@@ -1,0 +1,6 @@
+[submodule "skills/github"]
+	path = skills/github
+	url = /Users/liyao/claude-github-skill
+[submodule "skills/research-brainstorm"]
+	path = skills/research-brainstorm
+	url = /Users/liyao/research-brainstorm
