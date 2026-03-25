@@ -1,9 +1,9 @@
 [submodule "skills/github"]
 	path = skills/github
-	url = /Users/liyao/claude-github-skill
+	url = https://github.com/LKCY23/claude-github-skill.git
 [submodule "skills/research-brainstorm"]
 	path = skills/research-brainstorm
-	url = /Users/liyao/research-brainstorm
+	url = https://github.com/LKCY23/research-brainstorm.git
 [submodule "skills/research-reading-skills"]
 	path = skills/research-reading-skills
-	url = /Users/liyao/research-reading-skills
+	url = https://github.com/LKCY23/research-reading-skills.git
