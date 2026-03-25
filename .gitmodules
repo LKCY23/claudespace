@@ -4,3 +4,6 @@
 [submodule "skills/research-brainstorm"]
 	path = skills/research-brainstorm
 	url = /Users/liyao/research-brainstorm
+[submodule "skills/research-reading-skills"]
+	path = skills/research-reading-skills
+	url = /Users/liyao/research-reading-skills
