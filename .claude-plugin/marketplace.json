@@ -1,0 +1,108 @@
+{
+  "name": "claudespace",
+  "owner": {
+    "name": "LKCY23"
+  },
+  "description": "Personal Claude Code skill marketplace — self-authored and curated third-party skills with pinned versions. One marketplace, one install command.",
+  "plugins": [
+    {
+      "name": "github",
+      "source": "./skills/github",
+      "description": "GitHub workflow skill — manage PRs, issues, releases, and repo operations directly in Claude Code",
+      "category": "devtools"
+    },
+    {
+      "name": "research-brainstorm",
+      "source": "./skills/research-brainstorm",
+      "description": "研究头脑风暴 — 系统化生成、评估和筛选研究方向与假设",
+      "category": "research"
+    },
+    {
+      "name": "literature-review",
+      "source": "./skills/research-reading-skills/skills/literature-review",
+      "description": "学术文献综述 — 多论文对比矩阵、主题聚类、系统化文献调研与综合分析",
+      "category": "research"
+    },
+    {
+      "name": "read-paper",
+      "source": "./skills/research-reading-skills/skills/read-paper",
+      "description": "论文阅读工具 — 结构化精读、批判性分析、claims-evidence 提取与复现评估",
+      "category": "research"
+    },
+    {
+      "name": "deep-research",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Imbad0202/academic-research-skills",
+        "path": "skills/deep-research",
+        "ref": "main",
+        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
+      },
+      "description": "深度研究 — 13 agent 协作：研究问题定义、系统性检索、偏差评估、综合分析、引用编译",
+      "category": "research",
+      "author": {
+        "name": "Imbad0202"
+      }
+    },
+    {
+      "name": "academic-paper",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Imbad0202/academic-research-skills",
+        "path": "skills/academic-paper",
+        "ref": "main",
+        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
+      },
+      "description": "学术论文写作 — 12 agent 协作：结构设计、段落写作、引用合规、双语摘要、格式排版",
+      "category": "research",
+      "author": {
+        "name": "Imbad0202"
+      }
+    },
+    {
+      "name": "academic-paper-reviewer",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Imbad0202/academic-research-skills",
+        "path": "skills/academic-paper-reviewer",
+        "ref": "main",
+        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
+      },
+      "description": "论文评审 — 5 人评审团队 + EIC：方法学、领域、统计、批判性、视角多维度审稿",
+      "category": "research",
+      "author": {
+        "name": "Imbad0202"
+      }
+    },
+    {
+      "name": "academic-pipeline",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Imbad0202/academic-research-skills",
+        "path": "skills/academic-pipeline",
+        "ref": "main",
+        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
+      },
+      "description": "完整学术流水线 — 从 idea 到论文的全流程编排：状态机追踪、完整性验证、claim 校验",
+      "category": "research",
+      "author": {
+        "name": "Imbad0202"
+      }
+    },
+    {
+      "name": "karpathy-llm-wiki",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Astro-Han/karpathy-llm-wiki",
+        "path": ".",
+        "ref": "main",
+        "sha": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642"
+      },
+      "description": "Karpathy LLM Wiki 知识库 — Ingest / Query / Lint 三操作维护个人 LLM 知识体系",
+      "category": "knowledge",
+      "author": {
+        "name": "Astro-Han"
+      }
+    }
+  ]
+}
