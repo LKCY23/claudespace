@@ -34,7 +34,7 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "skills/deep-research",
+        "path": "deep-research",
         "ref": "main",
         "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
       },
@@ -49,7 +49,7 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "skills/academic-paper",
+        "path": "academic-paper",
         "ref": "main",
         "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
       },
@@ -64,7 +64,7 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "skills/academic-paper-reviewer",
+        "path": "academic-paper-reviewer",
         "ref": "main",
         "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
       },
@@ -79,7 +79,7 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "skills/academic-pipeline",
+        "path": "academic-pipeline",
         "ref": "main",
         "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
       },
