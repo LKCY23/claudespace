@@ -7,3 +7,6 @@
 [submodule "skills/research-reading-skills"]
 	path = skills/research-reading-skills
 	url = https://github.com/LKCY23/research-reading-skills.git
+[submodule "skills/research-dev-orchestrator"]
+	path = skills/research-dev-orchestrator
+	url = https://github.com/LKCY23/research-dev-orchestrator.git
