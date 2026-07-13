@@ -10,3 +10,6 @@
 [submodule "skills/research-dev-orchestrator"]
 	path = skills/research-dev-orchestrator
 	url = https://github.com/LKCY23/research-dev-orchestrator.git
+[submodule "skills/teach"]
+	path = skills/teach
+	url = https://github.com/LKCY23/teach-skill.git

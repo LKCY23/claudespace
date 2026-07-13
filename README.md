@@ -16,10 +16,12 @@ claude plugin marketplace add LKCY23/claudespace
 
 # 2. Install any plugin
 claude plugin install github@claudespace
+claude plugin install teach@claudespace
 claude plugin install deep-research@claudespace
 
 # 3. Install everything
 claude plugin install github@claudespace \
+  teach@claudespace \
   research-brainstorm@claudespace \
   literature-review@claudespace \
   read-paper@claudespace \
@@ -38,6 +40,7 @@ If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-ma
 |--------|----------|--------|----------|
 | `github` | devtools | self-hosted | [claude-github-skill](https://github.com/LKCY23/claude-github-skill) |
 | `research-brainstorm` | research | self-hosted | [research-brainstorm](https://github.com/LKCY23/research-brainstorm) |
+| `teach` | productivity | self-hosted | [teach-skill](https://github.com/LKCY23/teach-skill) |
 | `literature-review` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
 | `read-paper` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
 | `deep-research` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
@@ -65,7 +68,7 @@ claudespace/
 { "name": "github", "source": "./skills/github" }
 ```
 
-**Used for**: plugins you own — `github`, `research-brainstorm`, `literature-review`, `read-paper`.
+**Used for**: plugins you own — `github`, `research-brainstorm`, `teach`, `literature-review`, `read-paper`.
 
 ### Mode 2 — External reference (pinned sha)
 
@@ -205,6 +208,7 @@ claudespace/
 ├── skills/                       ← Self-hosted skill submodules
 │   ├── github/                   ← git submodule → claude-github-skill
 │   ├── research-brainstorm/      ← git submodule → research-brainstorm
+│   ├── teach/                    ← git submodule → teach-skill
 │   └── research-reading-skills/  ← git submodule → research-reading-skills
 │       └── skills/
 │           ├── literature-review/

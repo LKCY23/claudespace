@@ -18,6 +18,15 @@
       "category": "research"
     },
     {
+      "name": "teach",
+      "source": "./skills/teach",
+      "description": "Stateful teaching workflow with missions, lessons, references, and learning records",
+      "category": "productivity",
+      "author": {
+        "name": "Matt Pocock"
+      }
+    },
+    {
       "name": "literature-review",
       "source": "./skills/research-reading-skills/skills/literature-review",
       "description": "学术文献综述 — 多论文对比矩阵、主题聚类、系统化文献调研与综合分析",
