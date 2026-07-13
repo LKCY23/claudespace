@@ -27,6 +27,12 @@
       }
     },
     {
+      "name": "research-dev-orchestrator",
+      "source": "./skills/research-dev-orchestrator",
+      "description": "Research & dev orchestrator — 角色中立协调器 + CLI agent workers，将研究/实验目标转化为需求、设计决策、任务包、worker 调度、证据驱动评审和迭代实现",
+      "category": "research"
+    },
+    {
       "name": "literature-review",
       "source": "./skills/research-reading-skills/skills/literature-review",
       "description": "学术文献综述 — 多论文对比矩阵、主题聚类、系统化文献调研与综合分析",
