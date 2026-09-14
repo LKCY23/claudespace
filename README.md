@@ -39,6 +39,7 @@ If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-ma
 | Plugin | Category | Source | Upstream |
 |--------|----------|--------|----------|
 | `github` | devtools | self-hosted | [claude-github-skill](https://github.com/LKCY23/claude-github-skill) |
+| `skill-evaluator` | devtools | self-hosted (local) | local Git submodule; remote publication pending |
 | `research-brainstorm` | research | self-hosted | [research-brainstorm](https://github.com/LKCY23/research-brainstorm) |
 | `teach` | productivity | self-hosted | [teach-skill](https://github.com/LKCY23/teach-skill) |
 | `literature-review` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
@@ -248,3 +249,19 @@ This is intentional: a marketplace is a **curated catalog**, not a firehose. You
 ## License
 
 This repository contains both original work and third-party plugin references. Each self-hosted submodule carries its own license. Third-party plugins referenced in `marketplace.json` remain under their respective upstream licenses.
+
+## Local development: skill-evaluator
+
+`skills/skill-evaluator` is a self-authored plugin pinned by submodule commit,
+with its own `.claude-plugin/plugin.json`. Its initial submodule URL is a local
+Git repository; no GitHub repository has been published. This entry works in
+the local checkout but cannot yet be initialized on another machine.
+
+The Codex discovery link `~/.codex/skills/skill-evaluator` points to this
+submodule, so the active source is maintained here rather than as copied files.
+Do not publish the local source path as a portable installation instruction.
+
+After choosing and creating a real remote, push the skill commit first, replace
+the submodule URL with that remote, run `git submodule sync -- skills/skill-evaluator`,
+then review and publish the catalog commit. Cross-machine deployment remains
+the responsibility of claude-config; no deployment configuration was changed.

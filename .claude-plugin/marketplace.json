@@ -12,6 +12,15 @@
       "category": "devtools"
     },
     {
+      "name": "skill-evaluator",
+      "source": "./skills/skill-evaluator",
+      "description": "Skill 评测 — 触发边界、执行证据、产物验收、对照比较与回归分析",
+      "category": "devtools",
+      "author": {
+        "name": "LKCY23"
+      }
+    },
+    {
       "name": "research-brainstorm",
       "source": "./skills/research-brainstorm",
       "description": "研究头脑风暴 — 系统化生成、评估和筛选研究方向与假设",
