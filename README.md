@@ -42,6 +42,7 @@ If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-ma
 | `skill-evaluator` | devtools | self-hosted (local) | local Git submodule; remote publication pending |
 | `research-brainstorm` | research | self-hosted | [research-brainstorm](https://github.com/LKCY23/research-brainstorm) |
 | `teach` | productivity | self-hosted | [teach-skill](https://github.com/LKCY23/teach-skill) |
+| `programming-practice` | productivity | self-hosted (local) | local Git submodule; remote publication pending |
 | `literature-review` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
 | `read-paper` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
 | `deep-research` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
@@ -210,6 +211,7 @@ claudespace/
 │   ├── github/                   ← git submodule → claude-github-skill
 │   ├── research-brainstorm/      ← git submodule → research-brainstorm
 │   ├── teach/                    ← git submodule → teach-skill
+│   ├── programming-practice/     ← local git submodule (remote pending)
 │   └── research-reading-skills/  ← git submodule → research-reading-skills
 │       └── skills/
 │           ├── literature-review/
@@ -265,3 +267,29 @@ After choosing and creating a real remote, push the skill commit first, replace
 the submodule URL with that remote, run `git submodule sync -- skills/skill-evaluator`,
 then review and publish the catalog commit. Cross-machine deployment remains
 the responsibility of claude-config; no deployment configuration was changed.
+
+## Local development: programming-practice
+
+`skills/programming-practice` is a self-authored learning plugin, version 0.1.0,
+archived as a Git submodule pinned to an exact commit. Its independent source
+repository is currently local; remote publication is pending, so another machine
+cannot initialize it from the current submodule URL.
+
+The learner owns practice code and commands; the tutor provides concept teaching,
+graduated hints, debugging feedback, independent/transfer assessments, and optional
+course-local records. It is separate from `teach` and does not replace that plugin.
+See [the skill README](skills/programming-practice/README.md) for usage and
+[validation scope](skills/programming-practice/tests/validation.md).
+
+For a session-local trial, start Claude Code from the **learner project**:
+
+```sh
+claude --plugin-dir "$HOME/claudespace/skills/programming-practice"
+```
+
+Then invoke `/programming-practice:programming-practice`. No global installation
+or claude-config deployment is performed by this archive operation.
+
+For cross-machine publication, create the chosen remote and push the skill commit
+first; replace the submodule URL with that remote and sync it before publishing
+the catalog commit. Do not advertise the local URL as a portable installation.

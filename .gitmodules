@@ -16,3 +16,6 @@
 [submodule "skills/skill-evaluator"]
 	path = skills/skill-evaluator
 	url = /Users/liyao/Documents/Codex/2026-09-14/zha/outputs/skill-evaluator
+[submodule "skills/programming-practice"]
+	path = skills/programming-practice
+	url = /Users/liyao/programming-practice
