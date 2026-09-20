@@ -131,7 +131,7 @@
     {
       "name": "programming-practice",
       "source": "./skills/programming-practice",
-      "description": "编程实训教练 — 学生独立实现，AI 提供分级提示、调试反馈、迁移验收和学习记录",
+      "description": "编程实训教练 — Codex / Claude Code 共用教学规则，学生独立实现，AI 提供分级提示、调试反馈与学习记录",
       "category": "productivity",
       "author": {
         "name": "LKCY23"

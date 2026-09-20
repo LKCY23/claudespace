@@ -270,7 +270,7 @@ the responsibility of claude-config; no deployment configuration was changed.
 
 ## Local development: programming-practice
 
-`skills/programming-practice` is a self-authored learning plugin, version 0.1.0,
+`skills/programming-practice` is a self-authored learning skill/plugin, version 0.1.1,
 archived as a Git submodule pinned to an exact commit. Its independent source
 repository is currently local; remote publication is pending, so another machine
 cannot initialize it from the current submodule URL.
@@ -287,8 +287,20 @@ For a session-local trial, start Claude Code from the **learner project**:
 claude --plugin-dir "$HOME/claudespace/skills/programming-practice"
 ```
 
-Then invoke `/programming-practice:programming-practice`. No global installation
-or claude-config deployment is performed by this archive operation.
+Then invoke `/programming-practice:programming-practice`.
+
+For **Codex**, expose that same directory through the learner project's
+`.agents/skills/programming-practice` (or the user skill directory, not both).
+`agents/openai.yaml` supplies Codex UI metadata; use the skill selector to select
+it. The full package is discovered by the tested Codex CLI as
+`programming-practice:programming-practice`, invoked with
+`$programming-practice:programming-practice`. The Claude marketplace manifest is
+not a Codex marketplace. See the skill README for the one-time local link setup.
+
+Both hosts share the learner's `.programming-practice/` checkpoint, not chat
+history. The installed skill has one teaching source; host configuration does
+not create separate teachers. No global installation or claude-config deployment
+is performed by this archive operation.
 
 For cross-machine publication, create the chosen remote and push the skill commit
 first; replace the submodule URL with that remote and sync it before publishing
