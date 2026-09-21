@@ -1,0 +1,10 @@
+__pycache__/
+*.app/
+.claude-bootstrap-build-*/
+.claude-bootstrap-backups/
+
+# Personal runtime preferences belong in the configuration data repository.
+/overrides.json
+
+# Generated local preview, not an icon source.
+/app/icon-preview.png
