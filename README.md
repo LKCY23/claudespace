@@ -19,9 +19,11 @@ claude plugin install github@claudespace
 claude plugin install teach@claudespace
 claude plugin install deep-research@claudespace
 
-# 3. Install the plugins with remote sources
+# 3. Install all marketplace plugins
 claude plugin install github@claudespace \
+  skill-evaluator@claudespace \
   teach@claudespace \
+  programming-practice@claudespace \
   research-brainstorm@claudespace \
   research-dev-orchestrator@claudespace \
   literature-review@claudespace \
@@ -32,9 +34,6 @@ claude plugin install github@claudespace \
   academic-pipeline@claudespace \
   karpathy-llm-wiki@claudespace
 ```
-
-The batch above excludes the local-only `programming-practice` submodule; see its
-local development notes before using it on another machine.
 
 If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-machine config sync, you can reference these in `plugins.yaml` and let `claude-config apply` handle the installation.
 
