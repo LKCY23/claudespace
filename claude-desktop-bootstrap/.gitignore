@@ -1,0 +1,7 @@
+__pycache__/
+*.app/
+.claude-bootstrap-build-*/
+.claude-bootstrap-backups/
+
+# Generated local preview, not an icon source.
+/app/icon-preview.png

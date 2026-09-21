@@ -1,6 +1,6 @@
 # claudespace
 
-Personal [Claude Code](https://claude.ai/code) plugin marketplace — one catalog for all your self-authored and curated third-party skills, with exact version pinning via git.
+Personal [Claude Code](https://claude.ai/code) plugin marketplace and local Claude utilities — one catalog for self-authored and curated third-party skills, with exact plugin version pinning via git, plus self-contained host tools.
 
 ## What problem does this solve?
 
@@ -19,10 +19,11 @@ claude plugin install github@claudespace
 claude plugin install teach@claudespace
 claude plugin install deep-research@claudespace
 
-# 3. Install everything
+# 3. Install the plugins with remote sources
 claude plugin install github@claudespace \
   teach@claudespace \
   research-brainstorm@claudespace \
+  research-dev-orchestrator@claudespace \
   literature-review@claudespace \
   read-paper@claudespace \
   deep-research@claudespace \
@@ -31,6 +32,10 @@ claude plugin install github@claudespace \
   academic-pipeline@claudespace \
   karpathy-llm-wiki@claudespace
 ```
+
+The batch above excludes the local-only `skill-evaluator` and
+`programming-practice` submodules; see their local development notes before
+using them on another machine.
 
 If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-machine config sync, you can reference these in `plugins.yaml` and let `claude-config apply` handle the installation.
 
@@ -41,6 +46,7 @@ If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-ma
 | `github` | devtools | self-hosted | [claude-github-skill](https://github.com/LKCY23/claude-github-skill) |
 | `skill-evaluator` | devtools | self-hosted (local) | local Git submodule; remote publication pending |
 | `research-brainstorm` | research | self-hosted | [research-brainstorm](https://github.com/LKCY23/research-brainstorm) |
+| `research-dev-orchestrator` | research | self-hosted | [research-dev-orchestrator](https://github.com/LKCY23/research-dev-orchestrator) |
 | `teach` | productivity | self-hosted | [teach-skill](https://github.com/LKCY23/teach-skill) |
 | `programming-practice` | productivity | self-hosted (local) | local Git submodule; remote publication pending |
 | `literature-review` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
@@ -50,6 +56,29 @@ If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-ma
 | `academic-paper-reviewer` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
 | `academic-pipeline` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
 | `karpathy-llm-wiki` | knowledge | third-party | [karpathy-llm-wiki](https://github.com/Astro-Han/karpathy-llm-wiki) |
+
+## Local utilities
+
+Local host tools live in ordinary tracked directories, separate from `skills/`
+and the plugin catalog. They are not skills or plugins and cannot be installed
+with `claude plugin install`.
+
+| Utility | Purpose | Entry point |
+|---------|---------|-------------|
+| [claude-desktop-bootstrap](claude-desktop-bootstrap/README.md) | Safely persist local Claude Desktop profile overrides on macOS | Optional Dock app; `apply.py` (preview), `launch.command` (apply, then open) |
+
+Preview the default Chat and Allow Auto mode overrides from the repository root:
+
+```bash
+python3 claude-desktop-bootstrap/apply.py --dry-run
+```
+
+The utility dynamically resolves the applied `3p` profile, preserves unrelated
+settings, and supports private backups and rollback. Writes require Desktop to
+be stopped; it never quits/restarts the app or installs a background service.
+See its [README](claude-desktop-bootstrap/README.md) for application instructions
+and [macOS automation research](claude-desktop-bootstrap/macos-automation.md) for
+native event hooks and their timing limits.
 
 ## Architecture: Two source modes
 
@@ -70,7 +99,7 @@ claudespace/
 { "name": "github", "source": "./skills/github" }
 ```
 
-**Used for**: plugins you own — `github`, `research-brainstorm`, `teach`, `literature-review`, `read-paper`.
+**Used for**: plugins maintained as submodules; see the self-hosted entries in the catalog.
 
 ### Mode 2 — External reference (pinned sha)
 
@@ -82,7 +111,7 @@ The plugin code lives in an external repository. The version is locked to an exa
   "source": {
     "source": "git-subdir",
     "url": "https://github.com/Imbad0202/academic-research-skills",
-    "path": "skills/deep-research",
+    "path": "deep-research",
     "ref": "main",
     "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
   }
@@ -207,9 +236,20 @@ claudespace/
 ├── .claude-plugin/
 │   └── marketplace.json          ← Plugin catalog (the core of this repo)
 ├── .gitmodules                   ← Submodule definitions (self-hosted plugins)
+├── claude-desktop-bootstrap/      ← Local host utility (not a plugin/submodule)
+│   ├── apply.py                  ← Preview, merge, backup, and restore
+│   ├── overrides.json            ← Declarative Desktop policy values
+│   ├── launch.command            ← Apply successfully before opening Desktop
+│   ├── install-app.py            ← Build a user-local, Dock-friendly macOS app
+│   ├── app/                      ← App launcher and icon sources
+│   ├── tests/                    ← Isolated configuration and native app tests
+│   ├── macos-automation.md        ← Native launch-event research and limits
+│   └── README.md
 ├── skills/                       ← Self-hosted skill submodules
 │   ├── github/                   ← git submodule → claude-github-skill
+│   ├── skill-evaluator/          ← local git submodule (remote pending)
 │   ├── research-brainstorm/      ← git submodule → research-brainstorm
+│   ├── research-dev-orchestrator/ ← git submodule → research-dev-orchestrator
 │   ├── teach/                    ← git submodule → teach-skill
 │   ├── programming-practice/     ← local git submodule (remote pending)
 │   └── research-reading-skills/  ← git submodule → research-reading-skills
@@ -224,7 +264,11 @@ Third-party plugins (Mode 2) have no local files in this repo — they are refer
 
 ## Relationship with claude-config
 
-[claude-config](https://github.com/LKCY23/claude-config) is a cross-machine configuration sync tool. claudespace is the **skill source** — it defines what skills exist and at what versions. claude-config is the **deployment tool** — it applies configurations (including plugin installations) to any machine.
+[claude-config](https://github.com/LKCY23/claude-config) is a cross-machine configuration sync tool. For plugins, claudespace is the **skill source** — it defines what skills exist and at what versions. claude-config is the **deployment tool** — it applies configurations (including plugin installations) to any machine.
+
+The separate local utilities are maintained here as source, not registered as
+plugins. `claude-desktop-bootstrap` manages only a local Desktop profile; it does
+not deploy Claude Code settings or participate in `claude-config apply`.
 
 ```
 claudespace                     claude-config
