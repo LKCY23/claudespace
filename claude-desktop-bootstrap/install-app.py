@@ -34,11 +34,11 @@ def applescript_literal(value):
     return '"' + escaped + '"'
 
 
-def launcher_source(python, script):
+def launcher_source(python, script, overrides):
     template = (ROOT / "app/launcher.applescript").read_text(encoding="utf-8")
     return template.replace("@@PYTHON@@", applescript_literal(python)).replace(
         "@@SCRIPT@@", applescript_literal(script)
-    )
+    ).replace("@@OVERRIDES@@", applescript_literal(overrides))
 
 
 def run_tool(*arguments):
@@ -86,9 +86,18 @@ def make_icon(work, resources, icon_source):
     run_tool("/usr/bin/iconutil", "-c", "icns", iconset, "-o", resources / "Bootstrap.icns")
 
 
-def build_bundle(work, python, script, icon_source):
+def validate_overrides_path(path):
+    try:
+        info = path.lstat()
+    except OSError:
+        raise InstallError("Cannot read the overrides file; supply an existing file with --overrides.") from None
+    if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid():
+        raise InstallError("Overrides must be a regular, user-owned file, not a symbolic or hard link.")
+
+
+def build_bundle(work, python, script, icon_source, overrides):
     source = work / "launcher.applescript"
-    source.write_text(launcher_source(python, script), encoding="utf-8")
+    source.write_text(launcher_source(python, script, overrides), encoding="utf-8")
     bundle = work / f"{APP_NAME}.app"
     run_tool("/usr/bin/osacompile", "-o", bundle, source)
     contents = bundle / "Contents"
@@ -102,12 +111,13 @@ def build_bundle(work, python, script, icon_source):
         "CFBundleName": APP_NAME,
         "CFBundleDisplayName": APP_NAME,
         "CFBundleIconFile": "Bootstrap.icns",
-        "CFBundleShortVersionString": "1.1.1",
-        "CFBundleVersion": "3",
+        "CFBundleShortVersionString": "1.2.0",
+        "CFBundleVersion": "4",
         "NSHighResolutionCapable": True,
         "LSUIElement": False,
         "ClaudeBootstrapPythonExecutable": str(python),
         "ClaudeBootstrapScript": str(script),
+        "ClaudeBootstrapOverrides": str(overrides),
         "ClaudeBootstrapIconSource": str(icon_source),
     })
     manifest.write_bytes(plistlib.dumps(metadata))
@@ -145,6 +155,7 @@ def publish_bundle(bundle, target, previous):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--overrides", type=Path, required=True, help="external JSON configuration to read on every app launch")
     parser.add_argument("--output", type=Path, default=Path.home() / "Applications" / f"{APP_NAME}.app")
     parser.add_argument("--replace", action="store_true", help="back up and replace an existing Claude Bootstrap app")
     parser.add_argument("--icon-from", type=Path, default=Path("/Applications/Claude.app"), help="installed Claude.app to use as the base icon (read only)")
@@ -156,6 +167,8 @@ def main(argv=None):
         if target.suffix != ".app":
             raise InstallError("The destination must end in .app.")
         previous = existing_bundle(target, args.replace)
+        overrides = args.overrides.expanduser().absolute()
+        validate_overrides_path(overrides)
         icon_source = args.icon_from.expanduser().resolve()
         validate_icon_source(icon_source)
         for name in TOOLS:
@@ -167,10 +180,11 @@ def main(argv=None):
         python = Path(sys.executable).absolute()
         script = ROOT / "apply.py"
         with tempfile.TemporaryDirectory(prefix=".claude-bootstrap-build-", dir=target.parent) as directory:
-            bundle = build_bundle(Path(directory), python, script, icon_source)
+            bundle = build_bundle(Path(directory), python, script, icon_source, overrides)
             backup = publish_bundle(bundle, target, previous)
         print(f"Installed: {target}")
         print(f"Live script: {script}")
+        print(f"Live overrides: {overrides}")
         print(f"Python: {python}")
         if backup is not None:
             print(f"Previous app retained: {backup}")

@@ -46,7 +46,11 @@ class BootstrapTests(unittest.TestCase):
         self.put(self.metadata, {"appliedId": PROFILE_ID, "entries": [{"id": PROFILE_ID}]})
         self.put(self.profile, self.original)
         self.profile.chmod(0o600)
-        self.put(self.overrides, {"chatTabEnabled": True, "autoModeEnabled": True})
+        self.put(self.overrides, {
+            "chatTabEnabled": True,
+            "autoModeEnabled": True,
+            "builtinBrowserEnabled": True,
+        })
         self.running = self.patch("desktop_running", return_value=False)
         self.patch("managed_policy_paths", return_value=[])
         self.real_user_check = bootstrap.check_login_user
@@ -86,6 +90,33 @@ class BootstrapTests(unittest.TestCase):
     def assert_profile_unchanged(self):
         self.assertEqual(json.loads(self.profile.read_bytes()), self.original)
 
+    def test_missing_overrides_argument_does_not_load_the_example(self):
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as raised:
+                bootstrap.main(["--data-dir", str(self.data), "--apply"])
+        self.assertEqual(raised.exception.code, 2)
+        self.assertIn("--overrides is required", stderr.getvalue())
+        self.assert_profile_unchanged()
+        self.assertFalse((self.data / ".claude-desktop-bootstrap.lock").exists())
+        self.assertEqual(self.backups(), [])
+
+    def test_missing_external_file_does_not_fall_back_to_the_example(self):
+        self.overrides.unlink()
+        self.assertEqual(self.run_cli("--apply")[0], 1)
+        self.assert_profile_unchanged()
+        self.assertEqual(self.backups(), [])
+
+    def test_external_overrides_are_reread_on_every_apply(self):
+        self.assertEqual(self.run_cli("--apply")[0], 0)
+        self.put(self.overrides, {"builtinBrowserEnabled": False})
+        self.assertEqual(self.run_cli("--apply")[0], 0)
+        result = json.loads(self.profile.read_bytes())
+        self.assertIs(result["builtinBrowserEnabled"], False)
+        self.assertIs(result["chatTabEnabled"], True)
+        self.assertIs(result["autoModeEnabled"], True)
+        self.assertEqual(len(self.backups()), 2)
+
     def test_default_is_side_effect_free_dry_run_even_when_running(self):
         before = {path: path.read_bytes() for path in (self.metadata, self.profile, self.overrides)}
         self.running.return_value = True
@@ -104,6 +135,7 @@ class BootstrapTests(unittest.TestCase):
         result = json.loads(self.profile.read_bytes())
         self.assertIs(result.pop("chatTabEnabled"), True)
         self.assertIs(result.pop("autoModeEnabled"), True)
+        self.assertIs(result.pop("builtinBrowserEnabled"), True)
         self.assertEqual(result, self.original)
         backup, = self.backups()
         self.assertEqual(backup.read_bytes(), raw)
@@ -173,11 +205,12 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(self.backups(), [])
 
     def test_booleans_cannot_be_strings_numbers_or_null(self):
-        for value in ("true", 1, None, [], {}):
-            with self.subTest(value=value):
-                self.put(self.overrides, {"autoModeEnabled": value})
-                self.assertEqual(self.run_cli("--apply")[0], 1)
-                self.assert_profile_unchanged()
+        for key in ("chatTabEnabled", "autoModeEnabled", "builtinBrowserEnabled"):
+            for value in ("true", 1, None, [], {}):
+                with self.subTest(key=key, value=value):
+                    self.put(self.overrides, {key: value})
+                    self.assertEqual(self.run_cli("--apply")[0], 1)
+                    self.assert_profile_unchanged()
         self.assertEqual(self.backups(), [])
 
     def test_integer_one_is_not_treated_as_boolean_true(self):

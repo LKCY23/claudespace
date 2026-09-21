@@ -29,6 +29,8 @@ class AppInstallerTests(unittest.TestCase):
         self.root = Path(temporary.name).resolve()
         self.target = self.root / "Claude Bootstrap.app"
         self.bundle = self.root / "staged.app"
+        self.overrides = self.root / 'external "settings".json'
+        self.overrides.write_text('{"builtinBrowserEnabled": true}\n', encoding="utf-8")
 
     def make_bundle(self, path, identifier=installer.BUNDLE_ID):
         contents = path / "Contents"
@@ -36,6 +38,23 @@ class AppInstallerTests(unittest.TestCase):
         (contents / "Info.plist").write_bytes(plistlib.dumps({"CFBundleIdentifier": identifier}))
         (contents / "marker").write_text(path.name, encoding="utf-8")
         return path
+
+    def test_installer_requires_explicit_overrides(self):
+        with contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as raised:
+                installer.main(["--output", str(self.target)])
+        self.assertEqual(raised.exception.code, 2)
+        self.assertFalse(self.target.exists())
+
+    def test_overrides_path_must_be_an_existing_regular_file(self):
+        installer.validate_overrides_path(self.overrides)
+        for path in (self.root / "missing.json", self.root):
+            with self.subTest(path=path), self.assertRaises(installer.InstallError):
+                installer.validate_overrides_path(path)
+        link = self.root / "linked.json"
+        link.symlink_to(self.overrides)
+        with self.assertRaises(installer.InstallError):
+            installer.validate_overrides_path(link)
 
     def test_literals_escape_quotes_backslashes_and_line_breaks(self):
         self.assertEqual(installer.applescript_literal('a"b\\c\nd'), '"a\\"b\\\\c\\nd"')
@@ -117,7 +136,10 @@ class AppInstallerTests(unittest.TestCase):
         output = io.StringIO()
         with mock.patch.object(installer, "build_bundle", side_effect=OSError("synthetic build failure")):
             with contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
-                code = installer.main(["--output", str(self.target), "--replace", "--icon-from", str(source)])
+                code = installer.main([
+                    "--output", str(self.target), "--replace", "--icon-from", str(source),
+                    "--overrides", str(self.overrides),
+                ])
         self.assertEqual(code, 1)
         self.assertEqual((self.target / "Contents/marker").read_text(), self.target.name)
         self.assertFalse((self.root / ".claude-bootstrap-backups").exists())
@@ -134,15 +156,18 @@ class NativeAppTests(unittest.TestCase):
         cls.addClassCleanup(cls.temporary.cleanup)
         root = Path(cls.temporary.name).resolve()
         cls.marker = root / "native-invocation.json"
+        cls.overrides = root / '外部 "settings" \\ config.json'
+        cls.overrides.write_text('{"builtinBrowserEnabled": true}\n', encoding="utf-8")
         cls.script = root / 'fake "bootstrap" \\ script.py'
         cls.script.write_text(
             'import json, pathlib, sys\n'
-            f'pathlib.Path({str(cls.marker)!r}).write_text(json.dumps(sys.argv[1:]))\n'
+            'result = {"arguments": sys.argv[1:], "overrides": json.loads(pathlib.Path(sys.argv[3]).read_text())}\n'
+            f'pathlib.Path({str(cls.marker)!r}).write_text(json.dumps(result))\n'
             'print("SYNTHETIC " + sys.argv[1])\n', encoding="utf-8",
         )
         cls.icon_source = root / "Synthetic Icon.app"
         installer.run_tool("/usr/bin/osacompile", "-o", cls.icon_source, "-e", 'return "synthetic icon source"')
-        cls.bundle = installer.build_bundle(root, Path(sys.executable), cls.script, cls.icon_source)
+        cls.bundle = installer.build_bundle(root, Path(sys.executable), cls.script, cls.icon_source, cls.overrides)
         cls.compiled = cls.bundle / "Contents/Resources/Scripts/main.scpt"
 
         # A unique ID prevents LaunchServices from reopening the user's real launcher.
@@ -183,12 +208,15 @@ function run(args) {
             check=True, capture_output=True, text=True, timeout=20,
         )
         self.assertTrue(self.marker.is_file(), "Native launch did not invoke the synthetic script")
-        self.assertEqual(json.loads(self.marker.read_text()), ["--launch"])
+        result = json.loads(self.marker.read_text())
+        self.assertEqual(result["arguments"], ["--launch", "--overrides", str(self.overrides)])
+        self.assertEqual(result["overrides"], json.loads(self.overrides.read_text()))
 
     def test_repeated_launchservices_runs_preserve_signature(self):
         compiled = self.gui_bundle / "Contents/Resources/Scripts/main.scpt"
         original = compiled.read_bytes()
-        for _ in range(2):
+        for enabled in (True, False):
+            self.overrides.write_text(json.dumps({"builtinBrowserEnabled": enabled}), encoding="utf-8")
             self.launch_gui_app()
             self.assertEqual(compiled.read_bytes(), original)
             installer.run_tool("/usr/bin/codesign", "--verify", "--strict", self.gui_bundle)
@@ -237,6 +265,8 @@ function run(args) {
         metadata = plistlib.loads((self.bundle / "Contents/Info.plist").read_bytes())
         self.assertEqual(metadata["CFBundleIdentifier"], installer.BUNDLE_ID)
         self.assertEqual(metadata["ClaudeBootstrapScript"], str(self.script))
+        self.assertEqual(metadata["ClaudeBootstrapOverrides"], str(self.overrides))
+        self.assertFalse((self.bundle / "Contents/Resources" / self.overrides.name).exists())
         self.assertFalse(metadata["LSUIElement"])
         self.assertNotIn("CFBundleIconName", metadata)
         self.assertEqual(metadata["ClaudeBootstrapIconSource"], str(self.icon_source))

@@ -9,19 +9,19 @@ not an end-to-end test of an installed automation or background service.
 Use the applied Desktop profile for persistence. When launch-time enforcement is
 wanted, run the included [launch.command](launch.command): it waits for a
 successful configuration merge before asking macOS to open Claude. The optional
-[Claude Bootstrap app](README.md#app-icon) provides the same ordered launch from
+[Claude Bootstrap app](README.md#dock-application) provides the same ordered launch from
 a normal, Dock-friendly application icon; no Terminal or Shortcut is required.
 
 For an alternative graphical entry point, create a **normal shortcut** in Shortcuts
 with a **Run Shell Script** action, using this command (adjust the checkout path):
 
 ```bash
-"$HOME/claudespace/claude-desktop-bootstrap/launch.command"
+"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json"
 ```
 
 Use that shortcut instead of the original Claude icon, for example from the Dock
 or a keyboard shortcut. If needed, supply an absolute Python executable with
-`CLAUDE_BOOTSTRAP_PYTHON` as described in the [README](README.md#python-and-path-selection).
+`CLAUDE_BOOTSTRAP_PYTHON` as described in the [README](README.md#command-line-launch-or-standalone-apply).
 The user controls Shortcuts' permission to run scripts; this utility does not
 change that security setting.
 
@@ -98,7 +98,7 @@ assume older macOS releases offer the same UI. App-close automation on Mac was
 not confirmed by this research.
 
 An app-open automation cannot guarantee it runs before that app initializes.
-Attaching `apply.py --apply` to Claude's app-open event would meet the script's
+Attaching `apply.py --overrides <file> --apply` to Claude's app-open event would meet the script's
 running-app guard and refuse a needed write. Automatically quitting/restarting
 Claude from that event would risk interrupted work and restart loops. Use the
 normal shortcut entry point above instead.
@@ -108,7 +108,7 @@ normal shortcut entry point above instead.
 - Claude Code `SessionStart` runs when a Code session starts, after Desktop has
   initialized. It is not a Desktop process pre-launch hook.
 - Ordinary `defaults write` in the user preferences domain is not the verified
-  input source for these two Desktop deployment-policy keys. Do not create managed
+  input source for these Desktop deployment-policy keys. Do not create managed
   preferences or override organizational restrictions to imitate persistence.
 - Do not modify `Claude.app`, inject into its process, swizzle launch APIs, or use
   Accessibility to click configuration switches.

@@ -24,8 +24,7 @@ from dataclasses import dataclass
 
 
 BUNDLE_ID = "com.anthropic.claudefordesktop"
-DEFAULT_OVERRIDES = Path(__file__).resolve().with_name("overrides.json")
-BOOLEAN_KEYS = {"chatTabEnabled", "autoModeEnabled"}
+BOOLEAN_KEYS = {"chatTabEnabled", "autoModeEnabled", "builtinBrowserEnabled"}
 PROFILE_ID = re.compile(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}")
 SETTING_KEY = re.compile(r"[A-Za-z][A-Za-z0-9]*")
 
@@ -326,7 +325,7 @@ def parser():
     mode.add_argument("--launch", dest="mode", action="store_const", const="launch", help="apply successfully, then open Desktop")
     result.set_defaults(mode="dry-run")
     result.add_argument("--data-dir", type=Path, help="Desktop user-data root (default: ~/Library/Application Support/Claude-3p)")
-    result.add_argument("--overrides", type=Path, default=DEFAULT_OVERRIDES, help="flat JSON overrides (default: adjacent overrides.json)")
+    result.add_argument("--overrides", type=Path, help="external flat JSON overrides; required unless restoring a backup")
     result.add_argument("--restore", type=Path, metavar="BACKUP", help="restore a full backup of the applied profile; preview unless --apply")
     result.add_argument("--app", type=Path, default=Path("/Applications/Claude.app"), help="app bundle to open with --launch")
     return result
@@ -337,6 +336,8 @@ def main(argv=None):
     args = cli.parse_args(argv)
     if args.restore is not None and args.mode == "launch":
         cli.error("--restore cannot be combined with --launch; review and restore separately")
+    if args.restore is None and args.overrides is None:
+        cli.error("--overrides is required; select your external configuration file (examples are never loaded automatically)")
     try:
         if sys.platform != "darwin":
             raise BootstrapError("This utility targets macOS Claude Desktop only.")
@@ -345,7 +346,7 @@ def main(argv=None):
         check_managed_policies()
         plan = make_plan(
             data_dir,
-            args.overrides.expanduser().absolute(),
+            args.overrides.expanduser().absolute() if args.overrides is not None else None,
             args.restore.expanduser().absolute() if args.restore is not None else None,
         )
         app = args.app.expanduser().resolve()

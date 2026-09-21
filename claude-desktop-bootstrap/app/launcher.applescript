@@ -1,9 +1,10 @@
 on run
     -- Persisted run-handler globals would modify the signed script.
-    local pythonExecutable, bootstrapScript, commandText, errorMessage, errorNumber
+    local pythonExecutable, bootstrapScript, overridesFile, commandText, errorMessage, errorNumber
     set pythonExecutable to @@PYTHON@@
     set bootstrapScript to @@SCRIPT@@
-    set commandText to quoted form of pythonExecutable & " " & quoted form of bootstrapScript & " --launch"
+    set overridesFile to @@OVERRIDES@@
+    set commandText to quoted form of pythonExecutable & " " & quoted form of bootstrapScript & " --launch --overrides " & quoted form of overridesFile
     try
         return do shell script commandText
     on error errorMessage number errorNumber

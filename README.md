@@ -65,10 +65,11 @@ with `claude plugin install`.
 |---------|---------|-------------|
 | [claude-desktop-bootstrap](claude-desktop-bootstrap/README.md) | Safely persist local Claude Desktop profile overrides on macOS | Optional Dock app; `apply.py` (preview), `launch.command` (apply, then open) |
 
-Preview the default Chat and Allow Auto mode overrides from the repository root:
+Personal Desktop preferences live in `claude-config-data`, not in this tool
+checkout. Preview the external configuration from the repository root:
 
 ```bash
-python3 claude-desktop-bootstrap/apply.py --dry-run
+python3 claude-desktop-bootstrap/apply.py --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json" --dry-run
 ```
 
 The utility dynamically resolves the applied `3p` profile, preserves unrelated
@@ -236,7 +237,7 @@ claudespace/
 ├── .gitmodules                   ← Submodule definitions (self-hosted plugins)
 ├── claude-desktop-bootstrap/      ← Local host utility (not a plugin/submodule)
 │   ├── apply.py                  ← Preview, merge, backup, and restore
-│   ├── overrides.json            ← Declarative Desktop policy values
+│   ├── overrides.example.json    ← Example only; personal values live in config-data
 │   ├── launch.command            ← Apply successfully before opening Desktop
 │   ├── install-app.py            ← Build a user-local, Dock-friendly macOS app
 │   ├── app/                      ← App launcher and icon sources
