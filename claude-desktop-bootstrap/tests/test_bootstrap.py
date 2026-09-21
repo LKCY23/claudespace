@@ -49,6 +49,9 @@ class BootstrapTests(unittest.TestCase):
         self.put(self.overrides, {"chatTabEnabled": True, "autoModeEnabled": True})
         self.running = self.patch("desktop_running", return_value=False)
         self.patch("managed_policy_paths", return_value=[])
+        self.real_user_check = bootstrap.check_login_user
+        # Keep actual UIDs for filesystem ownership checks, including root-owned fixtures.
+        self.patch("check_login_user", return_value=None)
         platform = mock.patch.object(bootstrap.sys, "platform", "darwin")
         platform.start()
         self.addCleanup(platform.stop)
@@ -285,12 +288,23 @@ class BootstrapTests(unittest.TestCase):
             self.assertEqual(self.run_cli("--apply")[0], 1)
         self.assert_profile_unchanged()
 
+    def test_normal_login_user_is_allowed(self):
+        with mock.patch.object(bootstrap.os, "getuid", return_value=1000):
+            with mock.patch.object(bootstrap.os, "geteuid", return_value=1000):
+                self.real_user_check()
+
     def test_sudo_is_refused(self):
-        with mock.patch.object(bootstrap.os, "getuid", return_value=0):
-            code, output = self.run_cli("--apply")
-        self.assertEqual(code, 1)
-        self.assertIn("not with sudo", output)
-        self.assert_profile_unchanged()
+        for uid, euid in ((0, 0), (0, 1000), (1000, 0), (1000, 1001)):
+            with self.subTest(uid=uid, euid=euid):
+                with mock.patch.object(bootstrap, "check_login_user", self.real_user_check):
+                    with mock.patch.object(bootstrap.os, "getuid", return_value=uid):
+                        with mock.patch.object(bootstrap.os, "geteuid", return_value=euid):
+                            code, output = self.run_cli("--apply")
+                self.assertEqual(code, 1)
+                self.assertIn("not with sudo", output)
+                self.assert_profile_unchanged()
+                self.assertEqual(self.backups(), [])
+                self.assertFalse((self.data / ".claude-desktop-bootstrap.lock").exists())
 
     def test_profile_symlink_and_hardlink_are_refused(self):
         target = self.root / "target.json"

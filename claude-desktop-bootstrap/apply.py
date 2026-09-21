@@ -56,6 +56,11 @@ class Plan:
         return self.data_dir / "bootstrap-backups" / self.profile.path.stem
 
 
+def check_login_user():
+    if os.getuid() == 0 or os.geteuid() != os.getuid():
+        raise BootstrapError("Run as your normal login user, not with sudo or elevated privileges.")
+
+
 def check_directory(path):
     info = path.lstat()
     if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid():
@@ -335,8 +340,7 @@ def main(argv=None):
     try:
         if sys.platform != "darwin":
             raise BootstrapError("This utility targets macOS Claude Desktop only.")
-        if os.getuid() == 0 or os.geteuid() != os.getuid():
-            raise BootstrapError("Run as your normal login user, not with sudo or elevated privileges.")
+        check_login_user()
         data_dir = (args.data_dir or Path.home() / "Library/Application Support/Claude-3p").expanduser().resolve()
         check_managed_policies()
         plan = make_plan(
