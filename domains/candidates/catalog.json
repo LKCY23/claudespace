@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "name": "claudespace-candidates",
+  "domain": "candidates",
+  "description": "Collected but not deeply used or evaluated; registration never selects installation.",
+  "plugins": [
+    {
+      "name": "andrej-karpathy-skills",
+      "description": "Karpathy Guidelines — coding scope, assumptions, simplicity and verification",
+      "author": "forrestchang",
+      "maturity": "candidate",
+      "default_install": false,
+      "validation": "not-evaluated",
+      "upstream": {
+        "repo": "multica-ai/andrej-karpathy-skills",
+        "sha": "2c606141936f1eeef17fa3043a72095b4765b9c2",
+        "path": "."
+      },
+      "source": "./upstreams/karpathy",
+      "packaging": "upstream-submodule"
+    },
+    {
+      "name": "code-simplifier",
+      "description": "Code Simplifier — improve readability while preserving behavior",
+      "author": "Anthropic",
+      "maturity": "candidate",
+      "default_install": false,
+      "validation": "not-evaluated",
+      "upstream": {
+        "repo": "anthropics/claude-plugins-official",
+        "sha": "ab024cdcfa7ca80be204acd4907656ba5a968589",
+        "path": "plugins/code-simplifier"
+      },
+      "source": "./packages/code-simplifier",
+      "imports": {
+        "plugins/code-simplifier/.claude-plugin/plugin.json": "upstream/claude-plugin.json",
+        "plugins/code-simplifier/agents/code-simplifier.md": "agents/code-simplifier.md",
+        "LICENSE": "LICENSE"
+      },
+      "compatibility": {
+        "claude": "original-agent",
+        "codex": "orchestration-skill-and-independent-subagent"
+      },
+      "packaging_revision": 2
+    },
+    {
+      "name": "code-review",
+      "description": "Matt Pocock code review — Standards and Spec, with original setup helper",
+      "author": "Matt Pocock",
+      "maturity": "candidate",
+      "default_install": false,
+      "validation": "not-evaluated",
+      "upstream": {
+        "repo": "mattpocock/skills",
+        "sha": "d81f3a183412e71a5b1e84ca21bc1a35eea03a60",
+        "path": "skills/engineering/code-review"
+      },
+      "source": "./packages/code-review",
+      "imports": {
+        "LICENSE": "LICENSE",
+        "skills/engineering/code-review/SKILL.md": "skills/code-review/SKILL.md",
+        "skills/engineering/code-review/agents/openai.yaml": "skills/code-review/agents/openai.yaml",
+        "skills/engineering/setup-matt-pocock-skills/SKILL.md": "skills/setup-matt-pocock-skills/SKILL.md",
+        "skills/engineering/setup-matt-pocock-skills/agents/openai.yaml": "skills/setup-matt-pocock-skills/agents/openai.yaml",
+        "skills/engineering/setup-matt-pocock-skills/domain.md": "skills/setup-matt-pocock-skills/domain.md",
+        "skills/engineering/setup-matt-pocock-skills/issue-tracker-github.md": "skills/setup-matt-pocock-skills/issue-tracker-github.md",
+        "skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md": "skills/setup-matt-pocock-skills/issue-tracker-gitlab.md",
+        "skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md": "skills/setup-matt-pocock-skills/issue-tracker-local.md",
+        "skills/engineering/setup-matt-pocock-skills/triage-labels.md": "skills/setup-matt-pocock-skills/triage-labels.md"
+      },
+      "compatibility": {
+        "claude": "original-skills-with-plugin-manifest",
+        "codex": "original-skills-with-plugin-manifest"
+      },
+      "packaging_revision": 2
+    },
+    {
+      "name": "mattpocock-skills",
+      "description": "Complete original Matt Pocock skill collection, available for later trial",
+      "author": "Matt Pocock",
+      "maturity": "candidate",
+      "default_install": false,
+      "validation": "not-evaluated",
+      "upstream": {
+        "repo": "mattpocock/skills",
+        "sha": "d81f3a183412e71a5b1e84ca21bc1a35eea03a60",
+        "path": "."
+      },
+      "source": "./upstreams/matt",
+      "components": [
+        "grill-with-docs",
+        "to-spec",
+        "to-tickets",
+        "tdd",
+        "codebase-design",
+        "code-review",
+        "other upstream skills"
+      ],
+      "packaging": "upstream-submodule"
+    },
+    {
+      "name": "ponytail",
+      "description": "Ponytail — reuse-first simplification, review, audit and debt tracking",
+      "author": "Dietrich Gebert",
+      "maturity": "candidate",
+      "default_install": false,
+      "validation": "not-evaluated",
+      "upstream": {
+        "repo": "DietrichGebert/ponytail",
+        "sha": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+        "path": "."
+      },
+      "source": "./upstreams/ponytail",
+      "packaging": "upstream-submodule"
+    }
+  ]
+}

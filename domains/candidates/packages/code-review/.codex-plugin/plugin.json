@@ -1,0 +1,9 @@
+{
+  "name": "code-review",
+  "version": "0.1.0+claudespace.2.d81f3a183412",
+  "description": "Matt Pocock code review — Standards and Spec, with original setup helper",
+  "author": {
+    "name": "Matt Pocock"
+  },
+  "skills": "./skills/"
+}

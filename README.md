@@ -1,5 +1,19 @@
 # claudespace
 
+## Candidate domain · Claude Code + Codex
+
+[domains/candidates](domains/candidates/README.md) 是独立的 claudespace-candidates 目录，放已收集但尚未深入使用/检验的候选。原核心目录保持独立；候选注册不会安装全部内容。
+
+候选现有 Karpathy Guidelines、Code Simplifier、单独 code-review、完整 Matt Pocock skills 和 Ponytail。原版源码按 commit 固定；必要的宿主包装保留原执行规则与校验 hash。Codex Code Simplifier 增加 main skill → 一个独立 subagent 的调度入口。
+
+```sh
+git submodule update --init --recursive
+python scripts/build_candidates.py --check
+claude plugin marketplace add "$PWD/domains/candidates"
+codex plugin marketplace add "$PWD/domains/candidates"
+```
+
+具体安装由 claude-config-data/agents.yaml 明确选择。初始只选前三项；完整 Matt/Ponytail 留作候选，Superpowers 不在新选择中。
 Personal [Claude Code](https://claude.ai/code) plugin marketplace and local Claude utilities — one catalog for self-authored and curated third-party skills, with exact plugin version pinning via git, plus self-contained host tools.
 
 ## What problem does this solve?

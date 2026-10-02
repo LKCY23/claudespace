@@ -1,0 +1,58 @@
+{
+  "name": "claudespace-candidates",
+  "interface": {
+    "displayName": "claudespace · Candidates (未验证)"
+  },
+  "plugins": [
+    {
+      "name": "andrej-karpathy-skills",
+      "source": "./upstreams/karpathy",
+      "description": "Karpathy Guidelines — coding scope, assumptions, simplicity and verification",
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "code-simplifier",
+      "source": "./packages/code-simplifier",
+      "description": "Code Simplifier — improve readability while preserving behavior",
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "code-review",
+      "source": "./packages/code-review",
+      "description": "Matt Pocock code review — Standards and Spec, with original setup helper",
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "mattpocock-skills",
+      "source": "./upstreams/matt",
+      "description": "Complete original Matt Pocock skill collection, available for later trial",
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "ponytail",
+      "source": "./upstreams/ponytail",
+      "description": "Ponytail — reuse-first simplification, review, audit and debt tracking",
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    }
+  ]
+}

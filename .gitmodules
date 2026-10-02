@@ -19,3 +19,12 @@
 [submodule "skills/programming-practice"]
 	path = skills/programming-practice
 	url = https://github.com/LKCY23/programming-practice.git
+[submodule "domains/candidates/upstreams/karpathy"]
+	path = domains/candidates/upstreams/karpathy
+	url = https://github.com/multica-ai/andrej-karpathy-skills.git
+[submodule "domains/candidates/upstreams/matt"]
+	path = domains/candidates/upstreams/matt
+	url = https://github.com/mattpocock/skills.git
+[submodule "domains/candidates/upstreams/ponytail"]
+	path = domains/candidates/upstreams/ponytail
+	url = https://github.com/DietrichGebert/ponytail.git

@@ -1,0 +1,9 @@
+{
+  "name": "code-simplifier",
+  "version": "0.1.0+claudespace.2.ab024cdcfa7c",
+  "description": "Code Simplifier — improve readability while preserving behavior",
+  "author": {
+    "name": "Anthropic"
+  },
+  "skills": "./codex/skills/"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "claudespace-candidates",
+  "owner": {
+    "name": "LKCY23"
+  },
+  "description": "Candidates: collected for trial, not validated or installed by default.",
+  "plugins": [
+    {
+      "name": "andrej-karpathy-skills",
+      "source": "./upstreams/karpathy",
+      "description": "Karpathy Guidelines — coding scope, assumptions, simplicity and verification"
+    },
+    {
+      "name": "code-simplifier",
+      "source": "./packages/code-simplifier",
+      "description": "Code Simplifier — improve readability while preserving behavior"
+    },
+    {
+      "name": "code-review",
+      "source": "./packages/code-review",
+      "description": "Matt Pocock code review — Standards and Spec, with original setup helper"
+    },
+    {
+      "name": "mattpocock-skills",
+      "source": "./upstreams/matt",
+      "description": "Complete original Matt Pocock skill collection, available for later trial"
+    },
+    {
+      "name": "ponytail",
+      "source": "./upstreams/ponytail",
+      "description": "Ponytail — reuse-first simplification, review, audit and debt tracking"
+    }
+  ]
+}
