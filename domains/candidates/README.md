@@ -1,7 +1,7 @@
 # Candidates
 
 收集、试用、评估与正式采用是不同状态。此 domain 的所有条目都是
-candidate / not-evaluated / default_install=false；通过冒烟测试也不自动晋级。
+candidate / not-evaluated / default_install=false；安装、包装与接入检查通过也不自动晋级。
 未来按实际使用记录评价，再决定 fork、DIY、升级或移入稳定 domain。
 
 catalog.json 是来源、精确 SHA、成熟度与包装 revision 的单一索引。生成的
@@ -24,6 +24,19 @@ Claude 专属 model: opus 元数据不用于替换 Codex 模型。
 
 code-review 的 Standards / Spec 两路独立审查和项目 setup 要求保持原版。
 setup helper 一并安装，不在安装时自动更改任意项目；使用时在具体项目内显式调用。
+
+## 测试职责
+
+默认检查来源 pin/hash、manifest 组件路径、包装版本和生成 catalog，运行
+`python -m unittest discover -s tests -v` 及 `python scripts/build_candidates.py --check`。
+这些命令不调用模型或子 Agent，也不执行原版 skill 的业务任务。
+
+Codex Simplifier 额外校验实际导出入口到原规则文件的包内引用，包括缓存目录
+布局。首次接入或调度包装实质变化时，一次限定人工调用单独验证派发与返回；
+其运行条件和未验证项明确记录，不用文本匹配代替实际派发证据。
+
+原版 review 的审查结论、setup 写入和简化质量不作为 catalog 验收门槛。
+质量或成本对照在另行评估任务中开展；接入状态与 candidate 成熟度分别报告。
 
 ## 校验和更新
 

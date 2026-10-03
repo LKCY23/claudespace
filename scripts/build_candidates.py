@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 import ssl
 import urllib.request
@@ -82,6 +83,41 @@ def render(catalog):
         'interface': {'displayName': 'claudespace · Candidates (未验证)'}, 'plugins': native})
 
 
+def package_reference(package, relative):
+    path = (package / relative).resolve()
+    if not path.is_relative_to(package.resolve()) or not path.exists():
+        raise ValueError('Missing or escaping package reference: ' + relative)
+    return path
+
+
+def validate_manifest_paths(package, manifest):
+    for field in ('skills', 'agents', 'hooks'):
+        values = manifest.get(field, [])
+        for relative in values if isinstance(values, list) else [values]:
+            if not isinstance(relative, str):
+                raise ValueError('Imported package components must be paths: ' + field)
+            package_reference(package, relative)
+
+
+def validate_simplifier_entry(package, manifest):
+    package = package.resolve()
+    roots = manifest.get('skills', [])
+    roots = [roots] if isinstance(roots, str) else roots
+    entries = [(package_reference(package, root) / 'code-simplifier/SKILL.md').resolve() for root in roots]
+    if any(not entry.is_relative_to(package) for entry in entries):
+        raise ValueError('Codex exported entry escapes its package')
+    entries = [entry for entry in entries if entry.is_file()]
+    if len(entries) != 1:
+        raise ValueError('Codex manifest must expose one Code Simplifier entry')
+    skill = entries[0]
+    references = re.findall(r'`([^`\n]*agents/code-simplifier\.md)`', skill.read_text())
+    if len(references) != 1:
+        raise ValueError('Code Simplifier entry must reference its original rule file')
+    target = package_reference(package, str(skill.parent.relative_to(package) / references[0]))
+    if target != package_reference(package, 'agents/code-simplifier.md') or not target.is_file():
+        raise ValueError('Code Simplifier entry resolves to a different original rule file')
+
+
 def validate(catalog):
     names = set()
     for item in catalog['plugins']:
@@ -110,16 +146,19 @@ def validate(catalog):
             if record['sha'] != sha:
                 raise ValueError('Imported package pin differs from catalog')
             for relative, info in record['files'].items():
-                if hashlib.sha256((package / relative).read_bytes()).hexdigest() != info['sha256']:
+                if hashlib.sha256(package_reference(package, relative).read_bytes()).hexdigest() != info['sha256']:
                     raise ValueError('Upstream file changed: ' + relative)
-            if item['name'] == 'code-simplifier':
-                if (package / 'codex/skills/code-simplifier/SKILL.md').read_text() != (ROOT / 'scripts/templates/code-simplifier-codex.md').read_text():
-                    raise ValueError('Codex orchestration entry differs from the packaging template')
             for host in ['claude', 'codex']:
                 manifest = json.loads((package / f'.{host}-plugin/plugin.json').read_text())
                 expected = f'0.1.0+claudespace.{item.get("packaging_revision", 1)}.{sha[:12]}'
                 if manifest['version'] != expected:
                     raise ValueError('Host packaging version mismatch: ' + item['name'])
+                validate_manifest_paths(package, manifest)
+                if host == 'codex' and item['name'] == 'code-simplifier':
+                    validate_simplifier_entry(package, manifest)
+            if item['name'] == 'code-simplifier':
+                if (package / 'codex/skills/code-simplifier/SKILL.md').read_text() != (ROOT / 'scripts/templates/code-simplifier-codex.md').read_text():
+                    raise ValueError('Codex orchestration entry differs from the packaging template')
     return len(names)
 
 
