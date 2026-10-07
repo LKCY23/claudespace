@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "name": "claude-hud",
+  "plugins": [
+    {
+      "name": "claude-hud",
+      "description": "Real-time statusline HUD for Claude Code - context health, tool activity, agent tracking, and todo progress",
+      "source": "./packages/claude-hud",
+      "packaging": "installed-snapshot",
+      "upstream": {
+        "repo": "jarrodwatts/claude-hud",
+        "reported_install_commit": "26e38decd762f1a2d31e6d83bf33193b3b293084",
+        "commit_content_verified": false
+      },
+      "snapshot": {
+        "version": "0.0.10",
+        "sha256": "ad30b782cca49b4191aa55006b1c02e3e74c325ddfc126d516affbd29b82081a",
+        "captured_on": "2026-10-07",
+        "origin": "Existing user installation; not an upstream update. Native runtime leases excluded."
+      },
+      "compatibility": {
+        "claude": true,
+        "codex": false
+      }
+    }
+  ]
+}
