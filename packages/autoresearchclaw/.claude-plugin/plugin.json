@@ -1,0 +1,10 @@
+{
+  "name": "autoresearchclaw",
+  "version": "0.3.1+claudespace.1",
+  "description": "Seven research skills from pinned AutoResearchClaw, with the existing researchclaw YAML-frontmatter compatibility repair.",
+  "author": {
+    "name": "ResearchClaw contributors"
+  },
+  "license": "MIT",
+  "skills": "./skills/"
+}

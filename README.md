@@ -33,23 +33,14 @@ claude plugin install github@claudespace
 claude plugin install teach@claudespace
 claude plugin install deep-research@claudespace
 
-# 3. Install all marketplace plugins
-claude plugin install github@claudespace \
-  skill-evaluator@claudespace \
-  teach@claudespace \
-  programming-practice@claudespace \
-  research-brainstorm@claudespace \
-  research-dev-orchestrator@claudespace \
-  literature-review@claudespace \
-  read-paper@claudespace \
-  deep-research@claudespace \
-  academic-paper@claudespace \
-  academic-paper-reviewer@claudespace \
-  academic-pipeline@claudespace \
-  karpathy-llm-wiki@claudespace
+# Choose individual plugins; catalog membership does not select installation.
 ```
 
-If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-machine config sync, you can reference these in `plugins.yaml` and let `claude-config apply` handle the installation.
+If you use [claude-config](https://github.com/LKCY23/claude-config), current plugin selections belong in `agents.yaml`. Managed deployment requires prepared fixed sources; remote catalog references can also be installed through the native marketplace flow.
+
+ARIS, agent-browser and AutoResearchClaw are now source-only, on-demand catalog
+entries. They are not selected or installed. See [optional tools](domains/optional-tools/README.md)
+for exact commits, runtime dependencies and later installation.
 
 ## Plugin Catalog
 
@@ -286,7 +277,7 @@ not deploy Claude Code settings or participate in `claude-config apply`.
 ```
 claudespace                     claude-config
   │                               │
-  │ marketplace.json  ──ref──→    │ plugins.yaml
+  │ marketplace.json  ──ref──→    │ agents.yaml
   │ (what & which version)        │ (what to install where)
   │                               │
   │  claude plugin install        │  claude-config apply
@@ -294,7 +285,7 @@ claudespace                     claude-config
   │                               │
 ```
 
-If you use both, reference claudespace plugins in claude-config's `plugins.yaml` and run `claude-config apply` — it will handle marketplace registration and plugin installation for you.
+If you use both, explicitly select prepared plugins in claude-config-data/agents.yaml and validate the selected host before applying. Do not merge the archived legacy plugin list or install all available entries.
 
 ## Version Policy
 
