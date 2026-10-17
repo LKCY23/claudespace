@@ -41,7 +41,7 @@ class PrepareTests(unittest.TestCase):
         self.file = self.source / 'catalog.json'
 
     def git(self, root, *args):
-        return subprocess.run(['git', '-c', 'core.hooksPath=/dev/null', '-C', str(root), *args], check=True, capture_output=True, text=True).stdout.strip()
+        return subprocess.run(['git', '-c', 'core.hooksPath=/dev/null', '-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', '-c', 'commit.gpgsign=false', '-C', str(root), *args], check=True, capture_output=True, text=True).stdout.strip()
 
     def commit(self, root):
         self.git(root, 'add', '--all'); self.git(root, '-c', 'commit.gpgsign=false', 'commit', '-qm', 'fixture')
