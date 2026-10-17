@@ -1,6 +1,6 @@
 # 新版资源登记与更新实现进度
 
-更新：2026-10-17。资源登记、候选构建、源码候选及 GitHub 自动化源码已实现，工作流尚未合入默认分支或完成线上验收。操作入口见 [GitHub 更新自动化](github-update-automation.md)，登记和构建合同见 [候选构建](candidate-build.md)。
+更新：2026-10-17。资源登记、候选构建及 GitHub 自动化已在 `main` 启用，真实上游更新已完成候选 PR、必需检查、审查合并和结构基线发布。日常操作见 [更新与发布操作](operations.md)，实现边界见 [GitHub 更新自动化](github-update-automation.md)，登记和构建合同见 [候选构建](candidate-build.md)。
 
 ## 实现
 
@@ -34,16 +34,21 @@ Claudespace 管理来源正文和固有定义；Profile 保存选择与运行参
 - 第二阶段：65 项测试通过；Code Review 和 Ponytail 的真实新来源生成了隔离源码候选，未采用到运行配置。
 - 第三阶段：86 项测试通过，独立 20 项 GitHub 定向测试通过，actionlint 1.7.12 通过。
 - 私有 CI 接入：104 项测试通过，18 项私有 CI 定向测试独立复核通过；密钥只授予可信来源校验与准备作业，PR 工具测试保持无私钥。
-- 真实 Git 仓库验证 bundle 移交、裸对象检查及 push lease 拒绝人工提交覆盖；GitHub PR 写操作使用模拟 API 验证。
+- 真实 Git 仓库验证 bundle 移交、裸对象检查及 push lease 拒绝人工提交覆盖；GitHub PR 写操作先以模拟 API 验证，随后已在真实仓库创建更新 PR。
 - 无跨仓库凭据的实际下载检查中，四份 catalog、51 项资源通过；个人目录被私有来源阻断，完整检查保留失败结果。
+- 私有来源上线验收：GitHub runner 完整验证五份 catalog、61 项资源，开发分支预览权限已收回，Environment 长期只允许 main。
+- 主方案 [PR #3](https://github.com/LKCY23/claudespace/pull/3) 合入前，两项必需检查均通过；`main` 保护对管理员同样生效。104 项测试另在无全局 Git 身份的环境下通过，耗时 15.563 秒。
+- [真实更新运行](https://github.com/LKCY23/claudespace/actions/runs/39036485295) 生成三个草稿 PR。Code Review 的 [PR #5](https://github.com/LKCY23/claudespace/pull/5) 通过检查和独立审查后正常合入，最终提交 `d3ee64fddf55803dae41b613886b9ab23ac13af7` 的 [基线发布](https://github.com/LKCY23/claudespace/actions/runs/39036710100) 成功；其他候选保留待审草稿。
+- [全部目录更新预览](https://github.com/LKCY23/claudespace/actions/runs/39036738745) 验证了私有来源查询和部分失败保留：5 组候选准备成功；4 项因 GitHub 比较文件上限而检查失败；2 项因本地正文与旧上游不同而停止自动适配。结果明确为 `needs_attention`，这些待处理项没有被标记为已最新，也没有发布。两项 `manual` 资源按登记保持人工维护。
 
 测试入口为 `tests/`，可用 [候选构建说明](candidate-build.md) 中的命令重复运行。包含本机目录、安装状态和恢复信息的原始交付记录单独保存在本地，没有作为公开资源正文发布。
 
-## 上线前剩余工作
+## 剩余接入工作
 
-1. 完成私有来源 CI 的真实运行验收并收回开发分支预览权限；授权和校验实现见 [私有来源 CI](private-source-ci.md)。
-2. 合入经过审阅的源码，设置 Actions PR 权限和必需检查，完成真实线上演练。
-3. 完成正式基线附件获取、长期归档与消费者采用联调。
-4. 对需要真实客户端、登录或服务的资源分别执行适用验收。
+1. 完成正式基线附件获取、长期归档与消费者采用联调。本轮没有改变 Profile、Machine、安装版本或启用状态。
+2. 对需要真实客户端、登录或服务的资源分别执行适用验收。
+3. 处理全目录预览的具体待办：academic-pipeline、deep-research、claude-scientific-writer、autoresearchclaw 需要完整 Git 比较；karpathy-llm-wiki、superpowers 需要核对本地改动与导入声明。既有固定版本仍通过结构验证，待办只阻断相应的新更新。
+
+每周一 01:17 UTC 的调度已随 main 启用；本次通过手动触发验收，首次实际定时运行仍待其到期。GitHub 可能延迟 schedule，不能把已配置调度表述为每次都准时执行。
 
 当前已经保存的 HUD 历史快照不属于五份新版登记；不能把五份目录通过检查表述成整个仓库中所有历史资源均已完成新版验证。
