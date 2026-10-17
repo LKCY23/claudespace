@@ -1,6 +1,6 @@
 # GitHub 更新自动化
 
-日期：2026-10-17。源码和隔离验证已完成，定时更新与正式发布尚未合入默认分支。私有来源的授权和可信校验入口见 [私有来源 CI](private-source-ci.md)。本文记录操作入口和当前接入边界；资源与版本语义见 [源码候选合同](source-update-candidates.md) 和 [构建合同](candidate-build.md)。
+日期：2026-10-17。定时更新与基线发布已在 `main` 启用，已用 Code Review 的真实上游更新完成线上演练。日常操作见 [更新与发布操作](operations.md)，私有来源的授权和可信校验入口见 [私有来源 CI](private-source-ci.md)。资源与版本语义见 [源码候选合同](source-update-candidates.md) 和 [构建合同](candidate-build.md)。
 
 ## 流程与入口
 
@@ -75,19 +75,21 @@ PR 工具测试可以运行该 PR 的代码，因此没有私钥、写 token 或
 
 ## GitHub 接入现状
 
-2026-10-17 已只读确认 `LKCY23/claudespace` 为公共仓库，默认分支 `main`；Actions 已允许，但默认分支尚未接入这些工作流。默认 token 权限为 read，`can_approve_pull_request_reviews` 为 false，即仓库尚未允许 Actions 创建和批准 PR。本批没有修改该设置。
+2026-10-17 已完成 `LKCY23/claudespace` 的正式接入：工作流经 [PR #3](https://github.com/LKCY23/claudespace/pull/3) 合入 `main`；Actions 创建和批准 PR 的仓库选项已开启，默认 token 保持 read，工作流只创建／刷新草稿 PR，不自动批准或合并。
 
-上线顺序：
+`main` 必须通过 PR 合并，分支须跟上最新 main，管理员也受保护规则约束。必需检查为 `Tooling tests` 和 `claudespace/fixed-sources`，均绑定 GitHub Actions app；禁止强推和删除。单维护者仓库不要求另一位 GitHub 账号批准，维护者审查后明确执行合并。
 
-1. 在已审阅开发分支验证私有访问后收回其临时权限，再审阅源码并将工作流合入 `main`。更新器不自动提交开发工作区中的其他变更。
-2. 在仓库 Actions 设置中明确允许创建 PR；保持默认 token 为只读，由 PR 作业申请所需写权限。将 PR 工具测试和准确提交的 `claudespace/fixed-sources` 配置为合并前必需检查。
-3. 先手动运行 `Resource updates`，保留 `publish=false`，审查摘要和候选附件。
-4. 手动选择 `publish=true` 创建草稿 PR，检查同一 PR 的复用行为。
-5. 批准 PR 工具测试，并从可信 main 手动触发固定来源验证、指定 PR 的完整 SHA；两者通过后人工审查合并，再核对最终提交的基线附件。
+每轮更新的操作顺序：
+
+1. 手动运行 `Resource updates`，保留 `publish=false`，审查摘要和候选附件。
+2. 选择 `publish=true` 创建或刷新草稿 PR；同一基线和候选内容保持不变时复用已有 PR。
+3. 核对来源分支、完整 SHA 和文件差异，批准 PR 工具测试。
+4. 从可信 main 手动触发固定来源验证，指定 PR 的完整 SHA。
+5. 两项检查通过后把草稿标为 ready，审查合并，再核对最终提交的基线附件。main 或 PR 内容变化后重新准备并验证，不能沿用旧 SHA 的结果。
 
 当前 GitHub 对 `GITHUB_TOKEN` 打开的或更新的 PR 会生成需要批准的 `pull_request` 工作流运行。批准后才执行，不把 PR 创建成功当作 CI 已通过。若之后需要免人工批准的触发，可另行配置权限限定的 GitHub App token；本次没有引入这套凭据。[GitHub Token 文档](https://docs.github.com/en/actions/concepts/security/github_token)。
 
-仓库 token 不自动获得跨仓库私有来源权限。`goal-authoring` 的固定提交 `35be21e816e9956ed2673a24b2d37e7837487221` 已于 2026-10-17 发布到原私有仓库，提交身份及仓库可见性均保持不变。个人目录的五个外部固定提交现在均可由已有授权的维护者读取；这不代表 Claudespace 的工作流已获得私有来源访问权。
+仓库 token 不自动获得跨仓库私有来源权限。`goal-authoring` 的固定提交 `35be21e816e9956ed2673a24b2d37e7837487221` 已发布到原私有仓库，提交身份及仓库可见性均保持不变；工作流通过下一段的单仓库只读密钥访问，云端完整来源验证已通过。
 
 私有读取现使用 Goal Authoring 仓库专属的只读 deploy key，私钥保存在 `claudespace-private-sources` Environment。只有允许的可信分支可使用；PR merge refs 不在允许范围。检查结果和候选报告省略私有文件路径，私有正文仅在临时目录存在。详情、初次预览权限收回和轮换方式见 [私有来源 CI](private-source-ci.md)。
 
@@ -101,9 +103,11 @@ PR 工具测试可以运行该 PR 的代码，因此没有私钥、写 token 或
 
 ## 已完成验证
 
-- 全套 86 项测试通过，约 9.878 秒；独立复核的 20 项 GitHub 定向测试通过。
+- 自动化初步阶段：86 项测试通过，约 9.878 秒；独立复核的 20 项 GitHub 定向测试通过。
 - actionlint 1.7.12 校验全部工作流通过。
 - 使用临时真实 Git 仓库验证 bundle 可移交、无 checkout 检查，以及实际 push lease 拒绝人工提交覆盖。
-- GitHub API 适配器已针对真实仓库做只读探测；写操作采用隔离 Git 仓库和模拟 PR API，未向线上推送或创建 PR。
+- 104 项测试在不提供全局 Git 身份的环境下通过，耗时 15.563 秒。真实 Linux CI 暴露的 fixture 提交身份依赖已修复，生产更新逻辑不变。
+- [真实发布运行](https://github.com/LKCY23/claudespace/actions/runs/39036485295) 创建了三个机器人草稿 PR；Code Review 的 [PR #5](https://github.com/LKCY23/claudespace/pull/5) 经工具测试、准确提交的私有来源验证和独立审查后正常合入。
+- 最终提交 `d3ee64fddf55803dae41b613886b9ab23ac13af7` 的 [基线发布](https://github.com/LKCY23/claudespace/actions/runs/39036710100) 成功，覆盖五份新版 catalog、61 项资源。其余候选保留草稿，本机配置和安装不随发布改变。
 - 新增的全目录验证入口实际下载检查：4 份 catalog、51 项资源通过；当时个人 catalog 因私有且未发布的来源阻断，完整检查返回失败并保留其余结果。随后准确提交已发布，随后用本机授权验证全部 61 项来源通过。受限 CI 读取和可信验证现已接入，实际云端结果以检查 SHA 对应的 Actions run 为准。
 - 公开可复现入口为 `tests/` 和上述工具命令；包含个人目录与安装状态的本机交付记录单独保存，不随资源仓库发布。
