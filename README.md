@@ -2,7 +2,7 @@
 
 Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及宿主适配。支持插件、独立技能、MCP、Hooks、全局指令、Rules 和 Agents 七类资源。
 
-来源登记、候选构建和 GitHub 更新自动化已在 `main` 启用，真实资源更新已走通候选 PR、必需检查、审查合并和基线附件发布。消费者仍须明确采用新基线；远端附件获取与采用联调另行推进。日常入口见 [更新与发布操作](docs/operations.md)，验证范围见 [实现进度](docs/update-implementation.md)。
+来源登记、候选构建和 GitHub 更新自动化已在 `main` 启用。最终提交通过检查后发布永久 GitHub Release 记录；claude-config 0.2.0 按明确版本获取来源，再由用户采用和部署。日常入口见 [更新与发布操作](docs/operations.md)，验证范围见 [实现进度](docs/update-implementation.md)。
 
 ## 职责
 

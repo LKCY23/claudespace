@@ -16,7 +16,7 @@
 | `.github/workflows/resource-updates.yml` | 每周一 01:17 UTC（新加坡／北京时间 09:17）；手动触发默认仅准备。只读准备作业与 PR 写入作业分开 | 检查摘要、候选 bundle／回执、草稿 PR 和同步报告 |
 | `.github/workflows/validate-resources.yml` | PR 更新或手动；只读、无私钥 | 工具与协议测试 |
 | `.github/workflows/validate-fixed-sources.yml` | 可信分支 push 或手动指定准确提交；受限 Environment | 可信程序检查全部固定来源，向被检 SHA 写入 `claudespace/fixed-sources` 状态 |
-| `.github/workflows/publish-baseline.yml` | `main` 更新或默认分支手动触发；只读 | 最终提交重新验证通过后生成基线 JSON 附件 |
+| `.github/workflows/publish-baseline.yml` | `main` 更新或默认分支手动触发；验证作业只读，发布作业单独申请 contents:write | 最终提交重新验证后生成 JSON 记录并发布永久 Release；发布作业无私有来源密钥 |
 | `.github/dependabot.yml` | 每周 | 仅 Actions 和 Python 测试依赖的更新 PR |
 
 定时任务只在默认分支运行，可能延迟；长期无活动的公共仓库可能被 GitHub 停用定时任务，手动入口仍需保留。具体行为以 [GitHub 调度文档](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule) 为准。
@@ -97,9 +97,11 @@ PR 工具测试可以运行该 PR 的代码，因此没有私钥、写 token 或
 
 最终验证通过后保存 `claudespace-baseline-<完整SHA>` artifact，每份 catalog 有独立 JSON，包含 repo、commit、catalog_path、catalog_sha256 和结构验证层级；独立验证附件保存各资源构建结果。记录位于提交外，不修改被记录的提交。
 
-候选和验证附件保存 30 天，基线附件保存 90 天。Git 固定提交可长期引用，但 Actions 附件有保留期；当前没有自动创建 tag／Release，不能把 artifact 视为永久下载地址。长期归档或 Release 附件及消费者下载衔接另行接入。
+候选和验证附件保存 30 天，基线 artifact 保存 90 天。通过验证的默认分支提交另发布 `baseline-<完整SHA>` tag／Release，每份 catalog 对应 `<别名>.baseline.json`。正式记录不受 artifact 保留期限制；固定 Git 来源单独获取，未打包个人配置、私有外部源码或运行缓存。
 
-现有 `claude-config adopt-baseline` 支持本地已准备来源与基线记录。远端附件获取、正式发布到采用的联调尚未完成；自动发布不会替用户改 `catalogs.yaml`、Profile 或 Machine。
+`release_assets.py` 先创建草稿、上传并核对附件再公开；相同内容重跑复用，标签移动、不同附件或已发布缺件都会失败。草稿通过 gh 的 Release 查询定位，避免将尚未创建 tag 的草稿当成不存在。GitHub Release 本身仍可由仓库管理员管理，此协议不宣称服务端不可变存储或签名认证。
+
+claude-config 0.2.0 的 `fetch-baseline` 核对已发布 tag、记录和固定来源，并返回 `adopt-baseline` 预览命令。获取不修改选择，采用不部署；随后仍需明确 `plan/apply`。跨仓库／路径使用精确来源映射，私有历史记录保持私有。操作与恢复见[更新与发布操作](operations.md)。
 
 ## 已完成验证
 
