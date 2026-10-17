@@ -1,8 +1,8 @@
 # Claude HUD 历史安装快照
 
-此目录保留 Claude HUD 0.0.10 的历史安装正文及迁移证据。它不是五份新版 `schema_version: 1/resources` catalog 之一，也不属于其自动更新与结构基线覆盖范围。
+此目录保留 Claude HUD 0.0.10 的历史安装正文及迁移证据。正式资源及更新入口已迁至 [domains/claude-hud](../../claude-hud/README.md)；这里不参与自动发现、候选或基线发布，避免旧格式与新版并行管理。
 
-原包位于 `packages/claude-hud`，作者、许可证、命令和构建文件保持原样。这里的历史 `catalog.json` 保存准确内容指纹；`.in_use` 是运行时租约，不属于包内容。不能将安装收据中的旧提交视为已经重建验证的上游来源。
+原包位于 `packages/claude-hud`，作者、许可证、命令和构建文件保持原样。这里的历史 `catalog.json` 保存当时的内容指纹；`.in_use` 是运行时租约，不属于包内容。2026-10-18 已另行核对实际使用的迁移包：173 个文件及执行位与上游 `26e38decd762f1a2d31e6d83bf33193b3b293084` 完全一致。历史收据原文保持不变，新核对结果由正式登记说明记录。
 
 当前选择位于 Agent Profile，准确部署来源由配置数据的 `catalogs.yaml` 和本机 Machine 决定。需要迁移此历史正文时，应准备并核对新版登记与来源，不能把本目录的旧 catalog 直接传给新版构建器，也不要重新创建 `agents.yaml`。
 

@@ -40,7 +40,7 @@ python3 scripts/sync_update_prs.py \
   --report /tmp/claudespace-pr-preview.json
 ```
 
-省略 `--catalog` 检查根目录及 `domains/*/catalog.json` 的五份新版登记；`domains/infrastructure/claude-hud` 历史安装快照不在这一范围内。第二条默认只读，只有显式 `--write` 才推送分支和创建／刷新 PR；GitHub 工作流通过独立写入作业调用它。`--format json` 可取得原始同步报告，默认输出可读摘要与完整 JSON 路径。直接使用个人令牌时，应通过 `--bot-login` 明确实际发布账号；这不会接管其他账号创建的 PR。
+省略 `--catalog` 检查根目录及 `domains/*/catalog.json` 的六份新版登记，包括 `domains/claude-hud/catalog.json`；旧 `domains/infrastructure/claude-hud` 不参与发现。第二条默认只读，只有显式 `--write` 才推送分支和创建／刷新 PR；GitHub 工作流通过独立写入作业调用它。`--format json` 可取得原始同步报告，默认输出可读摘要与完整 JSON 路径。直接使用个人令牌时，应通过 `--bot-login` 明确实际发布账号；这不会接管其他账号创建的 PR。
 
 `private_ci.py prepare` 先准备允许的私有来源，再调用原更新器。私有分支通过 Git 查询；公共来源继续使用 GitHub API。私有密钥／读取失败只影响对应来源；更新器在一个组失败后继续其他组，结果仍列出失败原因，返回非零退出码；可用候选照常保存。工作流保留失败状态，同时允许独立 PR 作业处理已通过的组。检查失败、无法自动适配和下载超时不会被解释为“已经最新”。
 
@@ -113,3 +113,7 @@ claude-config 0.2.0 的 `fetch-baseline` 核对已发布 tag、记录和固定�
 - 最终提交 `d3ee64fddf55803dae41b613886b9ab23ac13af7` 的 [基线发布](https://github.com/LKCY23/claudespace/actions/runs/39036710100) 成功，覆盖五份新版 catalog、61 项资源。其余候选保留草稿，本机配置和安装不随发布改变。
 - 新增的全目录验证入口实际下载检查：4 份 catalog、51 项资源通过；当时个人 catalog 因私有且未发布的来源阻断，完整检查返回失败并保留其余结果。随后准确提交已发布，随后用本机授权验证全部 61 项来源通过。受限 CI 读取和可信验证现已接入，实际云端结果以检查 SHA 对应的 Actions run 为准。
 - 公开可复现入口为 `tests/` 和上述工具命令；包含个人目录与安装状态的本机交付记录单独保存，不随资源仓库发布。
+
+## 大跨度版本比较
+
+GitHub compare 的文件清单达到 300 项时，改为读取两个准确提交的完整递归 Git 树，比较文件对象、类型和执行位；重命名按旧路径删除、新路径新增处理，保留两端作用域。报告标注 `comparison_method`。任一树响应被截断、格式异常或网络失败，仍报告检查失败，不生成不完整候选。使用现有单次查询复用，不增加持久缓存，也不执行上游代码。限制与响应字段见 [GitHub Git Trees 文档](https://docs.github.com/en/rest/git/trees#get-a-tree)。

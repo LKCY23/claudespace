@@ -1,10 +1,10 @@
 # 新版资源登记与候选构建
 
-状态：2026-10-17 已实现本地候选构建。源码候选与 GitHub 自动化源码也已实现；线上启用与消费者联调仍待完成。见 [更新自动化](github-update-automation.md)。
+状态：2026-10-18，候选构建、线上 PR／基线发布及消费者获取采用已接通。见 [更新自动化](github-update-automation.md)。
 
 ## 登记入口
 
-仓库维护 5 份 `schema_version: 1` catalog，共 61 项资源：
+仓库维护 6 份 `schema_version: 1` catalog，共 62 项资源：
 
 | 文件 | 标识 | 数量 |
 | --- | --- | --- |
@@ -13,9 +13,10 @@
 | `domains/standalone/catalog.json` | claudespace-standalone | 33 |
 | `domains/legacy-plugins/catalog.json` | claudespace-legacy | 10 |
 | `domains/optional-tools/catalog.json` | claudespace-optional-tools | 3 |
+| `domains/claude-hud/catalog.json` | claude-hud | 1 |
 
 每份登记均使用按资源标识组织的 `resources`，包含 `kind`、`origin`、`maintenance`、`source`、`compatibility`、`requires`、`update`。类型与字段由 `scripts/resource_catalog.py` 校验，并与 claude-config 的协议副本一致。
-`domains/infrastructure/claude-hud` 是单独保存的历史安装快照，不在这五份登记的发现、检查或基线附件范围内。
+`domains/claude-hud` 使用经过逐文件核对的官方固定来源并跟踪正式 Release。`domains/infrastructure/claude-hud` 仅保留历史安装快照，不作为运行输入。
 
 旧的资源登记 `version/plugins` 不再是输入格式。宿主自己的 marketplace 仍按其原生协议使用 `plugins`；它是发现清单，不是第二套资源来源声明。
 
@@ -105,4 +106,4 @@ PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 5 份真实 catalog 的 61 项资源都完成隔离构建。固定源已准备时，四组构建分别约 0.36／0.19／0.47／0.36 秒，standalone 33 项另行通过；这些时间不包含首次下载。
 `--fetch` 分支也对固定 agent-browser 提交完成实际下载构建（约 2.34 秒）。本机 Git 的旧代理不可用，验证进程单独使用 `git -c http.proxy=`，未改全局 Git 或系统网络配置。
 
-当前全套 86 项测试和 actionlint 已通过。后续为 GitHub 线上启用、私有来源访问与验证、正式发布和消费者联调；源码入口见 [实现进度](update-implementation.md)。
+上述计数是初期构建验收记录；当前线上发布、私有来源与消费者联调已完成，HUD 接入后的实际验证以对应 CI 和本机验收报告为准。见 [实现进度](update-implementation.md)。

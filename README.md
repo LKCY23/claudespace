@@ -17,7 +17,7 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 ## 资源目录
 
-当前五份新版 `schema_version: 1/resources` 登记共 61 项：
+当前六份新版 `schema_version: 1/resources` 登记共 62 项：
 
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
@@ -26,8 +26,9 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 | [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
 | [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
+| [domains/claude-hud/catalog.json](domains/claude-hud/catalog.json) | `claude-hud` | 官方固定 HUD 来源；跟踪正式 Release，保留本机显示配置 |
 
-[Claude HUD 安装快照](domains/infrastructure/claude-hud/README.md) 单独保留历史内容，不属于上述五份新版登记，也不在其自动更新和结构基线覆盖范围内。
+[HUD 正式入口](domains/claude-hud/README.md) 已接入自动更新；旧安装快照仅保留历史证据。登记、发布和更新候选均不会覆盖本机 HUD 显示配置。
 
 `candidates`、`legacy-plugins` 是保留的目录名称，不代表当前是否安装、启用或验证通过；这些状态分别由 Profile、原生检查和验证记录说明。
 

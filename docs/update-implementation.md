@@ -7,7 +7,7 @@
 | 模块 | 当前职责 |
 | --- | --- |
 | `resource_catalog.py` | 七类资源的结构、来源、兼容入口、依赖和更新目标校验；拒绝旧登记格式 |
-| 当前资源登记 | 五份新版 catalog、61 项资源；HUD 历史安装快照不在这一范围内 |
+| 当前资源登记 | 六份新版 catalog、62 项资源；HUD 使用已核对的官方固定来源并跟踪正式 Release |
 | `check_updates.py` | 只读检查上游，按资源路径、imports、共享依赖和重命名比较 |
 | `candidate_sources.py` | 读取固定 Git 对象，使用明确本地来源或临时下载 |
 | `build_candidates.py` | 在新目录构建候选包、宿主发现清单和结构报告，保护本地包装 |
@@ -15,7 +15,7 @@
 | `run_updates.py` | 检查全部或指定新版登记，成组导出候选 bundle，保留逐组失败结果 |
 | `sync_update_prs.py` | 默认只读预览；检查 bundle 范围、复用草稿 PR、保护人工修改和并发推送 |
 | `private_ci.py` | 只读 deploy key、私有分支 Git 查询、临时来源准备、可信校验与报告脱敏 |
-| `validate_catalogs.py` | 汇总五份新版登记的固定资源构建检查，供 PR 和最终提交共用 |
+| `validate_catalogs.py` | 汇总自动发现的新版登记固定来源构建检查，供 PR 和最终提交共用 |
 | `baseline_record.py` | 对干净、准确提交生成独立结构基线记录 |
 | GitHub workflows | 调度准备与 PR 同步、验证 PR、验证最终提交并发布准确 SHA 的永久 Release |
 | `release_assets.py` | 草稿上传、附件核对、公开发布及重复运行保护，不覆盖已发布内容 |
@@ -53,4 +53,4 @@ Claudespace 管理来源正文和固有定义；Profile 保存选择与运行参
 
 每周一 01:17 UTC 的调度已随 main 启用；本次通过手动触发验收，首次实际定时运行仍待其到期。GitHub 可能延迟 schedule，不能把已配置调度表述为每次都准时执行。
 
-当前已经保存的 HUD 历史快照不属于五份新版登记；不能把五份目录通过检查表述成整个仓库中所有历史资源均已完成新版验证。
+HUD 已通过独立的正式 catalog 接入更新和发布；旧安装快照只供追溯。首次接入保持当前版本和显示偏好，新版本只生成待审候选。
