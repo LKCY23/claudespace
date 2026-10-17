@@ -1,4 +1,4 @@
-name: Validate resources
+name: Validate tooling
 on:
   pull_request:
   workflow_dispatch:
@@ -24,12 +24,3 @@ jobs:
       - run: python -m pip install -r requirements-test.txt
       - name: Unit and protocol tests
         run: PYTHONPATH=scripts python -B -m unittest discover -s tests -v
-      - name: Validate pinned resource bodies
-        run: python scripts/validate_catalogs.py --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/resource-validation" --fetch
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        if: always()
-        with:
-          name: resource-validation
-          path: ${{ runner.temp }}/resource-validation/*.json
-          retention-days: 30
-          if-no-files-found: warn

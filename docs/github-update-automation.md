@@ -1,6 +1,6 @@
 # GitHub 更新自动化
 
-日期：2026-10-17。源码和隔离验证已完成，工作流尚未上传到 GitHub 默认分支，也未在线运行。本文记录操作入口和当前接入边界；资源与版本语义见 [源码候选合同](source-update-candidates.md) 和 [构建合同](candidate-build.md)。
+日期：2026-10-17。源码和隔离验证已完成，定时更新与正式发布尚未合入默认分支。私有来源的授权和可信校验入口见 [私有来源 CI](private-source-ci.md)。本文记录操作入口和当前接入边界；资源与版本语义见 [源码候选合同](source-update-candidates.md) 和 [构建合同](candidate-build.md)。
 
 ## 流程与入口
 
@@ -14,7 +14,8 @@
 | 文件 | 触发与权限 | 输出 |
 | --- | --- | --- |
 | `.github/workflows/resource-updates.yml` | 每周一 01:17 UTC（新加坡／北京时间 09:17）；手动触发默认仅准备。只读准备作业与 PR 写入作业分开 | 检查摘要、候选 bundle／回执、草稿 PR 和同步报告 |
-| `.github/workflows/validate-resources.yml` | PR 更新或手动；只读 | 全套测试、五份新版 catalog 固定资源的结构验证 |
+| `.github/workflows/validate-resources.yml` | PR 更新或手动；只读、无私钥 | 工具与协议测试 |
+| `.github/workflows/validate-fixed-sources.yml` | 可信分支 push 或手动指定准确提交；受限 Environment | 可信程序检查全部固定来源，向被检 SHA 写入 `claudespace/fixed-sources` 状态 |
 | `.github/workflows/publish-baseline.yml` | `main` 更新或默认分支手动触发；只读 | 最终提交重新验证通过后生成基线 JSON 附件 |
 | `.github/dependabot.yml` | 每周 | 仅 Actions 和 Python 测试依赖的更新 PR |
 
@@ -27,10 +28,10 @@
 以下命令供维护源码仓库时使用，要求 Python 3.11+、Git、已登录的 GitHub CLI，以及干净、已提交的真实仓库基线。输出目录必须是仓库外的新位置。不要使用本机交付报告中的临时测试基线推送正式分支。
 
 ```sh
-python3 scripts/run_updates.py \
+python3 scripts/private_ci.py prepare \
   --root /absolute/claudespace \
   --output /tmp/claudespace-update-review \
-  --catalog domains/candidates/catalog.json --fetch
+  --catalog domains/candidates/catalog.json
 
 python3 scripts/sync_update_prs.py \
   --root /absolute/claudespace \
@@ -41,7 +42,7 @@ python3 scripts/sync_update_prs.py \
 
 省略 `--catalog` 检查根目录及 `domains/*/catalog.json` 的五份新版登记；`domains/infrastructure/claude-hud` 历史安装快照不在这一范围内。第二条默认只读，只有显式 `--write` 才推送分支和创建／刷新 PR；GitHub 工作流通过独立写入作业调用它。`--format json` 可取得原始同步报告，默认输出可读摘要与完整 JSON 路径。直接使用个人令牌时，应通过 `--bot-login` 明确实际发布账号；这不会接管其他账号创建的 PR。
 
-`run_updates.py` 在一个组失败后继续其他组，结果仍列出失败原因，返回非零退出码；可用候选照常保存。工作流保留失败状态，同时允许独立 PR 作业处理已通过的组。检查失败、无法自动适配和下载超时不会被解释为“已经最新”。
+`private_ci.py prepare` 先准备允许的私有来源，再调用原更新器。私有分支通过 Git 查询；公共来源继续使用 GitHub API。私有密钥／读取失败只影响对应来源；更新器在一个组失败后继续其他组，结果仍列出失败原因，返回非零退出码；可用候选照常保存。工作流保留失败状态，同时允许独立 PR 作业处理已通过的组。检查失败、无法自动适配和下载超时不会被解释为“已经最新”。
 
 ## PR 复用和人工修改
 
@@ -68,7 +69,7 @@ GitHub PR 正文的读取与 PATCH 不是原子操作，不能宣称完全消除
 
 PR 写入作业只从可信工作流提交加载发布器，将 bundle 导入临时裸 Git 仓库。它不 checkout 或执行候选。发布器核对 catalog 的准确版本转换、未选 marketplace 条目、gitlink 和允许变更范围，再执行分支及 PR 写入。
 
-PR 验证作业可以运行该 PR 的测试代码，因此没有写 token、部署凭据或本机账号；不使用 `pull_request_target`。最终基线作业在默认分支重新执行测试和完整结构检查。
+PR 工具测试可以运行该 PR 的代码，因此没有私钥、写 token 或本机账号。完整来源验证使用独立可信 checkout 中的程序，待检提交只作为数据读取，不执行其中的 Python、测试或安装命令；结果绑定准确 SHA。最终基线作业在默认分支再次执行完整来源检查。各工作流均不使用 `pull_request_target`。
 
 结构检查与实际客户端加载、认证和业务效果分别记录。自动化不执行技能任务、不授予信任、不调用付费模型、不改变 Profile 选择或本机安装。
 
@@ -78,17 +79,17 @@ PR 验证作业可以运行该 PR 的测试代码，因此没有写 token、部�
 
 上线顺序：
 
-1. 先完成私有来源的访问／验证接入，再审阅源码并将工作流合入 `main`。更新器不自动提交开发工作区中的其他变更。
-2. 在仓库 Actions 设置中明确允许创建 PR；保持默认 token 为只读，由 PR 作业申请所需写权限。配置 PR 验证为合并前必需检查。
+1. 在已审阅开发分支验证私有访问后收回其临时权限，再审阅源码并将工作流合入 `main`。更新器不自动提交开发工作区中的其他变更。
+2. 在仓库 Actions 设置中明确允许创建 PR；保持默认 token 为只读，由 PR 作业申请所需写权限。将 PR 工具测试和准确提交的 `claudespace/fixed-sources` 配置为合并前必需检查。
 3. 先手动运行 `Resource updates`，保留 `publish=false`，审查摘要和候选附件。
 4. 手动选择 `publish=true` 创建草稿 PR，检查同一 PR 的复用行为。
-5. 批准该 PR 的检查运行，通过后人工审查合并，再核对最终提交的基线附件。
+5. 批准 PR 工具测试，并从可信 main 手动触发固定来源验证、指定 PR 的完整 SHA；两者通过后人工审查合并，再核对最终提交的基线附件。
 
 当前 GitHub 对 `GITHUB_TOKEN` 打开的或更新的 PR 会生成需要批准的 `pull_request` 工作流运行。批准后才执行，不把 PR 创建成功当作 CI 已通过。若之后需要免人工批准的触发，可另行配置权限限定的 GitHub App token；本次没有引入这套凭据。[GitHub Token 文档](https://docs.github.com/en/actions/concepts/security/github_token)。
 
 仓库 token 不自动获得跨仓库私有来源权限。`goal-authoring` 的固定提交 `35be21e816e9956ed2673a24b2d37e7837487221` 已于 2026-10-17 发布到原私有仓库，提交身份及仓库可见性均保持不变。个人目录的五个外部固定提交现在均可由已有授权的维护者读取；这不代表 Claudespace 的工作流已获得私有来源访问权。
 
-上线前仍需确定私有内容的 CI 获取与验证方式。当前工作流没有跨仓库凭据，不能宣称已支持该私有来源的在线验证；也不能直接把读取私有仓库的 secret 交给可执行 PR 代码的作业。这个授权／验证边界应在接入时解决，不通过跳过资源、改成分支或公开私有内容来绕过。
+私有读取现使用 Goal Authoring 仓库专属的只读 deploy key，私钥保存在 `claudespace-private-sources` Environment。只有允许的可信分支可使用；PR merge refs 不在允许范围。检查结果和候选报告省略私有文件路径，私有正文仅在临时目录存在。详情、初次预览权限收回和轮换方式见 [私有来源 CI](private-source-ci.md)。
 
 ## 基线附件与消费者
 
@@ -104,5 +105,5 @@ PR 验证作业可以运行该 PR 的测试代码，因此没有写 token、部�
 - actionlint 1.7.12 校验全部工作流通过。
 - 使用临时真实 Git 仓库验证 bundle 可移交、无 checkout 检查，以及实际 push lease 拒绝人工提交覆盖。
 - GitHub API 适配器已针对真实仓库做只读探测；写操作采用隔离 Git 仓库和模拟 PR API，未向线上推送或创建 PR。
-- 新增的全目录验证入口实际下载检查：4 份 catalog、51 项资源通过；当时个人 catalog 因私有且未发布的来源阻断，完整检查返回失败并保留其余结果。随后准确提交已发布，但私有来源的 CI 授权仍待接入。
+- 新增的全目录验证入口实际下载检查：4 份 catalog、51 项资源通过；当时个人 catalog 因私有且未发布的来源阻断，完整检查返回失败并保留其余结果。随后准确提交已发布，随后用本机授权验证全部 61 项来源通过。受限 CI 读取和可信验证现已接入，实际云端结果以检查 SHA 对应的 Actions run 为准。
 - 公开可复现入口为 `tests/` 和上述工具命令；包含个人目录与安装状态的本机交付记录单独保存，不随资源仓库发布。

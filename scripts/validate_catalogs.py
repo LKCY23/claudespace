@@ -10,7 +10,7 @@ from run_updates import catalogs
 from resource_catalog import require
 
 
-def validate(root, output, *, fetch=False):
+def validate(root, output, *, fetch=False, prepared=None):
     root, output = Path(root).resolve(), Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(root), 'Use a new validation directory outside the checkout')
     output.mkdir(parents=True)
@@ -18,7 +18,7 @@ def validate(root, output, *, fetch=False):
     for catalog in catalogs(root):
         name = catalog.parent.name if catalog.parent != root else 'root'
         try:
-            report = build(catalog, output / name, fetch=fetch)
+            report = build(catalog, output / name, fetch=fetch, prepared=prepared)
         except (ValueError, OSError, RuntimeError, subprocess.SubprocessError) as exc:
             report = {'status': 'blocked', 'reason': str(exc)}
         write_json(output / (name + '.json'), report)

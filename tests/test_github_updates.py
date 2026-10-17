@@ -260,7 +260,7 @@ class WorkflowTests(unittest.TestCase):
     def test_baseline_only_follows_final_validation_and_has_no_write_token(self):
         value=self.read('publish-baseline.yml');self.assertEqual(value['permissions'],{'contents':'read'})
         steps=value['jobs']['baseline']['steps'];texts=[step.get('run','') for step in steps]
-        self.assertLess(next(i for i,t in enumerate(texts) if 'validate_catalogs.py' in t),next(i for i,t in enumerate(texts) if 'build_record' in t))
+        self.assertLess(next(i for i,t in enumerate(texts) if 'private_ci.py validate' in t),next(i for i,t in enumerate(texts) if 'build_record' in t))
         self.assertNotIn('pull_request',value['on'])
 
 

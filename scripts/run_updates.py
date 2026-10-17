@@ -31,7 +31,7 @@ def groups(catalog):
     return result
 
 
-def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=False):
+def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=False, private_repos=()):
     root, output = Path(root).resolve(), Path(output).resolve()
     base = clean_head(root)
     require(not output.exists() and not output.is_relative_to(root), 'Use a new output directory outside the repository')
@@ -46,6 +46,10 @@ def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=F
     for file in available:
         catalog = read_catalog(file)
         checked = check_catalog(catalog, api)
+        for row in checked['results']:
+            if row.get('repo') in private_repos:
+                row['changed_files_count'] = len(row.pop('changed_files', []))
+                row['private_details_redacted'] = True
         check_path = 'checks/' + catalog['name'] + '.json'
         write_json(output / check_path, checked)
         report['checks'].append({'catalog': catalog['name'], 'counts': checked['counts'], 'report': check_path})
@@ -67,7 +71,10 @@ def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=F
                     report['candidates'].append({'bundle': bundle_path, 'receipt': receipt_path})
                     row.update(status='prepared', commit=receipt['candidate_commit'])
             except (ValueError, OSError, RuntimeError, subprocess.SubprocessError) as exc:
-                row.update(status='blocked', reason=str(exc))
+                private = any(catalog['resources'][name]['source'].get('repo') in private_repos
+                              or catalog['resources'][name]['origin'].get('upstream', {}).get('repo') in private_repos for name in names)
+                reason = 'Private resource candidate build failed; inspect its source in an authorized environment' if private else str(exc)
+                row.update(status='blocked', reason=reason)
             report['groups'].append(row)
     report['status'] = 'needs_attention' if any(row['status'] == 'blocked' for row in report['groups']) or any(row['counts']['check_failed'] for row in report['checks']) else 'ok'
     write_json(output / 'index.json', report)
@@ -84,6 +91,18 @@ def summary(report):
     return '\n'.join(lines) + '\n'
 
 
+def emit(report, output):
+    text = summary(report)
+    (output / 'summary.md').write_text(text)
+    print(text); print('完整 JSON：' + str((output / 'index.json').resolve()))
+    if os.environ.get('GITHUB_OUTPUT'):
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
+            stream.write('ready=' + str(bool(report['candidates'])).lower() + '\n')
+    if os.environ.get('GITHUB_STEP_SUMMARY'):
+        with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream: stream.write(text)
+    return 1 if report['status'] == 'needs_attention' else 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, required=True)
@@ -95,15 +114,7 @@ def main(argv=None):
         report = run(args.root, args.output, selected_catalog=args.catalog, fetch=args.fetch)
     except (ValueError, OSError, RuntimeError, subprocess.SubprocessError) as exc:
         print('更新检查未完成：' + str(exc), file=sys.stderr); return 2
-    text = summary(report)
-    (args.output / 'summary.md').write_text(text)
-    print(text); print('完整 JSON：' + str((args.output / 'index.json').resolve()))
-    if os.environ.get('GITHUB_OUTPUT'):
-        with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
-            stream.write('ready=' + str(bool(report['candidates'])).lower() + '\n')
-    if os.environ.get('GITHUB_STEP_SUMMARY'):
-        with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream: stream.write(text)
-    return 1 if report['status'] == 'needs_attention' else 0
+    return emit(report, args.output)
 
 
 if __name__ == '__main__':
