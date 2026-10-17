@@ -22,12 +22,14 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
 | [catalog.json](catalog.json) | `claudespace-personal` | 10 项原创或按需资源 |
-| [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项候选插件及宿主包装 |
+| [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
 | [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
 | [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
 
 [Claude HUD 安装快照](domains/infrastructure/claude-hud/README.md) 单独保留历史内容，不属于上述五份新版登记，也不在其自动更新和结构基线覆盖范围内。
+
+`candidates`、`legacy-plugins` 是保留的目录名称，不代表当前是否安装、启用或验证通过；这些状态分别由 Profile、原生检查和验证记录说明。
 
 插件的原生 marketplace 文件用于宿主发现；其 `plugins` 数组不是另一套新版资源登记。独立技能保持技能类型，不因生成插件清单而变成插件。
 

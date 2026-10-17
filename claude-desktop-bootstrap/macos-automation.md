@@ -1,5 +1,6 @@
 # macOS startup automation
 
+> Scope: research for the standalone JSON-based Bootstrap. This is not an installation guide for the unadopted Profile-based refactor; current commands and prerequisites are in [README](README.md).
 Research checked against Apple's documentation on **2026-09-21**. The local
 machine reports Darwin 27. These are documented capabilities and timing limits,
 not an end-to-end test of an installed automation or background service.
@@ -16,7 +17,7 @@ For an alternative graphical entry point, create a **normal shortcut** in Shortc
 with a **Run Shell Script** action, using this command (adjust the checkout path):
 
 ```bash
-"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json"
+"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "/absolute/path/to/desktop-overrides.json"
 ```
 
 Use that shortcut instead of the original Claude icon, for example from the Dock
