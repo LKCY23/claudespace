@@ -1,75 +1,123 @@
 {
-  "version": 1,
-  "description": "On-demand third-party tools; source registration never selects installation.",
-  "plugins": [
-    {
-      "name": "aris",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
-        "path": ".",
-        "sha": "26b95cfa0d8747078e9e43b42e20952709e561b8"
-      },
+  "schema_version": 1,
+  "name": "claudespace-optional-tools",
+  "resources": {
+    "aris": {
+      "kind": "plugin",
       "description": "ARIS research skills, pinned upstream plugin; optional, not installed by catalog registration.",
-      "category": "research",
-      "defaultEnabled": false,
-      "metadata": {
-        "selection": "on-demand",
-        "local_install_removed_on": "2026-10-07",
-        "runtime_setup": "Run the upstream setup only after choosing to install; old local copies are privately archived."
-      }
-    },
-    {
-      "name": "agent-browser",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/vercel-labs/agent-browser",
-        "path": "skills",
-        "sha": "f7c8b071343dda29477a56cb336ea76144c05496"
-      },
-      "description": "Browser automation skill bundle with fixed upstream source; requires a compatible CLI.",
-      "version": "0.38.2",
-      "strict": false,
-      "skills": [
-        "./agent-browser"
-      ],
-      "category": "devtools",
-      "defaultEnabled": false,
-      "metadata": {
-        "selection": "on-demand",
-        "runtime": {
-          "npm_package": "agent-browser",
-          "version": "0.38.2",
-          "browser_download": "Separate explicit setup; existing browser user data is not part of this package."
-        },
-        "specialized_skills": {
-          "source": "Matching CLI skills get commands",
-          "names": [
-            "dogfood",
-            "electron",
-            "slack",
-            "vercel-sandbox"
-          ]
+      "origin": {
+        "type": "third-party",
+        "author": "wanshuiyin",
+        "upstream": {
+          "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+          "commit": "26b95cfa0d8747078e9e43b42e20952709e561b8",
+          "path": "."
         }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+        "commit": "26b95cfa0d8747078e9e43b42e20952709e561b8",
+        "path": "."
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
       }
     },
-    {
-      "name": "autoresearchclaw",
-      "source": "./packages/autoresearchclaw",
-      "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
-      "version": "0.3.1+claudespace.1",
-      "category": "research",
-      "defaultEnabled": false,
-      "metadata": {
-        "selection": "on-demand",
-        "runtime": {
-          "python_package": "researchclaw",
-          "source": "https://github.com/aiming-lab/AutoResearchClaw",
-          "sha": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
-          "credentials": "Remain local; not stored in the marketplace."
-        },
-        "adapter": "Thin local package with original skills and existing YAML frontmatter repair."
+    "agent-browser": {
+      "kind": "skill",
+      "description": "Browser automation skill bundle with fixed upstream source; requires a compatible CLI.",
+      "origin": {
+        "type": "third-party",
+        "author": "vercel-labs",
+        "upstream": {
+          "repo": "vercel-labs/agent-browser",
+          "commit": "f7c8b071343dda29477a56cb336ea76144c05496",
+          "path": "skills/agent-browser"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "vercel-labs/agent-browser",
+        "commit": "f7c8b071343dda29477a56cb336ea76144c05496",
+        "path": "skills/agent-browser"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "agent_browser": {
+            "kind": "executable",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
       }
+    },
+    "autoresearchclaw": {
+      "kind": "plugin",
+      "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
+      "origin": {
+        "type": "third-party",
+        "author": "aiming-lab",
+        "upstream": {
+          "repo": "aiming-lab/AutoResearchClaw",
+          "commit": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
+          "path": ".claude/skills"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/autoresearchclaw"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      },
+      "packaging_revision": 1
     }
-  ]
+  }
 }

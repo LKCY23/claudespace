@@ -6,6 +6,15 @@
   "description": "Personal Claude Code skill marketplace — self-authored and curated third-party skills with pinned versions. One marketplace, one install command.",
   "plugins": [
     {
+      "name": "analyze-peer-work",
+      "source": "./skills/analyze-peer-work",
+      "description": "需求驱动的参考工作分析与借鉴 — 机制与证据核查、适用性评价、可读文档与改进建议",
+      "category": "research",
+      "author": {
+        "name": "LKCY23"
+      }
+    },
+    {
       "name": "github",
       "source": "./skills/github",
       "description": "GitHub workflow skill — manage PRs, issues, releases, and repo operations directly in Claude Code",
@@ -190,7 +199,7 @@
     },
     {
       "name": "autoresearchclaw",
-      "source": "./packages/autoresearchclaw",
+      "source": "./domains/optional-tools/packages/autoresearchclaw",
       "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
       "version": "0.3.1+claudespace.1",
       "category": "research",
@@ -205,6 +214,16 @@
         },
         "adapter": "Thin local package with original skills and existing YAML frontmatter repair."
       }
+    },
+    {
+      "name": "goal-authoring",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/goal-authoring",
+        "path": ".",
+        "sha": "35be21e816e9956ed2673a24b2d37e7837487221"
+      },
+      "description": "Author and review durable Codex goal contracts."
     }
   ]
 }

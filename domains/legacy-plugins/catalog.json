@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "name": "claudespace-legacy",
+  "resources": {
+    "codex": {
+      "kind": "plugin",
+      "description": "Codex delegation and code review from Claude Code.",
+      "origin": {
+        "type": "third-party",
+        "author": "openai",
+        "upstream": {
+          "repo": "openai/codex-plugin-cc",
+          "commit": "807e03ac9d5aa23bc395fdec8c3767500a86b3cf",
+          "path": "plugins/codex"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/codex"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "github": {
+      "kind": "skill",
+      "description": "Use when the user wants to manage a GitHub repository workflow through git and gh, including local branch and sync operations, pull requests, issues, and CI runs.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23",
+        "upstream": {
+          "repo": "LKCY23/claude-github-skill",
+          "commit": "8ba6659ae35d73a0a9fe09ffcc07464e5169668e",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/github"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "git": {
+            "kind": "executable",
+            "required": true
+          },
+          "gh": {
+            "kind": "executable",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "read-paper": {
+      "kind": "skill",
+      "description": "Use when reading a single research paper in a structured way to extract claims, evidence, methods, limitations, and critique.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23",
+        "upstream": {
+          "repo": "LKCY23/research-reading-skills",
+          "commit": "0631f430e5e9b3bf80772e7ca057caa054d6be2d",
+          "path": "skills/read-paper"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/read-paper"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "master"
+      }
+    },
+    "literature-review": {
+      "kind": "skill",
+      "description": "Use when conducting a topic-first literature review across multiple papers, comparing methods, evidence, and coverage for a research question.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23",
+        "upstream": {
+          "repo": "LKCY23/research-reading-skills",
+          "commit": "0631f430e5e9b3bf80772e7ca057caa054d6be2d",
+          "path": "skills/literature-review"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/literature-review"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "master"
+      }
+    },
+    "deep-research": {
+      "kind": "skill",
+      "description": "Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic. 7 modes: full research, quick brief, paper review, lit-review, fact-check, Socratic guided research dialogue, and systematic review with optional meta-analysis. Covers research question formulation, Socratic mentoring, methodology design, systematic literature search, source verification, cross-source synthesis, risk of bias assessment, meta-analysis, APA 7.0 report compilation, editorial review, devil's advocate challenges, ethics review, and post-research literature monitoring. Triggers on: research, deep research, literature review, systematic review, meta-analysis, PRISMA, evidence synthesis, fact-check, guide my research, help me think through, 研究, 深度研究, 文獻回顧, 文獻探討, 系統性回顧, 後設分析, 事實查核, 引導我的研究, 幫我釐清, 幫我想想, 我不確定要研究什麼, 研究方向, 研究主題.",
+      "origin": {
+        "type": "third-party",
+        "author": "Imbad0202",
+        "upstream": {
+          "repo": "Imbad0202/academic-research-skills",
+          "commit": "57507ef7a0b6828798d5de8f68a08b5943f43a87",
+          "path": "deep-research"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/deep-research"
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "academic-pipeline": {
+      "kind": "skill",
+      "description": "Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize. Coordinates deep-research, academic-paper, and academic-paper-reviewer into a seamless 10-stage workflow with mandatory integrity verification, two-stage peer review, and reproducible quality gates. Triggers on: academic pipeline, research to paper, full paper workflow, paper pipeline, end-to-end paper, research-to-publication, complete paper workflow.",
+      "origin": {
+        "type": "third-party",
+        "author": "Imbad0202",
+        "upstream": {
+          "repo": "Imbad0202/academic-research-skills",
+          "commit": "57507ef7a0b6828798d5de8f68a08b5943f43a87",
+          "path": "academic-pipeline"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/academic-pipeline"
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "karpathy-llm-wiki": {
+      "kind": "skill",
+      "description": "Use when building or maintaining a personal LLM-powered knowledge base. Triggers: ingesting sources into a wiki, querying wiki knowledge, linting wiki quality, 'add to wiki', 'what do I know about', or any mention of 'LLM wiki' or 'Karpathy wiki'.",
+      "origin": {
+        "type": "third-party",
+        "author": "Astro-Han",
+        "upstream": {
+          "repo": "Astro-Han/karpathy-llm-wiki",
+          "commit": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/karpathy-llm-wiki"
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "teach": {
+      "kind": "skill",
+      "description": "Teach the user a new skill or concept, within this workspace.",
+      "origin": {
+        "type": "third-party",
+        "author": "Matt Pocock; maintained wrapper LKCY23",
+        "upstream": {
+          "repo": "LKCY23/teach-skill",
+          "commit": "c15b216daf1397addb7b4ef40c8accb504f606d9",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/teach"
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "superpowers": {
+      "kind": "plugin",
+      "description": "Optional development workflow collection; not selected.",
+      "origin": {
+        "type": "third-party",
+        "author": "obra",
+        "upstream": {
+          "repo": "obra/superpowers",
+          "commit": "7e516434f2a30114300efc9247db32fb37daa5f9",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/superpowers"
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "claude-scientific-writer": {
+      "kind": "plugin",
+      "description": "Scientific writing collection; keep source only and evaluate components separately.",
+      "origin": {
+        "type": "third-party",
+        "author": "K-Dense-AI",
+        "upstream": {
+          "repo": "K-Dense-AI/claude-scientific-writer",
+          "commit": "2f80d2aed0e6b555944ec528674148fb0d7c39fc",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "K-Dense-AI/claude-scientific-writer",
+        "commit": "2f80d2aed0e6b555944ec528674148fb0d7c39fc",
+        "path": "."
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    }
+  }
+}

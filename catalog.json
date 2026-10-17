@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "name": "claudespace-personal",
+  "resources": {
+    "goal-authoring": {
+      "kind": "skill",
+      "description": "Author, review, and right-size Codex /goal prompts for durable multi-turn work. Use when a user asks to create, improve, critique, normalize, or split a Goal; convert an objective, plan, migration, experiment, research task, or retry loop into a verifiable execution contract with starting anchors, bounded authority, evidence, checkpoints, stopping conditions, and handoff. Prefer normal execution for one-turn work and split only independently deliverable outcomes.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/goal-authoring",
+        "commit": "35be21e816e9956ed2673a24b2d37e7837487221",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "research-brainstorm": {
+      "kind": "skill",
+      "description": "Technical design discussion workflow for algorithm design, system architecture, data structure choices, performance strategy, and research engineering tradeoffs before coding. Use only when the user explicitly wants to brainstorm, compare approaches, reason through a design, clarify constraints, debate technical tradeoffs, or produce a design specification before implementation. Do not use for direct coding requests, routine bug fixes, ordinary task planning, PRDs, product requirements, or non-technical ideation.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/research-brainstorm",
+        "commit": "2087690977b2f343086480db9bff994a469e296d",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "master"
+      }
+    },
+    "research-dev-orchestrator": {
+      "kind": "skill",
+      "description": "Coordinate research proposal, experiment design, reproducible experiment implementation, and open-source contribution workflows with a role-neutral coordinator and CLI-based coding agents as workers. Use when an agent needs to turn research or experiment goals into requirements, design decisions, task packets, worker dispatch, evidence-based review, and iterative implementation, or resume this workflow from existing materials at any stage, using repo-local filesystem protocols and Git worktree isolation.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/research-dev-orchestrator",
+        "commit": "ca41f330e9e4cecc4b9e2a5ec2b0eae752601c4e",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "fix/runtime-lifecycle"
+      }
+    },
+    "skill-evaluator": {
+      "kind": "skill",
+      "description": "Evaluate an existing agent skill with task-based tests, trigger checks, execution evidence, and baseline or version comparisons. Use when asked to test a SKILL.md, validate an agent-authored skill, diagnose skill regressions, or measure whether a skill helps. Writing a new skill or explaining skills alone does not require this workflow.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/skill-evaluator",
+        "commit": "4130c79edc17788d7a29ddd9f50c35b8e4759a74",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "programming-practice": {
+      "kind": "skill",
+      "description": "Coach hands-on programming practice with the learner doing the reasoning, coding, command execution, and debugging needed for the selected learning goal. Use for guided implementation, rebuilding programming fundamentals, course labs, exam practice, or requests to learn by doing without AI completing the work. Continue an active practice session across conceptual questions. Do not impose practice on standalone factual questions, ordinary delivery tasks, or requests to create or review a teaching skill.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/programming-practice",
+        "commit": "c09d816ff93926acc131eb235e830673f85d8a4c",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "analyze-peer-work": {
+      "kind": "skill",
+      "description": "Analyze papers, frameworks, open-source projects, and technical designs against the user's own needs; assess mechanisms, evidence, applicability, and what to borrow, then synthesize readable findings. Use for 参考工作分析、框架调研、按需求比较方案、借鉴设计与实现，或将已有调研整理成需求驱动的文档. Do not use for a standalone summary, term explanation, independent peer review, routine code review, or implementation alone.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "skills/analyze-peer-work"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "manual"
+      }
+    },
+    "critique-research-paper": {
+      "kind": "skill",
+      "description": "Critically review research papers, preprints, technical reports, benchmark papers, and agent/system papers to identify inflated claims, weak novelty, unfair evaluations, missing controls, reproducibility gaps, and hidden assumptions. Use when the user asks to read a paper with skepticism, distinguish real contributions from repackaging or hype, diagnose why a paper is flawed, design stronger methods/evaluations, convert a weak paper into better research directions, or extract lessons from a failed/problematic paper.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "skills/critique-research-paper"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "manual"
+      }
+    },
+    "pdf": {
+      "kind": "skill",
+      "description": "Read, generate and visually inspect PDF documents with Python and Poppler.",
+      "origin": {
+        "type": "third-party",
+        "author": "OpenAI",
+        "upstream": {
+          "repo": "openai/skills",
+          "commit": "49f948faa9258a0c61caceaf225e179651397431",
+          "path": "skills/.curated/pdf"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "openai/skills",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431",
+        "path": "skills/.curated/pdf"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "playwright": {
+      "kind": "skill",
+      "description": "Automate browser interactions through the Playwright CLI; verify host-specific paths before use.",
+      "origin": {
+        "type": "third-party",
+        "author": "OpenAI",
+        "upstream": {
+          "repo": "openai/skills",
+          "commit": "49f948faa9258a0c61caceaf225e179651397431",
+          "path": "skills/.curated/playwright"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "openai/skills",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431",
+        "path": "skills/.curated/playwright"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "screenshot": {
+      "kind": "skill",
+      "description": "Capture desktop, application windows or screen regions using OS screenshot helpers.",
+      "origin": {
+        "type": "third-party",
+        "author": "OpenAI",
+        "upstream": {
+          "repo": "openai/skills",
+          "commit": "49f948faa9258a0c61caceaf225e179651397431",
+          "path": "skills/.curated/screenshot"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "openai/skills",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431",
+        "path": "skills/.curated/screenshot"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    }
+  }
+}

@@ -1,53 +1,23 @@
-# Optional third-party research and browser tools
+# Optional tools
 
-ARIS, agent-browser and AutoResearchClaw are registered in the root Claude
-marketplace with fixed upstream commits. They are available on demand, not
-selected by claude-config-data/agents.yaml and not installed by registration.
-Their old manifest external-tool installation declarations were removed.
+新版 `claudespace-optional-tools` catalog 只登记来源与兼容入口，安装由消费者明确选择。
 
-| Install ID | Fixed source | Separate setup |
+| 资源 | 类型 | 额外依赖 |
 | --- | --- | --- |
-| aris@claudespace | wanshuiyin/Auto-claude-code-research-in-sleep at 26b95cfa0d8747078e9e43b42e20952709e561b8 | Review and run upstream setup only after choosing to use it |
-| agent-browser@claudespace | vercel-labs/agent-browser at f7c8b071343dda29477a56cb336ea76144c05496, skills subtree | Matching agent-browser CLI 0.38.2 and explicit browser setup |
-| autoresearchclaw@claudespace | Thin seven-skill adapter, based on aiming-lab/AutoResearchClaw at 2984bb62323eb1abfe481e4b950e3a4c4cdbefa6 | Python researchclaw runtime, project configuration and local provider credentials |
+| aris | 上游固定插件 | 按上游说明明确准备运行环境 |
+| agent-browser | 上游固定独立技能 | Machine 提供 agent_browser executable；原匹配 CLI 版本为 0.38.2，浏览器下载另行准备 |
+| autoresearchclaw | 保留 YAML frontmatter 修复的插件包装 | researchclaw Python 运行环境、项目配置与本机凭据 |
 
-catalog.json records these same source-only entries for provenance. It is not
-an installation selection file. The native marketplace manifest is the install
-catalog. A source pin changes only after explicit review, never by following latest.
+三项保留既有上游 pin；更新目标 main 已从官方仓库元数据核实。AutoResearchClaw 原有包移到本域 `packages/autoresearchclaw`，正文及导入记录逐字节保留，根 Claude marketplace 路径同步调整。
 
-The AutoResearchClaw checkout had two local repair commits. The adapter keeps the
-researchclaw skill YAML-frontmatter repair, with provenance and file hashes in
-packages/autoresearchclaw/UPSTREAM.json. The Python runtime uses the publicly
-retrievable upstream commit, not the local repair commit.
-
-The local copied skills, source checkouts and two older agent-browser CLI versions
-were retired on 2026-10-07. Their recovery material is private machine state, not
-part of this repository. No personal configuration, research output or credentials
-were copied into this catalog. Future installation uses the pinned upstream source;
-it does not silently restore unversioned local variants.
-
-## Install only when needed
-
-After obtaining this catalog revision, use the normal native marketplace flow and
-choose one install ID. For example:
+旧原生 root marketplace 的 `aris@claudespace`、`agent-browser@claudespace`、`autoresearchclaw@claudespace` 发现入口不自动重绑。新版 Agent Profile 使用资源引用 `id@claudespace-optional-tools` 时，须明确选择；agent-browser 的新版资源类型为 skill。Codex 兼容尚未在此域声明，不凭存在 SKILL.md 就宣称已完成 Codex 接入。
 
 ```sh
-claude plugin install aris@claudespace
-claude plugin enable aris@claudespace
+python3 scripts/build_candidates.py \
+  --catalog domains/optional-tools/catalog.json \
+  --output /tmp/claudespace-optional-review \
+  --fetch
 ```
 
-For agent-browser, choose the matching CLI release explicitly instead of latest:
-
-```sh
-npm install -g agent-browser@0.38.2
-```
-
-Browser downloads, authentication and source-specific setup are separate actions.
-Read the selected plugin's documentation before doing them. These commands are
-examples; registering or validating the marketplace does not execute them.
-
-The declaration helper currently requires prepared local sources for managed
-deployment. Before adding one of these remote references to agents.yaml, prepare
-the pinned source or adapter and validate that plan. Until then, the source-only
-entries are consumed by the native Claude marketplace installer. Codex adapters
-are not installed or selected by this change.
+运行环境、凭据、旧私有归档都不进入构建包；构建不会执行任何上游 setup 或安装命令。
+完整接口与验证边界见[候选构建说明](../../docs/candidate-build.md)。
