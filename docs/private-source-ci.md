@@ -30,7 +30,7 @@ PR 的测试通过不代表全部固定来源已经验证。合并前还应确�
 ```sh
 gh workflow run validate-fixed-sources.yml \
   --repo LKCY23/claudespace --ref main \
-  -f commit=<完整40位SHA>
+  -f commit="<完整40位SHA>"
 ```
 
 输入为空则检查可信工作流当前提交。手动工作流需先存在于默认分支；初次接入的开发分支验证由受限 `push` 入口触发。[GitHub 手动运行规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。

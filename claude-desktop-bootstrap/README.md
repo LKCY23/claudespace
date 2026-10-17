@@ -4,22 +4,31 @@ A self-contained **local host configuration utility**, not a Claude Code skill o
 plugin. It merges explicitly selected Claude Desktop deployment-policy values
 into the applied local profile, and optionally opens Desktop afterwards.
 
+## Published implementation and refactor status
+
+This README documents the existing standalone JSON-based implementation. A
+Bootstrap 2.0.0 / claude-config 0.1.4 integration was prepared and tested in an
+isolated candidate on 2026-10-17; it has not replaced this published tool or the
+installed launcher. Its Profile-based commands must not be mixed with the
+`--overrides` commands below. Official Claude deployment does not meet this
+tool's third-party deployment requirement.
+
 ## Code, personal configuration, and runtime state
 
 - **claudespace** contains this tool, tests, documentation, and
   [overrides.example.json](overrides.example.json). The example is never loaded
   automatically.
 - **Your configuration data repository** contains the actual non-sensitive
-  preferences. In this setup, the file is
-  `~/claude-config-data/assets/settings/claude-desktop-mac.json`.
+  preferences. Choose an explicit JSON file outside this source checkout, for example
+  `/absolute/path/to/desktop-overrides.json`.
 - **Desktop's user-data directory** retains the full runtime profile, credentials,
   and private backups. Do not commit those files to either repository.
 
 Every normal invocation requires `--overrides FILE`. There is no implicit lookup
 in this checkout or fallback to the example. Restore is the only operation that
 does not require an overrides file. The tool does not execute `claude-config
-apply` or parse that framework's manifest; its Desktop archive pointer is separate
-from the Claude Code settings merge inputs.
+apply` or read Agent/App Profiles or Machine bindings. It is independent of the current
+App configuration operations, such as `claude-config plan --app claude-desktop`.
 
 The example demonstrates three supported boolean fields:
 
@@ -49,8 +58,7 @@ user and policy controls. No Claude Code permissions or consent records are edit
 
 ## Quick start
 
-These examples use the actual configuration-data checkout above; substitute your
-own file path if necessary. The JSON must already exist. For a new setup, copy
+These examples use a placeholder JSON path; substitute your own reviewed file. The JSON must already exist. For a new setup, copy
 `overrides.example.json` outside this code repository and review the values first.
 
 ### Preview
@@ -58,7 +66,7 @@ own file path if necessary. The JSON must already exist. For a new setup, copy
 From the claudespace repository root:
 
 ```bash
-python3 claude-desktop-bootstrap/apply.py --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json" --dry-run
+python3 claude-desktop-bootstrap/apply.py --overrides "/absolute/path/to/desktop-overrides.json" --dry-run
 ```
 
 Omitting a mode flag also previews. Output includes the target and changed field
@@ -69,7 +77,7 @@ names, never configuration values; a dry run writes nothing.
 Build a normal macOS application with the external configuration path:
 
 ```bash
-python3 claude-desktop-bootstrap/install-app.py --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json"
+python3 claude-desktop-bootstrap/install-app.py --overrides "/absolute/path/to/desktop-overrides.json"
 ```
 
 This creates `~/Applications/Claude Bootstrap.app`. Drag it to the application
@@ -89,7 +97,7 @@ To update an existing app, including apps built before external configuration wa
 required, or to change any recorded path:
 
 ```bash
-python3 claude-desktop-bootstrap/install-app.py --replace --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json"
+python3 claude-desktop-bootstrap/install-app.py --replace --overrides "/absolute/path/to/desktop-overrides.json"
 ```
 
 Keep the two checkouts and Python installed. Replacement only accepts this
@@ -111,11 +119,11 @@ If a write is needed, **quit Desktop with Cmd-Q first** and use an external
 Terminal, not a session hosted inside the app being closed.
 
 ```bash
-"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json"
+"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "/absolute/path/to/desktop-overrides.json"
 ```
 
 ```bash
-python3 claude-desktop-bootstrap/apply.py --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json" --apply
+python3 claude-desktop-bootstrap/apply.py --overrides "/absolute/path/to/desktop-overrides.json" --apply
 ```
 
 The launcher waits for a successful merge before calling macOS `open`. It never

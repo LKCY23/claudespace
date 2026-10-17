@@ -1,6 +1,6 @@
-# Candidates
+# 第三方插件与宿主包装（claudespace-candidates）
 
-收集、构建检查和正式采用是不同状态。本域的 5 项资源由新版 `catalog.json` 的 `resources` 登记，原生加载与业务效果保持 `not-evaluated`；登记和构建均不会选择安装。
+`candidates` 是保留的目录与 catalog 标识，不表示其中资源都未使用。收集、构建检查、Profile 选择及实际运行验证是不同状态。本域的 5 项资源由新版 `catalog.json` 的 `resources` 登记，原生加载与业务效果保持 `not-evaluated`；登记和构建均不会选择安装。
 
 | 资源 | 来源与入口 |
 | --- | --- |

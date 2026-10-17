@@ -29,7 +29,7 @@ gh workflow run resource-updates.yml --repo LKCY23/claudespace --ref main \
 
 ```sh
 gh workflow run validate-fixed-sources.yml --repo LKCY23/claudespace --ref main \
-  -f commit=<PR当前完整40位SHA>
+  -f commit="<PR当前完整40位SHA>"
 ```
 
 两项检查通过后，把草稿标为 ready，再明确合并。如果 main 已前进或 PR 内容变化，重新准备候选并验证当前 SHA；不复用旧提交的成功结果，也不绕过保护合并。
