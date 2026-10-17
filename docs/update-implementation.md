@@ -1,6 +1,6 @@
 # 新版资源登记与更新实现进度
 
-更新：2026-10-17。资源登记、候选构建及 GitHub 自动化已在 `main` 启用，真实上游更新已完成候选 PR、必需检查、审查合并和结构基线发布。日常操作见 [更新与发布操作](operations.md)，实现边界见 [GitHub 更新自动化](github-update-automation.md)，登记和构建合同见 [候选构建](candidate-build.md)。
+更新：2026-10-18。资源登记、候选构建及 GitHub 自动化已在 `main` 启用，真实上游更新已完成候选 PR、必需检查、审查合并和结构基线发布。日常操作见 [更新与发布操作](operations.md)，实现边界见 [GitHub 更新自动化](github-update-automation.md)，登记和构建合同见 [候选构建](candidate-build.md)。
 
 ## 实现
 
@@ -47,10 +47,14 @@ Claudespace 管理来源正文和固有定义；Profile 保存选择与运行参
 ## 剩余接入工作
 
 1. 对需要真实客户端、登录或服务的资源分别执行适用验收。
-2. 处理全目录预览的具体待办：academic-pipeline、deep-research、claude-scientific-writer、autoresearchclaw 需要完整 Git 比较；karpathy-llm-wiki、superpowers 需要核对本地改动与导入声明。既有固定版本仍通过结构验证，待办只阻断相应的新更新。
+2. 处理全目录预览的具体待办：academic-pipeline、deep-research、claude-scientific-writer、autoresearchclaw 在早期预览中受比较上限阻断。完整 Git 树比较回退已随 HUD 接入实现并核验，这四项尚未重跑，应重新检查后再判断；karpathy-llm-wiki、superpowers 需要核对本地改动与导入声明。既有固定版本仍通过结构验证，待办只阻断相应的新更新。
 
 0.2.0 已提供正式分发、获取、来源映射和采用接口。每次实际发布与本机采用以对应 Release／Actions run 及消费者私有报告为准；工具测试不等同于所有机器已更新。
 
 每周一 01:17 UTC 的调度已随 main 启用；本次通过手动触发验收，首次实际定时运行仍待其到期。GitHub 可能延迟 schedule，不能把已配置调度表述为每次都准时执行。
 
 HUD 已通过独立的正式 catalog 接入更新和发布；旧安装快照只供追溯。首次接入保持当前版本和显示偏好，新版本只生成待审候选。
+
+## 参数证据联动
+
+claude-config 的[资源参数证据](https://github.com/LKCY23/claude-config/blob/master/references/resource-parameter-evidence.md)集中记录 Profile 运行选项的类型、单位、实际原生版本和未验证行为。2026-10-18 已核实两项 Codex MCP 字段的官方 Schema 与 CLI／App 严格回读，以及 Claude timeout 的合法值保存和错误类型拒绝。解析成功不代表资源已连接、已获信任或业务执行通过；不为未选用的扩展自动增加开发任务。
