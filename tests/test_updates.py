@@ -171,6 +171,37 @@ class UpdateTests(unittest.TestCase):
         for api in (FakeAPI(files=files), FakeAPI(status='behind'), FakeAPI(status='diverged')):
             self.assertEqual(self.row(api=api)['status'], 'check_failed')
 
+    def test_capped_comparison_uses_complete_trees_and_both_rename_paths(self):
+        item = resource()
+        base = FakeAPI(files=[{'filename': 'unrelated/' + str(i)} for i in range(300)])
+        def entry(path, sha, mode='100644', kind='blob'):
+            return {'path': path, 'sha': sha, 'mode': mode, 'type': kind}
+        trees = {OLD: [entry('skills/selected/old.md', OLD), entry('same', OLD), entry('mode-only', OLD)],
+                 NEW: [entry('elsewhere/new.md', OLD), entry('same', OLD), entry('mode-only', OLD, '100755'),
+                       entry('executable', NEW, '100755')]}
+        def api(repo, route):
+            if route.startswith('git/trees/'):
+                return {'truncated': False, 'tree': trees[route.split('/')[2].split('?')[0]]}
+            return base(repo, route)
+        row = self.row(catalog(one=item), api)
+        self.assertEqual(row['status'], 'update_available')
+        self.assertEqual(row['changed_files'], ['skills/selected/old.md'])
+        self.assertEqual(row['comparison_method'], 'complete_git_trees')
+        item['origin']['upstream']['path'] = '.'
+        row = self.row(catalog(one=item), api)
+        self.assertEqual(row['changed_files'], ['elsewhere/new.md', 'executable', 'mode-only', 'skills/selected/old.md'])
+        item['origin']['upstream']['path'] = 'same'
+        self.assertEqual(self.row(catalog(one=item), api)['status'], 'no_relevant_change')
+
+    def test_capped_comparison_rejects_incomplete_or_malformed_trees(self):
+        base = FakeAPI(files=[{'filename': str(i)} for i in range(300)])
+        for tree in ({'truncated': True, 'tree': []}, {'tree': []},
+                     {'truncated': False, 'tree': [{'path': 'file', 'type': 'blob', 'mode': '100644', 'sha': 'bad'}]}):
+            with self.subTest(tree=tree):
+                def api(repo, route):
+                    return tree if route.startswith('git/trees/') else base(repo, route)
+                self.assertEqual(self.row(api=api)['status'], 'check_failed')
+
     def test_release_resolves_tag_to_commit_not_target_commitish(self):
         api = FakeAPI()
         row = self.row(catalog(one=resource(update={'strategy': 'release', 'target': 'latest'})), api)

@@ -53,7 +53,7 @@ claude-config fetch-baseline --agent codex --catalog claudespace-candidates \
 
 只准备各 Profile 明确选择的资源，输出后续 `adopt-baseline` 命令。先预览采用差异，再增加 `--write --expect-plan-id <ID>` 更新 catalog pin 与 Machine 来源目录；最后分别对受影响 Agent 运行 `plan/apply`。发布、获取、采用和原生部署各自有结果，不自动串联修改配置。
 
-历史私有仓库通过同样的私有 Release 保留准确来源。转向公开目录必须提供逐 catalog 的 `--source-map`，列出准确旧／新仓库、路径和提交；它不改变 Profile 选择或启用状态。HUD 等历史快照和私人指令可以继续留在私有来源，不纳入公开五份 catalog 的自动更新声明。
+历史私有仓库通过同样的私有 Release 保留准确来源。转向公开目录必须提供逐 catalog 的 `--source-map`，列出准确旧／新仓库、路径和提交；它不改变 Profile 选择或启用状态。HUD 已使用公开官方来源及独立的正式 catalog，显示偏好仍留在本机；私人指令和历史恢复资料继续保持私有。准确的迁移映射由消费者数据仓库保存。
 
 恢复先回退原生部署，再回退 catalog 采用；旧 refs、准备目录和 journal 保留。具体参数与失败处理见 [claude-config 基线分发规范](https://github.com/LKCY23/claude-config/blob/master/references/baseline-distribution.md)。
 

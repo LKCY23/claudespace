@@ -17,6 +17,24 @@ class CheckError(RuntimeError):
     pass
 
 
+def tree_entries(value):
+    """A complete fixed Git tree can replace a capped compare file list."""
+    if value.get('truncated') is not False or not isinstance(value.get('tree'), list):
+        raise CheckError('Git tree is incomplete; full source comparison required')
+    entries = {}
+    modes = {'blob': ('100644', '100755', '120000'), 'tree': ('040000',), 'commit': ('160000',)}
+    for row in value['tree']:
+        name, kind = row.get('path'), row.get('type')
+        if (not isinstance(name, str) or not name or PurePosixPath(name).is_absolute()
+                or '..' in PurePosixPath(name).parts or name in entries
+                or row.get('mode') not in modes.get(kind, ())
+                or not isinstance(row.get('sha'), str) or not SHA.fullmatch(row['sha'])):
+            raise CheckError('Malformed Git tree entry')
+        entries[name] = (kind, row['mode'], row['sha'])
+    # Directory object changes are represented by their changed leaf entries.
+    return {name: identity for name, identity in entries.items() if identity[0] != 'tree'}
+
+
 class GitHub:
     def __init__(self, token=None):
         self.token = token
@@ -87,10 +105,16 @@ def check_catalog(catalog, api):
             files = comparison.get('files')
             if not isinstance(files, list):
                 raise CheckError('Comparison did not include a file list')
-            # GitHub caps compare files at 300, regardless of commit pagination.
-            # Without a complete diff, absence of a path cannot establish no change.
+            # Only capped comparisons need two complete immutable trees. Renames
+            # become old/new paths, so both resource scopes remain visible.
             if len(files) >= 300:
-                raise CheckError('Comparison file limit reached; full Git comparison required')
+                before = tree_entries(query(repo, 'git/trees/' + current + '?recursive=1'))
+                after = tree_entries(query(repo, 'git/trees/' + commit + '?recursive=1'))
+                files = [{'filename': name} for name in sorted(before.keys() | after.keys())
+                         if before.get(name) != after.get(name)]
+                row['comparison_method'] = 'complete_git_trees'
+            else:
+                row['comparison_method'] = 'compare_api'
             names = set()
             for file in files:
                 if not isinstance(file, dict) or not isinstance(file.get('filename'), str):
