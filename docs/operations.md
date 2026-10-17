@@ -38,7 +38,24 @@ gh workflow run validate-fixed-sources.yml --repo LKCY23/claudespace --ref main 
 
 合入 main 后，`Publish structural baseline` 对最终提交重新测试、验证固定来源，再保存 `claudespace-baseline-<完整SHA>` artifact。每份新版 catalog 有独立 JSON 记录，内容包括仓库、准确提交、目录、登记摘要和结构验证层级。
 
-必须核对发布作业成功和附件中的 SHA。PR 合并成功本身不代表基线发布成功。基线 artifact 保留 90 天，检查和候选报告保留 30 天；长期 Release 分发与消费者远端获取仍按后续接入处理。
+随后独立的写权限作业创建 `baseline-<完整SHA>` GitHub Release，附件按 `<catalog别名>.baseline.json` 命名。发布器先上传草稿并核对全部附件，再公开；重跑只复用相同内容，不覆盖已发布附件。该作业不持有私有来源 deploy key，也不上传私有源码。
+
+必须核对发布作业成功、Release tag 和附件中的 SHA。PR 合并成功本身不代表基线发布成功。基线 artifact 保留 90 天，检查和候选报告保留 30 天；正式 Release 记录不受 Actions artifact 保留期限制。资源正文通过固定 Git 提交及明确的外部来源获取，Release 不打包整个仓库或缓存。
+
+## 消费者获取、采用和恢复
+
+claude-config 0.2.0 使用已登录的 `gh` 和 Git 访问公开及已获授权的私有来源：
+
+```sh
+claude-config fetch-baseline --agent codex --catalog claudespace-candidates \
+  --release baseline-<完整40位SHA>
+```
+
+只准备各 Profile 明确选择的资源，输出后续 `adopt-baseline` 命令。先预览采用差异，再增加 `--write --expect-plan-id <ID>` 更新 catalog pin 与 Machine 来源目录；最后分别对受影响 Agent 运行 `plan/apply`。发布、获取、采用和原生部署各自有结果，不自动串联修改配置。
+
+历史私有仓库通过同样的私有 Release 保留准确来源。转向公开目录必须提供逐 catalog 的 `--source-map`，列出准确旧／新仓库、路径和提交；它不改变 Profile 选择或启用状态。HUD 等历史快照和私人指令可以继续留在私有来源，不纳入公开五份 catalog 的自动更新声明。
+
+恢复先回退原生部署，再回退 catalog 采用；旧 refs、准备目录和 journal 保留。具体参数与失败处理见 [claude-config 基线分发规范](https://github.com/LKCY23/claude-config/blob/master/references/baseline-distribution.md)。
 
 每周一 01:17 UTC（新加坡／北京时间 09:17）自动检查并准备草稿 PR。自动化不会修改 Profile、Machine、启用状态或本机安装。
 

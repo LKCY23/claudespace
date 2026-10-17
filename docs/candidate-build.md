@@ -76,7 +76,7 @@ candidate/
 candidate.report.json                # 人类摘要对应的完整 JSON
 ```
 
-构建产物不是已发布 catalog。`source-catalog.json` 保留源声明及 pin，不能把它当成指向 `resources/` 的新发布登记。`prepare_update.py` 已负责在独立源码候选中更新成套 pin／正文／适配并验证；PR 同步和最终提交基线工作流的源码已实现，线上尚未启用。见[源码候选接口](source-update-candidates.md)。
+构建产物不是已发布 catalog。`source-catalog.json` 保留源声明及 pin，不能把它当成指向 `resources/` 的新发布登记。`prepare_update.py` 在独立源码候选中更新成套 pin／正文／适配并验证；PR 同步和最终提交基线工作流已在 main 启用，正式记录通过 Release 分发。见[源码候选接口](source-update-candidates.md)和[发布操作](operations.md)。
 
 生成宿主清单只使用 `kind: plugin` 的条目及声明的宿主。其他六类资源保留自己的定义和入口，不自动包装成插件，也不改成启用状态。
 

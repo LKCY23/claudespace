@@ -17,8 +17,9 @@
 | `private_ci.py` | 只读 deploy key、私有分支 Git 查询、临时来源准备、可信校验与报告脱敏 |
 | `validate_catalogs.py` | 汇总五份新版登记的固定资源构建检查，供 PR 和最终提交共用 |
 | `baseline_record.py` | 对干净、准确提交生成独立结构基线记录 |
-| GitHub workflows | 调度准备与 PR 同步、验证 PR、验证最终提交并保存基线附件 |
-| claude-config `adopt-baseline` | 支持本地已准备来源与记录的采用和影响分析；远端获取联调尚未完成 |
+| GitHub workflows | 调度准备与 PR 同步、验证 PR、验证最终提交并发布准确 SHA 的永久 Release |
+| `release_assets.py` | 草稿上传、附件核对、公开发布及重复运行保护，不覆盖已发布内容 |
+| claude-config 0.2.0 | `fetch-baseline` 获取正式记录及已选固定来源；`adopt-baseline` 预览／采用，支持精确来源映射和独立恢复 |
 
 ## 边界
 
@@ -45,9 +46,10 @@ Claudespace 管理来源正文和固有定义；Profile 保存选择与运行参
 
 ## 剩余接入工作
 
-1. 完成正式基线附件获取、长期归档与消费者采用联调。本轮没有改变 Profile、Machine、安装版本或启用状态。
-2. 对需要真实客户端、登录或服务的资源分别执行适用验收。
-3. 处理全目录预览的具体待办：academic-pipeline、deep-research、claude-scientific-writer、autoresearchclaw 需要完整 Git 比较；karpathy-llm-wiki、superpowers 需要核对本地改动与导入声明。既有固定版本仍通过结构验证，待办只阻断相应的新更新。
+1. 对需要真实客户端、登录或服务的资源分别执行适用验收。
+2. 处理全目录预览的具体待办：academic-pipeline、deep-research、claude-scientific-writer、autoresearchclaw 需要完整 Git 比较；karpathy-llm-wiki、superpowers 需要核对本地改动与导入声明。既有固定版本仍通过结构验证，待办只阻断相应的新更新。
+
+0.2.0 已提供正式分发、获取、来源映射和采用接口。每次实际发布与本机采用以对应 Release／Actions run 及消费者私有报告为准；工具测试不等同于所有机器已更新。
 
 每周一 01:17 UTC 的调度已随 main 启用；本次通过手动触发验收，首次实际定时运行仍待其到期。GitHub 可能延迟 schedule，不能把已配置调度表述为每次都准时执行。
 
