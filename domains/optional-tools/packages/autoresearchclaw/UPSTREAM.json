@@ -1,0 +1,17 @@
+{
+  "repo": "aiming-lab/AutoResearchClaw",
+  "sha": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
+  "path": ".claude/skills",
+  "packaging_revision": 1,
+  "local_repair_commit": "366a5969d5ffc79fd5a6932315b15c4683ec51e5",
+  "changes": "Preserved the existing YAML frontmatter repair in researchclaw/SKILL.md; no runtime or credentials included.",
+  "files": {
+    "skills/a-evolve/SKILL.md": "7b8144bdd37d0b357b1074594be0aef557329747ebb3614c304d5caceaa61a5b",
+    "skills/hypothesis-formulation/SKILL.md": "9f8f83a882b5b0ea8680188faf1f4c1fa9b6275a8020549b7d1a705d0b665246",
+    "skills/literature-search/SKILL.md": "a49eec3ab66617803803aeb6670eb2597fb13842c5368076007bf7112777310b",
+    "skills/researchclaw/SKILL.md": "9506288dfe06ebf65d6364e3624c0c37b2b1cf06a2f50fd47af50489d7985943",
+    "skills/scientific-visualization/SKILL.md": "07ae48cf917af7767e8c2da7a312ba17928cf8d45a596f85be4f8e8c9a08d8d1",
+    "skills/scientific-writing/SKILL.md": "d744442c5165050a7fdb76abee24127de765ae96dc32f13bc8b3f576ab059359",
+    "skills/statistical-reporting/SKILL.md": "95e9d1bfbcc2627db8160d86497807b613e70664e8be04099af1708aa41c9be3"
+  }
+}

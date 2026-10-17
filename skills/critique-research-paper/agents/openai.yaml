@@ -1,0 +1,4 @@
+interface:
+  display_name: "Critique Research Paper"
+  short_description: "Find paper flaws and stronger research paths"
+  default_prompt: "Use $critique-research-paper to critically review this paper, identify its core flaws, and suggest stronger research directions."

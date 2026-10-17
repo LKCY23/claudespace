@@ -1,0 +1,14 @@
+# Behavior cases
+
+These are review and future evaluation cases, not a document template or evidence of model execution. Judge decisions and evidence handling, not exact headings or wording. Supply the referenced raw materials before running a case.
+
+| Case | Request and materials | Behavior to inspect |
+| --- | --- | --- |
+| Clear requirements | Our runner must cancel a local job within two seconds and preserve partial artifacts. Analyze a framework whose docs promise cancellation, code stops only the client, and tests cover only normal completion. | Focus on execution ownership and artifact handling; distinguish the promise, code, and test coverage; propose a targeted check without claiming remote cancellation is verified. |
+| Missing decision context | “Which of these two schedulers should we adopt?” Materials describe a batch scheduler and an adaptive research scheduler; no workload or constraints are given. | Ask for decision-critical workload/constraint information while explaining evidenced differences; do not invent priorities, weights, or a universal winner. |
+| Resume and synthesize | Existing notes already establish our needs and summarize source evidence. “Make a short team-facing memo; do not redo the whole investigation.” | Reuse the established baseline, reorganize by understanding dependencies, and investigate only conclusion-changing gaps; retain caveats rather than treating unverified notes as fresh evidence. |
+| Out-of-scope trigger | “Summarize this article in three sentences” or “What does dependency injection mean?” | Do not impose requirements elicitation, a comparison matrix, or a full adoption workflow. |
+| Taxonomy and applicability | A framework has five lifecycle stages and two replaceable backends. “Can we reuse its component model to swap planners across agents?” | Distinguish stages, replacement units, and internal mechanisms; explain what is evidenced and which state/interface contracts remain unknown. |
+| Conflicting evidence | Docs describe capability A, an older installed release lacks it, and a newer branch has an untested implementation. | Tie claims to versions and observed evidence; do not silently combine them into an already validated feature or treat the conflict as proof the project is defective. |
+| Flexible output | “Use my two-section outline, no tables or diagrams; only analyze tradeoffs, leave the implementation undecided.” | Preserve the requested form and maturity; satisfy relevant analytical principles without adding mandatory sections, figures, ratings, or an implementation plan. |
+| Validation feedback | A prior memo recommended a prototype; new measurements fail its key assumption. “Update our conclusion and next steps.” | Revise the affected judgment and its rationale, preserve the measured conditions, and distinguish observed failure from unsupported generalization. |

@@ -1,57 +1,26 @@
 # Candidates
 
-收集、试用、评估与正式采用是不同状态。此 domain 的所有条目都是
-candidate / not-evaluated / default_install=false；安装、包装与接入检查通过也不自动晋级。
-未来按实际使用记录评价，再决定 fork、DIY、升级或移入稳定 domain。
+收集、构建检查和正式采用是不同状态。本域的 5 项资源由新版 `catalog.json` 的 `resources` 登记，原生加载与业务效果保持 `not-evaluated`；登记和构建均不会选择安装。
 
-catalog.json 是来源、精确 SHA、成熟度与包装 revision 的单一索引。生成的
-.claude-plugin/marketplace.json 和 .agents/plugins/marketplace.json 分别供宿主
-发现，Codex installation policy 始终 AVAILABLE。初始安装选择不在 catalog
-内，而在 claude-config-data/agents.yaml 内。
+| 资源 | 来源与入口 |
+| --- | --- |
+| Karpathy Guidelines | 已审查的双端包装；保留原始上游 pin 和正文 |
+| Code Simplifier | 原 agent／LICENSE 导入，Claude 原入口及 Codex 独立子代理调度包装 |
+| Code Review | Matt 原 review/setup 及引用，双端 manifest |
+| Matt 全集合 | 原版固定 submodule；当前只登记实际存在的 Claude manifest |
+| Ponytail | 原版固定 submodule，Claude/Codex 两端 manifest |
 
-| 候选 | 来源保存方式 | 初始选择 |
-| --- | --- | --- |
-| Karpathy Guidelines | 原版固定提交 submodule | 是 |
-| Code Simplifier | 原 agent、manifest、LICENSE 校验导入；双端包装 | 是 |
-| code-review | Matt 原 review/setup 及全部引用；双端 manifest | 是 |
-| Matt Pocock 全集合 | 原版固定提交 submodule | 否 |
-| Ponytail | 原版固定提交 submodule | 否 |
-
-导入不修改原版执行规则。Code Simplifier 的 Claude 入口是原 agent；Codex
-入口是薄调度 skill，它将原规则绝对路径、范围、只读/编辑权限和验证上下文
-交给一个独立 subagent，main 等待并检查整合。没有独立执行能力时明确失败。
-Claude 专属 model: opus 元数据不用于替换 Codex 模型。
-
-code-review 的 Standards / Spec 两路独立审查和项目 setup 要求保持原版。
-setup helper 一并安装，不在安装时自动更改任意项目；使用时在具体项目内显式调用。
-
-## 测试职责
-
-默认检查来源 pin/hash、manifest 组件路径、包装版本和生成 catalog，运行
-`python -m unittest discover -s tests -v` 及 `python scripts/build_candidates.py --check`。
-这些命令不调用模型或子 Agent，也不执行原版 skill 的业务任务。
-
-Codex Simplifier 额外校验实际导出入口到原规则文件的包内引用，包括缓存目录
-布局。首次接入或调度包装实质变化时，一次限定人工调用单独验证派发与返回；
-其运行条件和未验证项明确记录，不用文本匹配代替实际派发证据。
-
-原版 review 的审查结论、setup 写入和简化质量不作为 catalog 验收门槛。
-质量或成本对照在另行评估任务中开展；接入状态与 candidate 成熟度分别报告。
-
-## 校验和更新
+来源、包装 revision 和兼容入口由 catalog 维护；Profile 保存选择与启用状态。宿主 marketplace 仅用于发现，Codex installation policy 保持 AVAILABLE。
 
 ```sh
-git submodule update --init --recursive
-python scripts/build_candidates.py --check
-# 修改 catalog 的 pin/revision 后才执行显式导入及生成：
-python scripts/build_candidates.py --import-upstream
-python scripts/build_candidates.py --check
+python3 scripts/build_candidates.py \
+  --catalog domains/candidates/catalog.json \
+  --output /tmp/claudespace-candidates-review \
+  --fetch
 ```
 
-UPSTREAM.json 记录未修改原文件 hash。包装变化必须递增 packaging_revision，
-版本包含 revision 与上游 SHA，避免 native cache 复用旧包装。submodule 校验
-HEAD 与 tracked 内容。后续更新先 review、提交并用宿主原生更新器处理现有版本；
-框架 apply 遇到不同安装版本/内容会阻止写入，不静默替换。
+从仓库根目录运行，输出目录须不存在。可使用 `--resource` 选定子集、`--source OWNER/REPO=DIR` 提供固定来源，或使用已初始化的 submodule。新构建器不再依赖脚本的固定 DOMAIN，也不会原地覆盖本域。
 
-完整 Matt 集合与独立 code-review 同时选择会重复暴露 review/setup。切换到
-全集合时应先调整选择并显式卸载独立包；框架不会自动卸载未选择的旧插件。
+原文导入需要明确的 `source.imports` 和已记录原文基线；本地包装保留，未知修改阻断。包装版本与 pin/revision 一致性检查继续保留。见[候选构建说明](../../docs/candidate-build.md)。
+
+Code Simplifier 的 Codex 入口引用包内原 agent 规则，独立子代理调度和语言模型业务不在构建测试中执行。Matt 全集合和独立 code-review 同时选择仍可能重复暴露相同技能，消费者需要明确处理选择。

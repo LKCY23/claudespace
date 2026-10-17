@@ -1,0 +1,9 @@
+{
+  "name": "analyze-peer-work",
+  "version": "0.1.0",
+  "description": "需求驱动的参考工作分析与借鉴：理解机制、核查证据、评价适用性，并组织可读成果。",
+  "author": {
+    "name": "LKCY23"
+  },
+  "skills": ["./"]
+}

@@ -6,6 +6,15 @@
   "description": "Personal Claude Code skill marketplace — self-authored and curated third-party skills with pinned versions. One marketplace, one install command.",
   "plugins": [
     {
+      "name": "analyze-peer-work",
+      "source": "./skills/analyze-peer-work",
+      "description": "需求驱动的参考工作分析与借鉴 — 机制与证据核查、适用性评价、可读文档与改进建议",
+      "category": "research",
+      "author": {
+        "name": "LKCY23"
+      }
+    },
+    {
       "name": "github",
       "source": "./skills/github",
       "description": "GitHub workflow skill — manage PRs, issues, releases, and repo operations directly in Claude Code",
@@ -136,6 +145,85 @@
       "author": {
         "name": "LKCY23"
       }
+    },
+    {
+      "name": "aris",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+        "path": ".",
+        "sha": "26b95cfa0d8747078e9e43b42e20952709e561b8"
+      },
+      "description": "ARIS research skills, pinned upstream plugin; optional, not installed by catalog registration.",
+      "category": "research",
+      "defaultEnabled": false,
+      "metadata": {
+        "selection": "on-demand",
+        "local_install_removed_on": "2026-10-07",
+        "runtime_setup": "Run the upstream setup only after choosing to install; old local copies are privately archived."
+      }
+    },
+    {
+      "name": "agent-browser",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/vercel-labs/agent-browser",
+        "path": "skills",
+        "sha": "f7c8b071343dda29477a56cb336ea76144c05496"
+      },
+      "description": "Browser automation skill bundle with fixed upstream source; requires a compatible CLI.",
+      "version": "0.38.2",
+      "strict": false,
+      "skills": [
+        "./agent-browser"
+      ],
+      "category": "devtools",
+      "defaultEnabled": false,
+      "metadata": {
+        "selection": "on-demand",
+        "runtime": {
+          "npm_package": "agent-browser",
+          "version": "0.38.2",
+          "browser_download": "Separate explicit setup; existing browser user data is not part of this package."
+        },
+        "specialized_skills": {
+          "source": "Matching CLI skills get commands",
+          "names": [
+            "dogfood",
+            "electron",
+            "slack",
+            "vercel-sandbox"
+          ]
+        }
+      }
+    },
+    {
+      "name": "autoresearchclaw",
+      "source": "./domains/optional-tools/packages/autoresearchclaw",
+      "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
+      "version": "0.3.1+claudespace.1",
+      "category": "research",
+      "defaultEnabled": false,
+      "metadata": {
+        "selection": "on-demand",
+        "runtime": {
+          "python_package": "researchclaw",
+          "source": "https://github.com/aiming-lab/AutoResearchClaw",
+          "sha": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
+          "credentials": "Remain local; not stored in the marketplace."
+        },
+        "adapter": "Thin local package with original skills and existing YAML frontmatter repair."
+      }
+    },
+    {
+      "name": "goal-authoring",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/goal-authoring",
+        "path": ".",
+        "sha": "35be21e816e9956ed2673a24b2d37e7837487221"
+      },
+      "description": "Author and review durable Codex goal contracts."
     }
   ]
 }

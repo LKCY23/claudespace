@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "repositories": {
+    "LKCY23/goal-authoring": {
+      "key_env": "CLAUDESPACE_GOAL_AUTHORING_KEY"
+    }
+  }
+}

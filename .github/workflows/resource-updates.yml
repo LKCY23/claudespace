@@ -1,0 +1,94 @@
+name: Resource updates
+on:
+  schedule:
+    - cron: '17 1 * * 1'
+  workflow_dispatch:
+    inputs:
+      catalog:
+        description: 'Optional repository-relative catalog path; blank checks all'
+        type: string
+        default: ''
+      publish:
+        description: 'Create or refresh draft PRs after candidate validation'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: claudespace-resource-updates
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  prepare:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: claudespace-private-sources
+    outputs:
+      ready: ${{ steps.prepare.outputs.ready }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Check sources and prepare candidates
+        id: prepare
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
+          CATALOG: ${{ inputs.catalog }}
+        run: |
+          args=(prepare --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/claudespace-updates")
+          if [[ -n "$CATALOG" ]]; then args+=(--catalog "$CATALOG"); fi
+          python scripts/private_ci.py "${args[@]}"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: claudespace-update-candidates
+          path: ${{ runner.temp }}/claudespace-updates/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Surface failed checks or manual adaptations
+        if: steps.prepare.outcome == 'failure'
+        run: exit 1
+  pull_requests:
+    needs: prepare
+    if: ${{ always() && needs.prepare.outputs.ready == 'true' && (github.event_name == 'schedule' || inputs.publish == true) && github.ref_name == github.event.repository.default_branch }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: claudespace-update-candidates
+          path: ${{ runner.temp }}/claudespace-candidates
+      - name: Synchronize bot-owned draft PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          python scripts/sync_update_prs.py --root "$GITHUB_WORKSPACE" \
+            --directory "$RUNNER_TEMP/claudespace-candidates" --repo "$GITHUB_REPOSITORY" \
+            --base "$DEFAULT_BRANCH" --write --report "$RUNNER_TEMP/pr-sync.json"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: claudespace-pr-sync-report
+          path: ${{ runner.temp }}/pr-sync.json
+          retention-days: 30
+          if-no-files-found: warn

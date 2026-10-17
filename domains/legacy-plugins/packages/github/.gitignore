@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.*
+
+# Claude Code local state
+.claude/settings.local.json
+.claude/history/
+.claude/tmp/
+
+# Build and scratch outputs
+outputs/
+tmp/

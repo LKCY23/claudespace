@@ -1,360 +1,77 @@
 # claudespace
 
-## Candidate domain · Claude Code + Codex
+Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及宿主适配。支持插件、独立技能、MCP、Hooks、全局指令、Rules 和 Agents 七类资源。
 
-[domains/candidates](domains/candidates/README.md) 是独立的 claudespace-candidates 目录，放已收集但尚未深入使用/检验的候选。原核心目录保持独立；候选注册不会安装全部内容。
+来源登记、候选构建、源码候选和 GitHub 更新自动化已实现。工作流尚未合入默认分支，线上发布到消费者采用的完整流程仍待验证。详见 [实现进度](docs/update-implementation.md)。
 
-候选现有 Karpathy Guidelines、Code Simplifier、单独 code-review、完整 Matt Pocock skills 和 Ponytail。原版源码按 commit 固定；必要的宿主包装保留原执行规则与校验 hash。Codex Code Simplifier 增加 main skill → 一个独立 subagent 的调度入口。
+## 职责
+
+| 位置 | 管理内容 |
+| --- | --- |
+| Claudespace | 资源正文、固有定义、来源版本、适配、支持的运行入口和约束 |
+| Agent Profile | 选择哪些资源、是否启用，以及连接／启动等运行参数 |
+| Machine | 本机程序、路径、端点和凭据引用 |
+| [claude-config](https://github.com/LKCY23/claude-config) | 解析 Profile 与 Machine，检查差异并部署明确选择的固定基线 |
+
+资源登记不会选择安装，发布新版本也不会自动改变 Profile 或本机安装。子代理的提示词、工具清单和权限定义跟随资源正文维护。
+
+## 资源目录
+
+当前五份新版 `schema_version: 1/resources` 登记共 61 项：
+
+| 登记 | 标识 | 内容 |
+| --- | --- | --- |
+| [catalog.json](catalog.json) | `claudespace-personal` | 10 项原创或按需资源 |
+| [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项候选插件及宿主包装 |
+| [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
+| [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
+| [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
+
+[Claude HUD 安装快照](domains/infrastructure/claude-hud/README.md) 单独保留历史内容，不属于上述五份新版登记，也不在其自动更新和结构基线覆盖范围内。
+
+插件的原生 marketplace 文件用于宿主发现；其 `plugins` 数组不是另一套新版资源登记。独立技能保持技能类型，不因生成插件清单而变成插件。
+
+## 构建候选
+
+从仓库根目录运行，要求 Python 3.11+ 和 Git：
 
 ```sh
-git submodule update --init --recursive
-python scripts/build_candidates.py --check
-claude plugin marketplace add "$PWD/domains/candidates"
-codex plugin marketplace add "$PWD/domains/candidates"
+python3 scripts/build_candidates.py   --catalog domains/candidates/catalog.json   --output /tmp/claudespace-candidates-review   --fetch
 ```
 
-具体安装由 claude-config-data/agents.yaml 明确选择。初始只选前三项；完整 Matt/Ponytail 留作候选，Superpowers 不在新选择中。
-Personal [Claude Code](https://claude.ai/code) plugin marketplace and local Claude utilities — one catalog for self-authored and curated third-party skills, with exact plugin version pinning via git, plus self-contained host tools.
+输出目录须不存在，且位于输入 catalog 目录之外。`--fetch` 允许临时下载固定来源；已有源码可用 `--source OWNER/REPO=DIR` 提供。工具读取固定 Git 对象，不把源码工作区的未提交修改当作固定版本。
 
-## What problem does this solve?
+产物包含资源包、输入登记副本、宿主发现清单和结构报告。构建不会安装资源、执行技能任务或授予原生信任。完整接口见 [候选构建](docs/candidate-build.md)。
 
-Claude Code has two extension mechanisms — **skills** (flat file copies under `~/.claude/skills/`) and **plugins** (versioned, installed via `claude plugin install plugin@marketplace`). Managing skills as file copies means you lose track of where they came from, what version they're at, and whether there are upstream updates.
+## 更新与采用
 
-claudespace is a **marketplace**: a git repo with a `.claude-plugin/marketplace.json` catalog that tells Claude Code what plugins are available, where their code lives, and the exact commit to install. One `claude plugin marketplace add` gives you every skill in this catalog. Version bumps are explicit git operations — no silent drift.
-
-## Quick Start
-
-```bash
-# 1. Register this marketplace (once per machine)
-claude plugin marketplace add LKCY23/claudespace
-
-# 2. Install any plugin
-claude plugin install github@claudespace
-claude plugin install teach@claudespace
-claude plugin install deep-research@claudespace
-
-# 3. Install all marketplace plugins
-claude plugin install github@claudespace \
-  skill-evaluator@claudespace \
-  teach@claudespace \
-  programming-practice@claudespace \
-  research-brainstorm@claudespace \
-  research-dev-orchestrator@claudespace \
-  literature-review@claudespace \
-  read-paper@claudespace \
-  deep-research@claudespace \
-  academic-paper@claudespace \
-  academic-paper-reviewer@claudespace \
-  academic-pipeline@claudespace \
-  karpathy-llm-wiki@claudespace
+```text
+检查上游 → 准备成组源码候选 → 创建／刷新草稿 PR
+→ 验证与人工审查 → 合并后重新验证 → 保存准确提交的基线附件
+→ 在 claude-config 明确采用 → 预览并执行本机更新
 ```
 
-If you use [claude-config](https://github.com/LKCY23/claude-config) for cross-machine config sync, you can reference these in `plugins.yaml` and let `claude-config apply` handle the installation.
+- [源码候选](docs/source-update-candidates.md)：匹配检查报告和旧 pin，准备独立提交，保护本地修改。
+- [GitHub 更新自动化](docs/github-update-automation.md)：调度、PR 复用、人工修改保护、权限边界及基线附件。
+- [实现进度](docs/update-implementation.md)：已验证内容和上线前的剩余工作。
 
-## Plugin Catalog
+资源版本与检查目标分别声明。`source` 固定当前版本，`update` 指定要检查的分支、release 或人工更新策略。检查到新版本不等于采用它。
 
-| Plugin | Category | Source | Upstream |
-|--------|----------|--------|----------|
-| `github` | devtools | self-hosted | [claude-github-skill](https://github.com/LKCY23/claude-github-skill) |
-| `skill-evaluator` | devtools | self-hosted | [skill-evaluator](https://github.com/LKCY23/skill-evaluator) |
-| `research-brainstorm` | research | self-hosted | [research-brainstorm](https://github.com/LKCY23/research-brainstorm) |
-| `research-dev-orchestrator` | research | self-hosted | [research-dev-orchestrator](https://github.com/LKCY23/research-dev-orchestrator) |
-| `teach` | productivity | self-hosted | [teach-skill](https://github.com/LKCY23/teach-skill) |
-| `programming-practice` | productivity | self-hosted | [programming-practice](https://github.com/LKCY23/programming-practice) |
-| `literature-review` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
-| `read-paper` | research | self-hosted | [research-reading-skills](https://github.com/LKCY23/research-reading-skills) |
-| `deep-research` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
-| `academic-paper` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
-| `academic-paper-reviewer` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
-| `academic-pipeline` | research | third-party | [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) |
-| `karpathy-llm-wiki` | knowledge | third-party | [karpathy-llm-wiki](https://github.com/Astro-Han/karpathy-llm-wiki) |
+消费者在 `profiles/agents/<agent>/<profile>.yaml` 选择资源。凭据、账号状态、个人项目路径和本机安装记录不保存在这个资源仓库中。
 
-## Local utilities
+## 添加资源
 
-Local host tools live in ordinary tracked directories, separate from `skills/`
-and the plugin catalog. They are not skills or plugins and cannot be installed
-with `claude plugin install`.
+在对应 catalog 中登记资源身份、类型、来源、维护方式、固定版本、兼容入口、依赖和更新目标。第三方经过本地包装后仍保留第三方来源；原文映射和包装分开记录。资源可以使用 tracked、submodule、external 或明确的 snapshot 来源。
 
-| Utility | Purpose | Entry point |
-|---------|---------|-------------|
-| [claude-desktop-bootstrap](claude-desktop-bootstrap/README.md) | Safely persist local Claude Desktop profile overrides on macOS | Optional Dock app; `apply.py` (preview), `launch.command` (apply, then open) |
-
-Personal Desktop preferences live in `claude-config-data`, not in this tool
-checkout. Preview the external configuration from the repository root:
-
-```bash
-python3 claude-desktop-bootstrap/apply.py --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json" --dry-run
-```
-
-The utility dynamically resolves the applied `3p` profile, preserves unrelated
-settings, and supports private backups and rollback. Writes require Desktop to
-be stopped; it never quits/restarts the app or installs a background service.
-See its [README](claude-desktop-bootstrap/README.md) for application instructions
-and [macOS automation research](claude-desktop-bootstrap/macos-automation.md) for
-native event hooks and their timing limits.
-
-## Architecture: Two source modes
-
-claudespace supports two plugin source patterns, both defined in `marketplace.json`:
-
-### Mode 1 — Self-hosted (submodule)
-
-The plugin code lives directly in this repository via git submodule. The version is determined by the submodule's pinned commit.
-
-```
-claudespace/
-└── skills/
-    └── github/              ← git submodule @ commit 8ba6659
-        └── SKILL.md
-```
-
-```json
-{ "name": "github", "source": "./skills/github" }
-```
-
-**Used for**: plugins maintained as submodules; see the self-hosted entries in the catalog.
-
-### Mode 2 — External reference (pinned sha)
-
-The plugin code lives in an external repository. The version is locked to an exact commit sha.
-
-```json
-{
-  "name": "deep-research",
-  "source": {
-    "source": "git-subdir",
-    "url": "https://github.com/Imbad0202/academic-research-skills",
-    "path": "deep-research",
-    "ref": "main",
-    "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
-  }
-}
-```
-
-**Used for**: third-party plugins you want to pin — `deep-research`, `academic-paper`, `academic-paper-reviewer`, `academic-pipeline`, `karpathy-llm-wiki`.
-
-### Why two modes?
-
-| | Mode 1 (self-hosted) | Mode 2 (external) |
-|---|---|---|
-| Version tracking | `git submodule status` | `sha` field in marketplace.json |
-| Update mechanism | `git submodule update --remote` | manually update sha in marketplace.json |
-| Git history | Full submodule history in this repo | No local copy of upstream code |
-| Best for | Code you maintain and evolve | Curated third-party snapshots |
-
-## Install
-
-```bash
-# Register marketplace
-claude plugin marketplace add LKCY23/claudespace
-
-# Install a specific plugin
-claude plugin install <name>@claudespace
-
-# List what's installed
-claude plugin list
-```
-
-## Update
-
-### Update self-hosted plugins (Mode 1)
-
-```bash
-cd claudespace
-git submodule update --remote skills/github        # pull latest from upstream
-git add skills/github                              # pin new commit
-git commit -m "chore: update github to vX.Y.Z"
-git push
-
-# Then tell users to refresh their marketplace cache:
-claude plugin marketplace update claudespace
-claude plugin update github@claudespace
-```
-
-### Update third-party plugins (Mode 2)
-
-```bash
-# 1. Get the latest commit sha from upstream
-gh api repos/Imbad0202/academic-research-skills/commits/HEAD --jq '.sha'
-
-# 2. Edit marketplace.json: update the "sha" field for the plugin
-
-# 3. Review the diff between old and new sha to verify nothing is broken
-
-# 4. Commit and push
-git add .claude-plugin/marketplace.json
-git commit -m "chore: update deep-research to <new-sha>"
-git push
-
-# 5. Users refresh:
-claude plugin marketplace update claudespace
-claude plugin update deep-research@claudespace
-```
-
-## Add a new plugin
-
-### Add your own (Mode 1)
-
-```bash
-# 1. Add as git submodule
-git submodule add https://github.com/<you>/<repo>.git skills/<name>
-
-# 2. Add entry to marketplace.json
-# {
-#   "name": "<name>",
-#   "source": "./skills/<name>",
-#   "description": "...",
-#   "category": "..."
-# }
-
-# 3. Commit
-git add .gitmodules skills/<name> .claude-plugin/marketplace.json
-git commit -m "feat: add <name> plugin"
-git push
-```
-
-### Curate a third-party (Mode 2)
-
-```bash
-# 1. Find the repo structure — locate the SKILL.md and note the subdirectory path
-
-# 2. Get the latest commit sha
-gh api repos/<owner>/<repo>/commits/HEAD --jq '.sha'
-
-# 3. Add entry to marketplace.json
-# {
-#   "name": "<name>",
-#   "source": {
-#     "source": "git-subdir",
-#     "url": "https://github.com/<owner>/<repo>",
-#     "path": "<subdir>",
-#     "ref": "main",
-#     "sha": "<commit-sha>"
-#   },
-#   "description": "...",
-#   "category": "...",
-#   "author": { "name": "<owner>" }
-# }
-
-# 4. Commit
-git add .claude-plugin/marketplace.json
-git commit -m "feat: add <name> (third-party, pinned to <short-sha>)"
-git push
-```
-
-## Repository Structure
-
-```
-claudespace/
-├── .claude-plugin/
-│   └── marketplace.json          ← Plugin catalog (the core of this repo)
-├── .gitmodules                   ← Submodule definitions (self-hosted plugins)
-├── claude-desktop-bootstrap/      ← Local host utility (not a plugin/submodule)
-│   ├── apply.py                  ← Preview, merge, backup, and restore
-│   ├── overrides.example.json    ← Example only; personal values live in config-data
-│   ├── launch.command            ← Apply successfully before opening Desktop
-│   ├── install-app.py            ← Build a user-local, Dock-friendly macOS app
-│   ├── app/                      ← App launcher and icon sources
-│   ├── tests/                    ← Isolated configuration and native app tests
-│   ├── macos-automation.md        ← Native launch-event research and limits
-│   └── README.md
-├── skills/                       ← Self-hosted skill submodules
-│   ├── github/                   ← git submodule → claude-github-skill
-│   ├── skill-evaluator/          ← git submodule → skill-evaluator
-│   ├── research-brainstorm/      ← git submodule → research-brainstorm
-│   ├── research-dev-orchestrator/ ← git submodule → research-dev-orchestrator
-│   ├── teach/                    ← git submodule → teach-skill
-│   ├── programming-practice/     ← git submodule → programming-practice
-│   └── research-reading-skills/  ← git submodule → research-reading-skills
-│       └── skills/
-│           ├── literature-review/
-│           └── read-paper/
-├── .gitignore
-└── README.md
-```
-
-Third-party plugins (Mode 2) have no local files in this repo — they are referenced by URL and sha in `marketplace.json` and fetched on demand by `claude plugin install`.
-
-## Relationship with claude-config
-
-[claude-config](https://github.com/LKCY23/claude-config) is a cross-machine configuration sync tool. For plugins, claudespace is the **skill source** — it defines what skills exist and at what versions. claude-config is the **deployment tool** — it applies configurations (including plugin installations) to any machine.
-
-The separate local utilities are maintained here as source, not registered as
-plugins. `claude-desktop-bootstrap` manages only a local Desktop profile; it does
-not deploy Claude Code settings or participate in `claude-config apply`.
-
-```
-claudespace                     claude-config
-  │                               │
-  │ marketplace.json  ──ref──→    │ plugins.yaml
-  │ (what & which version)        │ (what to install where)
-  │                               │
-  │  claude plugin install        │  claude-config apply
-  │  github@claudespace           │  → calls plugin install
-  │                               │
-```
-
-If you use both, reference claudespace plugins in claude-config's `plugins.yaml` and run `claude-config apply` — it will handle marketplace registration and plugin installation for you.
-
-## Version Policy
-
-- **All plugins are pinned to exact commits** — no automatic tracking of `main`/`latest`
-- **Updates are manual and reviewed** — before bumping a sha, review the upstream diff to avoid breaking changes
-- **Self-hosted plugins** are pinned via submodule commit; `git submodule update --remote` fetches latest but does not auto-commit
-- **Third-party plugins** are pinned via `sha` in marketplace.json; update requires an explicit edit and commit
-
-This is intentional: a marketplace is a **curated catalog**, not a firehose. You decide when to upgrade.
-
-## License
-
-This repository contains both original work and third-party plugin references. Each self-hosted submodule carries its own license. Third-party plugins referenced in `marketplace.json` remain under their respective upstream licenses.
-
-## Local development: skill-evaluator
-
-`skills/skill-evaluator` is a self-authored plugin pinned by submodule commit,
-with its own `.claude-plugin/plugin.json`. It is published at
-[LKCY23/skill-evaluator](https://github.com/LKCY23/skill-evaluator), and its
-submodule source is portable across machines.
-
-The Codex discovery link `~/.codex/skills/skill-evaluator` points to this
-submodule, so the active source is maintained here rather than as copied files.
-Cross-machine deployment remains the responsibility of claude-config; the
-submodule source is now hosted remotely.
-
-## Local development: programming-practice
-
-`skills/programming-practice` is a self-authored learning skill/plugin, version 0.1.1,
-archived as a Git submodule pinned to an exact commit. It is published at
-[LKCY23/programming-practice](https://github.com/LKCY23/programming-practice), so
-other machines can initialize it from the canonical remote.
-
-The learner owns practice code and commands; the tutor provides concept teaching,
-graduated hints, debugging feedback, independent/transfer assessments, and optional
-course-local records. It is separate from `teach` and does not replace that plugin.
-See [the skill README](skills/programming-practice/README.md) for usage and
-[validation scope](skills/programming-practice/tests/validation.md).
-
-For a session-local trial, start Claude Code from the **learner project**:
+先运行结构测试和独立候选构建，再审阅资源定义与适配。需要真实客户端、服务或模型的验收另行执行和记录；结构通过不代表业务可用。
 
 ```sh
-CLAUDESPACE_ROOT="/path/to/claudespace"
-claude --plugin-dir "$CLAUDESPACE_ROOT/skills/programming-practice"
+python3 -m pip install -r requirements-test.txt
+PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 ```
 
-Then invoke `/programming-practice:programming-practice`.
+## 其他工具与许可
 
-For **Codex**, expose that same directory through the learner project's
-`.agents/skills/programming-practice` (or the user skill directory, not both).
-`agents/openai.yaml` supplies Codex UI metadata; use the skill selector to select
-it. The full package is discovered by the tested Codex CLI as
-`programming-practice:programming-practice`, invoked with
-`$programming-practice:programming-practice`. The Claude marketplace manifest is
-not a Codex marketplace. See the skill README for the one-time local link setup.
+[Claude Desktop Bootstrap](claude-desktop-bootstrap/README.md) 是独立的本机工具，以其 README 为准；它没有作为本批资源更新自动化的一部分部署。
 
-Both hosts share the learner's `.programming-practice/` checkpoint, not chat
-history. The installed skill has one teaching source; host configuration does
-not create separate teachers. No global installation or claude-config deployment
-is performed by this archive operation.
-
-For cross-machine use, initialize the submodule from its GitHub URL and keep the
-parent gitlink pinned; no local source path is advertised.
+各第三方来源及子模块保留其作者和许可证；具体内容以对应包或上游仓库为准。

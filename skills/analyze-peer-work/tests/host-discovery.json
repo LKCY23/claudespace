@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-16",
+  "skill_version": "0.1.0",
+  "content_sha256": {
+    "SKILL.md": "5ea0e077933e3f27308488e176c6d25b5b09396968abd1e0a0acda3ceb55d4b2",
+    "agents/openai.yaml": "aad6983a343791cd00e74d4a07552b641935de9fe3dce67865a8082c591e5cbc",
+    ".claude-plugin/plugin.json": "75a47d991a9c7806ac526d9bbf0756e051f10f09663963537b472cd24da78d45"
+  },
+  "codex": {
+    "status": "passed",
+    "level": "native-discovery",
+    "host_version": "codex-cli 0.160.0",
+    "name": "analyze-peer-work:analyze-peer-work",
+    "scope": "user",
+    "enabled": true,
+    "display_name": "参考工作分析与借鉴",
+    "default_prompt": "使用 $analyze-peer-work:analyze-peer-work 结合我们的需求分析这项工作，判断哪些思路与实现值得借鉴，并按用途组织分析结果。",
+    "other_discovery_error_count": 0,
+    "method": "Fresh app-server initialize + skills/list forceReload, using one user-level discovery symlink. No model request, persistent trust change, or plugin cache edit."
+  },
+  "behavior_evaluation": {
+    "status": "not-evaluated",
+    "note": "Scenario review is author review only; no independent model trials or baseline comparison."
+  },
+  "claude_code": {
+    "status": "passed",
+    "level": "native-inventory",
+    "host_version": "2.1.278 (Claude Code)",
+    "strict_manifest_validation": true,
+    "scope": "session-local plugin-dir",
+    "inventory": "analyze-peer-work 0.1.0\n  Description: 需求驱动的参考工作分析与借鉴：理解机制、核查证据、评价适用性，并组织可读成果。\n  Source: analyze-peer-work@inline\n\nComponent inventory\n  Skills (1)  analyze-peer-work\n  Agents (0)\n  Hooks (0)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~104 tok   added to every session\n\nPer-component (rounded)\n  component          always-on  on-invoke\n  analyze-peer-work       ~100       ~650\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.",
+    "method": "plugin validate --strict and session-local plugin details; no model request or persistent installation."
+  }
+}

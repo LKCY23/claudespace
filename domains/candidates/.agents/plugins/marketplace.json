@@ -1,23 +1,13 @@
 {
   "name": "claudespace-candidates",
   "interface": {
-    "displayName": "claudespace · Candidates (未验证)"
+    "displayName": "claudespace-candidates · candidates"
   },
   "plugins": [
     {
       "name": "andrej-karpathy-skills",
-      "source": "./upstreams/karpathy",
       "description": "Karpathy Guidelines — coding scope, assumptions, simplicity and verification",
-      "category": "Productivity",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "code-simplifier",
-      "source": "./packages/code-simplifier",
-      "description": "Code Simplifier — improve readability while preserving behavior",
+      "source": "./packages/andrej-karpathy-skills",
       "category": "Productivity",
       "policy": {
         "installation": "AVAILABLE",
@@ -26,8 +16,8 @@
     },
     {
       "name": "code-review",
-      "source": "./packages/code-review",
       "description": "Matt Pocock code review — Standards and Spec, with original setup helper",
+      "source": "./packages/code-review",
       "category": "Productivity",
       "policy": {
         "installation": "AVAILABLE",
@@ -35,9 +25,9 @@
       }
     },
     {
-      "name": "mattpocock-skills",
-      "source": "./upstreams/matt",
-      "description": "Complete original Matt Pocock skill collection, available for later trial",
+      "name": "code-simplifier",
+      "description": "Code Simplifier — improve readability while preserving behavior",
+      "source": "./packages/code-simplifier",
       "category": "Productivity",
       "policy": {
         "installation": "AVAILABLE",
@@ -46,8 +36,8 @@
     },
     {
       "name": "ponytail",
-      "source": "./upstreams/ponytail",
       "description": "Ponytail — reuse-first simplification, review, audit and debt tracking",
+      "source": "./upstreams/ponytail",
       "category": "Productivity",
       "policy": {
         "installation": "AVAILABLE",

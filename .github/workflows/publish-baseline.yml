@@ -1,0 +1,61 @@
+name: Publish structural baseline
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: claudespace-baseline-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  baseline:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: claudespace-private-sources
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements-test.txt
+      - run: PYTHONPATH=scripts python -B -m unittest discover -s tests -v
+      - name: Revalidate the final commit
+        env:
+          CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
+        run: python scripts/private_ci.py validate --root "$GITHUB_WORKSPACE" --report "$RUNNER_TEMP/baseline-validation/validation.json"
+      - name: Generate records outside the commit
+        run: |
+          python - <<'PYCODE'
+          import os, sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from baseline_record import build_record
+          from build_candidates import write_json
+          from run_updates import catalogs
+          root = Path(os.environ['GITHUB_WORKSPACE'])
+          output = Path(os.environ['RUNNER_TEMP']) / 'baselines'
+          for path in catalogs(root):
+              record = build_record(root, str(path.parent.relative_to(root)))
+              name = path.parent.name if path.parent != root else 'root'
+              write_json(output / (name + '.json'), record)
+          PYCODE
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: claudespace-baseline-${{ github.sha }}
+          path: ${{ runner.temp }}/baselines/
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: baseline-validation-${{ github.sha }}
+          path: ${{ runner.temp }}/baseline-validation/*.json
+          retention-days: 30
+          if-no-files-found: warn

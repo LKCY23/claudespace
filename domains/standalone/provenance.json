@@ -1,0 +1,735 @@
+{
+  "academic-paper": {
+    "repo_group": "academic",
+    "local_files": 45,
+    "remote_files": 63,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "agents/citation_compliance_agent.md",
+      "agents/draft_writer_agent.md",
+      "examples/chinese_paper_example.md",
+      "references/citation_format_switcher.md",
+      "references/journal_submission_guide.md",
+      "references/writing_quality_check.md",
+      "templates/revision_tracking_template.md",
+      "examples/revision_recovery_example.md",
+      "agents/peer_reviewer_agent.md",
+      "references/apa7_chinese_citation_guide.md",
+      "agents/revision_coach_agent.md",
+      "agents/structure_architect_agent.md",
+      "agents/socratic_mentor_agent.md",
+      "references/academic_writing_style.md",
+      "examples/revision_mode_example.md",
+      "templates/bilingual_abstract_template.md",
+      "agents/abstract_bilingual_agent.md",
+      "references/abstract_writing_guide.md",
+      "references/paper_structure_patterns.md",
+      "agents/literature_strategist_agent.md",
+      "references/failure_paths.md",
+      "references/mode_selection_guide.md",
+      "agents/argument_builder_agent.md",
+      "agents/intake_agent.md",
+      "agents/formatter_agent.md",
+      "agents/visualization_agent.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/revision_patch_protocol.md",
+      "references/policy_anchor_table.md",
+      "examples/clinical_citation_verification_checklist.md",
+      "references/policy_anchor_disclosure_protocol.md",
+      "references/anti_leakage_protocol.md",
+      "references/disclosure_mode_protocol.md",
+      "references/workflow_phase_details.md",
+      "references/committee_correspondence_protocol.md",
+      "references/venue_disclosure_policies.md",
+      "references/plan_mode_protocol.md",
+      "references/intro_title_rhetoric_guide.md",
+      "examples/clinical_epistemic_status_example.md",
+      "examples/commitment_ledger_example.md",
+      "examples/version_family_reconciliation_example.md",
+      "references/changelog.md",
+      "references/writing_judgment_framework.md",
+      "references/domain_evidence_profiles.md",
+      "references/vlm_figure_verification.md"
+    ],
+    "upstream_comparison_commit": "060cb3cbffc2ca1bdfb8f7c6d2ffa4883cf09b1a",
+    "packaging_changes": [
+      "Include the two existing shared support files inside the package."
+    ]
+  },
+  "academic-paper-reviewer": {
+    "repo_group": "academic",
+    "local_files": 18,
+    "remote_files": 28,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "agents/perspective_reviewer_agent.md",
+      "agents/field_analyst_agent.md",
+      "examples/hei_paper_review_example.md",
+      "templates/editorial_decision_template.md",
+      "templates/revision_response_template.md",
+      "agents/domain_reviewer_agent.md",
+      "references/top_journals_by_field.md",
+      "agents/devils_advocate_reviewer_agent.md",
+      "references/quality_rubrics.md",
+      "agents/eic_agent.md",
+      "references/statistical_reporting_standards.md",
+      "examples/interdisciplinary_review_example.md",
+      "agents/editorial_synthesizer_agent.md",
+      "references/editorial_decision_standards.md",
+      "agents/methodology_reviewer_agent.md",
+      "references/review_criteria_framework.md",
+      "templates/peer_review_report_template.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "examples/subclaim_decomposition_example.md",
+      "references/changelog.md",
+      "references/integration_guide.md",
+      "references/review_quality_thinking.md",
+      "references/review_panel_provenance_protocol.md",
+      "references/guided_mode_protocol.md",
+      "references/reviewer_sprint_prompt_source.md",
+      "references/re_review_mode_protocol.md",
+      "references/sprint_contract_protocol.md",
+      "references/calibration_mode_protocol.md"
+    ],
+    "upstream_comparison_commit": "060cb3cbffc2ca1bdfb8f7c6d2ffa4883cf09b1a",
+    "packaging_changes": [
+      "Include the two existing shared support files inside the package."
+    ]
+  },
+  "brainstorming-research-ideas": {
+    "repo_group": "orchestra",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+    "packaging_changes": []
+  },
+  "creative-thinking-for-research": {
+    "repo_group": "orchestra",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "773a52944ba4747a18bd4ae9ade53fff041adcbc",
+    "packaging_changes": []
+  },
+  "humanizer": {
+    "repo_group": "humanizer",
+    "equal": true,
+    "upstream_comparison_commit": "726456a912683485b0f43239b69eef212e299dd7",
+    "packaging_changes": []
+  },
+  "lark-approval": {
+    "repo_group": "lark",
+    "local_files": 17,
+    "remote_files": 17,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-approval-tasks-add-sign.md",
+      "references/lark-approval-tasks-query.md",
+      "references/lark-approval-instances-initiated.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-apps": {
+    "repo_group": "lark",
+    "local_files": 55,
+    "remote_files": 56,
+    "equal": false,
+    "changed": [
+      "references/lark-apps-env.md",
+      "SKILL.md",
+      "references/lark-apps-local-dev.md",
+      "references/lark-apps-release-get.md",
+      "references/lark-apps-release-create.md",
+      "references/lark-apps-observability.md",
+      "references/lark-apps-cache.md",
+      "references/lark-apps-db.md",
+      "creative-design/assets/index.html",
+      "references/lark-apps-automation.md",
+      "references/lark-apps-env-pull.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/lark-apps-export.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": [
+      "Fix a stale filename; the creative-design body is already installed."
+    ]
+  },
+  "lark-attendance": {
+    "repo_group": "lark",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-base": {
+    "repo_group": "lark",
+    "local_files": 30,
+    "remote_files": 27,
+    "equal": false,
+    "changed": [
+      "references/lark-base-form-questions-update.md",
+      "SKILL.md",
+      "references/lark-base-app.md",
+      "references/lark-base-field-update.md",
+      "references/lark-base-field-lookup.md",
+      "references/lark-base-field-create.md",
+      "references/lark-base-view-set-filter.md",
+      "references/lark-base-form-submit.md",
+      "references/lark-base-workflow-schema.md",
+      "references/lark-base-form-detail.md",
+      "references/lark-base-dashboard-block-get-data.md",
+      "references/lark-base-field-schema.md",
+      "references/lark-base-record-history-list.md",
+      "references/lark-base-workflow.md",
+      "references/lark-base-dashboard.md",
+      "references/lark-base-form-questions-create.md",
+      "references/lark-base-record-query-and-analysis-sop.md",
+      "references/lark-base-filter-condition.md",
+      "references/lark-base-dashboard-block-config.md",
+      "references/lark-base-data-query.md"
+    ],
+    "local_only": [
+      "references/lark-base-data-analysis-pandas.md",
+      "references/lark-base-record-batch-create.md",
+      "references/lark-base-record-query-and-analysis-cloud-sop.md",
+      "references/lark-base-cell-value.md",
+      "references/lark-base-record-batch-update.md",
+      "references/lark-base-data-analysis-python-stdlib.md"
+    ],
+    "remote_only": [
+      "references/lark-base-template-center.md",
+      "references/lark-base-field-extension.md",
+      "references/lark-base-view.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-calendar": {
+    "repo_group": "lark",
+    "local_files": 11,
+    "remote_files": 15,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-calendar-meeting.md",
+      "references/lark-calendar-schedule-clear-time.md",
+      "references/lark-calendar-recurring.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/lark-calendar-list-attendees.md",
+      "references/lark-calendar-transfer.md",
+      "references/lark-calendar-meeting-relation.md",
+      "references/lark-calendar-join-event.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-contact": {
+    "repo_group": "lark",
+    "local_files": 4,
+    "remote_files": 4,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-doc": {
+    "repo_group": "lark",
+    "local_files": 44,
+    "remote_files": 44,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-doc-media-preview.md",
+      "references/lark-doc-media-insert.md",
+      "references/lark-doc-media-download.md",
+      "references/lark-doc-resource-cover.md",
+      "references/lark-doc-create-workflow.md",
+      "references/lark-doc-script.md",
+      "references/lark-doc-fetch.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-drive": {
+    "repo_group": "lark",
+    "local_files": 61,
+    "remote_files": 61,
+    "equal": false,
+    "changed": [
+      "references/lark-drive-preview.md",
+      "references/lark-drive-cover.md",
+      "references/lark-drive-export-download.md",
+      "references/lark-drive-create-shortcut.md",
+      "references/lark-drive-version-get.md",
+      "references/lark-drive-push.md",
+      "references/lark-drive-delete.md",
+      "references/lark-drive-status.md",
+      "references/lark-drive-permission-guide.md",
+      "references/lark-drive-apply-permission.md",
+      "references/lark-drive-list-comments.md",
+      "references/lark-drive-version-delete.md",
+      "references/lark-drive-comment-location.md",
+      "references/lark-drive-pull.md",
+      "references/lark-drive-workflow-topic-move-collector-execute.md",
+      "references/lark-drive-workflow-topic-move-collector-resolve-verify.md",
+      "references/lark-drive-version-revert.md",
+      "references/lark-drive-inspect.md",
+      "references/lark-drive-export.md",
+      "references/lark-drive-workflow-topic-move-collector.md",
+      "references/lark-drive-copy.md",
+      "references/lark-drive-update-title.md",
+      "references/lark-drive-version-history.md",
+      "references/lark-drive-create-folder.md",
+      "references/lark-drive-search.md",
+      "references/lark-drive-task-result.md",
+      "references/lark-drive-add-comment.md",
+      "references/lark-drive-member-remove.md",
+      "references/lark-drive-upload.md",
+      "references/lark-drive-import.md",
+      "references/lark-drive-download.md",
+      "references/lark-drive-move.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-event": {
+    "repo_group": "lark",
+    "local_files": 8,
+    "remote_files": 8,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": [
+      "Point the repository-source citation to its fixed upstream URL."
+    ]
+  },
+  "lark-im": {
+    "repo_group": "lark",
+    "local_files": 59,
+    "remote_files": 61,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-im-feed-shortcut-remove.md",
+      "references/lark-im-chat-update.md",
+      "references/lark-im-chat-messages-list.md",
+      "references/lark-im-messages-search.md",
+      "references/lark-im-feed-shortcut-list.md",
+      "references/lark-im-chat-create.md",
+      "references/lark-im-chat-list.md",
+      "references/lark-im-threads-messages-list.md",
+      "references/lark-im-flag-cancel.md",
+      "references/lark-im-chat-search.md",
+      "references/lark-im-feed-groups.md",
+      "references/lark-im-messages-send.md",
+      "references/lark-im-messages-mget.md",
+      "references/lark-im-flag-list.md",
+      "references/lark-im-messages-reply.md",
+      "references/lark-im-message-enrichment.md",
+      "references/lark-im-chat-members-list.md",
+      "references/lark-im-flag-create.md",
+      "references/lark-im-reactions.md",
+      "references/lark-im-messages-resources-download.md",
+      "references/lark-im-feed-shortcut-create.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/lark-im-message-read-status.md",
+      "references/lark-im-messages-edit.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-mail": {
+    "repo_group": "lark",
+    "local_files": 34,
+    "remote_files": 36,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-mail-template-update.md",
+      "references/lark-mail-watch.md",
+      "references/lark-mail-rules.md",
+      "references/lark-mail-reply.md",
+      "references/lark-mail-template-create.md",
+      "references/lark-mail-send.md",
+      "references/lark-mail-draft-create.md",
+      "references/lark-mail-reply-all.md",
+      "references/lark-mail-draft-edit.md",
+      "references/lark-mail-triage.md",
+      "references/lark-mail-forward.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/lark-mail-thread-modify.md",
+      "references/lark-mail-thread-trash.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": [
+      "Fix installed documentation link in lark-mail-reply-all.md",
+      "Fix installed documentation link in lark-mail-send.md",
+      "Fix installed documentation link in lark-mail-reply.md",
+      "Fix installed documentation link in lark-mail-forward.md",
+      "Fix installed documentation link in lark-mail-watch.md",
+      "Fix installed documentation link in lark-mail-draft-edit.md",
+      "Fix installed documentation link in lark-mail-draft-create.md"
+    ]
+  },
+  "lark-markdown": {
+    "repo_group": "lark",
+    "local_files": 6,
+    "remote_files": 6,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-markdown-create.md",
+      "references/lark-markdown-patch.md",
+      "references/lark-markdown-fetch.md",
+      "references/lark-markdown-overwrite.md",
+      "references/lark-markdown-diff.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-minutes": {
+    "repo_group": "lark",
+    "local_files": 10,
+    "remote_files": 1,
+    "equal": false,
+    "changed": [
+      "SKILL.md"
+    ],
+    "local_only": [
+      "references/lark-minutes-update.md",
+      "references/lark-minutes-search.md",
+      "references/lark-minutes-upload.md",
+      "references/lark-minutes-detail.md",
+      "references/lark-minutes-summary.md",
+      "references/lark-minutes-speaker-replace.md",
+      "references/lark-minutes-apply-permission.md",
+      "references/lark-minutes-download.md",
+      "references/lark-minutes-todo.md"
+    ],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": [
+      "Mark an absent legacy command reference explicitly instead of claiming a missing file exists."
+    ]
+  },
+  "lark-note": {
+    "repo_group": "lark",
+    "local_files": 3,
+    "remote_files": 1,
+    "equal": false,
+    "changed": [
+      "SKILL.md"
+    ],
+    "local_only": [
+      "references/lark-note-transcript.md",
+      "references/lark-note-detail.md"
+    ],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-okr": {
+    "repo_group": "lark",
+    "local_files": 19,
+    "remote_files": 26,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-okr-entities.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/lark-okr-comment-create.md",
+      "references/lark-okr-comment-get.md",
+      "references/lark-okr-comment-patch.md",
+      "references/lark-okr-comment-delete.md",
+      "references/lark-okr-comment-solve-reopen.md",
+      "references/lark-okr-comment-detail.md",
+      "references/lark-okr-comment-list.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-openapi-explorer": {
+    "repo_group": "lark",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-shared": {
+    "repo_group": "lark",
+    "local_files": 7,
+    "remote_files": 7,
+    "equal": false,
+    "changed": [
+      "references/lark-wiki-token-routing.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-sheets": {
+    "repo_group": "lark",
+    "local_files": 27,
+    "remote_files": 30,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-sheets-filter-view.md",
+      "references/lark-sheets-formula-verify.md",
+      "references/lark-sheets-read-data.md",
+      "references/lark-sheets-sparkline.md",
+      "references/lark-sheets-range-operations.md",
+      "scripts/lark_sheet_read_cli.py",
+      "references/lark-sheets-chart.md",
+      "references/lark-sheets-visual-standards.md",
+      "references/lark-sheets-search-replace.md",
+      "references/lark-sheets-formula-translation.md",
+      "references/lark-sheets-conditional-format.md",
+      "references/lark-sheets-filter.md",
+      "references/lark-sheets-workbook.md",
+      "references/lark-sheets-batch-update.md",
+      "references/lark-sheets-sheet-structure.md",
+      "references/lark-sheets-float-image.md",
+      "references/lark-sheets-pivot-table.md",
+      "scripts/lark_inspect_workbook.py",
+      "references/lark-sheets-write-cells.md",
+      "references/lark-sheets-styles-put.md"
+    ],
+    "local_only": [
+      "scripts/sheets_df.py"
+    ],
+    "remote_only": [
+      "scripts/lark_chart_quality_check.py",
+      "scripts/lark_chart_size_advisor.py",
+      "scripts/lark_sheets_df.py",
+      "scripts/lark_chart_size_rules.py"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-skill-maker": {
+    "repo_group": "lark",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-slides": {
+    "repo_group": "lark",
+    "local_files": 50,
+    "remote_files": 50,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-slides-xml-presentation-slide-replace.md",
+      "references/cli/lark-slides-xml-presentations-get.md",
+      "references/workflow/error-handling.md",
+      "references/cli/lark-slides-media-upload.md",
+      "references/lark-slides-xml-presentation-slide-get.md",
+      "references/lark-slides-xml-presentations-get.md",
+      "references/cli/lark-slides-xml-presentation-slide-replace.md",
+      "references/cli/lark-slides-history.md",
+      "references/cli/lark-slides-create.md",
+      "references/cli/lark-slides-add-slide.md",
+      "references/workflow/slides-editing.md",
+      "references/cli/lark-slides-delete-slide.md",
+      "references/cli/lark-slides-replace-slide.md",
+      "references/cli/lark-slides-xml-presentation-slide-get.md",
+      "references/xml/slides_xml_schema_definition.xml",
+      "references/cli/lark-slides-update-slide.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-task": {
+    "repo_group": "lark",
+    "local_files": 18,
+    "remote_files": 19,
+    "equal": false,
+    "changed": [
+      "references/lark-task-set-ancestor.md",
+      "SKILL.md",
+      "references/lark-task-create.md",
+      "references/lark-task-assign.md",
+      "references/lark-task-update.md",
+      "references/lark-task-reminder.md",
+      "references/lark-task-get-my-tasks.md",
+      "references/lark-task-complete.md",
+      "references/lark-task-search.md",
+      "references/lark-task-tasklist-search.md",
+      "references/lark-task-tasklist-members.md",
+      "references/lark-task-upload-attachment.md",
+      "references/lark-task-get-related-tasks.md",
+      "references/lark-task-comment.md",
+      "references/lark-task-reopen.md",
+      "references/lark-task-tasklist-task-add.md",
+      "references/lark-task-followers.md",
+      "references/lark-task-tasklist-create.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "references/lark-task-sections.md"
+    ],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-vc": {
+    "repo_group": "lark",
+    "local_files": 8,
+    "remote_files": 1,
+    "equal": false,
+    "changed": [
+      "SKILL.md"
+    ],
+    "local_only": [
+      "references/lark-vc-detail.md",
+      "references/vc-domain-boundaries.md",
+      "references/lark-vc-meeting-list-active.md",
+      "references/lark-vc-meeting-message-send.md",
+      "references/lark-vc-search.md",
+      "references/lark-vc-meeting-events.md",
+      "references/lark-vc-recording.md"
+    ],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-vc-agent": {
+    "repo_group": "lark",
+    "local_files": 3,
+    "remote_files": 1,
+    "equal": false,
+    "changed": [
+      "SKILL.md"
+    ],
+    "local_only": [
+      "references/lark-vc-agent-meeting-join.md",
+      "references/lark-vc-agent-meeting-leave.md"
+    ],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-whiteboard": {
+    "repo_group": "lark",
+    "local_files": 31,
+    "remote_files": 31,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-wiki": {
+    "repo_group": "lark",
+    "local_files": 14,
+    "remote_files": 14,
+    "equal": false,
+    "changed": [
+      "SKILL.md",
+      "references/lark-wiki-delete-space.md",
+      "references/lark-wiki-node-delete.md",
+      "references/lark-wiki-node-get.md",
+      "references/lark-wiki-node-create.md",
+      "references/lark-wiki-move-to-drive.md",
+      "references/lark-wiki-move.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-workflow-meeting-summary": {
+    "repo_group": "lark",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": false,
+    "changed": [
+      "SKILL.md"
+    ],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "lark-workflow-standup-report": {
+    "repo_group": "lark",
+    "local_files": 1,
+    "remote_files": 1,
+    "equal": true,
+    "changed": [],
+    "local_only": [],
+    "remote_only": [],
+    "upstream_comparison_commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+    "packaging_changes": []
+  },
+  "mmx-cli": {
+    "repo_group": "mmx",
+    "local_files": 1,
+    "remote_files": 3,
+    "equal": false,
+    "changed": [
+      "SKILL.md"
+    ],
+    "local_only": [],
+    "remote_only": [
+      "h3-video/SKILL.md",
+      "h3-video/references/h3-video.md"
+    ],
+    "upstream_comparison_commit": "ca1724896e24c370e6981ba210e732450dd5a0b8",
+    "packaging_changes": []
+  }
+}
