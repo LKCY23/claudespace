@@ -39,6 +39,46 @@ class BootstrapTests(unittest.TestCase):
         self.assertIn('不是第三方部署', result.stderr)
         self.assertEqual([c[0] for c in calls(self.root)], ['plan'])
 
+    def test_preview_distinguishes_add_unchanged_and_explicit_retention(self):
+        scenario(self.root, changes=1, decisions=[
+            {'path': ['settings', 'chatTabEnabled'], 'action': 'add',
+             'before_exists': False, 'after': True},
+            {'path': ['settings', 'autoModeEnabled'], 'action': 'preserve',
+             'before': False, 'incoming': True, 'incoming_exists': True, 'after': False},
+            {'path': ['settings', 'userThemeMode'], 'action': 'unchanged', 'before': 'system'},
+            {'path': ['settings', 'locale'], 'action': 'residual', 'before': 'en-US'},
+        ])
+        result = self.run_launcher('--dry-run')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('Chat 入口：未设置 → 开启（待新增）', result.stdout)
+        self.assertIn('Auto 模式：关闭（按策略保留本机值）；Profile 要求：开启', result.stdout)
+        self.assertIn('主题：跟随系统（已一致）', result.stdout)
+        self.assertIn('界面语言：en-US（Profile 已移除声明，本机值保留）', result.stdout)
+        self.assertNotIn('已更新', result.stdout)
+        self.assertEqual([c[0] for c in calls(self.root)], ['plan'])
+
+    def test_conflict_lists_values_without_claiming_a_write(self):
+        scenario(self.root, fail='plan', decisions=[
+            {'path': ['settings', 'chatTabEnabled'], 'action': 'conflict',
+             'before': False, 'incoming': True, 'incoming_exists': True, 'after': False}])
+        result = self.run_launcher()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Chat 入口：关闭（有冲突，未修改）；Profile 要求：开启', result.stderr)
+        self.assertEqual([c[0] for c in calls(self.root)], ['plan'])
+
+    def test_summary_does_not_dump_unknown_fields_or_unexpected_values(self):
+        scenario(self.root, decisions=[
+            {'path': ['settings', 'privateCredential'], 'action': 'unchanged', 'before': 'TEST-SECRET'},
+            {'path': ['settings', 'locale'], 'action': 'unchanged', 'before': 'TEST-SECRET\nFORGED'},
+            {'path': ['settings', 'autoModeEnabled'], 'action': 'unchanged', 'before': {'token': 'TEST-SECRET'}},
+        ])
+        result = self.run_launcher('--dry-run')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn('TEST-SECRET', result.stdout)
+        self.assertNotIn('FORGED', result.stdout)
+        self.assertNotIn('privateCredential', result.stdout)
+        self.assertIn('详见报告', result.stdout)
+
     def test_running_app_message_requires_normal_exit_without_termination(self):
         scenario(self.root, fail='plan', failure_code='app_running')
         result = self.run_launcher()

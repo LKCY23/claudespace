@@ -1,4 +1,4 @@
-# Claude Desktop Bootstrap 2.0
+# Claude Desktop Bootstrap 2.0.1
 
 A macOS launcher for an **already configured third-party Claude Desktop**.
 Configuration belongs to `claude-config`: Bootstrap checks an explicit Machine,
@@ -9,6 +9,17 @@ local utility. It is not a skill or plugin. App preferences live in an **App
 Profile** in `claude-config-data`; local paths live in a **Machine** file.
 Provider configuration, credentials and deployment mode remain with Desktop and
 CC Switch.
+
+Its purpose is to reapply selected preferences such as Chat, Auto and the
+built-in browser before launch, including when Desktop has stopped preserving
+them. It does not change providers or run a background preference repair loop.
+Network management and protected official Desktop/CLI launches belong to the
+separate **Claude Link** project. Bootstrap does not depend on Claude Link,
+inspect subscription billing, scan CC Switch's database, or control its process.
+
+The experimental `inspect-access.py` branch is not part of this release line.
+The existing `claude-config` deployment and binding checks remain the authority;
+no second native settings or provider-selection parser is introduced here.
 
 ## Requirements and boundaries
 
@@ -80,6 +91,28 @@ configuration nor launches Desktop. If the command is not on PATH, add
 `--claude-config /absolute/path/to/claude-config`; the default also checks
 `~/.local/bin/claude-config`.
 
+The summary lists the selected Desktop preferences from the framework report:
+new or changed values, already matching values, and explicit decisions to retain
+native values. A preview never labels a pending change as applied. Only the five
+supported Desktop preference fields are rendered; unknown fields and unexpected
+values are not dumped into the launcher output. The full JSON remains available.
+
+For example, after a successful apply (illustrative, not a GUI verification):
+
+```text
+Claude Bootstrap · 第三方 Desktop
+配置已应用，已请求启动 Claude。
+Chat 入口：关闭 → 开启（已更新）
+Auto 模式：开启（已一致）
+内置浏览器：未设置 → 开启（已新增）
+界面实际生效尚未验证；本工具不检查网络或切换供应商。
+完整 JSON：<saved report path>
+```
+
+Command-line runs print this summary. Dock launches retain their existing
+non-modal success behavior; failures show an alert. The framework saves the
+complete report for either entry point.
+
 To apply and launch, omit `--dry-run`. The order is:
 
 1. Obtain a valid saved `plan` report for the explicit Machine.
@@ -108,13 +141,13 @@ folder, normally `<config_dir>/.state/reports/`.
 
 ## Download a fixed version
 
-Download `claude-desktop-bootstrap-2.0.0.tar.gz` from the
-[Bootstrap 2.0.0 Release](https://github.com/LKCY23/claudespace/releases/tag/bootstrap-v2.0.0),
+Download `claude-desktop-bootstrap-2.0.1.tar.gz` from the
+[Bootstrap 2.0.1 Release](https://github.com/LKCY23/claudespace/releases/tag/bootstrap-v2.0.1),
 then extract it on the target Mac:
 
 ```sh
-tar -xzf claude-desktop-bootstrap-2.0.0.tar.gz
-cd claude-desktop-bootstrap-2.0.0
+tar -xzf claude-desktop-bootstrap-2.0.1.tar.gz
+cd claude-desktop-bootstrap-2.0.1
 ```
 
 The archive contains only this utility's source, builder, documentation and tests.
