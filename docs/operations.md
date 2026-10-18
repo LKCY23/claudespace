@@ -66,3 +66,15 @@ claude-config fetch-baseline --agent codex --catalog claudespace-candidates \
 - [源码候选](source-update-candidates.md)：准备器输入与重复运行语义。
 
 结构验证不代表资源的模型效果、原生客户端加载或服务登录通过。需要这些环境的验收另行记录。
+
+## Bootstrap 发布
+
+Bootstrap 是本仓库的独立本机工具，使用 `bootstrap-v<版本>` tag 和源码包，不进入资源 catalog 或 baseline 采用流程。
+
+1. 修改启动器和 `install-app.py` 的 VERSION，通过普通 PR 审查；保持版本与下载说明一致。
+2. 等待 `Bootstrap macOS tests` 及 main 两项必需检查通过，再正常合并。
+3. 在合并提交创建对应 tag 并推送。`Verify and release Bootstrap` 再次运行 macOS 测试，与固定 claude-config 版本集成，校验 tag 后打包这个工具目录。
+4. 独立发布作业复用已有 Release 发布器，上传 `claude-desktop-bootstrap-<版本>.tar.gz` 并核对内容后公开。无私有来源密钥，不包含本机 Machine 或预先绑定的 App。
+5. 目标机器下载并检查绑定，再本机构建启动器。发布不会安装或切换供应商；真实第三方 GUI 验收单独记录。
+
+正式使用和旧版替换／恢复见 [Bootstrap README](../claude-desktop-bootstrap/README.md)。

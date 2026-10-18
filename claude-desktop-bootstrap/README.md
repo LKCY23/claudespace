@@ -1,249 +1,226 @@
-# Claude Desktop bootstrap
+# Claude Desktop Bootstrap 2.0
 
-A self-contained **local host configuration utility**, not a Claude Code skill or
-plugin. It merges explicitly selected Claude Desktop deployment-policy values
-into the applied local profile, and optionally opens Desktop afterwards.
+A macOS launcher for an **already configured third-party Claude Desktop**.
+Configuration belongs to `claude-config`: Bootstrap checks an explicit Machine,
+applies the same reviewed plan, then asks macOS to open the bound application.
 
-## Published implementation and refactor status
+Bootstrap source and its Dock application builder live in **claudespace** as a
+local utility. It is not a skill or plugin. App preferences live in an **App
+Profile** in `claude-config-data`; local paths live in a **Machine** file.
+Provider configuration, credentials and deployment mode remain with Desktop and
+CC Switch.
 
-This README documents the existing standalone JSON-based implementation. A
-Bootstrap 2.0.0 / claude-config 0.1.4 integration was prepared and tested in an
-isolated candidate on 2026-10-17; it has not replaced this published tool or the
-installed launcher. Its Profile-based commands must not be mixed with the
-`--overrides` commands below. Official Claude deployment does not meet this
-tool's third-party deployment requirement.
+## Requirements and boundaries
 
-## Code, personal configuration, and runtime state
+- macOS, an installed `claude-config` **0.1.4+**, and an explicit existing Machine.
+- A working third-party Desktop setup in the native directory
+  `~/Library/Application Support/Claude-3p`, with a saved applied configuration.
+- Python **3.9+** is needed only to build or restore the Dock app. Clicking the
+  built app uses macOS tools and the installed `claude-config` command.
+- Run as your normal login user. The launcher does not create a third-party
+  deployment, choose a provider, sign in, or modify the official deployment.
 
-- **claudespace** contains this tool, tests, documentation, and
-  [overrides.example.json](overrides.example.json). The example is never loaded
-  automatically.
-- **Your configuration data repository** contains the actual non-sensitive
-  preferences. Choose an explicit JSON file outside this source checkout, for example
-  `/absolute/path/to/desktop-overrides.json`.
-- **Desktop's user-data directory** retains the full runtime profile, credentials,
-  and private backups. Do not commit those files to either repository.
+An arbitrary Machine `data_root` does not redirect Desktop. The launcher rejects
+custom data roots before applying anything. The inspected signed Desktop build
+ignores `CLAUDE_USER_DATA_DIR`; Bootstrap does not try to override that behavior.
+A Machine pointing to the official `Claude` directory cannot use this launcher.
 
-Every normal invocation requires `--overrides FILE`. There is no implicit lookup
-in this checkout or fallback to the example. Restore is the only operation that
-does not require an overrides file. The tool does not execute `claude-config
-apply` or read Agent/App Profiles or Machine bindings. It is independent of the current
-App configuration operations, such as `claude-config plan --app claude-desktop`.
+Desktop's deployment choice is read from `claude_desktop_config.json`, **not**
+`config.json`. The latter contains ordinary preferences. `claude-config` reads
+`configLibrary/_meta.json` to find the applied feature-preference file. It never
+writes the deployment choice, provider configuration or applied-profile pointer.
+These locations were checked in installed Desktop **2.26454.2**; the framework
+also checks its audited preference interface. File checks do not establish that
+a provider account or actual GUI session works.
 
-The example demonstrates three supported boolean fields:
+## Profile and Machine
 
-```json
-{
-  "chatTabEnabled": true,
-  "autoModeEnabled": true,
-  "builtinBrowserEnabled": true
-}
+Example App Profile, saved as
+`profiles/apps/claude-desktop/third-party.yaml` in the configuration data repo:
+
+```yaml
+schema_version: 1
+app: claude-desktop
+settings:
+  chatTabEnabled: true
+  autoModeEnabled: true
+  builtinBrowserEnabled: true
 ```
 
-`autoModeEnabled` makes Auto mode **available**; it does not select a session mode,
-grant consent, enable bypass permissions, or override organization policy.
-`builtinBrowserEnabled` permits the built-in browser subject to Desktop's other
-user and policy controls. No Claude Code permissions or consent records are edited.
+All fields are optional. Omitted settings preserve native values. The Auto and
+browser switches control feature availability; native consent and organization
+policy still apply. Provider keys and Claude Code settings do not belong here.
 
-## Requirements
+The corresponding entry in an existing Machine file is:
 
-- macOS, Python **3.9+**, and an existing Claude Desktop **third-party (`3p`)**
-  deployment with a saved, applied profile.
-- Python standard library and built-in macOS tools only; no package installation
-  or network access is performed.
-- Profile loading and the original Chat/Auto keys were inspected in Desktop
-  **2.2553.1**; the built-in browser flag was also confirmed in the local profile.
-  This local format is not a promised stable API; recheck after Desktop updates.
-- Run as the normal login user, not `sudo`.
-
-## Quick start
-
-These examples use a placeholder JSON path; substitute your own reviewed file. The JSON must already exist. For a new setup, copy
-`overrides.example.json` outside this code repository and review the values first.
-
-### Preview
-
-From the claudespace repository root:
-
-```bash
-python3 claude-desktop-bootstrap/apply.py --overrides "/absolute/path/to/desktop-overrides.json" --dry-run
+```yaml
+apps:
+  claude-desktop:
+    profile: profiles/apps/claude-desktop/third-party.yaml
+    binding:
+      application: /Applications/Claude.app
+      data_root: /Users/your-name/Library/Application Support/Claude-3p
 ```
 
-Omitting a mode flag also previews. Output includes the target and changed field
-names, never configuration values; a dry run writes nothing.
+Use the actual account's absolute path. This is a Machine fragment, not a
+complete Machine file. Prepare the target machine's existing third-party setup
+and binding explicitly; changing this fragment does not switch Desktop's mode.
 
-### Dock application
+## Preview and launch
 
-Build a normal macOS application with the external configuration path:
+From this source directory, preview the exact target Machine:
 
-```bash
-python3 claude-desktop-bootstrap/install-app.py --overrides "/absolute/path/to/desktop-overrides.json"
+```sh
+./launch.command --machine /absolute/path/third-party-machine.yaml --dry-run
 ```
 
-This creates `~/Applications/Claude Bootstrap.app`. Drag it to the application
-side of the Dock. Clicking it applies the chosen overrides and opens Claude,
-without Terminal; errors appear in a native dialog. It uses a parameterless
-AppleScript `run` handler, not a command-line argument handler. The app and Claude
-are separate apps, so Claude retains its own running Dock icon.
+This runs `claude-config plan --app claude-desktop --format json`, saves the
+framework's report and prints a short result with its path. It neither applies
+configuration nor launches Desktop. If the command is not on PATH, add
+`--claude-config /absolute/path/to/claude-config`; the default also checks
+`~/.local/bin/claude-config`.
 
-The app records absolute paths to Python, this checkout's `apply.py`, and the
-external overrides file. **It records a path, not a copy of your preferences.**
-Edits to the data file take effect on the next launcher run. The installer checks
-that the file exists and is a regular user-owned file; the bootstrap validates its
-JSON and values on every run. Missing configuration is an error, not permission
-to use example values.
+To apply and launch, omit `--dry-run`. The order is:
 
-To update an existing app, including apps built before external configuration was
-required, or to change any recorded path:
+1. Obtain a valid saved `plan` report for the explicit Machine.
+2. Verify the third-party native directory and report binding.
+3. Run `apply --expect-plan-id <that-plan-id> --format json` for the same Machine.
+4. Check successful execution (`completed` or `unchanged`) and identical binding.
+5. Call `open -a` with the bound application's absolute path.
 
-```bash
-python3 claude-desktop-bootstrap/install-app.py --replace --overrides "/absolute/path/to/desktop-overrides.json"
+Configuration conflicts, stale plans, missing bindings or failed reports stop
+launch. If a write requires Desktop to close, the error asks you to save work and
+quit normally with **Cmd-Q**. Bootstrap never terminates it. A successful no-op
+can open or activate the existing app.
+
+Use the framework directly to review individual differences or resolve conflicts:
+
+```sh
+claude-config plan --app claude-desktop --machine /absolute/path/third-party-machine.yaml
 ```
 
-Keep the two checkouts and Python installed. Replacement only accepts this
-utility's bundle identifier, retains the old app under
-`~/Applications/.claude-bootstrap-backups/`, and restores it if publication fails.
-`--output "/absolute/path/Claude Bootstrap.app"` selects another install location.
+The launcher adds no conflict policy, merge engine, configuration cache or native
+backup system. The framework owns these operations and its normal recovery
+journal. Failure retains the launch attempt's raw stdout/stderr in a private
+`claude-bootstrap.*` temporary directory and prints that location; success
+removes that temporary directory. Full framework reports stay in its state
+folder, normally `<config_dir>/.state/reports/`.
 
-The icon uses the installed **Claude artwork with a green play badge**. macOS's
-icon service supplies the base; full-bleed artwork avoids an extra background
-plate on macOS 27. `--icon-from "/path/to/Claude.app"` chooses the artwork source,
-not the launch target. Older macOS versions may render the enclosure differently.
-The app is ad-hoc signed for local use, not notarized for distribution. Building
-it requires no Xcode and does not apply settings, launch Claude, change the Dock,
-install a login item, or modify the original Claude.app.
+## Download a fixed version
 
-### Command-line launch or standalone apply
+Download `claude-desktop-bootstrap-2.0.0.tar.gz` from the
+[Bootstrap 2.0.0 Release](https://github.com/LKCY23/claudespace/releases/tag/bootstrap-v2.0.0),
+then extract it on the target Mac:
 
-If a write is needed, **quit Desktop with Cmd-Q first** and use an external
-Terminal, not a session hosted inside the app being closed.
-
-```bash
-"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "/absolute/path/to/desktop-overrides.json"
+```sh
+tar -xzf claude-desktop-bootstrap-2.0.0.tar.gz
+cd claude-desktop-bootstrap-2.0.0
 ```
 
-```bash
-python3 claude-desktop-bootstrap/apply.py --overrides "/absolute/path/to/desktop-overrides.json" --apply
+The archive contains only this utility's source, builder, documentation and tests.
+It contains no Machine, preferences, credentials, installed application or Python
+runtime. Install the current stable `claude-config` separately (0.2.0 was used
+for this release's integration tests), then prepare the explicit third-party
+Machine. Preview with `launch.command --dry-run` before building or replacing
+its launcher. Downloading the archive does not install or apply anything.
+
+The Dock app is built on its destination Mac because it records that machine's
+CLI and Machine paths. Do not copy a pre-bound `.app` from another machine.
+Bootstrap releases use `bootstrap-v<version>`; they are separate from resource
+`baseline-<SHA>` releases and are not adopted through `fetch-baseline`.
+
+## Dock application
+
+Build on the target machine:
+
+```sh
+python3 install-app.py --machine /absolute/path/third-party-machine.yaml
 ```
 
-The launcher waits for a successful merge before calling macOS `open`. It never
-quits or restarts an existing instance. If the stored profile already matches,
-there is no write, and it can open/activate the running app.
+The default output is `~/Applications/Claude Bootstrap.app`. Drag it to the Dock.
+Errors appear in a native dialog. The app bundles `launch.command` and its report
+helper; it records absolute paths to the installed `claude-config` command and
+Machine file. It does not depend on the source checkout or a recorded Python
+interpreter when clicked. Changes to the selected Profile take effect on the
+next run; the Machine still determines which Profile and application to use.
 
-`launch.command` forwards its arguments to `apply.py --launch`. It uses
-`CLAUDE_BOOTSTRAP_PYTHON` when supplied, otherwise `PATH` and common Homebrew/Conda
-locations before Apple's Python. The Dock app uses the interpreter recorded at
-installation and does not depend on Finder's `PATH`.
+To update the app or its Machine/command paths:
 
-Use `--data-dir` to choose a different Desktop **user-data root**, not a profile
-file or `configLibrary`. The default is `~/Library/Application Support/Claude-3p`;
-this option does not redirect Desktop itself or infer another deployment mode.
-Use `--app "/path/to/Claude.app"` with `apply.py --launch` for another app location;
-the bundle identifier must remain `com.anthropic.claudefordesktop`.
-
-## Extending the external configuration
-
-Edit your data repository's JSON, not the example, to add **verified flat Desktop
-policy keys**. Only listed keys are replaced; unrelated fields are preserved.
-Objects and arrays are whole-field replacements, not deep merges.
-
-Validation rejects malformed JSON, duplicate keys, non-finite numbers, wrong
-boolean types for the three example fields, and changed types for other existing
-non-null fields. It is not Desktop's full schema: new keys, enums, array contents,
-and version support require separate verification. Do not add Claude Code
-`permissions`, `hooks`, or preference objects here.
-
-Removing a key stops managing it; it does not remove the stored value. To disable
-a boolean, explicitly set it to `false` and apply. Full rollback uses a backup.
-Never put credentials in the example or commit complete profiles to the data repo.
-
-## Files and write safety
-
-Under the selected Desktop user-data root:
-
-```text
-Claude-3p/
-├── configLibrary/
-│   ├── _meta.json                 # Read only; appliedId selects the profile
-│   └── <appliedId>.json           # Merge target; UUID is not hard-coded
-├── bootstrap-backups/
-│   └── <appliedId>/<timestamp>-<random>.json
-└── .claude-desktop-bootstrap.lock # Advisory lock; intentionally retained
+```sh
+python3 install-app.py --machine /absolute/path/third-party-machine.yaml --replace
 ```
 
-A real change resolves and validates the existing profile, refuses a running
-Desktop or managed-policy conflict, locks other instances of this utility, and
-backs up the original bytes. It then writes and flushes a same-directory temporary
-file, rechecks the input snapshots and app state, and atomically replaces the
-profile. Missing or malformed inputs are never replaced with empty configuration.
+Use `--claude-config` to pin a different installed executable and `--output` for
+another destination. `--icon-from` selects an installed Claude app for artwork
+only, not the launch target. The icon retains the Claude artwork and green play
+badge. The app is ad-hoc signed for local use, not notarized for distribution.
+Building does not apply preferences, open Desktop, alter its app bundle, or add
+Dock items, login items or background services.
 
-Published profiles and backups use mode `0600`; backup directories use `0700`.
-Inputs must be user-owned regular files, not symbolic or hard links. The
-`configLibrary` directory cannot be a symlink; the selected data root is resolved
-before checks. A no-op creates no backup/lock and does not rewrite the profile.
-Rejected writes may leave an empty lock or a valid backup. Handled failures clean
-up temporary files; a force-kill may leave a private temporary file, not a
-partially published profile.
+Replacement accepts only this utility's bundle ID, retains the previous app in
+`.claude-bootstrap-backups/` beside the destination and restores it if publication
+fails or is interrupted by Ctrl-C. Build failures leave the previous app in place.
 
-Full-profile backups can contain credentials. They stay outside both repositories,
-are never printed or uploaded, and are not automatically pruned. Do not attach
-them to bug reports.
+Restore a retained **launcher app** without applying configuration:
 
-Desktop and other editors do not honor this advisory lock. A detected input
-change aborts instead of retrying, but a window remains after the final check:
-a competing writer can be overwritten or an app can read the older configuration.
-Do not edit or independently launch Desktop during an apply.
-
-The utility refuses local overrides if either managed-policy plist exists:
-
-- `/Library/Managed Preferences/com.anthropic.claudefordesktop.plist`
-- `/Library/Managed Preferences/<login-user>/com.anthropic.claudefordesktop.plist`
-
-It never edits or bypasses these policies. Separate Claude Code managed policies
-can also restrict Auto mode regardless of the Desktop feature flag.
-
-## Restore
-
-Preview the backup path printed during an apply:
-
-```bash
-python3 claude-desktop-bootstrap/apply.py --restore "/absolute/path/to/printed-backup.json"
+```sh
+python3 install-app.py --restore /absolute/path/to/retained.app --replace
 ```
 
-After reviewing and quitting Desktop:
+The source backup remains, and the displaced current launcher is also retained.
+A restored old launcher retains its old runtime dependencies; its availability
+must be checked separately before use.
 
-```bash
-python3 claude-desktop-bootstrap/apply.py --restore "/absolute/path/to/printed-backup.json" --apply
+Restore **configuration** through the framework using the run ID in its report:
+
+```sh
+claude-config rollback --app claude-desktop --machine /absolute/path/third-party-machine.yaml --run RUN_ID
 ```
 
-Restore only accepts the currently applied profile's own backup directory. It
-restores the **entire profile**, including credentials and later changes, and backs
-up the current state first. It does not change `appliedId` or `_meta.json`, and
-needs no overrides file. A later launcher run reapplies the external preferences,
-so update that file or stop using the launcher if the rollback should persist.
-Deleting the utility alone does not undo already saved Desktop values.
+After reviewing that preview, repeat with `--write --expect-plan-id PLAN_ID`.
+Launcher replacement and configuration rollback are separate operations.
 
-## Automation and tests
+## Upgrade from the old Bootstrap
 
-The saved profile already persists across normal launches. The ordered launcher
-is useful to reassert your preferences; it is not a global pre-launch interceptor.
-See [macOS automation options](macos-automation.md) for native events and timing
-limits. No resident helper, LaunchAgent, or login item is installed.
+The old `apply.py`, JSON overrides file and `--overrides` / `--data-dir` options
+are removed. Move the selected preferences into an App Profile, install the
+matching framework version, prepare the target Machine, preview it, then build
+the new launcher. There is no fallback to old JSON merging.
 
-```bash
-python3 -B -m unittest discover -s claude-desktop-bootstrap/tests -v
+Do not remove the old source checkout or overrides while an installed old app
+still points at them. This refactor can be prepared in a separate worktree and
+activated only when the target machine is ready. Official local deployment does
+not need to change for source work or isolated tests.
+
+## Tests
+
+```sh
+python3 -B -m unittest discover -s tests -v
+zsh -n launch.command
 ```
 
-```bash
-zsh -n claude-desktop-bootstrap/launch.command
-```
+Tests use temporary data, a synthetic CLI and uniquely identified synthetic apps.
+They cover previews, failures, unchanged and changed application, quoted paths,
+report binding, interrupted updates, restore, repeated Dock launches and signing.
+They do not launch real Claude or apply a user's Machine file.
 
-Tests use synthetic temporary data, including explicit external configuration,
-missing-file refusal, browser boolean validation, merging, backups, restore,
-permissions, failure cleanup, and races. Native tests compile/sign a temporary
-app and launch it through LaunchServices with a synthetic script, verify quoted
-paths and live configuration changes, and recheck the signature and resolved icon.
-They do not apply a real profile or restart Claude. A dry run checks the stored
-merge plan, not the running UI; UI adoption requires a later full quit and launch.
-Exit codes: `0` success/preview/no-op, `1` refused or failed operation, `2` invalid
-arguments.
+For the real-framework integration tests, install the framework's development
+dependencies and set `CLAUDE_CONFIG_TEST_SOURCE=/absolute/framework/src` (or place
+that source at `../framework/src`). Only native app probing and the application
+itself are synthetic; field merging, plans, reports and recovery use framework
+code. Without that source, those integration tests are explicitly skipped.
+Native packaging tests require a macOS GUI session where `osacompile`, signing
+and LaunchServices can operate.
+
+This entry point orders its own launch only. Direct Claude launches can bypass
+it; see [macOS automation notes](macos-automation.md). Network checks are outside
+this implementation.
+
+## Release verification boundary
+
+The macOS CI checks preview/apply ordering, exact report identity, blocked and
+unchanged cases, packaged scripts, signatures, replacement and recovery, and
+integration with a pinned claude-config source. Synthetic apps and temporary
+configuration are used throughout. Neither passing CI nor downloading this
+release verifies a real third-party account, provider or Desktop GUI session.
+Network-exit checks are not included. Official local deployments are unchanged.

@@ -1,0 +1,82 @@
+name: Verify and release Bootstrap
+on:
+  pull_request:
+    paths:
+      - 'claude-desktop-bootstrap/**'
+      - '.github/workflows/bootstrap.yml'
+      - 'scripts/release_assets.py'
+  push:
+    tags: ['bootstrap-v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  test:
+    name: Bootstrap macOS tests
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: LKCY23/claude-config
+          ref: 06d9d0f999a4bb836aa111d2b63c2cb4185eb0e8 # 0.2.0 + parameter evidence
+          path: .framework
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .framework -c .framework/constraints.txt
+      - name: Test launcher and framework integration in temporary directories
+        env:
+          CLAUDE_CONFIG_TEST_SOURCE: ${{ github.workspace }}/.framework/src
+        run: |
+          /bin/zsh -n claude-desktop-bootstrap/launch.command
+          python -B -m unittest discover -s claude-desktop-bootstrap/tests -v
+      - name: Package the exact source
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          version=$(python -c 'import runpy; print(runpy.run_path("claude-desktop-bootstrap/install-app.py")["VERSION"])')
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            test "$RELEASE_TAG" = "bootstrap-v$version"
+          fi
+          mkdir -p "$RUNNER_TEMP/bootstrap-release"
+          git archive --format=tar.gz --mtime="$(git show -s --format=%cI HEAD)" \
+            --prefix="claude-desktop-bootstrap-$version/" \
+            HEAD:claude-desktop-bootstrap > "$RUNNER_TEMP/bootstrap-release/claude-desktop-bootstrap-$version.tar.gz"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/bootstrap-v')
+        with:
+          name: bootstrap-release
+          path: ${{ runner.temp }}/bootstrap-release/*.tar.gz
+          if-no-files-found: error
+  release:
+    needs: test
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/bootstrap-v')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: bootstrap-release
+          path: ${{ runner.temp }}/bootstrap-release
+      - name: Publish verified Bootstrap source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 scripts/release_assets.py --repo "$GITHUB_REPOSITORY" \
+            --tag "$RELEASE_TAG" --commit "$GITHUB_SHA" \
+            --title "Claude Desktop Bootstrap ${RELEASE_TAG#bootstrap-v}" \
+            --notes "Source release for an existing third-party Claude Desktop. Requires claude-config 0.1.4+. Build the Dock app on the target Mac with its explicit Machine file. No provider switching, network-exit checks, or pre-bound app included. Isolated tests passed; real third-party GUI/account acceptance is separate." \
+            "$RUNNER_TEMP"/bootstrap-release/*.tar.gz

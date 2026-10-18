@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Dock-friendly macOS app that runs this checkout's bootstrap script."""
+"""Build or restore a Dock launcher bound to claude-config and a Machine file."""
 
 import sys
 
@@ -11,6 +11,8 @@ import datetime
 import os
 from pathlib import Path
 import plistlib
+import re
+import shutil
 import stat
 import subprocess
 import tempfile
@@ -18,6 +20,7 @@ import uuid
 
 
 ROOT = Path(__file__).resolve().parent
+VERSION = "2.0.0"
 BUNDLE_ID = "io.claudespace.desktop-bootstrap"
 APP_NAME = "Claude Bootstrap"
 TOOLS = ("osacompile", "osascript", "sips", "iconutil", "codesign")
@@ -34,11 +37,10 @@ def applescript_literal(value):
     return '"' + escaped + '"'
 
 
-def launcher_source(python, script, overrides):
+def launcher_source(command, machine):
     template = (ROOT / "app/launcher.applescript").read_text(encoding="utf-8")
-    return template.replace("@@PYTHON@@", applescript_literal(python)).replace(
-        "@@SCRIPT@@", applescript_literal(script)
-    ).replace("@@OVERRIDES@@", applescript_literal(overrides))
+    return template.replace("@@COMMAND@@", applescript_literal(command)).replace(
+        "@@MACHINE@@", applescript_literal(machine))
 
 
 def run_tool(*arguments):
@@ -86,21 +88,36 @@ def make_icon(work, resources, icon_source):
     run_tool("/usr/bin/iconutil", "-c", "icns", iconset, "-o", resources / "Bootstrap.icns")
 
 
-def validate_overrides_path(path):
+def validate_machine_path(path):
     try:
         info = path.lstat()
     except OSError:
-        raise InstallError("Cannot read the overrides file; supply an existing file with --overrides.") from None
+        raise InstallError("Cannot read the Machine file; supply an existing file with --machine.") from None
     if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid():
-        raise InstallError("Overrides must be a regular, user-owned file, not a symbolic or hard link.")
+        raise InstallError("Machine must be a regular, user-owned file, not a symbolic or hard link.")
 
 
-def build_bundle(work, python, script, icon_source, overrides):
+def config_command(path):
+    command = (path or Path(shutil.which('claude-config') or Path.home() / '.local/bin/claude-config')).expanduser().absolute()
+    if not command.is_file() or not os.access(command, os.X_OK):
+        raise InstallError("Install claude-config first, or supply its executable with --claude-config.")
+    result = subprocess.run([str(command), '--version'], capture_output=True, text=True, timeout=10)
+    match = re.fullmatch(r'claude-config (\d+)\.(\d+)\.(\d+)\s*', result.stdout)
+    if result.returncode or match is None or tuple(map(int, match.groups())) < (0, 1, 4):
+        raise InstallError("Claude Bootstrap requires claude-config 0.1.4 or later.")
+    return command
+
+
+def build_bundle(work, command, icon_source, machine):
     source = work / "launcher.applescript"
-    source.write_text(launcher_source(python, script, overrides), encoding="utf-8")
+    source.write_text(launcher_source(command, machine), encoding="utf-8")
     bundle = work / f"{APP_NAME}.app"
     run_tool("/usr/bin/osacompile", "-o", bundle, source)
     contents = bundle / "Contents"
+    launcher = contents / 'Resources/Bootstrap'
+    (launcher / 'app').mkdir(parents=True)
+    shutil.copy2(ROOT / 'launch.command', launcher / 'launch.command')
+    shutil.copy2(ROOT / 'app/handle-report.js', launcher / 'app/handle-report.js')
     make_icon(work, contents / "Resources", icon_source)
     manifest = contents / "Info.plist"
     metadata = plistlib.loads(manifest.read_bytes())
@@ -111,13 +128,12 @@ def build_bundle(work, python, script, icon_source, overrides):
         "CFBundleName": APP_NAME,
         "CFBundleDisplayName": APP_NAME,
         "CFBundleIconFile": "Bootstrap.icns",
-        "CFBundleShortVersionString": "1.2.0",
-        "CFBundleVersion": "4",
+        "CFBundleShortVersionString": VERSION,
+        "CFBundleVersion": "5",
         "NSHighResolutionCapable": True,
         "LSUIElement": False,
-        "ClaudeBootstrapPythonExecutable": str(python),
-        "ClaudeBootstrapScript": str(script),
-        "ClaudeBootstrapOverrides": str(overrides),
+        "ClaudeBootstrapCommand": str(command),
+        "ClaudeBootstrapMachine": str(machine),
         "ClaudeBootstrapIconSource": str(icon_source),
     })
     manifest.write_bytes(plistlib.dumps(metadata))
@@ -143,11 +159,12 @@ def publish_bundle(bundle, target, previous):
         backup_dir.chmod(0o700)
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         backup = backup_dir / f"{target.stem}-{timestamp}-{uuid.uuid4().hex[:8]}.app"
-        target.rename(backup)
     try:
+        if backup is not None:
+            target.rename(backup)
         bundle.rename(target)
-    except OSError:
-        if backup is not None and not target.exists():
+    except (OSError, KeyboardInterrupt):
+        if backup is not None and backup.exists() and not target.exists():
             backup.rename(target)
         raise
     return backup
@@ -155,7 +172,10 @@ def publish_bundle(bundle, target, previous):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--overrides", type=Path, required=True, help="external JSON configuration to read on every app launch")
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--machine", type=Path, help="existing Machine file selecting the third-party App Profile")
+    mode.add_argument("--restore", type=Path, metavar='BACKUP_APP', help="restore a retained launcher without applying configuration or opening it")
+    parser.add_argument("--claude-config", dest='command', type=Path, help="installed claude-config executable; defaults to PATH or ~/.local/bin")
     parser.add_argument("--output", type=Path, default=Path.home() / "Applications" / f"{APP_NAME}.app")
     parser.add_argument("--replace", action="store_true", help="back up and replace an existing Claude Bootstrap app")
     parser.add_argument("--icon-from", type=Path, default=Path("/Applications/Claude.app"), help="installed Claude.app to use as the base icon (read only)")
@@ -167,25 +187,36 @@ def main(argv=None):
         if target.suffix != ".app":
             raise InstallError("The destination must end in .app.")
         previous = existing_bundle(target, args.replace)
-        overrides = args.overrides.expanduser().absolute()
-        validate_overrides_path(overrides)
-        icon_source = args.icon_from.expanduser().resolve()
-        validate_icon_source(icon_source)
+        if args.restore and args.command:
+            raise InstallError("--claude-config is only used when building with --machine.")
+        if not args.restore:
+            machine = args.machine.expanduser().absolute()
+            validate_machine_path(machine)
+            command = config_command(args.command)
+            icon_source = args.icon_from.expanduser().resolve()
+            validate_icon_source(icon_source)
         for name in TOOLS:
             if not os.access(f"/usr/bin/{name}", os.X_OK):
                 raise InstallError(f"Missing macOS tool: {name}.")
         target.parent.mkdir(parents=True, exist_ok=True)
         if target.parent.stat().st_uid != os.getuid():
             raise InstallError("Choose a destination directory owned by your login user.")
-        python = Path(sys.executable).absolute()
-        script = ROOT / "apply.py"
         with tempfile.TemporaryDirectory(prefix=".claude-bootstrap-build-", dir=target.parent) as directory:
-            bundle = build_bundle(Path(directory), python, script, icon_source, overrides)
+            if args.restore:
+                source = args.restore.expanduser().absolute()
+                if existing_bundle(source, replace=True) is None:
+                    raise InstallError("The retained launcher does not exist.")
+                run_tool('/usr/bin/codesign', '--verify', '--strict', source)
+                bundle = Path(directory) / f'{APP_NAME}.app'
+                shutil.copytree(source, bundle, symlinks=True)
+            else:
+                bundle = build_bundle(Path(directory), command, icon_source, machine)
             backup = publish_bundle(bundle, target, previous)
         print(f"Installed: {target}")
-        print(f"Live script: {script}")
-        print(f"Live overrides: {overrides}")
-        print(f"Python: {python}")
+        if not args.restore:
+            print(f"claude-config: {command}")
+            print(f"Machine: {machine}")
+            print("Launcher code is bundled; Python is not used when clicking this app.")
         if backup is not None:
             print(f"Previous app retained: {backup}")
         print("Drag the app into the Dock. No Desktop configuration was applied and no app was launched.")
