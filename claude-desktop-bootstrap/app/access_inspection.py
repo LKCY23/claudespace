@@ -15,6 +15,15 @@ ENV_KEYS = ("ANTHROPIC_BASE_URL", *CREDENTIALS, *PROXIES, *CLOUD_FLAGS,
             "NO_PROXY", "no_proxy", "CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST", "ANTHROPIC_PROFILE")
 
 
+def cc_switch_scope(expected, configured_access):
+    """Shared policy: only third-party access may consult CC Switch."""
+    if expected in ("subscription", "official-api"):
+        return "official-entry"
+    if configured_access != "gateway":
+        return "third-party-not-confirmed"
+    return "third-party"
+
+
 def endpoint(value):
     """Never return userinfo, query, fragment, or arbitrary path segments."""
     if not isinstance(value, str) or not value or any(c.isspace() or ord(c) < 32 or ord(c) == 127 for c in value):
@@ -212,6 +221,11 @@ class Inspection:
 
     def manager(self):
         """CC Switch evidence, never an authority overriding native settings."""
+        scope = cc_switch_scope(self.report["expected_access"],
+                                self.report["observations"].get("configured_access"))
+        if scope != "third-party":
+            self.report["observations"]["cc_switch"] = {"status": "not_applicable", "reason": scope}
+            return
         app = "claude" if self.report["target"] == "claude-code" else "claude-desktop"
         root = self.home / ".cc-switch"
         settings = self.read(root / "settings.json")
@@ -239,12 +253,13 @@ class Inspection:
                     manager["selection_source"] = "local" if row else "unresolved"
                 if row:
                     official = app == "claude-desktop" and row[0] == "claude-desktop-official"
-                    manager["selected_kind"] = "official-desktop" if official else "configured-provider"
-                    data = json.loads(row[1])
-                    value = data.get("env", {}).get("ANTHROPIC_BASE_URL")
-                    manager["selected_upstream"] = self.parse_endpoint(value, str(path)) if value else None
-                    if official and self.report["observations"].get("deployment_modes", {}).get("Claude") == "3p":
-                        self.issue("manager_native_conflict", "conflict", "CC Switch 本机选择为 official，但原生 Desktop 配置仍为 3p。", str(path))
+                    manager["selected_kind"] = "builtin-official-entry" if official else "configured-provider"
+                    if official:
+                        self.issue("third_party_selection_missing", "conflict", "第三方 Desktop 的 CC Switch 选择仍是内置官方项，第三方供应商选择尚未对齐；未自动选择候选。", str(path))
+                    else:
+                        data = json.loads(row[1])
+                        value = data.get("env", {}).get("ANTHROPIC_BASE_URL")
+                        manager["selected_upstream"] = self.parse_endpoint(value, str(path)) if value else None
                 config = db.execute("SELECT auto_failover_enabled FROM proxy_config WHERE app_type=?", (app,)).fetchone()
                 manager["auto_failover"] = bool(config[0]) if config else None
                 if manager["auto_failover"]:
@@ -287,9 +302,11 @@ def render(report, report_path):
         lines.append(f"端点：{ep['scheme']}://{host}:{ep['port']}" + ("（本机转发）" if ep["loopback"] else ""))
     manager = observed.get("cc_switch", {})
     upstream = manager.get("selected_upstream")
-    if upstream and manager.get("selected_kind") != "official-desktop":
+    if upstream and manager.get("selected_kind") == "configured-provider":
         host = f"[{upstream['host']}]" if ":" in upstream["host"] else upstream["host"]
         lines.append(f"CC Switch 配置选择：{upstream['scheme']}://{host}:{upstream['port']}（未验证运行中的上游）")
+    if manager.get("status") == "not_applicable":
+        lines.append("CC Switch：不适用，未读取（仅第三方接入关联）。")
     for finding in report["findings"]:
         lines.append(f"- {finding['message']}" + (f" 来源：{finding['source']}" if finding["source"] else ""))
     lines += ["未验证：原生认证、管理策略、运行进程、网络出口和运行期阻断。",

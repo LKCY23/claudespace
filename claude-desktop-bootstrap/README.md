@@ -48,6 +48,19 @@ uses a read-only SQLite connection and prefers an existing local selection
 over the database fallback; it does not repair stale selectors or create
 missing proxy rows. This is disk evidence, not the running proxy's state.
 
+CC Switch belongs only to third-party access in this configuration system, for
+both Claude and Codex. Official access neither binds nor depends on CC Switch.
+This Claude inspector therefore skips its settings and database entirely when
+the expected entry is official, or when third-party access has not been
+identified. A native gateway/official expectation mismatch is still reported
+from native configuration; skipping CC Switch does not waive proxy checks.
+For third-party Desktop, a selector pointing at CC Switch's built-in official
+entry is reported as a missing valid third-party selection, never as an official
+profile to adopt. The command does not delete built-in entries or select a
+different provider. Third-party access does not require CC Switch installation.
+The command's targets remain Claude Code and Desktop; no Codex inspector is
+introduced by this policy clarification.
+
 Reports contain endpoint authorities, source paths, credential-presence
 booleans and findings. The parser reads native JSON/selected database records
 but does not retain raw configuration, credential values, arbitrary URL paths,

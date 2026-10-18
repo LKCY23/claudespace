@@ -55,6 +55,9 @@ class AccessInspectionTests(unittest.TestCase):
             db.execute("INSERT INTO proxy_config VALUES (?,?)", (app, failover))
         return path
 
+    def gateway_cli(self):
+        self.write(".claude/settings.json", {"env": {"ANTHROPIC_BASE_URL": "http://127.0.0.1:15721"}})
+
     def test_default_endpoint_does_not_infer_subscription(self):
         r = self.inspect(expected="subscription")
         self.assertEqual(r["observations"]["configured_access"], "official-auth-unverified")
@@ -202,9 +205,11 @@ class AccessInspectionTests(unittest.TestCase):
         manager = r["observations"]["cc_switch"]
         self.assertEqual(manager["selection_source"], "local")
         self.assertTrue(manager["pointers_differ"])
-        self.assertIn("manager_native_conflict", self.codes(r))
+        self.assertIn("third_party_selection_missing", self.codes(r))
+        self.assertEqual(manager["selected_kind"], "builtin-official-entry")
 
     def test_manager_fallback_does_not_repair_native_files(self):
+        self.gateway_cli()
         self.manager("claude", "stale", [("fallback", 1)])
         before = {p: p.read_bytes() for p in self.home.rglob('*') if p.is_file()}
         r = self.inspect()
@@ -213,12 +218,46 @@ class AccessInspectionTests(unittest.TestCase):
         self.assertNotIn(SECRET, json.dumps(r))
 
     def test_manager_failover_and_unreadable_layout_do_not_pass(self):
+        self.gateway_cli()
         db = self.manager("claude", "one", [("one", 1)], failover=1)
         self.assertIn("dynamic_upstream_unverified", self.codes(self.inspect()))
         db.write_text(SECRET)
         r = self.inspect()
         self.assertIn("manager_unreadable", self.codes(r))
         self.assertNotIn(SECRET, json.dumps(r))
+
+    def test_official_entries_do_not_read_cc_switch_even_with_native_conflict(self):
+        self.desktop()
+        self.gateway_cli()
+        self.manager("claude-desktop", "claude-desktop-official", [("claude-desktop-official", 1)])
+        for target in ("claude-code", "claude-desktop"):
+            for expected in ("subscription", "official-api"):
+                with self.subTest(target=target, expected=expected), patch.object(access.sqlite3, "connect", side_effect=AssertionError("official must not query CC Switch")):
+                    r = self.inspect(target, expected)
+                self.assertEqual(r["observations"]["cc_switch"], {"status": "not_applicable", "reason": "official-entry"})
+                self.assertFalse(any(".cc-switch" in s["path"] for s in r["sources"]))
+                self.assertIn("expected_access_conflict", self.codes(r))
+                self.assertNotIn("third_party_selection_missing", self.codes(r))
+
+    def test_observed_official_or_unknown_access_does_not_read_manager(self):
+        for target in ("claude-code", "claude-desktop"):
+            with self.subTest(target=target), patch.object(access.sqlite3, "connect", side_effect=AssertionError("must not query manager")):
+                r = self.inspect(target)
+            self.assertEqual(r["observations"]["cc_switch"]["status"], "not_applicable")
+            self.assertFalse(any(".cc-switch" in s["path"] for s in r["sources"]))
+
+    def test_expected_gateway_does_not_make_observed_official_manager_dependent(self):
+        self.desktop(mode="1p")
+        with patch.object(access.sqlite3, "connect", side_effect=AssertionError("must not query manager")):
+            r = self.inspect("claude-desktop", "gateway")
+        self.assertIn("expected_access_conflict", self.codes(r))
+        self.assertEqual(r["observations"]["cc_switch"]["status"], "not_applicable")
+
+    def test_third_party_without_cc_switch_does_not_require_installation(self):
+        self.gateway_cli()
+        r = self.inspect(expected="gateway")
+        self.assertEqual(r["observations"]["cc_switch"]["status"], "database_missing")
+        self.assertNotEqual(r["result"], "conflict")
 
     def test_desktop_official_api_remains_explicitly_unverified(self):
         self.desktop(mode="1p")
