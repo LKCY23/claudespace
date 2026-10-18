@@ -37,15 +37,17 @@ jobs:
         run: |
           /bin/zsh -n claude-desktop-bootstrap/launch.command
           python -B -m unittest discover -s claude-desktop-bootstrap/tests -v
-      - name: Package the exact tagged source
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/bootstrap-v')
+      - name: Package the exact source
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           version=$(python -c 'import runpy; print(runpy.run_path("claude-desktop-bootstrap/install-app.py")["VERSION"])')
-          test "$RELEASE_TAG" = "bootstrap-v$version"
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            test "$RELEASE_TAG" = "bootstrap-v$version"
+          fi
           mkdir -p "$RUNNER_TEMP/bootstrap-release"
-          git archive --format=tar.gz --prefix="claude-desktop-bootstrap-$version/" \
+          git archive --format=tar.gz --mtime="$(git show -s --format=%cI HEAD)" \
+            --prefix="claude-desktop-bootstrap-$version/" \
             HEAD:claude-desktop-bootstrap > "$RUNNER_TEMP/bootstrap-release/claude-desktop-bootstrap-$version.tar.gz"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/bootstrap-v')
