@@ -47,6 +47,7 @@ report = {'schema_version': 1, 'status': 'blocked' if failed else 'ok', 'ready':
           'operation': operation, 'preview_only': operation == 'plan',
           'plan_id': ('b' if options.get('changed_plan') and operation == 'apply' else 'a') * 64,
           'targets': [target], 'summary': {'changes': options.get('changes', 0)},
+          'decisions': options.get('decisions', []),
           'errors': [], 'blockers': [{'code': options.get('failure_code', 'synthetic_block'), 'reason': 'synthetic blocked'}] if failed else [],
           'execution': {'status': 'preview' if operation == 'plan' else options.get('execution_status', 'completed'), 'started': operation == 'apply'}}
 if options.get('not_started'):

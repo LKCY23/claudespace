@@ -20,7 +20,7 @@ import uuid
 
 
 ROOT = Path(__file__).resolve().parent
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 BUNDLE_ID = "io.claudespace.desktop-bootstrap"
 APP_NAME = "Claude Bootstrap"
 TOOLS = ("osacompile", "osascript", "sips", "iconutil", "codesign")
@@ -129,7 +129,7 @@ def build_bundle(work, command, icon_source, machine):
         "CFBundleDisplayName": APP_NAME,
         "CFBundleIconFile": "Bootstrap.icns",
         "CFBundleShortVersionString": VERSION,
-        "CFBundleVersion": "5",
+        "CFBundleVersion": "6",
         "NSHighResolutionCapable": True,
         "LSUIElement": False,
         "ClaudeBootstrapCommand": str(command),
