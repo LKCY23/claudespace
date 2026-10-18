@@ -10,6 +10,59 @@ Profile** in `claude-config-data`; local paths live in a **Machine** file.
 Provider configuration, credentials and deployment mode remain with Desktop and
 CC Switch.
 
+## Source preview: read-only access inspection
+
+`inspect-access.py` is an unreleased, independent inspection command. It is not
+called by `launch.command`, not bundled into the installed Dock launcher, and
+does not authorize or start an application. It requires Python 3.9+ and only
+the standard library.
+
+```sh
+python3 -B inspect-access.py --target claude-code --expected subscription \
+  --project-dir /absolute/project/root --report-dir /private/report/directory
+python3 -B inspect-access.py --target claude-desktop --expected gateway
+```
+
+`--expected` accepts `subscription`, `official-api` or `gateway`; omit it to
+record observations without asserting a desired mode. `--home` selects the
+user directory to inspect, not a new application data root. For Code,
+`--config-dir` explicitly selects the config directory (otherwise the process's
+absolute `CLAUDE_CONFIG_DIR`, or `<home>/.claude`). `--project-dir` names the
+project settings directory; it does not search ancestor repositories or scan
+other projects. Repeat `--settings /path/file.json` for declared session files.
+These flags describe inspection inputs, not arguments forwarded to Claude.
+
+The collector records the selected process environment, user, project, local
+and session-file declarations in that order. This is a **static, standard
+standalone overlay**, not a reimplementation of native effective settings:
+project trust, managed/MDM/server policies, special invocation modes and host
+overrides remain unverified. Host-managed routing and declared cloud providers
+are explicitly not inferred as ordinary official access. See the official
+[settings](https://code.claude.com/docs/en/settings) and
+[environment](https://code.claude.com/docs/en/env-vars) rules.
+
+For Desktop it reads deployment choices and the applied gateway profile.
+An official-looking path or CC Switch selection does not override a native
+`3p` declaration. Only the applied profile is inspected. The CC Switch reader
+uses a read-only SQLite connection and prefers an existing local selection
+over the database fallback; it does not repair stale selectors or create
+missing proxy rows. This is disk evidence, not the running proxy's state.
+
+Reports contain endpoint authorities, source paths, credential-presence
+booleans and findings. The parser reads native JSON/selected database records
+but does not retain raw configuration, credential values, arbitrary URL paths,
+userinfo, query parameters or fragments in reports. It does not call Keychain,
+authentication helpers, Claude, provider APIs or a shell. It writes only its
+own report, with mode `0600`, in `--report-dir` or a new private temporary folder.
+
+Text is the default, with an absolute linkable JSON path. `--format json`
+prints the same redacted report for automation. Exit `2` means a configuration
+conflict was observed; exit `0` means collection completed with unresolved
+evidence, **not** authentication/network success. `launch_authorized` is always
+`false`. Subscription versus API billing cannot be confirmed from endpoint or
+credential presence; native authentication, running processes and all network
+enforcement checks remain outside this command.
+
 ## Requirements and boundaries
 
 - macOS, an installed `claude-config` **0.1.4+**, and an explicit existing Machine.
