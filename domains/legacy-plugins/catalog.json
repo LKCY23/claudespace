@@ -10,7 +10,7 @@
         "author": "openai",
         "upstream": {
           "repo": "openai/codex-plugin-cc",
-          "commit": "807e03ac9d5aa23bc395fdec8c3767500a86b3cf",
+          "commit": "db52e28f4d9ded852ab3942cea316258ae4ef346",
           "path": "plugins/codex"
         }
       },
