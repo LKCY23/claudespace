@@ -124,12 +124,14 @@ function autoFix(text) {
  *   - autofix {boolean}   Apply safe auto-fixes
  *   - verbose {boolean}   Show all matches
  *   - includeStats {boolean}  Include statistical suggestions
+ *   - ignoreCode {boolean}  Ignore fenced/inline code snippets during analysis
+ *   - ignoreQuotes {boolean}  Ignore quoted blocks during analysis
  * @returns {object}       — Suggestions report
  */
 function humanize(text, opts = {}) {
-  const { autofix = false, includeStats = true } = opts;
+  const { autofix = false, includeStats = true, ignoreCode = false, ignoreQuotes = false } = opts;
 
-  const analysis = analyze(text, { verbose: true, includeStats });
+  const analysis = analyze(text, { verbose: true, includeStats, ignoreCode, ignoreQuotes });
 
   // Group by priority
   const critical = []; // weight 4-5: dead giveaways
@@ -171,6 +173,7 @@ function humanize(text, opts = {}) {
     score: analysis.score,
     patternScore: analysis.patternScore,
     uniformityScore: analysis.uniformityScore,
+    reliability: analysis.reliability,
     wordCount: analysis.wordCount,
     totalIssues: analysis.totalMatches,
     stats: analysis.stats,
@@ -250,6 +253,11 @@ function buildGuidance(analysis) {
   if (ids.has(29)) {
     tips.push(
       'Remove hidden unicode characters (zero-width, soft hyphen, NBSP). They can break readability and look like detector-gaming obfuscation.',
+    );
+  }
+  if (ids.has(30)) {
+    tips.push(
+      'Replace product-positioning fog with a user, a metric, and the behavior that changed. "Drive engagement" is a claim; clicks, retention, or task completion are evidence.',
     );
   }
 
@@ -351,6 +359,11 @@ function formatSuggestions(result) {
   lines.push(
     `  Issues: ${result.totalIssues}  |  Pattern: ${result.patternScore}  |  Uniformity: ${result.uniformityScore}`,
   );
+  if (result.reliability) {
+    lines.push(
+      `  Confidence: ${formatReliabilityLabel(result.reliability.level)} (${result.reliability.score}/100)`,
+    );
+  }
   lines.push('');
 
   if (result.critical.length > 0) {
@@ -418,6 +431,12 @@ function formatSuggestions(result) {
 function truncate(str, len) {
   if (typeof str !== 'string') return '';
   return str.length > len ? `${str.substring(0, len)}...` : str;
+}
+
+function formatReliabilityLabel(level) {
+  if (level === 'high') return 'High confidence';
+  if (level === 'medium') return 'Medium confidence';
+  return 'Low confidence';
 }
 
 // ─── Exports ─────────────────────────────────────────────

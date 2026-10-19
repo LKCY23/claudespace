@@ -100,6 +100,7 @@ describe('humanize', () => {
   it('returns a valid suggestion object', () => {
     const result = humanize('This is a testament to great things.');
     expect(result).toHaveProperty('score');
+    expect(result).toHaveProperty('reliability');
     expect(result).toHaveProperty('critical');
     expect(result).toHaveProperty('important');
     expect(result).toHaveProperty('minor');
@@ -160,6 +161,15 @@ describe('humanize', () => {
     expect(result.styleTips).toBeDefined();
     expect(Array.isArray(result.styleTips)).toBe(true);
   });
+
+  it('gives concrete guidance for product positioning fog', () => {
+    const text =
+      'This platform will drive engagement, unlock value, and create a frictionless customer experience with actionable insights.';
+    const result = humanize(text);
+
+    expect(result.critical.some((s) => s.patternId === 30)).toBe(true);
+    expect(result.guidance.some((g) => g.includes('user, a metric, and the behavior'))).toBe(true);
+  });
 });
 
 // ─── formatSuggestions ───────────────────────────────────
@@ -172,6 +182,7 @@ describe('formatSuggestions', () => {
     expect(typeof output).toBe('string');
     expect(output).toContain('HUMANIZATION SUGGESTIONS');
     expect(output).toContain('AI Score:');
+    expect(output).toContain('Confidence:');
   });
 
   it('includes guidance section', () => {

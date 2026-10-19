@@ -23,6 +23,7 @@ describe('analyze', () => {
     expect(result).toHaveProperty('score');
     expect(result).toHaveProperty('patternScore');
     expect(result).toHaveProperty('uniformityScore');
+    expect(result).toHaveProperty('reliability');
     expect(result).toHaveProperty('totalMatches');
     expect(result).toHaveProperty('wordCount');
     expect(result).toHaveProperty('categories');
@@ -70,6 +71,49 @@ describe('analyze', () => {
     expect(result.stats).toHaveProperty('burstiness');
     expect(result.stats).toHaveProperty('typeTokenRatio');
   });
+
+  it('can ignore code snippets during analysis', () => {
+    const text = [
+      'Release notes:',
+      '```md',
+      'Great question! This serves as a testament to innovation.',
+      '```',
+      'Actual summary: shipped bug fixes and reduced latency by 18%.',
+    ].join('\n');
+
+    const regular = analyze(text);
+    const ignoreCode = analyze(text, { ignoreCode: true });
+
+    expect(regular.score).toBeGreaterThan(ignoreCode.score);
+    expect(ignoreCode.summary.toLowerCase()).not.toContain('great question');
+  });
+
+  it('can ignore quoted blocks during analysis', () => {
+    const text = [
+      'Draft notes:',
+      '> Great question! This serves as a testament to innovation.',
+      'Actual summary: shipped bug fixes and reduced latency by 18%.',
+    ].join('\n');
+
+    const regular = analyze(text);
+    const ignoreQuotes = analyze(text, { ignoreQuotes: true });
+
+    expect(regular.score).toBeGreaterThan(ignoreQuotes.score);
+    expect(ignoreQuotes.summary.toLowerCase()).not.toContain('great question');
+  });
+
+  it('marks short samples as low confidence', () => {
+    const result = analyze('Great question! This helps.');
+    expect(result.reliability.level).toBe('low');
+    expect(result.reliability.score).toBeLessThan(45);
+    expect(result.reliability.reasons.length).toBeGreaterThan(0);
+  });
+
+  it('marks longer multi-paragraph text as higher confidence', () => {
+    const text = loadFixture('human-sample-1.txt');
+    const result = analyze(text);
+    expect(result.reliability.score).toBeGreaterThanOrEqual(45);
+  });
 });
 
 // ─── Score Function ──────────────────────────────────────
@@ -85,6 +129,13 @@ describe('score', () => {
     const aiScore = score(loadFixture('ai-sample-1.txt'));
     const humanScore = score(loadFixture('human-sample-1.txt'));
     expect(aiScore).toBeGreaterThan(humanScore);
+  });
+
+  it('accepts analysis options', () => {
+    const text = '```md\nGreat question!\n```\nShipped bug fixes yesterday.';
+    const regular = score(text);
+    const ignoreCode = score(text, { ignoreCode: true });
+    expect(regular).toBeGreaterThan(ignoreCode);
   });
 });
 
@@ -109,6 +160,7 @@ describe('formatting', () => {
     expect(typeof report).toBe('string');
     expect(report).toContain('AI WRITING PATTERN ANALYSIS');
     expect(report).toContain('Score:');
+    expect(report).toContain('Confidence:');
   });
 
   it('formatJSON produces valid JSON', () => {
@@ -124,6 +176,7 @@ describe('formatting', () => {
     expect(typeof md).toBe('string');
     expect(md).toContain('# AI writing pattern analysis');
     expect(md).toContain('**Score:');
+    expect(md).toContain('**Confidence:**');
   });
 });
 
@@ -323,6 +376,24 @@ describe('pattern detection', () => {
     expect(result.findings.length).toBeGreaterThan(0);
     expect(result.findings[0].patternId).toBe(29);
     expect(result.totalMatches).toBeGreaterThanOrEqual(3);
+  });
+
+  // 30. Product positioning fog
+  it('detects clustered product positioning fog', () => {
+    const text =
+      'The roadmap will drive engagement, unlock value, and create a seamless user experience while giving leaders actionable insights.';
+    const result = analyze(text, { patternsToCheck: [30] });
+    expect(result.findings.length).toBeGreaterThan(0);
+    expect(result.findings[0].patternId).toBe(30);
+    expect(result.totalMatches).toBeGreaterThanOrEqual(4);
+  });
+
+  it('does not flag a single product cliche by itself', () => {
+    const result = analyze('The dashboard will drive adoption for account admins.', {
+      patternsToCheck: [30],
+    });
+    expect(result.findings.length).toBe(0);
+    expect(result.totalMatches).toBe(0);
   });
 });
 

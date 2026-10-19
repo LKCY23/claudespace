@@ -222,7 +222,7 @@
         "author": "brandonwise",
         "upstream": {
           "repo": "brandonwise/humanizer",
-          "commit": "726456a912683485b0f43239b69eef212e299dd7",
+          "commit": "4b9b9bee384aea139f599133d2de1e1ceaee71a3",
           "path": "."
         },
         "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
