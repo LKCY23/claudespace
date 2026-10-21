@@ -470,6 +470,61 @@
         "strategy": "branch",
         "target": "main"
       }
+    },
+    "agent-session-migration": {
+      "kind": "skill",
+      "description": "在 Codex、Claude Code、Pi 和 DeepSeek Harness（DSH）之间迁移可续聊的原生会话。用于跨 agent 搬移聊天记录、接续已有任务，以及检查或排查会话迁移结果。",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "skills/agent-session-migration"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          },
+          "session_migrate": {
+            "kind": "executable",
+            "required": false
+          },
+          "harnext": {
+            "kind": "executable",
+            "required": false
+          },
+          "dsh_home": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "manual"
+      }
     }
   }
 }
