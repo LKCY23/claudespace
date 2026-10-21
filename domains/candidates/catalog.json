@@ -156,7 +156,7 @@
         "author": "Matt Pocock",
         "upstream": {
           "repo": "mattpocock/skills",
-          "commit": "d81f3a183412e71a5b1e84ca21bc1a35eea03a60",
+          "commit": "49dd158d1076134a641b33efb035946536778336",
           "path": "."
         }
       },
@@ -168,7 +168,7 @@
         "kind": "submodule",
         "path": "upstreams/matt",
         "repo": "mattpocock/skills",
-        "commit": "d81f3a183412e71a5b1e84ca21bc1a35eea03a60"
+        "commit": "49dd158d1076134a641b33efb035946536778336"
       },
       "compatibility": {
         "claude-code": {
@@ -193,7 +193,7 @@
         "author": "Dietrich Gebert",
         "upstream": {
           "repo": "DietrichGebert/ponytail",
-          "commit": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+          "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
           "path": "."
         }
       },
@@ -205,7 +205,7 @@
         "kind": "submodule",
         "path": "upstreams/ponytail",
         "repo": "DietrichGebert/ponytail",
-        "commit": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156"
+        "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710"
       },
       "compatibility": {
         "claude-code": {
