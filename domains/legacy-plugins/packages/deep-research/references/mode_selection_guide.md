@@ -2,7 +2,7 @@
 
 ## Overview
 
-deep-research provides 7 modes suited to different research stages and needs. This guide helps users select the most appropriate mode.
+deep-research provides 8 modes suited to different research stages and needs. This guide helps users select the most appropriate mode.
 
 ---
 
@@ -19,7 +19,9 @@ User Input
     │   │                         └── No ───→ Need a complete report?
     │   │                                     ├── Yes ──→ full mode
     │   │                                     └── No ───→ Only need literature?
-    │   │                                                 ├── Yes ──→ lit-review mode
+    │   │                                                 ├── Yes ──→ Need rapid paper comparison?
+    │   │                                                 │            ├── Yes ──→ three-way-scan mode
+    │   │                                                 │            └── No ───→ lit-review mode
     │   │                                                 └── No ───→ quick mode
     │   │
     │   └── No ──→ Want guided thinking?
@@ -106,7 +108,7 @@ User Input
 |------|------|
 | **Applicable Scenario** | Need systematic literature search and synthesis analysis, but not a complete research report |
 | **Not Applicable** | Need a complete report with original analysis; only need to verify a few facts; need methodology design |
-| **Typical Users** | Graduate students writing the literature review chapter of their thesis, research teams conducting systematic reviews, coursework assignments |
+| **Typical Users** | Graduate students writing the literature review chapter of their thesis, coursework assignments (teams conducting a systematic review use `systematic-review` mode) |
 | **Expected Output** | Annotated bibliography + synthesis analysis (1,500-4,000 words), including thematic classification, evidence matrix, research gaps |
 | **Expected Dialogue Rounds** | 1-2 rounds (confirm search scope) |
 | **Agents Activated** | 3 (Biblio + Verification + Synthesis) |
@@ -116,7 +118,27 @@ User Input
 ```
 "Literature review on SDGs in higher education"
 "Literature review: the evolution of quality assurance in Taiwan's higher education"
-"Systematic review of AI-assisted assessment"
+```
+
+---
+
+### three-way-scan mode (WHY / HOW / WHAT paper comparison)
+
+| Item | Description |
+|------|------|
+| **Applicable Scenario** | Need a disciplined shortlist of papers compared in a stable WHY/HOW/WHAT frame, lighter than a full literature review |
+| **Not Applicable** | Need a complete evidence matrix, thematic synthesis, or PRISMA-like coverage (escalate to `lit-review`; `systematic-review` only when the author chooses it); need to verify specific facts (`fact-check`) |
+| **Typical Users** | Researchers scoping a new area, students triaging a reading list, anyone deciding which papers to read in depth |
+| **Expected Output** | Per-paper WHY/HOW/WHAT shortlist + cross-paper synthesis (common WHY, divergent HOW, strongest WHAT, unresolved gap) (800-2,000 words) |
+| **Expected Dialogue Rounds** | 1-2 rounds (confirm candidate set) |
+| **Agents Activated** | 2 (Biblio + Verification, retrieval + compact extract) |
+| **Time Required** | Low-Medium |
+
+**Trigger Examples**:
+```
+"Compare these papers in WHY/HOW/WHAT format"
+"Quick 3W scan of recent LLM-evaluation papers"
+"Which of these should I read first?"
 ```
 
 ---
@@ -215,7 +237,7 @@ User Input
 socratic → full              Continue with complete research after Socratic completion
 socratic → academic-paper    Write paper directly after Socratic completion
 lit-review → full            Want complete analysis after literature review
-lit-review → systematic-review  Need formal PRISMA compliance after initial lit survey
+lit-review → systematic-review  Author chooses a systematic review after initial lit survey
 fact-check → full            Need deeper research after fact-checking
 quick → full                 Worth going deeper after quick research
 review → full                Need to re-research after review
@@ -291,7 +313,7 @@ Rules for switching between modes mid-research. Not all transitions are safe.
 - **Quality Delta**: Fact-check is binary (true/false/mixed); full mode produces nuanced analysis
 
 ### Transition: lit-review → systematic-review
-- **When**: Literature review reveals the topic warrants formal PRISMA compliance (e.g., for publication in a journal that requires it)
+- **When**: The author chooses a systematic review, for example after the review-form note (`deep-research/SKILL.md` § Review-form note, #921) or because their target journal requires PRISMA compliance. ARS does not start this transition because the topic seems to warrant it
 - **Reusable**: Initial keyword strategy, some identified sources (need re-screening)
 - **Must Redo**: Protocol registration, formal inclusion/exclusion criteria, dual screening, risk of bias assessment, meta-analysis feasibility assessment
 - **Quality Delta**: systematic-review requires protocol, RoB assessment, GRADE; lit-review has none of these
