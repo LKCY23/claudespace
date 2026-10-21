@@ -8,8 +8,10 @@ import os from 'os';
 import path from 'path';
 import {
   normalizeExtensions,
+  normalizeIgnoreDirs,
   collectTextFiles,
   scanPath,
+  compareScanResults,
   compareTexts,
   compareFiles,
 } from '../src/workflows.js';
@@ -23,6 +25,20 @@ describe('normalizeExtensions', () => {
     const exts = normalizeExtensions([]);
     expect(exts.length).toBeGreaterThan(0);
     expect(exts).toContain('.md');
+  });
+});
+
+describe('normalizeIgnoreDirs', () => {
+  it('merges defaults with user-supplied ignore dirs', () => {
+    const dirs = normalizeIgnoreDirs(['generated']);
+    expect(dirs.has('node_modules')).toBe(true);
+    expect(dirs.has('generated')).toBe(true);
+  });
+
+  it('can disable default ignore dirs', () => {
+    const dirs = normalizeIgnoreDirs(['generated'], false);
+    expect(dirs.has('node_modules')).toBe(false);
+    expect(dirs.has('generated')).toBe(true);
   });
 });
 
@@ -44,6 +60,38 @@ describe('collectTextFiles', () => {
     expect(files.some((f) => f.endsWith('guide.txt'))).toBe(true);
     expect(files.some((f) => f.endsWith('script.js'))).toBe(false);
     expect(files.some((f) => f.includes('node_modules'))).toBe(false);
+  });
+
+  it('supports custom ignored directories', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'humanizer-scan-'));
+
+    fs.mkdirSync(path.join(tmp, 'docs'), { recursive: true });
+    fs.mkdirSync(path.join(tmp, 'generated'), { recursive: true });
+
+    fs.writeFileSync(path.join(tmp, 'docs', 'guide.md'), 'ship this change now');
+    fs.writeFileSync(path.join(tmp, 'generated', 'noise.md'), 'Great question! I hope this helps!');
+
+    const files = collectTextFiles(tmp, {
+      exts: ['.md'],
+      ignoreDirs: ['generated'],
+    });
+
+    expect(files.some((f) => f.endsWith('guide.md'))).toBe(true);
+    expect(files.some((f) => f.includes('generated'))).toBe(false);
+  });
+
+  it('can disable default ignore directories', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'humanizer-scan-'));
+
+    fs.mkdirSync(path.join(tmp, 'node_modules', 'pkg'), { recursive: true });
+    fs.writeFileSync(path.join(tmp, 'node_modules', 'pkg', 'doc.md'), 'scan me too');
+
+    const files = collectTextFiles(tmp, {
+      exts: ['.md'],
+      includeDefaultIgnore: false,
+    });
+
+    expect(files.some((f) => f.includes('node_modules'))).toBe(true);
   });
 });
 
@@ -87,6 +135,82 @@ describe('scanPath', () => {
     expect(sharedPattern).toBeDefined();
     expect(sharedPattern.totalMatches).toBeGreaterThanOrEqual(sharedPattern.affectedFiles);
   });
+
+  it('surfaces product positioning fog as a scan hotspot', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'humanizer-scan-'));
+
+    fs.writeFileSync(
+      path.join(tmp, 'launch.md'),
+      'The launch will drive adoption, unlock value, and deliver a seamless user experience with actionable insights for operators.',
+    );
+
+    const result = scanPath(tmp, { exts: ['md'], minWords: 3 });
+    const hotspot = result.patternHotspots.find((p) => p.patternId === 30);
+
+    expect(hotspot).toBeDefined();
+    expect(hotspot.totalMatches).toBeGreaterThanOrEqual(4);
+  });
+
+  it('respects custom ignore dirs during scan', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'humanizer-scan-'));
+
+    fs.mkdirSync(path.join(tmp, 'content'), { recursive: true });
+    fs.mkdirSync(path.join(tmp, 'generated'), { recursive: true });
+
+    fs.writeFileSync(
+      path.join(tmp, 'content', 'notes.md'),
+      'The patch ships today. We validated with integration checks.',
+    );
+    fs.writeFileSync(
+      path.join(tmp, 'generated', 'bot.md'),
+      'Great question! This serves as a testament to innovation. I hope this helps!',
+    );
+
+    const result = scanPath(tmp, {
+      exts: ['md'],
+      minWords: 3,
+      ignoreDirs: ['generated'],
+    });
+
+    expect(result.summary.scannedFiles).toBe(1);
+    expect(result.files[0].file.endsWith('notes.md')).toBe(true);
+  });
+
+  it('can ignore code snippets during scan', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'humanizer-scan-'));
+
+    const content = [
+      'Release notes',
+      '```md',
+      'Great question! This serves as a testament to innovation.',
+      '```',
+      'Shipped bug fixes and reduced latency by 18%.',
+    ].join('\n');
+
+    fs.writeFileSync(path.join(tmp, 'notes.md'), content);
+
+    const regular = scanPath(tmp, { exts: ['md'], minWords: 3, ignoreCode: false });
+    const ignoreCode = scanPath(tmp, { exts: ['md'], minWords: 3, ignoreCode: true });
+
+    expect(regular.files[0].score).toBeGreaterThan(ignoreCode.files[0].score);
+  });
+
+  it('can ignore quoted blocks during scan', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'humanizer-scan-'));
+
+    const content = [
+      'Release notes',
+      '> Great question! This serves as a testament to innovation.',
+      'Shipped bug fixes and reduced latency by 18%.',
+    ].join('\n');
+
+    fs.writeFileSync(path.join(tmp, 'notes.md'), content);
+
+    const regular = scanPath(tmp, { exts: ['md'], minWords: 3, ignoreQuotes: false });
+    const ignoreQuotes = scanPath(tmp, { exts: ['md'], minWords: 3, ignoreQuotes: true });
+
+    expect(regular.files[0].score).toBeGreaterThan(ignoreQuotes.files[0].score);
+  });
 });
 
 describe('compareTexts and compareFiles', () => {
@@ -115,5 +239,107 @@ describe('compareTexts and compareFiles', () => {
     expect(result.before.score).toBeGreaterThanOrEqual(0);
     expect(result.after.score).toBeGreaterThanOrEqual(0);
     expect(typeof result.delta.score).toBe('number');
+  });
+
+  it('supports ignoreCode option in compare workflows', () => {
+    const before = '```md\nGreat question!\n```\nShipped bug fixes.';
+    const after = '```md\nGreat question!\n```\nShipped bug fixes and lowered latency.';
+
+    const regular = compareTexts(before, after);
+    const codeAware = compareTexts(before, after, { ignoreCode: true });
+
+    expect(regular.before.score).toBeGreaterThan(codeAware.before.score);
+  });
+
+  it('supports ignoreQuotes option in compare workflows', () => {
+    const before = '> Great question!\nShipped bug fixes.';
+    const after = '> Great question!\nShipped bug fixes and lowered latency.';
+
+    const regular = compareTexts(before, after);
+    const quoteAware = compareTexts(before, after, { ignoreQuotes: true });
+
+    expect(regular.before.score).toBeGreaterThan(quoteAware.before.score);
+  });
+});
+
+describe('compareScanResults', () => {
+  it('detects regressions, improvements, new files, and missing files by relative path', () => {
+    const baselineRoot = path.resolve('/tmp/humanizer-baseline-a');
+    const currentRoot = path.resolve('/tmp/humanizer-baseline-b');
+
+    const baseline = {
+      targetPath: baselineRoot,
+      files: [
+        {
+          file: path.join(baselineRoot, 'docs', 'a.md'),
+          score: 12,
+          totalMatches: 2,
+        },
+        {
+          file: path.join(baselineRoot, 'docs', 'b.md'),
+          score: 44,
+          totalMatches: 6,
+        },
+        {
+          file: path.join(baselineRoot, 'docs', 'c.md'),
+          score: 29,
+          totalMatches: 4,
+        },
+      ],
+    };
+
+    const current = {
+      targetPath: currentRoot,
+      files: [
+        {
+          file: path.join(currentRoot, 'docs', 'a.md'),
+          score: 20,
+          totalMatches: 5,
+        },
+        {
+          file: path.join(currentRoot, 'docs', 'b.md'),
+          score: 36,
+          totalMatches: 4,
+        },
+        {
+          file: path.join(currentRoot, 'docs', 'new.md'),
+          score: 18,
+          totalMatches: 2,
+        },
+      ],
+    };
+
+    const comparison = compareScanResults(current, baseline, { regressionThreshold: 5 });
+
+    expect(comparison.summary.regressions).toBe(1);
+    expect(comparison.summary.improvements).toBe(1);
+    expect(comparison.summary.newFiles).toBe(1);
+    expect(comparison.summary.missingFiles).toBe(1);
+
+    expect(comparison.regressions[0].relativePath).toBe('docs/a.md');
+    expect(comparison.regressions[0].delta).toBe(8);
+
+    expect(comparison.improvements[0].relativePath).toBe('docs/b.md');
+    expect(comparison.improvements[0].delta).toBe(-8);
+
+    expect(comparison.newFiles[0].relativePath).toBe('docs/new.md');
+    expect(comparison.missingFiles[0].relativePath).toBe('docs/c.md');
+  });
+
+  it('treats small deltas under threshold as unchanged', () => {
+    const baseline = {
+      targetPath: '/tmp/humanizer-baseline-a',
+      files: [{ file: '/tmp/humanizer-baseline-a/a.md', score: 30, totalMatches: 4 }],
+    };
+    const current = {
+      targetPath: '/tmp/humanizer-baseline-b',
+      files: [{ file: '/tmp/humanizer-baseline-b/a.md', score: 33, totalMatches: 4 }],
+    };
+
+    const comparison = compareScanResults(current, baseline, { regressionThreshold: 5 });
+
+    expect(comparison.summary.regressions).toBe(0);
+    expect(comparison.summary.improvements).toBe(0);
+    expect(comparison.summary.unchanged).toBe(1);
   });
 });

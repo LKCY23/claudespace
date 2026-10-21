@@ -1,12 +1,12 @@
 # humanizer
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Tests](https://img.shields.io/badge/tests-137%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-168%20passing-brightgreen)
 ![Node >= 18](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
 
 Detect and remove signs of AI-generated writing. Makes text sound natural and human.
 
-An [OpenClaw](https://github.com/nichochar/openclaw) skill and standalone CLI tool that scans text for **29 AI writing patterns** using **500+ vocabulary terms** and **statistical text analysis** (burstiness, type-token ratio, readability metrics) — then provides actionable suggestions to fix them.
+An [OpenClaw](https://github.com/nichochar/openclaw) skill and standalone CLI tool that scans text for **30 AI writing patterns** using **500+ vocabulary terms** and **statistical text analysis** (burstiness, type-token ratio, readability metrics) — then provides actionable suggestions to fix them.
 
 Based on [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Copyleaks stylistic fingerprint research](https://arxiv.org/abs/2503.01659), and [blader/humanizer](https://github.com/blader/humanizer).
 
@@ -56,7 +56,7 @@ The scoring engine combines three signal types:
 │   Pattern Score    │    Uniformity Score         │
 │   (70% weight)     │    (30% weight)             │
 ├────────────────────┼────────────────────────────┤
-│ • 29 pattern       │ • Burstiness (sentence     │
+│ • 30 pattern       │ • Burstiness (sentence     │
 │   detectors        │   length variation)         │
 │ • 500+ vocabulary  │ • Type-token ratio          │
 │   terms (3 tiers)  │ • Trigram repetition        │
@@ -110,6 +110,13 @@ humanizer humanize --autofix -f article.txt
 # Scan an entire docs folder, rank risk, and show recurring pattern hotspots
 humanizer scan docs --ext md,txt --fail-above 45
 
+# Scan a large repo with reusable defaults + custom ignores
+humanizer scan . --config .humanizer.json --ignore-dirs vendor,generated
+
+# Baseline-aware scan: fail only on regressions vs a saved baseline
+humanizer scan docs --json > .humanizer-baseline.json
+humanizer scan docs --baseline .humanizer-baseline.json --fail-on-regression
+
 # Compare draft revisions and see score delta
 humanizer compare --before draft-v1.md --after draft-v2.md
 ```
@@ -117,8 +124,15 @@ humanizer compare --before draft-v1.md --after draft-v2.md
 ### New core capabilities
 
 - **Repo scan (`scan`)** — analyze a whole folder, rank files by risk, surface cross-file pattern hotspots, and optionally fail CI with `--fail-above`.
+- **Baseline-aware scan gating** — compare a current scan to a saved baseline (`--baseline`) and fail only when files regress.
+- **Config-driven scan defaults** — keep monorepo scan settings in one JSON file (`--config`) and layer one-off overrides from CLI.
+- **Custom ignore controls** — skip noisy directories with `--ignore-dirs` or disable built-in excludes with `--no-default-ignore`.
+- **Code-aware analysis mode (`--ignore-code`)** — ignore fenced code blocks and inline code snippets so technical docs do not get false positives from sample code.
+- **Quote-aware analysis mode (`--ignore-quotes`)** — ignore markdown/email quote blocks so pasted AI examples, support replies, and forum excerpts do not dominate scores.
+- Confidence calibration: every analysis now includes a confidence rating (high/medium/low) with short-sample warnings to reduce false-positive overconfidence.
 - **Draft compare (`compare`)** — compare two versions of text and show exactly which patterns improved or regressed.
 - **Unicode obfuscation detection (pattern 29)** — flags hidden zero-width/soft-hyphen tricks and suspicious non-breaking-space density often used in detector-evasion text.
+- **Product positioning fog detection (pattern 30)** — flags clustered PM/marketing claims like `drive engagement` and `unlock value` when they lack a user, metric, or concrete behavior.
 
 ### Options
 
@@ -134,8 +148,49 @@ humanizer compare --before draft-v1.md --after draft-v2.md
 --ext <list>            Extensions for scan (e.g. md,txt,rst)
 --min-words <n>         Skip files shorter than n words (scan)
 --fail-above <n>        Exit non-zero if any scanned file score >= n
---config <file>         Custom config file (JSON)
+--baseline <file>       Compare scan against prior scan JSON output
+--regression-threshold <n>  Minimum score delta to flag regression (default: 1)
+--fail-on-regression    Exit non-zero if baseline regressions are found
+--ignore-dirs <list>    Extra dirs to ignore when scanning (comma-separated)
+--no-default-ignore     Disable built-in ignores (.git,node_modules,dist,...)
+--ignore-code           Ignore fenced/inline code snippets during analysis
+--ignore-quotes         Ignore markdown/email quote blocks during analysis
+--config <file>         Load scan defaults from JSON (scan section)
 --help, -h              Show help
+```
+
+### Scan config file (`--config`)
+
+`--config` reads scan defaults from a JSON file under a top-level `scan` object.
+CLI flags still win when both are provided.
+
+```json
+{
+  "scan": {
+    "extensions": ["md", "txt"],
+    "minWords": 30,
+    "failAbove": 45,
+    "baseline": ".humanizer-baseline.json",
+    "regressionThreshold": 3,
+    "failOnRegression": true,
+    "ignoreDirs": ["generated", "vendor"],
+    "includeDefaultIgnore": true,
+    "ignoreCode": true,
+    "ignoreQuotes": true
+  }
+}
+```
+
+Then run:
+
+```bash
+humanizer scan . --config .humanizer.json
+# or one-off:
+humanizer analyze docs/guide.md --ignore-code
+# or ignore pasted quotes/examples too:
+humanizer analyze docs/guide.md --ignore-code --ignore-quotes
+# or regression-only gate:
+humanizer scan docs --baseline .humanizer-baseline.json --fail-on-regression
 ```
 
 ### Score badges
@@ -225,7 +280,7 @@ console.log(stats.typeTokenRatio);   // Vocabulary diversity
 
 ## How scoring works
 
-1. **Pattern detection** — Each of 29 detectors scans for regex matches. Matches are weighted 1-5.
+1. **Pattern detection** — Each of 30 detectors scans for regex matches. Matches are weighted 1-5.
 2. **Density calculation** — Weighted matches per 100 words, on a logarithmic curve (prevents runaway scores).
 3. **Breadth bonus** — More unique pattern types = higher score (up to +20).
 4. **Category diversity** — Hits across content/language/style/communication/filler = higher score (up to +15).
@@ -348,7 +403,7 @@ Target: consistently **under 25** on the humanizer score.
 humanizer/
 ├── SKILL.md          # OpenClaw skill definition
 ├── src/
-│   ├── patterns.js   # 29 pattern detectors + pattern registry
+│   ├── patterns.js   # 30 pattern detectors + pattern registry
 │   ├── vocabulary.js  # 500+ AI words/phrases (3 tiers)
 │   ├── stats.js       # Statistical analysis engine
 │   ├── analyzer.js    # Composite scoring engine

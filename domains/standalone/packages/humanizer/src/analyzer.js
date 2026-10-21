@@ -16,6 +16,7 @@
 
 const { patterns, wordCount } = require('./patterns');
 const { computeStats, computeUniformityScore } = require('./stats');
+const { prepareText } = require('./preprocess');
 
 // ─── Category Labels ────────────────────────────────────
 
@@ -27,6 +28,8 @@ const CATEGORY_LABELS = {
   filler: 'Filler & hedging',
 };
 
+const RELIABILITY_RECOMMENDED_WORDS = 150;
+
 // ─── Analysis Engine ─────────────────────────────────────
 
 /**
@@ -37,17 +40,26 @@ const CATEGORY_LABELS = {
  *   - verbose {boolean}     Show all matches (not just top 5 per pattern)
  *   - patternsToCheck {number[]}  Only run specific pattern IDs
  *   - includeStats {boolean}  Include full text statistics (default: true)
+ *   - ignoreCode {boolean}  Ignore fenced/inline code snippets before analysis
+ *   - ignoreQuotes {boolean}  Ignore quoted blocks before analysis
  *   - config {object}       Custom config overrides
  * @returns {object}     — Full analysis result
  */
 function analyze(text, opts = {}) {
-  const { verbose = false, patternsToCheck = null, includeStats = true } = opts;
+  const {
+    verbose = false,
+    patternsToCheck = null,
+    includeStats = true,
+    ignoreCode = false,
+    ignoreQuotes = false,
+  } = opts;
 
   if (!text || typeof text !== 'string') {
     return emptyResult();
   }
 
-  const trimmed = text.trim();
+  const preparedText = prepareText(text, { ignoreCode, ignoreQuotes });
+  const trimmed = preparedText.trim();
   if (trimmed.length === 0) return emptyResult();
 
   const words = wordCount(trimmed);
@@ -93,6 +105,13 @@ function analyze(text, opts = {}) {
   // ── Calculate composite score ──────────────────────
   const patternScore = calculatePatternScore(findings, words);
   const compositeScore = calculateCompositeScore(patternScore, uniformityScore, findings);
+  const reliability = buildReliability({
+    words,
+    stats,
+    findings,
+    patternScore,
+    uniformityScore,
+  });
 
   // ── Build category summary ─────────────────────────
   const categories = {};
@@ -112,12 +131,66 @@ function analyze(text, opts = {}) {
     score: compositeScore,
     patternScore,
     uniformityScore,
+    reliability,
     totalMatches,
     wordCount: words,
     stats,
     categories,
     findings,
-    summary: buildSummary(compositeScore, totalMatches, findings, words, stats),
+    summary: buildSummary(compositeScore, totalMatches, findings, words, stats, reliability),
+  };
+}
+
+function buildReliability({ words, stats, findings, patternScore, uniformityScore }) {
+  const reasons = [];
+  const sentenceCount = stats?.sentenceCount || 0;
+  let confidenceScore = 100;
+
+  if (words < 80) {
+    confidenceScore -= 40;
+    reasons.push('Sample is very short (<80 words).');
+  } else if (words < RELIABILITY_RECOMMENDED_WORDS) {
+    confidenceScore -= 20;
+    reasons.push(`Sample is shorter than recommended (${RELIABILITY_RECOMMENDED_WORDS}+ words).`);
+  }
+
+  if (sentenceCount > 0 && sentenceCount < 4) {
+    confidenceScore -= 30;
+    reasons.push('Fewer than 4 sentences limits rhythm analysis.');
+  } else if (sentenceCount > 0 && sentenceCount < 7) {
+    confidenceScore -= 12;
+    reasons.push('Sentence count is low, so statistical signals are weaker.');
+  }
+
+  if (findings.length <= 1) {
+    confidenceScore -= 15;
+    reasons.push('Only one AI pattern family was detected.');
+  }
+
+  if (uniformityScore === 0) {
+    confidenceScore -= 10;
+    reasons.push('Uniformity metrics were not applied (text too short or too sparse).');
+  }
+
+  if (patternScore >= 60 && findings.length >= 3 && words >= RELIABILITY_RECOMMENDED_WORDS) {
+    confidenceScore += 5;
+  }
+
+  confidenceScore = Math.max(0, Math.min(100, Math.round(confidenceScore)));
+
+  const level = confidenceScore >= 75 ? 'high' : confidenceScore >= 45 ? 'medium' : 'low';
+
+  const recommendation =
+    level === 'high'
+      ? 'Signal quality is strong enough for decision support.'
+      : `Treat this score as directional. Re-run on ${RELIABILITY_RECOMMENDED_WORDS}+ words across multiple paragraphs before making high-stakes calls.`;
+
+  return {
+    level,
+    score: confidenceScore,
+    reasons,
+    recommendedMinWords: RELIABILITY_RECOMMENDED_WORDS,
+    recommendation,
   };
 }
 
@@ -170,9 +243,13 @@ function calculateCompositeScore(patternScore, uniformityScore, findings) {
 /**
  * Build human-readable summary.
  */
-function buildSummary(finalScore, totalMatches, findings, words, stats) {
+function buildSummary(finalScore, totalMatches, findings, words, stats, reliability = null) {
   if (totalMatches === 0 && finalScore < 10) {
-    return 'No significant AI writing patterns detected. The text looks human-written.';
+    let summary = 'No significant AI writing patterns detected. The text looks human-written.';
+    if (reliability && reliability.level !== 'high') {
+      summary += ` Confidence: ${reliability.level}. ${reliability.recommendation}`;
+    }
+    return summary;
   }
 
   const level =
@@ -204,6 +281,10 @@ function buildSummary(finalScore, totalMatches, findings, words, stats) {
     }
   }
 
+  if (reliability && reliability.level !== 'high') {
+    summary += ` Confidence: ${reliability.level}. ${reliability.recommendation}`;
+  }
+
   return summary;
 }
 
@@ -212,8 +293,8 @@ function buildSummary(finalScore, totalMatches, findings, words, stats) {
 /**
  * Quick score — returns just the number (0-100).
  */
-function score(text) {
-  return analyze(text).score;
+function score(text, opts = {}) {
+  return analyze(text, opts).score;
 }
 
 // ─── Formatting ──────────────────────────────────────────
@@ -237,6 +318,11 @@ function formatReport(result) {
   lines.push(
     `  Words: ${result.wordCount}  |  Matches: ${result.totalMatches}  |  Pattern: ${result.patternScore}  |  Uniformity: ${result.uniformityScore}`,
   );
+  if (result.reliability) {
+    lines.push(
+      `  Confidence: ${reliabilityLabel(result.reliability.level)} (${result.reliability.score}/100)`,
+    );
+  }
   lines.push('');
   lines.push(`  ${result.summary}`);
   lines.push('');
@@ -307,6 +393,11 @@ function formatMarkdown(result) {
   lines.push('# AI writing pattern analysis');
   lines.push('');
   lines.push(`**Score: ${result.score}/100** — ${scoreLabel(result.score)}`);
+  if (result.reliability) {
+    lines.push(
+      `**Confidence:** ${reliabilityLabel(result.reliability.level)} (${result.reliability.score}/100)`,
+    );
+  }
   lines.push('');
   lines.push(
     `Words: ${result.wordCount} | Matches: ${result.totalMatches} | Pattern score: ${result.patternScore} | Uniformity score: ${result.uniformityScore}`,
@@ -391,11 +482,24 @@ function ttrLabel(ttr, wc) {
   return '(low — repetitive vocabulary)';
 }
 
+function reliabilityLabel(level) {
+  if (level === 'high') return 'High confidence';
+  if (level === 'medium') return 'Medium confidence';
+  return 'Low confidence';
+}
+
 function emptyResult() {
   return {
     score: 0,
     patternScore: 0,
     uniformityScore: 0,
+    reliability: {
+      level: 'low',
+      score: 0,
+      reasons: ['No text provided.'],
+      recommendedMinWords: RELIABILITY_RECOMMENDED_WORDS,
+      recommendation: `Provide at least ${RELIABILITY_RECOMMENDED_WORDS} words for stable scoring.`,
+    },
     totalMatches: 0,
     wordCount: 0,
     stats: null,

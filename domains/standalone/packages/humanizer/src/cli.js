@@ -20,10 +20,12 @@
  */
 
 const fs = require('fs');
+const path = require('path');
 const { analyze, score, formatMarkdown, formatJSON } = require('./analyzer');
 const { humanize, formatSuggestions } = require('./humanizer');
 const { computeStats } = require('./stats');
-const { scanPath, compareFiles, normalizeExtensions } = require('./workflows');
+const { scanPath, compareScanResults, compareFiles, normalizeExtensions } = require('./workflows');
+const { prepareText } = require('./preprocess');
 
 // ─── Tiny Color Helper (no chalk dependency) ─────────────
 
@@ -82,6 +84,21 @@ function scoreLabel(s) {
   return 'Heavily AI-generated';
 }
 
+/**
+ * Get a colored reliability badge.
+ *
+ * @param {{level: string, score: number}} reliability
+ * @returns {string}
+ */
+function reliabilityBadge(reliability) {
+  if (!reliability) return color.gray('Unknown confidence');
+
+  const label = `${reliability.level.toUpperCase()} confidence (${reliability.score}/100)`;
+  if (reliability.level === 'high') return color.green(`🟢 ${label}`);
+  if (reliability.level === 'medium') return color.yellow(`🟡 ${label}`);
+  return color.red(`🔴 ${label}`);
+}
+
 // ─── CLI Arg Parsing ─────────────────────────────────────
 
 const args = process.argv.slice(2);
@@ -99,8 +116,15 @@ const flags = {
   threshold: null,
   config: null,
   extensions: null,
-  minWords: 1,
+  minWords: null,
   failAbove: null,
+  baseline: null,
+  regressionThreshold: null,
+  failOnRegression: null,
+  ignoreDirs: null,
+  includeDefaultIgnore: null,
+  ignoreCode: null,
+  ignoreQuotes: null,
 };
 
 // Parse -f / --file flag
@@ -174,7 +198,198 @@ if (minWordsIdx !== -1 && args[minWordsIdx + 1]) {
 const failIdx = args.indexOf('--fail-above');
 if (failIdx !== -1 && args[failIdx + 1]) {
   const n = parseInt(args[failIdx + 1], 10);
-  if (!Number.isNaN(n)) flags.failAbove = n;
+  if (!Number.isNaN(n) && n >= 0) flags.failAbove = n;
+}
+
+// Parse --baseline flag (scan command)
+const baselineIdx = args.indexOf('--baseline');
+if (baselineIdx !== -1 && args[baselineIdx + 1]) {
+  flags.baseline = args[baselineIdx + 1];
+}
+
+// Parse --regression-threshold flag (scan command)
+const regressionIdx = args.indexOf('--regression-threshold');
+if (regressionIdx !== -1 && args[regressionIdx + 1]) {
+  const n = parseInt(args[regressionIdx + 1], 10);
+  if (!Number.isNaN(n) && n >= 0) flags.regressionThreshold = n;
+}
+
+if (args.includes('--fail-on-regression')) {
+  flags.failOnRegression = true;
+}
+
+// Parse --ignore-dirs flag (scan command)
+const ignoreIdx = args.indexOf('--ignore-dirs');
+if (ignoreIdx !== -1 && args[ignoreIdx + 1]) {
+  flags.ignoreDirs = args[ignoreIdx + 1]
+    .split(',')
+    .map((d) => d.trim())
+    .filter(Boolean);
+}
+
+if (args.includes('--no-default-ignore')) {
+  flags.includeDefaultIgnore = false;
+}
+
+if (args.includes('--ignore-code')) {
+  flags.ignoreCode = true;
+}
+
+if (args.includes('--ignore-quotes')) {
+  flags.ignoreQuotes = true;
+}
+
+// ─── Scan Config Resolution ──────────────────────────────
+
+function parseNonNegativeInt(value, label) {
+  if (value === undefined || value === null) return null;
+
+  const n = parseInt(String(value), 10);
+  if (Number.isNaN(n) || n < 0) {
+    throw new Error(`${label} must be a non-negative integer.`);
+  }
+
+  return n;
+}
+
+function parseDirList(value, label) {
+  if (value === undefined || value === null) return null;
+
+  if (typeof value === 'string') {
+    const dirs = value
+      .split(',')
+      .map((v) => v.trim())
+      .filter(Boolean);
+    return dirs.length > 0 ? dirs : [];
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((v) => String(v).trim()).filter(Boolean);
+  }
+
+  throw new Error(`${label} must be a comma-separated string or array.`);
+}
+
+function parseExtensionList(value) {
+  if (value === undefined || value === null) return null;
+
+  if (typeof value === 'string') {
+    const parts = value
+      .split(',')
+      .map((v) => v.trim())
+      .filter(Boolean);
+    return parts.length > 0 ? normalizeExtensions(parts) : [];
+  }
+
+  if (Array.isArray(value)) {
+    return normalizeExtensions(value);
+  }
+
+  throw new Error('scan.extensions must be a comma-separated string or array.');
+}
+
+function loadConfig(configPath) {
+  const resolved = path.resolve(configPath);
+
+  let raw;
+  try {
+    raw = fs.readFileSync(resolved, 'utf-8');
+  } catch (err) {
+    throw new Error(`Could not read config file: ${configPath} (${err.message})`);
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (err) {
+    throw new Error(`Invalid JSON in config file ${configPath}: ${err.message}`);
+  }
+
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    throw new Error(`Config file must contain a JSON object: ${configPath}`);
+  }
+
+  return parsed;
+}
+
+function resolveScanOptions() {
+  let config = {};
+  const configPath = flags.config ? path.resolve(flags.config) : null;
+
+  if (flags.config) {
+    config = loadConfig(flags.config);
+  }
+
+  const scanConfig =
+    config.scan && typeof config.scan === 'object' && !Array.isArray(config.scan)
+      ? config.scan
+      : {};
+
+  const configExtensions = parseExtensionList(scanConfig.extensions);
+  const configMinWords = parseNonNegativeInt(scanConfig.minWords, 'scan.minWords');
+  const configFailAbove = parseNonNegativeInt(scanConfig.failAbove, 'scan.failAbove');
+  const configRegressionThreshold = parseNonNegativeInt(
+    scanConfig.regressionThreshold,
+    'scan.regressionThreshold',
+  );
+  const configIgnoreDirs = parseDirList(scanConfig.ignoreDirs, 'scan.ignoreDirs');
+  const configIncludeDefaultIgnore =
+    typeof scanConfig.includeDefaultIgnore === 'boolean' ? scanConfig.includeDefaultIgnore : null;
+  const configIgnoreCode =
+    typeof scanConfig.ignoreCode === 'boolean' ? scanConfig.ignoreCode : null;
+  const configIgnoreQuotes =
+    typeof scanConfig.ignoreQuotes === 'boolean' ? scanConfig.ignoreQuotes : null;
+  const configFailOnRegression =
+    typeof scanConfig.failOnRegression === 'boolean' ? scanConfig.failOnRegression : null;
+  const configBaseline =
+    typeof scanConfig.baseline === 'string' && scanConfig.baseline.trim()
+      ? scanConfig.baseline
+      : null;
+
+  const extensions = flags.extensions || configExtensions;
+  const minWords = flags.minWords !== null ? flags.minWords : (configMinWords ?? 1);
+  const failAbove = flags.failAbove !== null ? flags.failAbove : configFailAbove;
+  let baseline = flags.baseline || configBaseline;
+  if (baseline && !path.isAbsolute(baseline)) {
+    if (!flags.baseline && configPath) {
+      baseline = path.resolve(path.dirname(configPath), baseline);
+    } else {
+      baseline = path.resolve(baseline);
+    }
+  }
+  const regressionThreshold =
+    flags.regressionThreshold !== null
+      ? flags.regressionThreshold
+      : (configRegressionThreshold ?? 1);
+  const failOnRegression =
+    flags.failOnRegression !== null ? flags.failOnRegression : (configFailOnRegression ?? false);
+  const ignoreDirs = flags.ignoreDirs || configIgnoreDirs || undefined;
+  const includeDefaultIgnore =
+    flags.includeDefaultIgnore !== null
+      ? flags.includeDefaultIgnore
+      : (configIncludeDefaultIgnore ?? true);
+  const ignoreCode = flags.ignoreCode !== null ? flags.ignoreCode : (configIgnoreCode ?? false);
+  const ignoreQuotes =
+    flags.ignoreQuotes !== null ? flags.ignoreQuotes : (configIgnoreQuotes ?? false);
+
+  if (failOnRegression && !baseline) {
+    throw new Error(
+      'scan.failOnRegression requires --baseline <file> (or scan.baseline in config).',
+    );
+  }
+
+  return {
+    extensions,
+    minWords,
+    failAbove,
+    baseline,
+    regressionThreshold,
+    failOnRegression,
+    ignoreDirs,
+    includeDefaultIgnore,
+    ignoreCode,
+    ignoreQuotes,
+  };
 }
 
 // ─── Help ────────────────────────────────────────────────
@@ -211,7 +426,14 @@ ${color.bold('Options:')}
   --ext <list>            File extensions for scan (e.g. md,txt,rst)
   --min-words <n>         Skip files shorter than n words (scan)
   --fail-above <n>        Exit non-zero if any scanned file score >= n
-  --config <file>         Custom config file (JSON)
+  --baseline <file>       Compare scan output against a prior scan JSON file
+  --regression-threshold <n>  Min score delta to flag baseline regressions (default: 1)
+  --fail-on-regression    Exit non-zero if baseline regressions are found
+  --ignore-dirs <list>    Extra dirs to ignore when scanning (comma-separated)
+  --no-default-ignore     Disable built-in ignores (.git,node_modules,dist,...)
+  --ignore-code           Ignore fenced/inline code snippets during analysis
+  --ignore-quotes         Ignore markdown/email quote blocks during analysis
+  --config <file>         Load scan defaults from JSON (scan section)
   --help, -h              Show this help
 
 ${color.bold('Examples:')}
@@ -220,6 +442,12 @@ ${color.bold('Examples:')}
 
   ${color.gray('# Analyze a file')}
   humanizer analyze essay.txt
+
+  ${color.gray('# Analyze docs while ignoring code examples')}
+  humanizer analyze docs/guide.md --ignore-code
+
+  ${color.gray('# Ignore quoted examples or pasted email/forum replies')}
+  humanizer analyze draft.md --ignore-quotes
 
   ${color.gray('# Full markdown report')}
   humanizer report article.txt > report.md
@@ -235,6 +463,19 @@ ${color.bold('Examples:')}
 
   ${color.gray('# Scan all markdown docs in a repo')}
   humanizer scan docs --ext md --fail-above 45
+
+  ${color.gray('# Scan docs but ignore fenced/inline code snippets')}
+  humanizer scan docs --ext md --ignore-code
+
+  ${color.gray('# Scan docs but ignore quoted examples')}
+  humanizer scan docs --ext md --ignore-quotes
+
+  ${color.gray('# Scan a large codebase with config defaults')}
+  humanizer scan . --config .humanizer.json --ignore-dirs vendor,generated
+
+  ${color.gray('# Baseline-aware scan gating (regressions only)')}
+  humanizer scan docs --json > .humanizer-baseline.json
+  humanizer scan docs --baseline .humanizer-baseline.json --fail-on-regression
 
   ${color.gray('# Compare two drafts')}
   humanizer compare --before draft-v1.md --after draft-v2.md
@@ -389,6 +630,12 @@ function formatColoredReport(result) {
   lines.push(
     `  ${color.dim(`Words: ${result.wordCount}  |  Matches: ${result.totalMatches}  |  Pattern: ${result.patternScore}  |  Uniformity: ${result.uniformityScore}`)}`,
   );
+  if (result.reliability) {
+    lines.push(`  ${color.dim(`Confidence: ${reliabilityBadge(result.reliability)}`)}`);
+    if (result.reliability.level !== 'high' && result.reliability.reasons.length > 0) {
+      lines.push(`  ${color.dim(`Why: ${result.reliability.reasons.slice(0, 2).join(' ')}`)}`);
+    }
+  }
   lines.push('');
   lines.push(`  ${result.summary}`);
   lines.push('');
@@ -468,6 +715,9 @@ function formatGroupedSuggestions(result) {
   lines.push('');
   lines.push(color.bold(`  Score: ${scoreBadge(result.score)}  (${scoreLabel(result.score)})`));
   lines.push(`  ${color.dim(`${result.totalIssues} issues found in ${result.wordCount} words`)}`);
+  if (result.reliability) {
+    lines.push(`  ${color.dim(`Confidence: ${reliabilityBadge(result.reliability)}`)}`);
+  }
   lines.push('');
 
   if (result.critical.length > 0) {
@@ -593,9 +843,10 @@ function formatComparisonReport(result) {
  *
  * @param {object} scanResult
  * @param {?number} failAbove
+ * @param {?object} baselineComparison
  * @returns {string}
  */
-function formatScanReport(scanResult, failAbove = null) {
+function formatScanReport(scanResult, failAbove = null, baselineComparison = null) {
   const lines = [];
   const files = scanResult.files;
 
@@ -631,6 +882,38 @@ function formatScanReport(scanResult, failAbove = null) {
     );
   }
   lines.push('');
+
+  if (baselineComparison) {
+    const summary = baselineComparison.summary;
+    lines.push(color.bold('  Baseline comparison:'));
+    lines.push(
+      `  Compared: ${summary.comparedFiles}  |  Regressions: ${summary.regressions}  |  Improvements: ${summary.improvements}  |  Unchanged: ${summary.unchanged}`,
+    );
+    lines.push(
+      `  New files: ${summary.newFiles}  |  Missing files: ${summary.missingFiles}  |  Threshold: ±${summary.regressionThreshold}`,
+    );
+    lines.push('');
+
+    if (baselineComparison.regressions.length > 0) {
+      lines.push(color.red(color.bold('  Baseline regressions:')));
+      for (const item of baselineComparison.regressions.slice(0, 8)) {
+        lines.push(
+          `  ${color.red('▲')} +${item.delta} ${item.relativePath} ${color.dim(`(${item.baselineScore} → ${item.currentScore})`)}`,
+        );
+      }
+      lines.push('');
+    }
+
+    if (baselineComparison.improvements.length > 0) {
+      lines.push(color.green(color.bold('  Baseline improvements:')));
+      for (const item of baselineComparison.improvements.slice(0, 5)) {
+        lines.push(
+          `  ${color.green('▼')} ${item.delta} ${item.relativePath} ${color.dim(`(${item.baselineScore} → ${item.currentScore})`)}`,
+        );
+      }
+      lines.push('');
+    }
+  }
 
   if (scanResult.patternHotspots && scanResult.patternHotspots.length > 0) {
     lines.push(color.bold('  Common pattern hotspots:'));
@@ -683,6 +966,8 @@ async function main() {
   const opts = {
     verbose: flags.verbose,
     patternsToCheck: flags.patterns,
+    ignoreCode: flags.ignoreCode === true,
+    ignoreQuotes: flags.ignoreQuotes === true,
   };
 
   switch (command) {
@@ -697,7 +982,7 @@ async function main() {
     }
 
     case 'score': {
-      const s = score(text);
+      const s = score(text, opts);
       if (flags.json) {
         console.log(JSON.stringify({ score: s }));
       } else {
@@ -707,7 +992,12 @@ async function main() {
     }
 
     case 'humanize': {
-      const result = humanize(text, { autofix: flags.autofix, verbose: flags.verbose });
+      const result = humanize(text, {
+        autofix: flags.autofix,
+        verbose: flags.verbose,
+        ignoreCode: opts.ignoreCode,
+        ignoreQuotes: opts.ignoreQuotes,
+      });
       if (flags.json) {
         console.log(JSON.stringify(result, null, 2));
       } else {
@@ -728,7 +1018,11 @@ async function main() {
     }
 
     case 'suggest': {
-      const result = humanize(text, { verbose: flags.verbose });
+      const result = humanize(text, {
+        verbose: flags.verbose,
+        ignoreCode: opts.ignoreCode,
+        ignoreQuotes: opts.ignoreQuotes,
+      });
       if (flags.json) {
         console.log(JSON.stringify(result, null, 2));
       } else {
@@ -738,7 +1032,11 @@ async function main() {
     }
 
     case 'stats': {
-      const stats = computeStats(text);
+      const statsText = prepareText(text, {
+        ignoreCode: opts.ignoreCode,
+        ignoreQuotes: opts.ignoreQuotes,
+      });
+      const stats = computeStats(statsText);
       if (flags.json) {
         console.log(JSON.stringify(stats, null, 2));
       } else {
@@ -753,7 +1051,10 @@ async function main() {
         process.exit(1);
       }
 
-      const result = compareFiles(flags.before, flags.after);
+      const result = compareFiles(flags.before, flags.after, {
+        ignoreCode: opts.ignoreCode,
+        ignoreQuotes: opts.ignoreQuotes,
+      });
       if (flags.json) {
         console.log(JSON.stringify(result, null, 2));
       } else {
@@ -764,20 +1065,75 @@ async function main() {
 
     case 'scan': {
       const target = flags.file || '.';
-      const scanResult = scanPath(target, {
-        exts: flags.extensions || undefined,
-        minWords: flags.minWords,
-      });
 
-      if (flags.json) {
-        console.log(JSON.stringify(scanResult, null, 2));
-      } else {
-        console.log(formatScanReport(scanResult, flags.failAbove));
+      let scanOptions;
+      try {
+        scanOptions = resolveScanOptions();
+      } catch (err) {
+        console.error(color.red(`Error: ${err.message}`));
+        process.exit(1);
       }
 
-      if (flags.failAbove !== null) {
-        const hasFailure = scanResult.files.some((f) => f.score >= flags.failAbove);
-        if (hasFailure) process.exit(2);
+      const scanResult = scanPath(target, {
+        exts: scanOptions.extensions || undefined,
+        minWords: scanOptions.minWords,
+        ignoreDirs: scanOptions.ignoreDirs,
+        includeDefaultIgnore: scanOptions.includeDefaultIgnore,
+        ignoreCode: scanOptions.ignoreCode,
+        ignoreQuotes: scanOptions.ignoreQuotes,
+      });
+
+      let baselineComparison = null;
+      if (scanOptions.baseline) {
+        let baselinePayload;
+        try {
+          baselinePayload = loadConfig(scanOptions.baseline);
+        } catch (err) {
+          console.error(color.red(`Error: ${err.message.replace('config file', 'baseline file')}`));
+          process.exit(1);
+        }
+
+        if (!Array.isArray(baselinePayload.files)) {
+          console.error(
+            color.red('Error: baseline file must contain a scan JSON object with a files array.'),
+          );
+          process.exit(1);
+        }
+
+        baselineComparison = compareScanResults(scanResult, baselinePayload, {
+          regressionThreshold: scanOptions.regressionThreshold,
+        });
+      }
+
+      const outputPayload = baselineComparison
+        ? {
+            ...scanResult,
+            baselineComparison,
+          }
+        : scanResult;
+
+      if (flags.json) {
+        console.log(JSON.stringify(outputPayload, null, 2));
+      } else {
+        console.log(formatScanReport(scanResult, scanOptions.failAbove, baselineComparison));
+      }
+
+      let exitCode = 0;
+      if (scanOptions.failAbove !== null) {
+        const hasFailure = scanResult.files.some((f) => f.score >= scanOptions.failAbove);
+        if (hasFailure) exitCode = 2;
+      }
+
+      if (
+        scanOptions.failOnRegression &&
+        baselineComparison &&
+        baselineComparison.summary.regressions > 0
+      ) {
+        exitCode = exitCode || 3;
+      }
+
+      if (exitCode !== 0) {
+        process.exit(exitCode);
       }
       break;
     }
