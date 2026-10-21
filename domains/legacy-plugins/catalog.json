@@ -296,7 +296,7 @@
         "author": "K-Dense-AI",
         "upstream": {
           "repo": "K-Dense-AI/claude-scientific-writer",
-          "commit": "2f80d2aed0e6b555944ec528674148fb0d7c39fc",
+          "commit": "529b9f73ab4b48925027145800d7b49e96ccfd3c",
           "path": "."
         }
       },
@@ -307,7 +307,7 @@
       "source": {
         "kind": "external",
         "repo": "K-Dense-AI/claude-scientific-writer",
-        "commit": "2f80d2aed0e6b555944ec528674148fb0d7c39fc",
+        "commit": "529b9f73ab4b48925027145800d7b49e96ccfd3c",
         "path": "."
       },
       "compatibility": {},
