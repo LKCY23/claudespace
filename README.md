@@ -17,11 +17,11 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 ## 资源目录
 
-当前六份新版 `schema_version: 1/resources` 登记共 62 项：
+当前六份新版 `schema_version: 1/resources` 登记共 63 项：
 
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
-| [catalog.json](catalog.json) | `claudespace-personal` | 10 项原创或按需资源 |
+| [catalog.json](catalog.json) | `claudespace-personal` | 11 项原创或按需资源 |
 | [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
 | [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |

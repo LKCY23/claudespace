@@ -4,11 +4,11 @@
 
 ## 登记入口
 
-仓库维护 6 份 `schema_version: 1` catalog，共 62 项资源：
+仓库维护 6 份 `schema_version: 1` catalog，共 63 项资源：
 
 | 文件 | 标识 | 数量 |
 | --- | --- | --- |
-| `catalog.json` | claudespace-personal | 10 |
+| `catalog.json` | claudespace-personal | 11 |
 | `domains/candidates/catalog.json` | claudespace-candidates | 5 |
 | `domains/standalone/catalog.json` | claudespace-standalone | 33 |
 | `domains/legacy-plugins/catalog.json` | claudespace-legacy | 10 |

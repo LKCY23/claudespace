@@ -10,7 +10,7 @@
         "author": "Jarrod Watts",
         "upstream": {
           "repo": "jarrodwatts/claude-hud",
-          "commit": "26e38decd762f1a2d31e6d83bf33193b3b293084",
+          "commit": "5621429b84ea2503185221244c43a06797bfd05e",
           "path": "."
         }
       },
@@ -21,7 +21,7 @@
       "source": {
         "kind": "external",
         "repo": "jarrodwatts/claude-hud",
-        "commit": "26e38decd762f1a2d31e6d83bf33193b3b293084",
+        "commit": "5621429b84ea2503185221244c43a06797bfd05e",
         "path": "."
       },
       "compatibility": {
