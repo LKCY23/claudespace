@@ -16,19 +16,19 @@ For an alternative graphical entry point, create a **normal shortcut** in Shortc
 with a **Run Shell Script** action, using this command (adjust the checkout path):
 
 ```bash
-"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --overrides "$HOME/claude-config-data/assets/settings/claude-desktop-mac.json"
+"$HOME/claudespace/claude-desktop-bootstrap/launch.command" --machine /absolute/path/third-party-machine.yaml
 ```
 
 Use that shortcut instead of the original Claude icon, for example from the Dock
-or a keyboard shortcut. If needed, supply an absolute Python executable with
-`CLAUDE_BOOTSTRAP_PYTHON` as described in the [README](README.md#command-line-launch-or-standalone-apply).
+or a keyboard shortcut. If needed, supply the installed command with
+`--claude-config /absolute/path/to/claude-config` as described in the [README](README.md#preview-and-launch).
 The user controls Shortcuts' permission to run scripts; this utility does not
 change that security setting.
 
 This is a **replacement launch entry point**, not an automation triggered by
 Claude already being open. Direct launches through the original Dock item,
 Finder, Spotlight, login items, app updates, or macOS reopen can bypass it. The
-persisted values still remain on disk, but the override manifest is not
+persisted values still remain on disk, but the App Profile is not
 reapplied on those bypassed launches.
 
 ## What Apple provides
@@ -98,7 +98,7 @@ assume older macOS releases offer the same UI. App-close automation on Mac was
 not confirmed by this research.
 
 An app-open automation cannot guarantee it runs before that app initializes.
-Attaching `apply.py --overrides <file> --apply` to Claude's app-open event would meet the script's
+Attaching `claude-config apply --app claude-desktop --machine <file>` to Claude's app-open event would meet the framework's
 running-app guard and refuse a needed write. Automatically quitting/restarting
 Claude from that event would risk interrupted work and restart loops. Use the
 normal shortcut entry point above instead.

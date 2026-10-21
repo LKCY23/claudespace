@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "name": "claude-hud",
+  "resources": {
+    "claude-hud": {
+      "kind": "plugin",
+      "description": "Claude Code statusline HUD; official pinned source with tracked runtime",
+      "origin": {
+        "type": "third-party",
+        "author": "Jarrod Watts",
+        "upstream": {
+          "repo": "jarrodwatts/claude-hud",
+          "commit": "26e38decd762f1a2d31e6d83bf33193b3b293084",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "jarrodwatts/claude-hud",
+        "commit": "26e38decd762f1a2d31e6d83bf33193b3b293084",
+        "path": "."
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "release",
+        "target": "latest"
+      }
+    }
+  }
+}

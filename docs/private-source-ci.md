@@ -25,12 +25,12 @@ Deploy key 只授予单仓库读取，没有自动过期时间。更换密钥时
 
 PR 的测试通过不代表全部固定来源已经验证。合并前还应确认准确提交的 `claudespace/fixed-sources` 状态通过；这一状态由可信校验工作流产生，不能沿用其他 SHA 的结果。
 
-工作流合入默认分支后，可显式验证一个完整提交：
+工作流已合入默认分支，可显式验证一个完整提交：
 
 ```sh
 gh workflow run validate-fixed-sources.yml \
   --repo LKCY23/claudespace --ref main \
-  -f commit=<完整40位SHA>
+  -f commit="<完整40位SHA>"
 ```
 
 输入为空则检查可信工作流当前提交。手动工作流需先存在于默认分支；初次接入的开发分支验证由受限 `push` 入口触发。[GitHub 手动运行规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。
@@ -63,4 +63,4 @@ python3 scripts/private_ci.py prepare \
 
 104 项测试通过，其中 18 项私有 CI 定向测试经独立复核；工作流通过 actionlint。覆盖密钥清理、公共子进程无私钥、失败报告脱敏、公共候选保留、私有正文禁止导入公共包、可信政策与候选目录越界等边界。
 
-真实 GitHub 运行以对应提交的 status 和 Actions run 为准。结构检查不代表客户端加载、服务登录或模型业务效果通过。
+真实 GitHub 已完成全部 61 项固定来源检查；例如 Code Review 更新的 [准确提交验证](https://github.com/LKCY23/claudespace/actions/runs/39036589905) 和合并后的 [基线发布](https://github.com/LKCY23/claudespace/actions/runs/39036710100)。临时预览变量和分支权限已撤销，Environment 长期只允许 main。后续运行仍以对应 SHA 的 status 和 Actions run 为准；结构检查不代表客户端加载、服务登录或模型业务效果通过。

@@ -2,7 +2,7 @@
 
 Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及宿主适配。支持插件、独立技能、MCP、Hooks、全局指令、Rules 和 Agents 七类资源。
 
-来源登记、候选构建、源码候选和 GitHub 更新自动化已实现。工作流尚未合入默认分支，线上发布到消费者采用的完整流程仍待验证。详见 [实现进度](docs/update-implementation.md)。
+来源登记、候选构建和 GitHub 更新自动化已在 `main` 启用。最终提交通过检查后发布永久 GitHub Release 记录；claude-config 0.2.0 按明确版本获取来源，再由用户采用和部署。日常入口见 [更新与发布操作](docs/operations.md)，验证范围见 [实现进度](docs/update-implementation.md)。
 
 ## 职责
 
@@ -17,17 +17,20 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 ## 资源目录
 
-当前五份新版 `schema_version: 1/resources` 登记共 61 项：
+当前六份新版 `schema_version: 1/resources` 登记共 63 项：
 
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
-| [catalog.json](catalog.json) | `claudespace-personal` | 10 项原创或按需资源 |
-| [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项候选插件及宿主包装 |
+| [catalog.json](catalog.json) | `claudespace-personal` | 11 项原创或按需资源 |
+| [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
 | [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
 | [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
+| [domains/claude-hud/catalog.json](domains/claude-hud/catalog.json) | `claude-hud` | 官方固定 HUD 来源；跟踪正式 Release，保留本机显示配置 |
 
-[Claude HUD 安装快照](domains/infrastructure/claude-hud/README.md) 单独保留历史内容，不属于上述五份新版登记，也不在其自动更新和结构基线覆盖范围内。
+[HUD 正式入口](domains/claude-hud/README.md) 已接入自动更新；旧安装快照仅保留历史证据。登记、发布和更新候选均不会覆盖本机 HUD 显示配置。
+
+`candidates`、`legacy-plugins` 是保留的目录名称，不代表当前是否安装、启用或验证通过；这些状态分别由 Profile、原生检查和验证记录说明。
 
 插件的原生 marketplace 文件用于宿主发现；其 `plugins` 数组不是另一套新版资源登记。独立技能保持技能类型，不因生成插件清单而变成插件。
 
@@ -53,7 +56,8 @@ python3 scripts/build_candidates.py   --catalog domains/candidates/catalog.json 
 
 - [源码候选](docs/source-update-candidates.md)：匹配检查报告和旧 pin，准备独立提交，保护本地修改。
 - [GitHub 更新自动化](docs/github-update-automation.md)：调度、PR 复用、人工修改保护、权限边界及基线附件。
-- [实现进度](docs/update-implementation.md)：已验证内容和上线前的剩余工作。
+- [更新与发布操作](docs/operations.md)：预览、批准检查、审查合并和核对基线附件。
+- [实现进度](docs/update-implementation.md)：已验证内容和剩余接入工作。
 
 资源版本与检查目标分别声明。`source` 固定当前版本，`update` 指定要检查的分支、release 或人工更新策略。检查到新版本不等于采用它。
 
@@ -72,6 +76,6 @@ PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 
 ## 其他工具与许可
 
-[Claude Desktop Bootstrap](claude-desktop-bootstrap/README.md) 是独立的本机工具，以其 README 为准；它没有作为本批资源更新自动化的一部分部署。
+[Claude Desktop Bootstrap 2.0](claude-desktop-bootstrap/README.md) 是独立的 macOS 工具：通过已安装的 claude-config 和明确 Machine 应用第三方 App Profile，再启动绑定的 Desktop。源码在本仓库维护，以 `bootstrap-v<版本>` 发布可下载源码包；目标机器构建自己的 Dock App。它不是技能或插件，不进入七类 catalog，不随资源基线采用自动安装；供应商、部署模式和认证继续由 Desktop／CC Switch 管理。
 
 各第三方来源及子模块保留其作者和许可证；具体内容以对应包或上游仓库为准。

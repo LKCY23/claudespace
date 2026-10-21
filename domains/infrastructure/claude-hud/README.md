@@ -1,17 +1,9 @@
-# Claude HUD installed baseline
+# Claude HUD 历史安装快照
 
-This catalog preserves the currently enabled Claude HUD 0.0.10 package for
-configuration migration. Plugin selection belongs to claude-config-data/agents.yaml.
+此目录保留 Claude HUD 0.0.10 的历史安装正文及迁移证据。正式资源及更新入口已迁至 [domains/claude-hud](../../claude-hud/README.md)；这里不参与自动发现、候选或基线发布，避免旧格式与新版并行管理。
 
-The original installed package is under packages/claude-hud, with its author,
-license, commands and built assets unchanged. catalog.json pins the exact package
-fingerprint. Native process leases under .in_use are runtime metadata and excluded.
+原包位于 `packages/claude-hud`，作者、许可证、命令和构建文件保持原样。这里的历史 `catalog.json` 保存当时的内容指纹；`.in_use` 是运行时租约，不属于包内容。2026-10-18 已另行核对实际使用的迁移包：173 个文件及执行位与上游 `26e38decd762f1a2d31e6d83bf33193b3b293084` 完全一致。历史收据原文保持不变，新核对结果由正式登记说明记录。
 
-This is an installed-content snapshot, not a new upstream release or a claim that
-the commit in the old installation receipt reproduces these bytes. Updates require
-an explicit source and version review. Claude only; no Codex port is selected.
+当前选择位于 Agent Profile，准确部署来源由配置数据的 `catalogs.yaml` 和本机 Machine 决定。需要迁移此历史正文时，应准备并核对新版登记与来源，不能把本目录的旧 catalog 直接传给新版构建器，也不要重新创建 `agents.yaml`。
 
-The framework may preserve an existing registration at another path only when the
-selected package is already installed at this exact version and content hash. A
-fresh host registers this catalog normally. Missing or changed installations block
-preservation; existing registrations are never moved by that policy.
+保留旧注册和匹配已安装内容的策略只属于当时迁移记录，不是新版冷安装命令。后续更新须显式审阅来源与版本；本快照没有声明 Codex 兼容入口。
