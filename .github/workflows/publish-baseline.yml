@@ -29,6 +29,7 @@ jobs:
       - name: Revalidate the final commit
         env:
           CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
+          CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
         run: python scripts/private_ci.py validate --root "$GITHUB_WORKSPACE" --report "$RUNNER_TEMP/baseline-validation/validation.json"
       - name: Generate records outside the commit
         run: |
