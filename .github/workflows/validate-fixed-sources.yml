@@ -60,6 +60,7 @@ jobs:
         id: validation
         env:
           CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
+          CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
         working-directory: ${{ runner.temp }}
         run: python "$GITHUB_WORKSPACE/validator/scripts/private_ci.py" validate --root "$GITHUB_WORKSPACE/candidate" --report "$RUNNER_TEMP/fixed-source-validation.json"
       - name: Record status on the inspected commit

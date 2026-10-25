@@ -1,13 +1,13 @@
 # 私有来源的 CI 访问与验证
 
-当前私有来源为 `LKCY23/goal-authoring`。使用该仓库专属的只读 deploy key，不复制维护者的个人 GitHub Token，也不改变来源仓库可见性。公开来源仍使用原有 GitHub API 和固定提交下载。
+当前私有来源为 `LKCY23/goal-authoring` 与 `LKCY23/claude-sanctuary`。每个仓库使用专属的只读 deploy key，不复制维护者的个人 GitHub Token，也不改变来源仓库可见性。公开来源仍使用原有 GitHub API 和固定提交下载。
 
 ## 授权位置
 
 | 项目 | 位置与用途 |
 | --- | --- |
-| 来源公钥 | Goal Authoring 仓库的只读 Deploy Key |
-| 私钥 | Claudespace 的 `claudespace-private-sources` Environment secret：`CLAUDESPACE_GOAL_AUTHORING_KEY` |
+| 来源公钥 | 各来源仓库的只读 Deploy Key |
+| 私钥 | Claudespace 的 `claudespace-private-sources` Environment secret：`CLAUDESPACE_GOAL_AUTHORING_KEY`、`CLAUDESPACE_CLAUDE_SANCTUARY_KEY` |
 | 来源与密钥变量映射 | `ci/private-sources.json`，只保存变量名 |
 | GitHub 主机身份 | `ci/github-known-hosts`，固定 GitHub 官方公布的 Ed25519 公钥 |
 | 长期允许分支 | `main`；不允许 PR merge refs、通配分支或 tags |
