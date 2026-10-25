@@ -548,11 +548,32 @@
           "mode": "native",
           "entry": ".claude-plugin/plugin.json",
           "validation": {
-            "status": "not-evaluated"
+            "status": "passed",
+            "level": "native",
+            "evidence": "docs/evidence/sanctuary-native-20261026.json"
           }
         }
       },
-      "requires": {},
+      "requires": {
+        "bindings": {
+          "node": {
+            "kind": "executable",
+            "required": true
+          }
+        },
+        "runtime": {
+          "kind": "node",
+          "binding": "node",
+          "major": 22,
+          "platforms": [
+            "darwin"
+          ],
+          "architectures": [
+            "arm64"
+          ],
+          "modules_abi": "127"
+        }
+      },
       "update": {
         "strategy": "branch",
         "target": "main"
