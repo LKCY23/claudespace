@@ -525,6 +525,38 @@
       "update": {
         "strategy": "manual"
       }
+    },
+    "sanctuary-translate": {
+      "kind": "plugin",
+      "description": "Claude Code 与 Desktop Code 双向翻译插件：输入侧写审查、原生译文输出块、修复与重试控制，以及本地 SQLite 持久版本。MCP 后端经插件内 launch-translator.sh 定位本机 Node 22，不依赖桌面应用 PATH。",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/claude-sanctuary",
+        "commit": "ad93741c3eab430de908f60f7631420e9b686067",
+        "path": "release/plugin"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
     }
   }
 }
