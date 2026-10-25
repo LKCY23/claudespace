@@ -78,3 +78,8 @@ Bootstrap 是本仓库的独立本机工具，使用 `bootstrap-v<版本>` tag �
 5. 目标机器下载并检查绑定，再本机构建启动器。发布不会安装或切换供应商；真实第三方 GUI 验收单独记录。
 
 正式使用和旧版替换／恢复见 [Bootstrap README](../claude-desktop-bootstrap/README.md)。
+
+## Node 原生依赖的资源
+
+固定包携带平台原生模块时，`requires.runtime` 可声明 Node 主版本、平台、架构和模块 ABI，并通过 `requires.bindings` 要求本机可执行程序。消费者需要 claude-config 0.5.0 或更新版本。解释器检查与原生模块实际加载分别验收，不能将结构检查当作业务通过。
+
