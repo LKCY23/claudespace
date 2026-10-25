@@ -83,3 +83,5 @@ Bootstrap 是本仓库的独立本机工具，使用 `bootstrap-v<版本>` tag �
 
 固定包携带平台原生模块时，`requires.runtime` 可声明 Node 主版本、平台、架构和模块 ABI，并通过 `requires.bindings` 要求本机可执行程序。消费者需要 claude-config 0.5.0 或更新版本。解释器检查与原生模块实际加载分别验收，不能将结构检查当作业务通过。
 
+
+Sanctuary 的当前固定包要求 macOS arm64、Node 22 和模块 ABI 127。Profile 的 `node` 槽绑定到本机 Node 22。完整包的原生安装、重复检查、回滚及隔离 SQLite/MCP 验证见[验收记录](evidence/sanctuary-native-20261026.json)。此记录独立保存在 catalog 仓库；资源包内的 validation 声明保持原样。目标机器的 GUI 与真实翻译仍需分别验收。
