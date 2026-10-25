@@ -540,7 +540,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/claude-sanctuary",
-        "commit": "80759a5b34fd6d6ddff3cd1bc5172037aecdccfe",
+        "commit": "26fc4e0c525c435dfbe37efe4bc39daccefda040",
         "path": "release/plugin"
       },
       "compatibility": {
