@@ -67,14 +67,15 @@ claude-config fetch-baseline --agent codex --catalog claudespace-candidates \
 
 结构验证不代表资源的模型效果、原生客户端加载或服务登录通过。需要这些环境的验收另行记录。
 
-## Bootstrap 发布
+## Bootstrap 发布与采用
 
-Bootstrap 是本仓库的独立本机工具，使用 `bootstrap-v<版本>` tag 和源码包，不进入资源 catalog 或 baseline 采用流程。
+Bootstrap 的源码、测试和发布已迁到 [独立仓库](https://github.com/LKCY23/claude-desktop-bootstrap)。
+本仓库只在 `apps/claude-desktop-bootstrap/` 固定采用的提交，不再构建或发布 Bootstrap。
+2.0.0 和 2.0.1 的原始 `bootstrap-v*` tags 与 Release 附件继续保留，供历史版本复现。
 
-1. 修改启动器和 `install-app.py` 的 VERSION，通过普通 PR 审查；保持版本与下载说明一致。
-2. 等待 `Bootstrap macOS tests` 及 main 两项必需检查通过，再正常合并。
-3. 在合并提交创建对应 tag 并推送。`Verify and release Bootstrap` 再次运行 macOS 测试，与固定 claude-config 版本集成，校验 tag 后打包这个工具目录。
-4. 独立发布作业复用已有 Release 发布器，上传 `claude-desktop-bootstrap-<版本>.tar.gz` 并核对内容后公开。无私有来源密钥，不包含本机 Machine 或预先绑定的 App。
-5. 目标机器下载并检查绑定，再本机构建启动器。发布不会安装或切换供应商；真实第三方 GUI 验收单独记录。
+1. 在独立仓库开发，在 Mac mini 测试，按 [发布流程](../apps/claude-desktop-bootstrap/docs/releases.md) 发布。
+2. 采用时按 [应用聚合说明](../apps/README.md) 更新 submodule 到已推送的明确提交，审查指针差异后提交。
+3. 需要安装或更新时，在 Mac mini 用其 Machine 构建 App。MacBook 只负责开发，不安装第三方启动器。
 
-正式使用和旧版替换／恢复见 [Bootstrap README](../claude-desktop-bootstrap/README.md)。
+Bootstrap 不进入资源 catalog 或 baseline 采用流程。更新 submodule 不会自动安装 App、应用配置或切换供应商。
+正式使用和旧版替换／恢复见 [Bootstrap README](../apps/claude-desktop-bootstrap/README.md)。

@@ -76,6 +76,6 @@ PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 
 ## 其他工具与许可
 
-[Claude Desktop Bootstrap 2.0](claude-desktop-bootstrap/README.md) 是独立的 macOS 工具：通过已安装的 claude-config 和明确 Machine 应用第三方 App Profile，再启动绑定的 Desktop。源码在本仓库维护，以 `bootstrap-v<版本>` 发布可下载源码包；目标机器构建自己的 Dock App。它不是技能或插件，不进入七类 catalog，不随资源基线采用自动安装；供应商、部署模式和认证继续由 Desktop／CC Switch 管理。
+[Claude Desktop Bootstrap](apps/claude-desktop-bootstrap/README.md) 是独立的 macOS 应用工具：通过已安装的 claude-config 和明确 Machine 应用第三方 App Profile，再启动绑定的 Desktop。源码、测试与发布由 [独立仓库](https://github.com/LKCY23/claude-desktop-bootstrap) 维护，本仓库在 `apps/claude-desktop-bootstrap/` 以 submodule 固定采用版本。应用聚合及更新方式见 [apps/README.md](apps/README.md)。它不是技能或插件，不进入七类 catalog，不随资源基线采用自动安装；供应商、部署模式和认证继续由 Desktop／CC Switch 管理。
 
 各第三方来源及子模块保留其作者和许可证；具体内容以对应包或上游仓库为准。
