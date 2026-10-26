@@ -28,3 +28,6 @@
 [submodule "domains/candidates/upstreams/ponytail"]
 	path = domains/candidates/upstreams/ponytail
 	url = https://github.com/DietrichGebert/ponytail.git
+[submodule "apps/claude-desktop-bootstrap"]
+	path = apps/claude-desktop-bootstrap
+	url = https://github.com/LKCY23/claude-desktop-bootstrap.git
