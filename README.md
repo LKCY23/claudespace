@@ -15,6 +15,8 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 资源登记不会选择安装，发布新版本也不会自动改变 Profile 或本机安装。子代理的提示词、工具清单和权限定义跟随资源正文维护。
 
+同一固定来源按客户端分别部署：Claude 使用绑定的 `config_root/skills`，Codex 使用 Machine 明确绑定的 `.agents/skills`。受管技能由 claude-config 部署，其他工具须按客户端交接重叠安装声明。目录存在、已启用、原生发现和当前会话实际使用分别验收；详见[部署边界与交接](docs/deployment-ownership.md)。
+
 ## 资源目录
 
 当前六份新版 `schema_version: 1/resources` 登记共 64 项：
