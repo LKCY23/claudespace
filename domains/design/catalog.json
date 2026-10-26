@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "name": "claudespace-design",
+  "resources": {
+    "impeccable": {
+      "kind": "skill",
+      "description": "Impeccable UI design, redesign, critique, layout, typography, color and polish; official Codex skill distribution.",
+      "origin": {
+        "type": "third-party",
+        "author": "pbakaus",
+        "upstream": {
+          "repo": "pbakaus/impeccable",
+          "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+          "path": ".agents/skills/impeccable"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "pbakaus/impeccable",
+        "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+        "path": ".agents/skills/impeccable"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    }
+  }
+}
