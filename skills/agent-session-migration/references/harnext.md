@@ -18,6 +18,8 @@
 
 按输出中的目标 ID、文件路径和恢复命令接续会话。Pi 恢复使用文件路径，Codex 和 Claude Code 使用会话 ID。
 
+目标为 Claude Code Desktop 时，按[桌面接续](claude-desktop.md)打开转换后的会话。
+
 ## 限制
 
 - Codex → Pi 会截断超过 10,000 字符的单条工具结果；需要完整文本时使用 [SDK 调用方案](harnext-long-tool-output.md)。

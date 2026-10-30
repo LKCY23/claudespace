@@ -21,7 +21,9 @@
 在目标工作目录恢复会话，使用迁移时对应的 `CODEX_HOME` 或 `CLAUDE_CONFIG_DIR`：
 
 - Codex：`codex resume <session_id>`
-- Claude Code：`claude --resume <session_id>`
+- Claude Code CLI：`claude --resume <session_id>`
+
+目标为 Claude Code Desktop 时，按[桌面接续](claude-desktop.md)打开转换后的会话。
 
 ## 限制
 

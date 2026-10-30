@@ -28,7 +28,7 @@ DSH 会话导入、导出插件。以下基于 0.26.2、DSH 桌面引擎 0.2.1-r
 
 | 目标 | 输出目录与后续操作 |
 |---|---|
-| Claude Code | 导出到目标 Claude 数据根下的 `projects` 目录；在 `cwd` 中使用对应的 `CLAUDE_CONFIG_DIR` 执行 `claude --resume <返回的 sessionId>`。 |
+| Claude Code | 导出到目标 Claude 数据根下的 `projects` 目录。CLI：在 `cwd` 中使用对应的 `CLAUDE_CONFIG_DIR` 执行 `claude --resume <返回的 sessionId>`；Desktop：按[桌面接续](claude-desktop.md)打开会话。 |
 | Codex | 导出到临时目录，将返回的 `filePath` 交给 [session-migrate](session-migrate.md)。 |
 | Pi | 导出到临时目录，将返回的 `filePath` 交给 [harnext](harnext.md)。 |
 
