@@ -31,3 +31,6 @@
 [submodule "apps/claude-desktop-bootstrap"]
 	path = apps/claude-desktop-bootstrap
 	url = https://github.com/LKCY23/claude-desktop-bootstrap.git
+[submodule "skills/agent-session-migration"]
+	path = skills/agent-session-migration
+	url = https://github.com/LKCY23/agent-session-migration.git

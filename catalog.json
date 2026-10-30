@@ -483,8 +483,10 @@
         "mode": "original"
       },
       "source": {
-        "kind": "tracked",
-        "path": "skills/agent-session-migration"
+        "kind": "external",
+        "repo": "LKCY23/agent-session-migration",
+        "commit": "5379285af344964dbc64d1ba2424e0ccacbc1d04",
+        "path": "."
       },
       "compatibility": {
         "codex": {
@@ -523,7 +525,8 @@
         }
       },
       "update": {
-        "strategy": "manual"
+        "strategy": "branch",
+        "target": "main"
       }
     },
     "sanctuary-translate": {
