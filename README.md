@@ -19,11 +19,11 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 ## 资源目录
 
-当前六份新版 `schema_version: 1/resources` 登记共 64 项：
+当前六份新版 `schema_version: 1/resources` 登记共 65 项：
 
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
-| [catalog.json](catalog.json) | `claudespace-personal` | 12 项原创或按需资源 |
+| [catalog.json](catalog.json) | `claudespace-personal` | 13 项原创或按需资源 |
 | [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
 | [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
@@ -35,6 +35,8 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 `candidates`、`legacy-plugins` 是保留的目录名称，不代表当前是否安装、启用或验证通过；这些状态分别由 Profile、原生检查和验证记录说明。
 
 插件的原生 marketplace 文件用于宿主发现；其 `plugins` 数组不是另一套新版资源登记。独立技能保持技能类型，不因生成插件清单而变成插件。
+
+`agent-led-swe` 以独立 skill 登记在 `claudespace-personal`，固定采用独立仓库中已接受的 v0.2.0，更新检查跟踪 `master`。Codex 与 Claude Code 共用 `SKILL.md`；原生 Claude marketplace 使用同一来源提交。登记与构建不代表行为效果验收，也不会自动选择或安装。根 marketplace 名称为 `claudespace`，与 catalog 的 `claudespace-personal` 不同；后续更新此资源时须同时审查并同步两处 pin，不能假设 catalog 更新器会改写该原生清单。
 
 ## 构建候选
 
