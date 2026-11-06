@@ -106,7 +106,7 @@ class GitHubPRs:
         self.repo = repo
 
     def api(self, method, route, payload=None, missing=False):
-        args = ['gh', 'api', '--method', method, 'repos/' + self.repo + '/' + route]
+        args = ['gh', 'api', '--method', method, 'repos/' + self.repo + ('/' + route if route else '')]
         if payload is not None: args += ['--input', '-']
         result = subprocess.run(args, input=json.dumps(payload) if payload is not None else None, capture_output=True, text=True, timeout=45)
         if result.returncode:

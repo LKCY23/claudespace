@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 import sys
+import subprocess
 import unittest
 import yaml
 
@@ -33,6 +34,11 @@ class Hub:
 
 
 class RoutingTests(unittest.TestCase):
+    def test_repository_metadata_api_has_no_trailing_slash(self):
+        with patch('sync_update_prs.subprocess.run', return_value=subprocess.CompletedProcess([],0,'{"default_branch":"main"}','')) as run:
+            self.assertEqual(GitHubPRs('owner/repo').api('GET','')['default_branch'],'main')
+            self.assertEqual(run.call_args.args[0][-1],'repos/owner/repo')
+
     def test_dispatch_selects_exact_open_same_repo_head(self):
         hub = Hub()
         self.assertEqual(module.select(hub, {}, number='12', expected='a'*40), hub.pr)
