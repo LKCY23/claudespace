@@ -7,14 +7,14 @@
 | 项目 | 位置与用途 |
 | --- | --- |
 | 来源公钥 | 各来源仓库的只读 Deploy Key |
-| 私钥 | Claudespace 的 `claudespace-private-sources` Environment secret：`CLAUDESPACE_GOAL_AUTHORING_KEY`、`CLAUDESPACE_CLAUDE_SANCTUARY_KEY` |
+| 私钥 | Claudespace repository secrets（私有来源作业受 `claudespace-private-sources` Environment 分支规则约束）：`CLAUDESPACE_GOAL_AUTHORING_KEY`、`CLAUDESPACE_CLAUDE_SANCTUARY_KEY` |
 | 来源与密钥变量映射 | `ci/private-sources.json`，只保存变量名 |
 | GitHub 主机身份 | `ci/github-known-hosts`，固定 GitHub 官方公布的 Ed25519 公钥 |
 | 长期允许分支 | `main`；不允许 PR merge refs、通配分支或 tags |
 
 首次接入可为已审阅的开发分支临时添加 Environment branch policy，并将仓库变量 `CLAUDESPACE_PRIVATE_CI_PREVIEW_REF` 设为该分支。一次真实验证完成后删除这两个临时入口。该变量单独存在不会绕过 Environment 的分支限制。
 
-Deploy key 只授予单仓库读取，没有自动过期时间。更换密钥时先登记新只读公钥、更新 Environment secret并验证，再移除旧公钥。撤销访问时删除来源公钥和 Environment secret。不要把私钥写进仓库或命令参数。[GitHub deploy keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)、[Environment 的分支规则](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)。
+Deploy key 只授予单仓库读取，没有自动过期时间。更换密钥时先登记新只读公钥、更新 repository secret 并验证，再移除旧公钥。撤销访问时删除来源公钥和对应 secret。不要把私钥写进仓库或命令参数。[GitHub deploy keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)、[Environment 的分支规则](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)。
 
 ## 工作流分工
 
@@ -44,6 +44,8 @@ gh workflow run validate-fixed-sources.yml \
 ```
 
 输入为空则检查可信工作流当前提交。手动工作流需先存在于默认分支；初次接入的开发分支验证由受限 `push` 入口触发。[GitHub 手动运行规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。
+
+复用工作流不会自动接收调用方的 repository secrets。`pr-validation.yml` 只向固定来源 job 显式传递上述两个只读密钥，callee 在 `workflow_call.secrets` 中声明必需项；不使用全量 `secrets: inherit`，普通测试、选择及报告 job 不接收它们。
 
 ## 读取与输出
 
