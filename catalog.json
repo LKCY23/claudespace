@@ -483,8 +483,10 @@
         "mode": "original"
       },
       "source": {
-        "kind": "tracked",
-        "path": "skills/agent-session-migration"
+        "kind": "external",
+        "repo": "LKCY23/agent-session-migration",
+        "commit": "3af8bdcf9f5f1483a57cf68d3cfc9d732b031d1c",
+        "path": "."
       },
       "compatibility": {
         "codex": {
@@ -523,7 +525,8 @@
         }
       },
       "update": {
-        "strategy": "manual"
+        "strategy": "branch",
+        "target": "main"
       }
     },
     "sanctuary-translate": {
@@ -575,6 +578,52 @@
       "update": {
         "strategy": "branch",
         "target": "main"
+      }
+    },
+    "agent-led-swe": {
+      "kind": "skill",
+      "description": "围绕用户需求和变更目标，指导 Agent 主导的软件开发，从澄清需求、设计到经过验证的交付。结合人类决策、项目工程约定和可追溯记录，协调相关工作。适用于需要这类协调的软件开发或变更任务，也可显式调用；根据任务规模裁剪。",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/agent-led-swe",
+        "commit": "23d8b921618bc19ab9421572ae4166e3456681e9",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "master"
       }
     }
   }

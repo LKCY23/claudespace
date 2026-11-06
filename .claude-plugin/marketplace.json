@@ -224,6 +224,20 @@
         "sha": "35be21e816e9956ed2673a24b2d37e7837487221"
       },
       "description": "Author and review durable Codex goal contracts."
+    },
+    {
+      "name": "agent-led-swe",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/agent-led-swe",
+        "path": ".",
+        "sha": "23d8b921618bc19ab9421572ae4166e3456681e9"
+      },
+      "description": "围绕用户需求和变更目标，指导 Agent 主导的软件开发，从澄清需求、设计到经过验证的交付。结合人类决策、项目工程约定和可追溯记录，协调相关工作。适用于需要这类协调的软件开发或变更任务，也可显式调用；根据任务规模裁剪。",
+      "category": "devtools",
+      "author": {
+        "name": "LKCY23"
+      }
     }
   ]
 }
