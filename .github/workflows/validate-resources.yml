@@ -23,5 +23,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install -r requirements-test.txt
+      - name: Check generated marketplaces
+        run: python -B scripts/sync_marketplaces.py --check
       - name: Unit and protocol tests
         run: PYTHONPATH=scripts python -B -m unittest discover -s tests -v

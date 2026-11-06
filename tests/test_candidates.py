@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import build_candidates as builder
 from candidate_sources import git_files
 from resource_catalog import read_catalog
+from catalog_index import catalog_paths
 
 
 def manifest_digest(files):
@@ -251,8 +252,29 @@ class CandidateTests(unittest.TestCase):
 
 
 class RepositoryCatalogTests(unittest.TestCase):
+    def test_root_marketplace_contains_registered_claude_plugins_at_catalog_pins(self):
+        catalog = read_catalog(ROOT / 'catalog.json')
+        manifest = json.loads((ROOT / '.claude-plugin/marketplace.json').read_text())
+        self.assertEqual(manifest['name'], 'claudespace')
+        entries = {row['name']: row for row in manifest['plugins']}
+        self.assertEqual(len(entries), len(manifest['plugins']), 'Duplicate marketplace entries')
+        for name, item in catalog['resources'].items():
+            if item['kind'] != 'plugin' or 'claude-code' not in item['compatibility']:
+                continue
+            with self.subTest(resource=name):
+                self.assertIn(name, entries, 'Register new Claude Code plugins in the marketplace too')
+                source = item['source']
+                if source['kind'] == 'external':
+                    native = entries[name]['source']
+                    self.assertEqual(native['source'], 'git-subdir')
+                    self.assertEqual(native['url'].removesuffix('.git'), 'https://github.com/' + source['repo'])
+                    self.assertEqual(native['path'], source['path'])
+                    self.assertEqual(native['sha'], source['commit'])
+                else:
+                    self.assertEqual(entries[name]['source'], './' + source['path'])
+
     def test_every_current_catalog_is_new_format(self):
-        paths = [ROOT / 'catalog.json', *(ROOT / 'domains').glob('*/catalog.json')]
+        paths = catalog_paths(ROOT)
         registered = [read_catalog(p) for p in paths]
         self.assertTrue(registered)
         self.assertEqual(len({item['name'] for item in registered}), len(registered))

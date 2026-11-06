@@ -155,7 +155,7 @@ class PrivateSourceTests(unittest.TestCase):
     def test_catalog_symlink_cannot_select_data_outside_the_inspected_commit(self):
         outside=self.f.root/'outside.json';outside.write_bytes(self.f.file.read_bytes())
         self.f.file.unlink();self.f.file.symlink_to(outside)
-        with self.assertRaisesRegex(ValueError,'inside the inspected'):
+        with self.assertRaisesRegex(ValueError,'symlink|inside the inspected'):
             module.private_items(self.f.source,RULES)
 
     def test_public_queries_keep_the_existing_api(self):

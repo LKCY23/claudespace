@@ -187,23 +187,44 @@ class BundleTests(unittest.TestCase):
             sync.inspect_bundle(f.source,bad,original,f.root/'other-objects.git','owner/catalog','main')
     def test_unselected_discovery_entries_cannot_be_changed(self):
         f = self.fixture
-        paths = ['.claude-plugin/marketplace.json', '.agents/plugins/marketplace.json']
-        manifest = {'name':'fixture', 'plugins':[
-            {'name':'demo', 'source':{'source':'git-subdir','url':'https://github.com/owner/upstream.git','sha':f.old,'path':'.'}},
-            {'name':'unrelated', 'source':'./keep'}]}
-        for path in paths:
-            file = f.source/path; file.parent.mkdir(parents=True); file.write_text(json.dumps(manifest))
+        f.catalog['resources']['second'] = deepcopy(f.item)
+        f.market['skills'] = {'demo@fixture': 'skill', 'second@fixture': 'skill'}
         f.save(); receipt = f.prepare()
-        for index, path in enumerate(paths):
-            with self.subTest(path=path):
-                file = f.output/path; incoming = json.loads(file.read_text()); incoming['plugins'][1]['source'] = './unreviewed'
-                file.write_text(json.dumps(incoming)); f.git(f.output,'add',path); f.git(f.output,'commit','--amend','--no-edit')
-                receipt['candidate_commit'] = f.git(f.output,'rev-parse','HEAD')
-                bundle = f.root/('bad-discovery-'+str(index)+'.bundle')
-                f.git(f.output,'bundle','create',str(bundle),'^'+f.base,receipt['request']['branch'])
-                with self.assertRaisesRegex(ValueError,'unselected discovery'):
-                    sync.inspect_bundle(f.source,bundle,receipt,f.root/('objects-'+str(index)), 'owner/catalog','main')
-                incoming['plugins'][1]['source'] = './keep'; file.write_text(json.dumps(incoming)); f.git(f.output,'add',path)
+        file = f.output / '.claude-plugin/marketplace.json'
+        incoming = json.loads(file.read_text()); incoming['plugins'][1]['source'] = './unreviewed'
+        file.write_text(json.dumps(incoming)); f.git(f.output, 'add', '.'); f.git(f.output, 'commit', '--amend', '--no-edit')
+        receipt['candidate_commit'] = f.git(f.output, 'rev-parse', 'HEAD')
+        bundle = f.root / 'bad-discovery.bundle'
+        f.git(f.output, 'bundle', 'create', str(bundle), '^' + f.base, receipt['request']['branch'])
+        with self.assertRaisesRegex(ValueError, 'unselected discovery'):
+            sync.inspect_bundle(f.source, bundle, receipt, f.root / 'objects', 'owner/catalog', 'main')
+
+    def test_cross_catalog_marketplace_update_is_required_and_policy_is_protected(self):
+        f = self.fixture
+        f.market['skills'] = {'demo@fixture': 'skill'}
+        f.save()
+        nested = f.source / 'domains/optional/catalog.json'; nested.parent.mkdir(parents=True)
+        f.file.rename(nested); f.file = nested
+        (f.source / 'catalogs.json').write_text(json.dumps({'schema_version': 1, 'catalogs': ['domains/optional/catalog.json']}))
+        f.commit(f.source); f.base = f.git(f.source, 'rev-parse', 'HEAD')
+        receipt = f.prepare()
+        manifest = '.claude-plugin/marketplace.json'
+        self.assertEqual(json.loads((f.output / manifest).read_text())['plugins'][0]['source']['sha'], f.new)
+        def inspect(label):
+            receipt['candidate_commit'] = f.git(f.output, 'rev-parse', 'HEAD')
+            bundle = f.root / (label + '.bundle')
+            f.git(f.output, 'bundle', 'create', str(bundle), '^' + f.base, receipt['request']['branch'])
+            return sync.inspect_bundle(f.source, bundle, receipt, f.root / (label + '-objects'), 'owner/catalog', 'main')
+        inspect('good')
+        (f.output / manifest).write_bytes((f.source / manifest).read_bytes())
+        f.git(f.output, 'add', manifest); f.git(f.output, 'commit', '--amend', '--no-edit')
+        with self.assertRaisesRegex(ValueError, 'omitted discovery'):
+            inspect('missing-update')
+        policy = f.output / 'marketplaces.json'; policy.write_text(policy.read_text() + '\n')
+        f.git(f.output, 'add', 'marketplaces.json'); f.git(f.output, 'commit', '--amend', '--no-edit')
+        with self.assertRaisesRegex(ValueError, 'outside its resource scope'):
+            inspect('policy-edit')
+
     def test_submodule_gitlink_must_match_the_new_pin(self):
         f = self.fixture
         f.item['source'] = {'kind':'submodule','repo':'owner/upstream','commit':f.old,'path':'modules/demo'}
@@ -236,6 +257,11 @@ class BundleTests(unittest.TestCase):
 
 class WorkflowTests(unittest.TestCase):
     def read(self,name):return yaml.load((ROOT/'.github/workflows'/name).read_text(),Loader=yaml.BaseLoader)
+    def test_pr_and_release_check_generated_marketplaces_without_writing(self):
+        for workflow, job in [('validate-resources.yml', 'validate'), ('publish-baseline.yml', 'baseline')]:
+            commands = [step.get('run', '') for step in self.read(workflow)['jobs'][job]['steps']]
+            self.assertTrue(any('scripts/sync_marketplaces.py --check' in command for command in commands))
+            self.assertFalse(any('sync_marketplaces.py --write' in command for command in commands))
     def test_read_and_write_jobs_are_separate_and_untrusted_checkout_disabled(self):
         value=self.read('resource-updates.yml');jobs=value['jobs']
         self.assertEqual(value['permissions'],{'contents':'read'})

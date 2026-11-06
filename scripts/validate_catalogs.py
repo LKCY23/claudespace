@@ -7,18 +7,21 @@ from pathlib import Path
 
 from build_candidates import build, write_json
 from run_updates import catalogs
-from resource_catalog import require
+from resource_catalog import read_catalog, require
+from sync_marketplaces import check as check_marketplaces, validate_built_publications
 
 
 def validate(root, output, *, fetch=False, prepared=None):
     root, output = Path(root).resolve(), Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(root), 'Use a new validation directory outside the checkout')
+    check_marketplaces(root)
     output.mkdir(parents=True)
     rows = []
     for catalog in catalogs(root):
-        name = catalog.parent.name if catalog.parent != root else 'root'
+        name = read_catalog(catalog)['name']
         try:
             report = build(catalog, output / name, fetch=fetch, prepared=prepared)
+            validate_built_publications(root, report['catalog'], output / name)
         except (ValueError, OSError, RuntimeError, subprocess.SubprocessError) as exc:
             report = {'status': 'blocked', 'reason': str(exc)}
         write_json(output / (name + '.json'), report)
