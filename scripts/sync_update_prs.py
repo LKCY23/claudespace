@@ -9,8 +9,10 @@ from urllib.parse import quote
 
 from build_candidates import within, write_json
 from candidate_sources import git
-from prepare_update import advance_catalog, advance_discovery, clean_head, protect_local_sources, selected_updates
+from catalog_index import load_catalogs
+from prepare_update import advance_catalog, clean_head, protect_local_sources, selected_updates
 from resource_catalog import NAME, REPO, SHA, require, validate_catalog
+from sync_marketplaces import render as render_marketplaces, encode
 
 PREFIX = '<!-- claudespace-update-v1\n'
 SUFFIX = '\n-->'
@@ -140,17 +142,22 @@ def inspect_bundle(root, bundle, receipt, objects, repo, base):
     protect_local_sources(before, updates, root / Path(path).parent)
     require(after == advance_catalog(before, updates), 'Candidate changed settings outside the selected version update')
     parent = Path(path).parent
-    discovery = [parent / '.claude-plugin/marketplace.json', parent / '.agents/plugins/marketplace.json']
-    allowed = [Path(path), *discovery]
-    allowed += [parent / before['resources'][name]['source']['path'] for name in updates if before['resources'][name]['source']['kind'] != 'external']
+    def read_at(commit, file):
+        row = git(objects, 'ls-tree', commit, '--', file).decode().split()
+        require(row[:2] in (['100644', 'blob'], ['100755', 'blob']), 'Expected a regular committed file: ' + file)
+        return git(objects, 'show', commit + ':' + file)
+    baseline_read = lambda file: read_at(request['base_commit'], file)
+    require(path in [file for file, _ in load_catalogs(baseline_read).values()], 'Candidate catalog is not registered')
+    previous_outputs = render_marketplaces(baseline_read)
+    expected_outputs = render_marketplaces(lambda file: encode(after) if file == path else baseline_read(file))
+    allowed_files = {path, *expected_outputs}
+    allowed_dirs = [parent / before['resources'][name]['source']['path'] for name in updates if before['resources'][name]['source']['kind'] != 'external']
     changed = git(objects, 'diff', '--name-only', '-z', request['base_commit'], head).split(b'\0')
-    require(all(not name or any(Path(name.decode()).is_relative_to(p) for p in allowed) for name in changed), 'Candidate changed files outside its resource scope')
-    for manifest_path in discovery:
-        if manifest_path.as_posix().encode() not in changed:
-            continue
-        previous = json.loads(git(objects, 'show', request['base_commit'] + ':' + manifest_path.as_posix()))
-        incoming = json.loads(git(objects, 'show', head + ':' + manifest_path.as_posix()))
-        require(incoming == advance_discovery(previous, after, updates), 'Candidate changed unselected discovery entries or fields')
+    require(all(not name or name.decode() in allowed_files or any(Path(name.decode()).is_relative_to(p) for p in allowed_dirs)
+                for name in changed), 'Candidate changed files outside its resource scope')
+    for manifest_path, expected in expected_outputs.items():
+        require(baseline_read(manifest_path) == previous_outputs[manifest_path], 'Baseline discovery differs from generated policy')
+        require(read_at(head, manifest_path) == expected, 'Candidate omitted discovery updates or changed unselected discovery entries or fields')
     for name, change in updates.items():
         source = before['resources'][name]['source']
         if source['kind'] == 'submodule':

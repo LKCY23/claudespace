@@ -173,7 +173,15 @@
         "kind": "tracked",
         "path": "packages/deep-research"
       },
-      "compatibility": {},
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
       "requires": {},
       "update": {
         "strategy": "branch",
@@ -200,7 +208,15 @@
         "kind": "tracked",
         "path": "packages/academic-pipeline"
       },
-      "compatibility": {},
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
       "requires": {},
       "update": {
         "strategy": "branch",
@@ -227,7 +243,15 @@
         "kind": "tracked",
         "path": "packages/karpathy-llm-wiki"
       },
-      "compatibility": {},
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
       "requires": {},
       "update": {
         "strategy": "branch",
@@ -254,7 +278,15 @@
         "kind": "tracked",
         "path": "packages/teach"
       },
-      "compatibility": {},
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
       "requires": {},
       "update": {
         "strategy": "branch",

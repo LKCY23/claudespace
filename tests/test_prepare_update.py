@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import prepare_update as module
 from check_updates import check_catalog
+from sync_marketplaces import sync as sync_marketplaces
 
 
 class PrepareTests(unittest.TestCase):
@@ -39,6 +40,8 @@ class PrepareTests(unittest.TestCase):
                      'requires': {}, 'update': {'strategy': 'branch', 'target': 'main'}}
         self.catalog = {'schema_version': 1, 'name': 'fixture', 'resources': {'demo': self.item}}
         self.file = self.source / 'catalog.json'
+        self.market = {'host': 'claude-code', 'output': '.claude-plugin/marketplace.json', 'name': 'fixture-market',
+                       'owner': {'name': 'fixture'}, 'catalogs': ['fixture']}
 
     def git(self, root, *args):
         return subprocess.run(['git', '-c', 'core.hooksPath=/dev/null', '-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', '-c', 'commit.gpgsign=false', '-C', str(root), *args], check=True, capture_output=True, text=True).stdout.strip()
@@ -47,7 +50,12 @@ class PrepareTests(unittest.TestCase):
         self.git(root, 'add', '--all'); self.git(root, '-c', 'commit.gpgsign=false', 'commit', '-qm', 'fixture')
 
     def save(self):
-        self.file.write_text(json.dumps(self.catalog)); self.commit(self.source)
+        self.file.write_text(json.dumps(self.catalog))
+        (self.source / 'catalogs.json').write_text(json.dumps({'schema_version': 1, 'catalogs': ['catalog.json']}))
+        self.market['catalogs'] = [self.catalog['name']]
+        (self.source / 'marketplaces.json').write_text(json.dumps({'schema_version': 1, 'marketplaces': [self.market]}))
+        sync_marketplaces(self.source, write=True)
+        self.commit(self.source)
         self.base = self.git(self.source, 'rev-parse', 'HEAD')
         self.checked = check_catalog(self.catalog, lambda repo, route: {'sha': self.new} if route.startswith('commits/') else
                                      {'status': 'ahead', 'files': [{'filename': 'SKILL.md'}]})
@@ -80,6 +88,36 @@ class PrepareTests(unittest.TestCase):
         self.commit(self.output)
         with self.assertRaisesRegex(ValueError, 'manual commit'): self.prepare()
         self.assertEqual(marker.read_text(), 'retain')
+
+    def test_marketplace_name_can_differ_from_catalog(self):
+        self.catalog['name'] = 'claudespace-personal'
+        self.market['name'] = 'claudespace'
+        self.market['skills'] = {'demo@claudespace-personal': 'skill'}
+        self.save()
+        path = self.source / '.claude-plugin/marketplace.json'
+        manifest = json.loads(path.read_text())
+        self.prepare()
+        expected = deepcopy(manifest)
+        expected['plugins'][0]['source']['sha'] = self.new
+        self.assertEqual(json.loads((self.output / '.claude-plugin/marketplace.json').read_text()), expected)
+        self.assertEqual(json.loads(path.read_text()), manifest)
+
+    def test_stale_marketplace_blocks_before_creating_candidate(self):
+        self.save()
+        (self.source / '.claude-plugin/marketplace.json').write_text('{}')
+        self.commit(self.source)
+        with self.assertRaisesRegex(ValueError, 'Generated marketplaces differ'):
+            self.prepare()
+        self.assertFalse(self.output.exists())
+
+    def test_unindexed_catalog_cannot_prepare_updates(self):
+        self.save()
+        unindexed = self.source / 'unindexed/catalog.json'
+        unindexed.parent.mkdir(); unindexed.write_bytes(self.file.read_bytes())
+        self.commit(self.source)
+        with self.assertRaisesRegex(ValueError, 'not registered'):
+            module.prepare(self.source, unindexed, self.checked, self.output, ['demo'])
+        self.assertFalse(self.output.exists())
 
     def test_manual_branch_and_remote_changes_stop_reuse(self):
         self.save(); report = self.prepare()
