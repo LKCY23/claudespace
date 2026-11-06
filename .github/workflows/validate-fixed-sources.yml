@@ -1,5 +1,10 @@
 name: Validate fixed sources
 on:
+  workflow_call:
+    inputs:
+      commit:
+        type: string
+        required: true
   push:
     branches: [main, codex/claude-codex-adaptation]
   workflow_dispatch:

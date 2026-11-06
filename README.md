@@ -73,6 +73,7 @@ python3 scripts/build_candidates.py   --catalog domains/candidates/catalog.json 
 
 - [源码候选](docs/source-update-candidates.md)：匹配检查报告和旧 pin，准备独立提交，保护本地修改。
 - [GitHub 更新自动化](docs/github-update-automation.md)：调度、PR 复用、人工修改保护、权限边界及基线附件。
+- [更新 PR 流程](docs/update-pr-lifecycle.md)：自动触发两项必需检查、main 合并证明、失败提示和重试边界。
 - [更新与发布操作](docs/operations.md)：预览、批准检查、审查合并和核对基线附件。
 - [实现进度](docs/update-implementation.md)：已验证内容和剩余接入工作。
 

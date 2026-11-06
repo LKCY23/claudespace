@@ -33,6 +33,7 @@ class FakeHub:
     def __init__(self, value, pr=None, head=None):
         self.remote = {'base_sha': value['base_commit'], 'head_sha': head, 'pr': pr}
         self.calls = []; self.fail_pr = False; self.fail_push = False; self.race = False
+        self.safe_merge = False; self.fail_validation = False
         self.on_inspect = None
     def inspect(self, branch, base):
         self.calls.append('inspect')
@@ -44,6 +45,12 @@ class FakeHub:
         if self.fail_push: raise ValueError('synthetic push transport failure')
         if self.remote['head_sha'] != expected: raise ValueError('lease rejected')
         self.remote['head_sha'] = commit
+    def verify_base_merges(self, objects, remote, old):
+        return self.safe_merge
+    def request_validation(self, number, sha, base):
+        self.calls.append('validate')
+        if self.fail_validation: raise ValueError('Validation dispatch failed')
+        return True
     def create(self, value):
         self.calls.append('create')
         if self.fail_pr: raise ValueError('synthetic PR failure')
@@ -75,6 +82,22 @@ class PRPolicyTests(unittest.TestCase):
         result = sync.sync_one(value, Path('/unused'), hub, write=True)
         self.assertEqual(result['status'], 'synced'); self.assertEqual(result['pr_number'], 7)
         self.assertIn('update', hub.calls); self.assertNotIn('create', hub.calls)
+
+    def test_verified_base_merge_can_refresh_but_uses_the_observed_lease(self):
+        old = state(); value = deepcopy(old); value['generated_head'] = 'f'*40
+        hub = FakeHub(value, pr_for(old), '1'*40); hub.safe_merge = True
+        result = sync.sync_one(value, Path('/unused'), hub, write=True)
+        self.assertEqual(result['status'], 'synced'); self.assertEqual(result['expected_head'], '1'*40)
+        self.assertTrue(result['validation_requested'])
+
+    def test_validation_dispatch_failure_keeps_successful_pr_and_can_retry(self):
+        value = state(); hub = FakeHub(value); hub.fail_validation = True
+        result = sync.sync_one(value, Path('/unused'), hub, write=True)
+        self.assertEqual(result['status'], 'partial'); self.assertTrue(result['pr_updated'])
+        hub.fail_validation = False
+        result = sync.sync_one(value, Path('/unused'), hub, write=True)
+        self.assertEqual(result['status'], 'unchanged'); self.assertTrue(result['validation_requested'])
+        self.assertEqual(hub.calls.count('push'), 1)
 
     def test_manual_commit_pr_text_author_and_group_changes_block(self):
         value = state()
@@ -147,6 +170,24 @@ class BundleTests(unittest.TestCase):
         self.fixture.save()
     def checked_api(self, repo, route):
         return {'sha': self.fixture.new} if route.startswith('commits/') else {'status':'ahead','files':[{'filename':'SKILL.md'}]}
+    def test_base_merge_proof_rejects_edits_and_non_base_parents(self):
+        f = self.fixture
+        (f.source/'candidate.txt').write_text('generated'); f.commit(f.source)
+        generated = f.git(f.source, 'rev-parse', 'HEAD')
+        f.git(f.source, 'checkout', '-qb', 'advanced', f.base)
+        (f.source/'base.txt').write_text('main advanced'); f.commit(f.source)
+        base = f.git(f.source, 'rev-parse', 'HEAD')
+        f.git(f.source, 'checkout', '-qb', 'bot', generated)
+        f.git(f.source, 'merge', '--no-ff', '--no-edit', base)
+        merged = f.git(f.source, 'rev-parse', 'HEAD')
+        self.assertTrue(sync.only_base_merges(f.source, merged, generated, base))
+        self.assertFalse(sync.only_base_merges(f.source, merged, generated, f.base))
+        (f.source/'human.txt').write_text('keep my edit'); f.commit(f.source)
+        self.assertFalse(sync.only_base_merges(f.source, f.git(f.source, 'rev-parse', 'HEAD'), generated, base))
+        f.git(f.source, 'checkout', '--detach', merged)
+        (f.source/'human-resolution.txt').write_text('extra merge resolution')
+        f.git(f.source, 'add', '.'); f.git(f.source, 'commit', '--amend', '--no-edit')
+        self.assertFalse(sync.only_base_merges(f.source, f.git(f.source, 'rev-parse', 'HEAD'), generated, base))
     def export(self):
         f = self.fixture; output = f.root/'batch'
         report = run_updates.run(f.source, output, api=self.checked_api, prepared={'owner/upstream':f.upstream})
@@ -265,7 +306,7 @@ class WorkflowTests(unittest.TestCase):
     def test_read_and_write_jobs_are_separate_and_untrusted_checkout_disabled(self):
         value=self.read('resource-updates.yml');jobs=value['jobs']
         self.assertEqual(value['permissions'],{'contents':'read'})
-        self.assertEqual(jobs['pull_requests']['permissions'],{'contents':'write','pull-requests':'write'})
+        self.assertEqual(jobs['pull_requests']['permissions'],{'contents':'write','pull-requests':'write','actions':'write'})
         self.assertIn('needs.prepare.outputs.ready',jobs['pull_requests']['if'])
         for job in jobs.values():
             for step in job['steps']:
@@ -278,7 +319,8 @@ class WorkflowTests(unittest.TestCase):
         for path in (ROOT/'.github/workflows').glob('*.yml'):
             value=self.read(path.name)
             for job in value['jobs'].values():
-                for step in job['steps']:
+                if 'uses' in job:self.assertRegex(job['uses'],r'^\./\.github/workflows/[\w-]+\.yml$')
+                for step in job.get('steps', []):
                     if 'uses' in step:self.assertRegex(step['uses'],r'^actions/[\w-]+@[0-9a-f]{40}$')
         value=self.read('resource-updates.yml')
         self.assertEqual(value['on']['workflow_dispatch']['inputs']['publish']['default'],'false')

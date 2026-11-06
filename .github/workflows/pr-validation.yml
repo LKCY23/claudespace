@@ -1,0 +1,98 @@
+name: Validate PR head
+on:
+  workflow_run:
+    workflows: [Validate tooling]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Open same-repository PR number'
+        type: string
+        required: true
+      head:
+        description: 'Exact current PR head SHA'
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: claudespace-pr-head-${{ inputs.head || github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  select:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+      statuses: write
+    outputs:
+      eligible: ${{ steps.target.outputs.eligible }}
+      number: ${{ steps.target.outputs.number }}
+      head: ${{ steps.target.outputs.head }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Select current same-repository PR
+        id: target
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr }}
+          PR_HEAD: ${{ inputs.head }}
+        run: python3 -B scripts/pr_validation.py select --repo "$GITHUB_REPOSITORY"
+  tooling:
+    needs: select
+    if: needs.select.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ needs.select.outputs.head }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements-test.txt
+      - run: python -B scripts/sync_marketplaces.py --check
+      - run: PYTHONPATH=scripts python -B -m unittest discover -s tests -v
+  fixed_sources:
+    needs: select
+    if: needs.select.outputs.eligible == 'true'
+    permissions:
+      contents: read
+      statuses: write
+    uses: ./.github/workflows/validate-fixed-sources.yml
+    with:
+      commit: ${{ needs.select.outputs.head }}
+  report:
+    needs: [select, tooling, fixed_sources]
+    if: ${{ always() && needs.select.outputs.eligible == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Report results only for the inspected head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ needs.select.outputs.number }}
+          PR_HEAD: ${{ needs.select.outputs.head }}
+          TOOLING_RESULT: ${{ needs.tooling.result }}
+          FIXED_RESULT: ${{ needs.fixed_sources.result }}
+        run: python3 -B scripts/pr_validation.py report --repo "$GITHUB_REPOSITORY"
