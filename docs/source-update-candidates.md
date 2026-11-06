@@ -65,7 +65,7 @@ python3 scripts/prepare_update.py \
 
 Code Simplifier 的原生 Claude manifest 随原上游定义同步；若本地除包装版本外有其他修改，则停止。Codex 调度包装保留。包装版本与导入 pin/revision 的一致性继续由构建器检查。
 
-更新版本时，旧版本声明的 native/runtime 验证不会自动沿用，候选将其改为 `not-evaluated`；当前构建只记录 structural 结果。更新已有、属于当前 catalog 的发现清单时保留其他条目及元数据。根 marketplace 的其他历史发现入口不会被猜测接管；临时构建产物会提供与当前选择一致的宿主清单。
+更新版本时，旧版本声明的 native/runtime 验证不会自动沿用，候选将其改为 `not-evaluated`；当前构建只记录 structural 结果。正式市场依据 `catalogs.json` 和 `marketplaces.json` 统一生成，更新候选会验证发布包装并重生成跨目录引用该资源的市场；基线清单过期时先报错，不把其他修改夹带进候选。候选审查从固定 Git 对象重新生成预期清单，拒绝漏同步及无关条目变动。详见 [市场生成](marketplace-generation.md)。临时构建产物的清单仍只包含当前选择的原生插件。
 
 ## 重复运行和人工修改保护
 

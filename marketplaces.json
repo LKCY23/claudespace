@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "marketplaces": [
+    {
+      "host": "claude-code",
+      "output": ".claude-plugin/marketplace.json",
+      "name": "claudespace",
+      "owner": {
+        "name": "LKCY23"
+      },
+      "description": "Claude Code plugins generated from the indexed Claudespace resource catalogs.",
+      "catalogs": [
+        "claudespace-personal",
+        "claude-hud",
+        "claudespace-legacy",
+        "claudespace-optional-tools",
+        "claudespace-standalone"
+      ],
+      "skills": {
+        "analyze-peer-work@claudespace-personal": "native",
+        "github@claudespace-legacy": "skill",
+        "skill-evaluator@claudespace-personal": "native",
+        "research-brainstorm@claudespace-personal": "skill",
+        "teach@claudespace-legacy": "skill",
+        "research-dev-orchestrator@claudespace-personal": "skill",
+        "literature-review@claudespace-legacy": "skill",
+        "read-paper@claudespace-legacy": "skill",
+        "deep-research@claudespace-legacy": "skill",
+        "academic-paper@claudespace-standalone": "skill",
+        "academic-paper-reviewer@claudespace-standalone": "skill",
+        "academic-pipeline@claudespace-legacy": "skill",
+        "karpathy-llm-wiki@claudespace-legacy": "skill",
+        "programming-practice@claudespace-personal": "native",
+        "agent-browser@claudespace-optional-tools": "skill",
+        "goal-authoring@claudespace-personal": "skill",
+        "agent-led-swe@claudespace-personal": "native"
+      },
+      "exclude": {
+        "codex@claudespace-legacy": "Not published in the existing root marketplace; retain the explicit opt-in distribution decision.",
+        "claude-hud@claude-hud": "Distributed through its official marketplace or claude-config; retain the existing installation identity."
+      },
+      "display": {
+        "analyze-peer-work@claudespace-personal": {
+          "category": "research"
+        },
+        "github@claudespace-legacy": {
+          "category": "devtools"
+        },
+        "skill-evaluator@claudespace-personal": {
+          "category": "devtools"
+        },
+        "research-brainstorm@claudespace-personal": {
+          "category": "research"
+        },
+        "teach@claudespace-legacy": {
+          "category": "productivity"
+        },
+        "research-dev-orchestrator@claudespace-personal": {
+          "category": "research"
+        },
+        "literature-review@claudespace-legacy": {
+          "category": "research"
+        },
+        "read-paper@claudespace-legacy": {
+          "category": "research"
+        },
+        "deep-research@claudespace-legacy": {
+          "category": "research"
+        },
+        "academic-paper@claudespace-standalone": {
+          "category": "research"
+        },
+        "academic-paper-reviewer@claudespace-standalone": {
+          "category": "research"
+        },
+        "academic-pipeline@claudespace-legacy": {
+          "category": "research"
+        },
+        "karpathy-llm-wiki@claudespace-legacy": {
+          "category": "knowledge"
+        },
+        "programming-practice@claudespace-personal": {
+          "category": "productivity"
+        },
+        "aris@claudespace-optional-tools": {
+          "category": "research",
+          "defaultEnabled": false
+        },
+        "agent-browser@claudespace-optional-tools": {
+          "category": "devtools",
+          "defaultEnabled": false
+        },
+        "autoresearchclaw@claudespace-optional-tools": {
+          "category": "research",
+          "defaultEnabled": false
+        },
+        "agent-led-swe@claudespace-personal": {
+          "category": "devtools"
+        }
+      }
+    },
+    {
+      "host": "claude-code",
+      "output": "domains/candidates/.claude-plugin/marketplace.json",
+      "name": "claudespace-candidates",
+      "catalogs": [
+        "claudespace-candidates"
+      ],
+      "owner": {
+        "name": "LKCY23"
+      }
+    },
+    {
+      "host": "codex",
+      "output": "domains/candidates/.agents/plugins/marketplace.json",
+      "name": "claudespace-candidates",
+      "catalogs": [
+        "claudespace-candidates"
+      ],
+      "interface": {
+        "displayName": "claudespace-candidates · candidates"
+      }
+    }
+  ]
+}

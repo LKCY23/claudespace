@@ -13,7 +13,9 @@ import uuid
 
 from build_candidates import build, within, write_files, write_json
 from candidate_sources import Sources, git, local_files
+from catalog_index import catalog_paths
 from resource_catalog import NAME, SHA, read_catalog, require, validate_catalog
+from sync_marketplaces import check as check_marketplaces, sync as sync_marketplaces, validate_built_publications
 
 
 RECEIPT = 'claudespace-update.json'
@@ -111,43 +113,14 @@ def protect_local_sources(catalog, updates, root):
                     'Source replacement overlaps another local resource; adapt explicitly: ' + name + ', ' + other_name)
 
 
-def advance_discovery(manifest, catalog, changed):
-    """Change selected source references while preserving all other entries."""
-    manifest = deepcopy(manifest)
-    if manifest.get('name') != catalog['name']:
-        return manifest
-    for entry in manifest.get('plugins', []):
-        if entry.get('name') not in changed:
-            continue
-        source = catalog['resources'][entry['name']]['source']
-        if source['kind'] == 'external':
-            old = entry.get('source', {})
-            require(isinstance(old, dict) and old.get('source') == 'git-subdir'
-                    and old.get('url', '').removesuffix('.git') == 'https://github.com/' + source['repo'],
-                    'Native external-source encoding needs manual adaptation')
-            entry['source'] = {**old, 'sha': source['commit'], 'path': source['path']}
-        else:
-            entry['source'] = './' + source['path']
-    return manifest
-
-
-def update_discovery(catalog_root, catalog, changed):
-    """Update existing discovery entries owned by this catalog, preserving extras."""
-    for filename in ('.claude-plugin/marketplace.json', '.agents/plugins/marketplace.json'):
-        path = catalog_root / filename
-        if not path.exists():
-            continue
-        manifest = json.loads(path.read_text())
-        if manifest.get('name') == catalog['name']:
-            write_json(path, advance_discovery(manifest, catalog, changed))
-
-
 def prepare(root, catalog_file, checked, output, names, *, group=None, prepared=None, fetch=False):
     root = Path(root).resolve()
     catalog_file = Path(catalog_file).resolve()
     require(catalog_file.is_relative_to(root), 'Catalog must be inside the source repository')
     relative = catalog_file.relative_to(root).as_posix()
     base = clean_head(root)
+    check_marketplaces(root)
+    require(catalog_file in catalog_paths(root), 'Catalog is not registered in catalogs.json')
     require(git(root, 'show', base + ':' + relative) == catalog_file.read_bytes(), 'Catalog differs from its committed baseline')
     catalog = read_catalog(catalog_file)
     updates = selected_updates(catalog, checked, names)
@@ -233,7 +206,8 @@ def prepare(root, catalog_file, checked, output, names, *, group=None, prepared=
             require(package.is_dir() and not package.is_symlink(), 'Import target must be a real package directory')
             shutil.rmtree(package)
             shutil.copytree(workspace / 'build/resources' / name, package)
-        update_discovery(catalog_root, next_catalog, updates)
+        validate_built_publications(candidate, next_catalog['name'], workspace / 'build', selected=updates)
+        sync_marketplaces(candidate, write=True)
         # Stage only the candidate checkout. Its hooks are disabled for every Git command.
         git(candidate, 'add', '--all')
         git(candidate, '-c', 'commit.gpgsign=false', '-c', 'user.name=Claudespace Updates',
