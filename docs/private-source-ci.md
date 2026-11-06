@@ -19,11 +19,21 @@ Deploy key 只授予单仓库读取，没有自动过期时间。更换密钥时
 ## 工作流分工
 
 - `Validate tooling`：PR 的代码测试，不使用私钥或私有源码。
+- `Validate PR head`：从默认分支调度准确 PR head 的检查。普通 `Validate tooling` 结束后自动触发；更新机器人也会显式 dispatch，避免 `GITHUB_TOKEN` 创建的 PR 停在 workflow approval。只接受仍打开、目标为默认分支、head SHA 未变的本仓库 PR，fork 不自动进入私有来源验证。
 - `Validate fixed sources`：从可信分支加载校验程序；待检提交单独 checkout，仅作为数据读取。只运行可信目录下的 Python，不安装或执行待检提交中的代码。结果写到被检查 SHA 的 `claudespace/fixed-sources` commit status。
 - `Resource updates`：默认分支的可信准备作业读取私有来源和比较私有分支；单个私有来源失败仍保存其他公共候选。后续 PR 写入作业没有来源私钥。
 - `Publish structural baseline`：默认分支再次验证全部固定来源，通过后才生成基线记录。
 
-PR 的测试通过不代表全部固定来源已经验证。合并前还应确认准确提交的 `claudespace/fixed-sources` 状态通过；这一状态由可信校验工作流产生，不能沿用其他 SHA 的结果。
+PR 的测试通过不代表全部固定来源已经验证。自动协调流程在无私钥、只读 token 的独立 job 中运行 PR 的测试；私有来源 job 复用默认分支的可信校验工作流，只把 PR checkout 当作数据，不执行其中的脚本。报告 job 也只运行可信代码。结果写到准确 head 的 `Tooling tests` 和 `claudespace/fixed-sources` 状态；旧 head 完成后不会替新 head 标记通过，跳过或取消不会算通过。
+
+自动调度失败或需要重试时，可从 main 手动启动完整 PR 验证：
+
+```sh
+gh workflow run pr-validation.yml --repo LKCY23/claudespace --ref main \
+  -f pr="<PR编号>" -f head="<准确40位head SHA>"
+```
+
+协调工作流仅在默认分支运行，不使用 `pull_request_target`，不向运行 PR 测试的 job 传递来源私钥。`workflow_run` 只订阅 `Validate tooling`，不订阅自身，因此不会循环触发。新工作流需先合入 main 才能自动生效；首次 PR 仍使用下方准确提交的手动固定来源验证入口。
 
 工作流已合入默认分支，可显式验证一个完整提交：
 

@@ -2,6 +2,7 @@
 """Preview or synchronize bot-owned update PRs from validated Git bundles."""
 import argparse
 import json
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -57,7 +58,7 @@ def managed_pr(pr):
             pr['user']['login'], pr['head']['repo']['full_name'], pr['head']['ref'], pr['base']['ref'])
 
 
-def decide(state, remote, bot):
+def decide(state, remote, bot, *, verified_base_merges=False):
     require(remote['base_sha'] == state['base_commit'], 'Default branch advanced; prepare a new candidate')
     pr, head = remote['pr'], remote['head_sha']
     old = None
@@ -66,7 +67,8 @@ def decide(state, remote, bot):
         require(same_scope(old, state), 'The update group changed; review the existing PR before reusing it')
         if pr['state'] == 'closed' and not pr.get('merged_at') and old['updates'] == state['updates']:
             return {'action': 'declined', 'expected_head': head, 'pr_number': pr['number']}
-        require(head in (None, old['generated_head'], state['generated_head']), 'Candidate branch has manual commits; preserve them')
+        require(head in (None, old['generated_head'], state['generated_head']) or verified_base_merges,
+                'Candidate branch has manual commits; preserve them')
         if pr['state'] == 'open':
             require(head is not None, 'Open PR branch is missing')
             if old['base_commit'] == state['base_commit'] and old['tree'] == state['tree'] and old['updates'] == state['updates'] and head == old['generated_head']:
@@ -77,19 +79,59 @@ def decide(state, remote, bot):
             'pr_number': pr['number'] if pr and pr['state'] == 'open' else None}
 
 
+def only_base_merges(objects, head, generated, base):
+    """Prove every extra commit is an unmodified merge from the current base history."""
+    try:
+        for _ in range(32):
+            if head == generated:
+                return True
+            row = git(objects, 'rev-list', '--parents', '-n', '1', head).decode().split()
+            if len(row) != 3:
+                return False
+            _, first, second = row
+            git(objects, 'merge-base', '--is-ancestor', second, base)
+            expected = git(objects, 'merge-tree', '--write-tree', first, second).decode().splitlines()[0]
+            actual = git(objects, 'rev-parse', head + '^{tree}').decode().strip()
+            if actual != expected:
+                return False
+            head = first
+    except (ValueError, subprocess.SubprocessError):
+        return False
+    return False
+
+
 class GitHubPRs:
     def __init__(self, repo):
         require(REPO.fullmatch(repo), 'Invalid GitHub repository')
         self.repo = repo
 
     def api(self, method, route, payload=None, missing=False):
-        args = ['gh', 'api', '--method', method, 'repos/' + self.repo + '/' + route]
+        args = ['gh', 'api', '--method', method, 'repos/' + self.repo + ('/' + route if route else '')]
         if payload is not None: args += ['--input', '-']
         result = subprocess.run(args, input=json.dumps(payload) if payload is not None else None, capture_output=True, text=True, timeout=45)
         if result.returncode:
             if missing and '(HTTP 404)' in result.stderr: return None
             raise ValueError('GitHub ' + method + ' failed; check repository/token permissions and the saved operation report')
-        return json.loads(result.stdout)
+        return json.loads(result.stdout) if result.stdout.strip() else None
+
+    def verify_base_merges(self, objects, remote, old):
+        git(objects, '-c', 'credential.helper=', '-c', 'credential.helper=!gh auth git-credential',
+            'fetch', '--quiet', '--no-tags', 'https://github.com/' + self.repo + '.git',
+            'refs/heads/' + old['branch'])
+        require(git(objects, 'rev-parse', 'FETCH_HEAD').decode().strip() == remote['head_sha'],
+                'Branch changed while verifying base merges')
+        return only_base_merges(objects, remote['head_sha'], old['generated_head'], remote['base_sha'])
+
+    def request_validation(self, number, sha, base):
+        statuses = self.api('GET', 'commits/' + sha + '/status')['statuses']
+        latest = {}
+        for status in statuses:
+            latest.setdefault(status['context'], status['state'])
+        if all(latest.get(context) == 'success' for context in ('Tooling tests', 'claudespace/fixed-sources')):
+            return False
+        self.api('POST', 'actions/workflows/pr-validation.yml/dispatches',
+                 {'ref': base, 'inputs': {'pr': str(number), 'head': sha}})
+        return True
 
     def inspect(self, branch, base):
         tip = self.api('GET', 'git/ref/heads/' + quote(base, safe=''))
@@ -174,9 +216,17 @@ def sync_one(state, objects, hub, *, write=False, bot='github-actions[bot]'):
     push_attempted = pr_attempted = False
     try:
         remote = hub.inspect(state['branch'], state['base'])
-        plan = decide(state, remote, bot); result.update(plan)
+        verified = False
+        if remote['pr'] and remote['head_sha'] not in (None, state['generated_head']):
+            old = marker(remote['pr'], state['repo'], state['base'], state['branch'], bot)
+            if remote['head_sha'] != old['generated_head']:
+                verified = hub.verify_base_merges(objects, remote, old)
+        plan = decide(state, remote, bot, verified_base_merges=verified); result.update(plan)
         if not write or plan['action'] in ('unchanged', 'declined'):
-            result['status'] = 'preview' if not write else plan['action']; return result
+            result['status'] = 'preview' if not write else plan['action']
+            if write and plan['action'] == 'unchanged':
+                result['validation_requested'] = hub.request_validation(plan['pr_number'], remote['head_sha'], state['base'])
+            return result
         # Re-read before mutation; the explicit Git lease also checks at the push itself.
         fresh = hub.inspect(state['branch'], state['base'])
         require(all(fresh[key] == remote[key] for key in ('base_sha', 'head_sha'))
@@ -198,9 +248,10 @@ def sync_one(state, objects, hub, *, write=False, bot='github-actions[bot]'):
             pr_attempted = True
             pr = hub.create(state)
         result.update(status='synced', pr_updated=True, pr_number=pr['number'], pr_url=pr['html_url'])
+        result['validation_requested'] = hub.request_validation(pr['number'], state['generated_head'], state['base'])
     except (ValueError, OSError, RuntimeError, KeyError, TypeError, subprocess.SubprocessError) as exc:
         if push_attempted and not result['remote_branch_updated']: result['remote_branch_updated'] = None
-        if pr_attempted: result['pr_updated'] = None
+        if pr_attempted and not result['pr_updated']: result['pr_updated'] = None
         result.update(status='partial' if push_attempted or pr_attempted else 'blocked', reason=str(exc))
     return result
 
@@ -244,6 +295,12 @@ def main(argv=None):
         report = {'schema_version': 1, 'kind': 'claudespace-pr-sync', 'status': 'needs_attention',
                   'write_requested': args.write, 'results': [{'status': 'blocked', 'reason': str(exc)}]}
     write_json(args.report, report)
+    if os.environ.get('GITHUB_STEP_SUMMARY'):
+        with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+            stream.write('## 更新 PR 同步\n\n')
+            for row in report['results']:
+                detail = row.get('reason', '等待必需检查和人工合并' if row['status'] == 'synced' else row['status'])
+                stream.write('- ' + row.get('branch', '候选') + '：' + detail.replace('\n', ' ') + '\n')
     if args.format == 'json':
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
