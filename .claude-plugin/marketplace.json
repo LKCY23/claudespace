@@ -3,241 +3,225 @@
   "owner": {
     "name": "LKCY23"
   },
-  "description": "Personal Claude Code skill marketplace — self-authored and curated third-party skills with pinned versions. One marketplace, one install command.",
+  "description": "Claude Code plugins generated from the indexed Claudespace resource catalogs.",
   "plugins": [
     {
-      "name": "analyze-peer-work",
-      "source": "./skills/analyze-peer-work",
-      "description": "需求驱动的参考工作分析与借鉴 — 机制与证据核查、适用性评价、可读文档与改进建议",
-      "category": "research",
-      "author": {
-        "name": "LKCY23"
-      }
-    },
-    {
-      "name": "github",
-      "source": "./skills/github",
-      "description": "GitHub workflow skill — manage PRs, issues, releases, and repo operations directly in Claude Code",
-      "category": "devtools"
-    },
-    {
-      "name": "skill-evaluator",
-      "source": "./skills/skill-evaluator",
-      "description": "Skill 评测 — 触发边界、执行证据、产物验收、对照比较与回归分析",
-      "category": "devtools",
-      "author": {
-        "name": "LKCY23"
-      }
-    },
-    {
-      "name": "research-brainstorm",
-      "source": "./skills/research-brainstorm",
-      "description": "研究头脑风暴 — 系统化生成、评估和筛选研究方向与假设",
-      "category": "research"
-    },
-    {
-      "name": "teach",
-      "source": "./skills/teach",
-      "description": "Stateful teaching workflow with missions, lessons, references, and learning records",
-      "category": "productivity",
-      "author": {
-        "name": "Matt Pocock"
-      }
-    },
-    {
-      "name": "research-dev-orchestrator",
-      "source": "./skills/research-dev-orchestrator",
-      "description": "Research & dev orchestrator — 角色中立协调器 + CLI agent workers，将研究/实验目标转化为需求、设计决策、任务包、worker 调度、证据驱动评审和迭代实现",
-      "category": "research"
-    },
-    {
-      "name": "literature-review",
-      "source": "./skills/research-reading-skills/skills/literature-review",
-      "description": "学术文献综述 — 多论文对比矩阵、主题聚类、系统化文献调研与综合分析",
-      "category": "research"
-    },
-    {
-      "name": "read-paper",
-      "source": "./skills/research-reading-skills/skills/read-paper",
-      "description": "论文阅读工具 — 结构化精读、批判性分析、claims-evidence 提取与复现评估",
-      "category": "research"
-    },
-    {
-      "name": "deep-research",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "deep-research",
-        "ref": "main",
-        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
-      },
-      "description": "深度研究 — 13 agent 协作：研究问题定义、系统性检索、偏差评估、综合分析、引用编译",
-      "category": "research",
-      "author": {
-        "name": "Imbad0202"
-      }
-    },
-    {
       "name": "academic-paper",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "academic-paper",
-        "ref": "main",
-        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
-      },
-      "description": "学术论文写作 — 12 agent 协作：结构设计、段落写作、引用合规、双语摘要、格式排版",
+      "description": "Academic paper writing skill with 12-agent pipeline. v2.5: Style Calibration (learn author's writing voice from past papers) + Writing Quality Check (writing quality checklist for natural prose). Supports IMRaD, literature review, theoretical, case study, policy brief, and conference paper structures. APA 7.0 (default), Chicago, MLA, IEEE, Vancouver citation formats. Bilingual abstracts (zh-TW + EN). Multi-format output (LaTeX, DOCX, PDF, Markdown). Triggers on: write paper, academic paper, paper outline, write abstract, revise paper, check citations, convert to LaTeX, guide my paper, parse reviews, revision roadmap, 寫論文, 學術論文, 論文大綱, 寫摘要, 修改論文, 檢查引用, 引導我寫論文, 帶我規劃論文, 逐章規劃, 論文架構, 審查意見, 修訂路線圖.",
+      "source": "./domains/standalone/packages/academic-paper",
       "category": "research",
-      "author": {
-        "name": "Imbad0202"
-      }
+      "strict": false,
+      "skills": [
+        "./"
+      ]
     },
     {
       "name": "academic-paper-reviewer",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "academic-paper-reviewer",
-        "ref": "main",
-        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
-      },
-      "description": "论文评审 — 5 人评审团队 + EIC：方法学、领域、统计、批判性、视角多维度审稿",
+      "description": "Multi-perspective academic paper review with dynamic reviewer personas. Simulates 5 independent reviewers (EIC + 3 peer reviewers + Devil's Advocate) with field-specific expertise. Supports full review, re-review (verification), quick assessment, methodology focus, and Socratic guided modes. Triggers on: review paper, peer review, manuscript review, referee report, review my paper, critique paper, simulate review, editorial review.",
+      "source": "./domains/standalone/packages/academic-paper-reviewer",
       "category": "research",
-      "author": {
-        "name": "Imbad0202"
-      }
+      "strict": false,
+      "skills": [
+        "./"
+      ]
     },
     {
       "name": "academic-pipeline",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Imbad0202/academic-research-skills",
-        "path": "academic-pipeline",
-        "ref": "main",
-        "sha": "57507ef7a0b6828798d5de8f68a08b5943f43a87"
-      },
-      "description": "完整学术流水线 — 从 idea 到论文的全流程编排：状态机追踪、完整性验证、claim 校验",
+      "description": "Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize. Coordinates deep-research, academic-paper, and academic-paper-reviewer into a seamless 10-stage workflow with mandatory integrity verification, two-stage peer review, and reproducible quality gates. Triggers on: academic pipeline, research to paper, full paper workflow, paper pipeline, end-to-end paper, research-to-publication, complete paper workflow.",
+      "source": "./domains/legacy-plugins/packages/academic-pipeline",
       "category": "research",
-      "author": {
-        "name": "Imbad0202"
-      }
-    },
-    {
-      "name": "karpathy-llm-wiki",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Astro-Han/karpathy-llm-wiki",
-        "path": ".",
-        "ref": "main",
-        "sha": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642"
-      },
-      "description": "Karpathy LLM Wiki 知识库 — Ingest / Query / Lint 三操作维护个人 LLM 知识体系",
-      "category": "knowledge",
-      "author": {
-        "name": "Astro-Han"
-      }
-    },
-    {
-      "name": "programming-practice",
-      "source": "./skills/programming-practice",
-      "description": "编程实训教练 — Codex / Claude Code 共用教学规则，学生独立实现，AI 提供分级提示、调试反馈与学习记录",
-      "category": "productivity",
-      "author": {
-        "name": "LKCY23"
-      }
-    },
-    {
-      "name": "aris",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
-        "path": ".",
-        "sha": "26b95cfa0d8747078e9e43b42e20952709e561b8"
-      },
-      "description": "ARIS research skills, pinned upstream plugin; optional, not installed by catalog registration.",
-      "category": "research",
-      "defaultEnabled": false,
-      "metadata": {
-        "selection": "on-demand",
-        "local_install_removed_on": "2026-10-07",
-        "runtime_setup": "Run the upstream setup only after choosing to install; old local copies are privately archived."
-      }
+      "strict": false,
+      "skills": [
+        "./"
+      ]
     },
     {
       "name": "agent-browser",
+      "description": "Browser automation skill bundle with fixed upstream source; requires a compatible CLI.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/vercel-labs/agent-browser",
-        "path": "skills",
+        "path": "skills/agent-browser",
         "sha": "f7c8b071343dda29477a56cb336ea76144c05496"
       },
-      "description": "Browser automation skill bundle with fixed upstream source; requires a compatible CLI.",
-      "version": "0.38.2",
-      "strict": false,
-      "skills": [
-        "./agent-browser"
-      ],
       "category": "devtools",
       "defaultEnabled": false,
-      "metadata": {
-        "selection": "on-demand",
-        "runtime": {
-          "npm_package": "agent-browser",
-          "version": "0.38.2",
-          "browser_download": "Separate explicit setup; existing browser user data is not part of this package."
-        },
-        "specialized_skills": {
-          "source": "Matching CLI skills get commands",
-          "names": [
-            "dogfood",
-            "electron",
-            "slack",
-            "vercel-sandbox"
-          ]
-        }
-      }
-    },
-    {
-      "name": "autoresearchclaw",
-      "source": "./domains/optional-tools/packages/autoresearchclaw",
-      "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
-      "version": "0.3.1+claudespace.1",
-      "category": "research",
-      "defaultEnabled": false,
-      "metadata": {
-        "selection": "on-demand",
-        "runtime": {
-          "python_package": "researchclaw",
-          "source": "https://github.com/aiming-lab/AutoResearchClaw",
-          "sha": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
-          "credentials": "Remain local; not stored in the marketplace."
-        },
-        "adapter": "Thin local package with original skills and existing YAML frontmatter repair."
-      }
-    },
-    {
-      "name": "goal-authoring",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/LKCY23/goal-authoring",
-        "path": ".",
-        "sha": "35be21e816e9956ed2673a24b2d37e7837487221"
-      },
-      "description": "Author and review durable Codex goal contracts."
+      "strict": false,
+      "skills": [
+        "./"
+      ]
     },
     {
       "name": "agent-led-swe",
+      "description": "围绕用户需求和变更目标，指导 Agent 主导的软件开发，从澄清需求、设计到经过验证的交付。结合人类决策、项目工程约定和可追溯记录，协调相关工作。适用于需要这类协调的软件开发或变更任务，也可显式调用；根据任务规模裁剪。",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/LKCY23/agent-led-swe",
         "path": ".",
         "sha": "23d8b921618bc19ab9421572ae4166e3456681e9"
       },
-      "description": "围绕用户需求和变更目标，指导 Agent 主导的软件开发，从澄清需求、设计到经过验证的交付。结合人类决策、项目工程约定和可追溯记录，协调相关工作。适用于需要这类协调的软件开发或变更任务，也可显式调用；根据任务规模裁剪。",
+      "category": "devtools"
+    },
+    {
+      "name": "analyze-peer-work",
+      "description": "Analyze papers, frameworks, open-source projects, and technical designs against the user's own needs; assess mechanisms, evidence, applicability, and what to borrow, then synthesize readable findings. Use for 参考工作分析、框架调研、按需求比较方案、借鉴设计与实现，或将已有调研整理成需求驱动的文档. Do not use for a standalone summary, term explanation, independent peer review, routine code review, or implementation alone.",
+      "source": "./skills/analyze-peer-work",
+      "category": "research"
+    },
+    {
+      "name": "aris",
+      "description": "ARIS research skills, pinned upstream plugin; optional, not installed by catalog registration.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+        "path": ".",
+        "sha": "08f9bc06f68907279b7ddce9e41efa0c42b357df"
+      },
+      "category": "research",
+      "defaultEnabled": false
+    },
+    {
+      "name": "autoresearchclaw",
+      "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
+      "source": "./domains/optional-tools/packages/autoresearchclaw",
+      "category": "research",
+      "defaultEnabled": false
+    },
+    {
+      "name": "deep-research",
+      "description": "Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic. 7 modes: full research, quick brief, paper review, lit-review, fact-check, Socratic guided research dialogue, and systematic review with optional meta-analysis. Covers research question formulation, Socratic mentoring, methodology design, systematic literature search, source verification, cross-source synthesis, risk of bias assessment, meta-analysis, APA 7.0 report compilation, editorial review, devil's advocate challenges, ethics review, and post-research literature monitoring. Triggers on: research, deep research, literature review, systematic review, meta-analysis, PRISMA, evidence synthesis, fact-check, guide my research, help me think through, 研究, 深度研究, 文獻回顧, 文獻探討, 系統性回顧, 後設分析, 事實查核, 引導我的研究, 幫我釐清, 幫我想想, 我不確定要研究什麼, 研究方向, 研究主題.",
+      "source": "./domains/legacy-plugins/packages/deep-research",
+      "category": "research",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "github",
+      "description": "Use when the user wants to manage a GitHub repository workflow through git and gh, including local branch and sync operations, pull requests, issues, and CI runs.",
+      "source": "./domains/legacy-plugins/packages/github",
       "category": "devtools",
-      "author": {
-        "name": "LKCY23"
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "goal-authoring",
+      "description": "Author, review, and right-size Codex /goal prompts for durable multi-turn work. Use when a user asks to create, improve, critique, normalize, or split a Goal; convert an objective, plan, migration, experiment, research task, or retry loop into a verifiable execution contract with starting anchors, bounded authority, evidence, checkpoints, stopping conditions, and handoff. Prefer normal execution for one-turn work and split only independently deliverable outcomes.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/goal-authoring",
+        "path": ".",
+        "sha": "35be21e816e9956ed2673a24b2d37e7837487221"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "karpathy-llm-wiki",
+      "description": "Use when building or maintaining a personal LLM-powered knowledge base. Triggers: ingesting sources into a wiki, querying wiki knowledge, linting wiki quality, 'add to wiki', 'what do I know about', or any mention of 'LLM wiki' or 'Karpathy wiki'.",
+      "source": "./domains/legacy-plugins/packages/karpathy-llm-wiki",
+      "category": "knowledge",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "literature-review",
+      "description": "Use when conducting a topic-first literature review across multiple papers, comparing methods, evidence, and coverage for a research question.",
+      "source": "./domains/legacy-plugins/packages/literature-review",
+      "category": "research",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "programming-practice",
+      "description": "Coach hands-on programming practice with the learner doing the reasoning, coding, command execution, and debugging needed for the selected learning goal. Use for guided implementation, rebuilding programming fundamentals, course labs, exam practice, or requests to learn by doing without AI completing the work. Continue an active practice session across conceptual questions. Do not impose practice on standalone factual questions, ordinary delivery tasks, or requests to create or review a teaching skill.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/programming-practice",
+        "path": ".",
+        "sha": "c09d816ff93926acc131eb235e830673f85d8a4c"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "read-paper",
+      "description": "Use when reading a single research paper in a structured way to extract claims, evidence, methods, limitations, and critique.",
+      "source": "./domains/legacy-plugins/packages/read-paper",
+      "category": "research",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "research-brainstorm",
+      "description": "Technical design discussion workflow for algorithm design, system architecture, data structure choices, performance strategy, and research engineering tradeoffs before coding. Use only when the user explicitly wants to brainstorm, compare approaches, reason through a design, clarify constraints, debate technical tradeoffs, or produce a design specification before implementation. Do not use for direct coding requests, routine bug fixes, ordinary task planning, PRDs, product requirements, or non-technical ideation.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/research-brainstorm",
+        "path": ".",
+        "sha": "2087690977b2f343086480db9bff994a469e296d"
+      },
+      "category": "research",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "research-dev-orchestrator",
+      "description": "Coordinate research proposal, experiment design, reproducible experiment implementation, and open-source contribution workflows with a role-neutral coordinator and CLI-based coding agents as workers. Use when an agent needs to turn research or experiment goals into requirements, design decisions, task packets, worker dispatch, evidence-based review, and iterative implementation, or resume this workflow from existing materials at any stage, using repo-local filesystem protocols and Git worktree isolation.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/research-dev-orchestrator",
+        "path": ".",
+        "sha": "ca41f330e9e4cecc4b9e2a5ec2b0eae752601c4e"
+      },
+      "category": "research",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    },
+    {
+      "name": "sanctuary-translate",
+      "description": "Claude Code 与 Desktop Code 双向翻译插件：输入侧写审查、原生译文输出块、修复与重试控制，以及本地 SQLite 持久版本。MCP 后端经插件内 launch-translator.sh 定位本机 Node 22，不依赖桌面应用 PATH。",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/claude-sanctuary",
+        "path": "release/plugin",
+        "sha": "de04efbbf3df3f86d5762654613c305984072358"
       }
+    },
+    {
+      "name": "skill-evaluator",
+      "description": "Evaluate an existing agent skill with task-based tests, trigger checks, execution evidence, and baseline or version comparisons. Use when asked to test a SKILL.md, validate an agent-authored skill, diagnose skill regressions, or measure whether a skill helps. Writing a new skill or explaining skills alone does not require this workflow.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/skill-evaluator",
+        "path": ".",
+        "sha": "4130c79edc17788d7a29ddd9f50c35b8e4759a74"
+      },
+      "category": "devtools"
+    },
+    {
+      "name": "teach",
+      "description": "Teach the user a new skill or concept, within this workspace.",
+      "source": "./domains/legacy-plugins/packages/teach",
+      "category": "productivity",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
     }
   ]
 }

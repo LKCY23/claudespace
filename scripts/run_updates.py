@@ -9,6 +9,7 @@ import subprocess
 import tempfile
 
 from build_candidates import write_json
+from catalog_index import catalog_paths
 from candidate_sources import git
 from check_updates import GitHub, check_catalog
 from prepare_update import clean_head, prepare, share_update
@@ -16,7 +17,7 @@ from resource_catalog import read_catalog, require
 
 
 def catalogs(root):
-    return sorted([root / 'catalog.json', *(root / 'domains').glob('*/catalog.json')])
+    return catalog_paths(root)
 
 
 def groups(catalog):

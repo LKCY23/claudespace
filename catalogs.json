@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "catalogs": [
+    "catalog.json",
+    "domains/candidates/catalog.json",
+    "domains/claude-hud/catalog.json",
+    "domains/legacy-plugins/catalog.json",
+    "domains/optional-tools/catalog.json",
+    "domains/standalone/catalog.json"
+  ]
+}
