@@ -41,7 +41,7 @@ derive or refresh it from a clock, path, artifact contents, or transcript.
 
 **Important: mid-entry routing rules**
 - User brings a paper and requests "review" -> go to Stage 2.5 (INTEGRITY) first, then Stage 3 (REVIEW) after passing
-- Cannot jump directly to Stage 3 (unless user can provide a previous integrity verification report)
+- Cannot jump directly to Stage 3, even when the user provides a previous integrity verification report; that report is context for the Stage 2.5 run, not a substitute for it
 - When user enters mid-pipeline, check for Material Passport — see "Mid-Entry Material Passport Check" below; then ask the experiment intake question if § Experiment Intake Question (#925) applies
 
 #### Resume Mode: `resume_from_passport`
@@ -133,7 +133,7 @@ You can adjust any stage's mode at any time. Ready to begin?
 1. First checkpoint in the pipeline: always FULL
 2. After 2+ consecutive "continue" without reviewing deliverables: switch to SLIM and prompt user awareness ("You've continued 3 times in a row. Want to review progress?")
 3. Integrity boundaries (Stage 2.5, 4.5): always MANDATORY
-4. Review decisions (Stage 3, 3'): always MANDATORY
+4. Review decisions (Stage 3, 3'): always MANDATORY. Stage 3 also stops inside the stage, after the reviewer's Phase 0: show the Reviewer Configuration Cards, end the turn, and dispatch no reviewer seat until the user accepts the whole set (`academic-paper-reviewer/SKILL.md` § Checkpoint Rules, rule 1, #1030)
 5. Before finalization (Stage 5 entry gate): always MANDATORY — this is the checkpoint between Stage 4.5 PASS and the Stage 5 dispatch, where the user explicitly confirms proceeding and makes the finalization-format decision (citation style); the in-stage LaTeX question and content confirmation stay inside Stage 5 execution. The Stage 5 completion checkpoint (Final Paper delivered, before Stage 6) is FULL — never SLIM. See `../references/pipeline_state_machine.md` § Stage 5 boundary semantics
 6. All other stages: start FULL, downgrade to SLIM if user says "just continue"
 
@@ -352,7 +352,7 @@ Verification result: [PASS / PASS WITH NOTES / FAIL]
 - Citation context check: [X/X] passed
 - Data verification: [X/X] passed
 - Originality check: [PASS/ISSUES]
-- Claim verification: [X/X] verified [PASS/ISSUES]; full text not accessible (UNVERIFIABLE_ACCESS, a note, not an issue): [none / N claims, listed below; offer to re-verify against full text the user supplies, once per claim]
+- Claim verification: [X/X] verified [PASS/ISSUES]; cited version not readable or not identified (UNVERIFIABLE_ACCESS, a note, not an issue): [none / N claims, listed below with the cited version each one needs; ask for the PDF of that version (for `VERSION_INCONSISTENT_CITATION`, ask which version the manuscript cites) and offer to re-verify against full text the user supplies, once per claim]
 - Ordinary advisory rows (#547/#548/#541/#570, non-gating): [none / N rows, listed below]
 - E6 claim-strength drift rows (checkpoint-closing): [none / N rows; disposition sidecar absent/valid]
 
@@ -931,7 +931,7 @@ The Cite-Time Provenance Finalizer, its strict terminal policies, and, under `AR
 
 ## Mid-Entry Material Passport Check
 
-When a user enters the pipeline mid-way (e.g., bringing an existing paper), the orchestrator MUST check for a Material Passport before deciding whether to require full Stage 2.5 verification.
+When a user enters the pipeline mid-way (e.g., bringing an existing paper), the orchestrator MUST check for a Material Passport before running the integrity stage that applies (Stage 2.5 for a paper draft on its way to Stage 3; Stage 4.5 for a revised draft), to decide whether a prior Integrity Report is attached as context. That stage runs either way.
 
 ### Decision Tree
 
@@ -948,9 +948,9 @@ Mid-Entry Material Passport Check:
          (UNVERIFIED or STALE both require re-verification)
    YES -> Continue to step 3
 
-3. Is integrity_pass_date within current session or < 24 hours?
+3. Is integrity_pass_date < 24 hours old? (rule 10; within one session too)
    NO  -> Mark passport as STALE, require re-verification
-         "Your integrity verification from [date] is more than 24 hours old.
+         "Your integrity verification from [date] is 24 hours old or older.
           Re-verification is required."
    YES -> Continue to step 4
 
@@ -958,7 +958,7 @@ Mid-Entry Material Passport Check:
    YES -> Require re-verification
          "The paper has been modified since the last integrity check
           (version [old] -> [new]). Re-verification is required."
-   NO  -> Require Stage 2.5 verification:
+   NO  -> Re-run the integrity stage, prior report as context (paper draft -> 2.5; revised draft -> 4.5); paper draft:
          "Your paper passed integrity check on [date] (version [label]),
           but Stage 2.5 remains mandatory for this pipeline run.
           Re-run Stage 2.5 and attach the prior report as context."
@@ -966,7 +966,7 @@ Mid-Entry Material Passport Check:
 
 ### Rules
 
-- **Stage 2.5 can NEVER be skipped** via Material Passport. Prior reports can inform the rerun, but Stage 2.5 still executes in every pipeline run
+- **Stage 2.5 can NEVER be skipped** via Material Passport. Prior reports can inform the rerun, but Stage 2.5 still executes before Stage 3 in every pipeline run
 - **Stage 4.5 can NEVER be skipped** via Material Passport, regardless of passport status. Final integrity check always requires full Mode 2 verification
 - **Passport freshness threshold**: 24 hours. Sessions that span multiple days should trigger re-verification
 - **Content hash comparison**: If `content_hash` is available in the passport, use it for reliable change detection. If not available, fall back to `version_label` comparison
@@ -989,7 +989,7 @@ Do not ask when the run reaches no integrity gate (a format conversion that ente
 
 **Recording the answer.** A yes sets `status: experiments_declared` and a no sets `status: no_experiments_declared`, each with `declared_at` (when the scholar answered), `declared_by: scholar`, and `scholar_answer` holding the scholar's words unchanged. If the answer is neither a yes nor a no, ask once more; never choose a status for the scholar, and never set `legacy_unknown` from this question. When the run has a passport file, also append the question and answer to the run ledger as an in-stage question that changes a deliverable (§ Run ledger and handoff check). If the scholar does not answer, say that the Stage 2.5 integrity gate will stop until they do, and dispatch no writer or integrity gate before they answer.
 
-**Recording the experiments.** After a yes, the scholar enters one `experiment_provenance[]` entry per experiment before the first Stage 2 writer dispatch, or, when no Stage 2 lies ahead, before the first integrity gate. Stage 2 writers are not dispatched until this intake is sealed, because `experiment_id` values freeze here (#260 D3). An entry needs details that exist only after the experiment has run, such as its `repro_lock`, so a scholar who still has to run one may pause the run here and return with the results (`pause`, or `resume_from_passport` under `ARS_PASSPORT_RESET=1`). A file the scholar hands over, such as another tool's output, is data for them to confirm, not an answer to the question above.
+**Recording the experiments.** After a yes, the scholar enters one `experiment_provenance[]` entry per experiment before the first Stage 2 writer dispatch, or, when no Stage 2 lies ahead, before the first integrity gate. Stage 2 writers are not dispatched until this intake is sealed, because `experiment_id` values freeze here (#260 D3). An entry needs details that exist only after the experiment has run, such as its `repro_lock`, so a scholar who still has to run one may pause the run here and return with the results (`pause`, or `resume_from_passport` under `ARS_PASSPORT_RESET=1`). When any of the lock's fields has no honest value for the experiment, as with a survey, an analysis that used no LLM or ARS session, or a trained model with no ARS prompts to hash, the scholar writes `repro_lock: null` and says why in `repro_lock_reason`, naming there any real details such as the model id; never fill the fields with placeholders (#1049). A file the scholar hands over, such as another tool's output, is data for them to confirm, not an answer to the question above.
 
 ---
 
