@@ -74,6 +74,9 @@ jobs:
     uses: ./.github/workflows/validate-fixed-sources.yml
     with:
       commit: ${{ needs.select.outputs.head }}
+    secrets:
+      CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
+      CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
   report:
     needs: [select, tooling, fixed_sources]
     if: ${{ always() && needs.select.outputs.eligible == 'true' }}

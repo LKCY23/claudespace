@@ -5,6 +5,11 @@ on:
       commit:
         type: string
         required: true
+    secrets:
+      CLAUDESPACE_GOAL_AUTHORING_KEY:
+        required: true
+      CLAUDESPACE_CLAUDE_SANCTUARY_KEY:
+        required: true
   push:
     branches: [main, codex/claude-codex-adaptation]
   workflow_dispatch:

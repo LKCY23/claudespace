@@ -92,8 +92,14 @@ class WorkflowTests(unittest.TestCase):
             self.assertNotIn('needs.select.outputs.head',str(jobs[name]['steps'][0]))
         self.assertEqual(jobs['fixed_sources']['uses'],'./.github/workflows/validate-fixed-sources.yml')
         self.assertEqual(jobs['fixed_sources']['with']['commit'],'${{ needs.select.outputs.head }}')
+        keys = ('CLAUDESPACE_GOAL_AUTHORING_KEY', 'CLAUDESPACE_CLAUDE_SANCTUARY_KEY')
+        self.assertEqual(jobs['fixed_sources']['secrets'], {key: '${{ secrets.' + key + ' }}' for key in keys})
+        for name in ('select', 'tooling', 'report'):
+            self.assertNotIn('CLAUDESPACE_GOAL_AUTHORING_KEY', str(jobs[name]))
+            self.assertNotIn('CLAUDESPACE_CLAUDE_SANCTUARY_KEY', str(jobs[name]))
         fixed = yaml.load((ROOT/'.github/workflows/validate-fixed-sources.yml').read_text(),Loader=yaml.BaseLoader)
         self.assertIn('workflow_call',fixed['on'])
+        self.assertEqual(fixed['on']['workflow_call']['secrets'], {key: {'required': 'true'} for key in keys})
 
 
 if __name__ == '__main__': unittest.main()
