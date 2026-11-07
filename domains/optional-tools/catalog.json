@@ -10,7 +10,7 @@
         "author": "wanshuiyin",
         "upstream": {
           "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
-          "commit": "08f9bc06f68907279b7ddce9e41efa0c42b357df",
+          "commit": "2901234ad2954cd2388ced8d3aed2ed9de42803a",
           "path": "."
         }
       },
@@ -21,7 +21,7 @@
       "source": {
         "kind": "external",
         "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
-        "commit": "08f9bc06f68907279b7ddce9e41efa0c42b357df",
+        "commit": "2901234ad2954cd2388ced8d3aed2ed9de42803a",
         "path": "."
       },
       "compatibility": {
