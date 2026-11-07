@@ -193,7 +193,7 @@
         "author": "Dietrich Gebert",
         "upstream": {
           "repo": "DietrichGebert/ponytail",
-          "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
+          "commit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
           "path": "."
         }
       },
@@ -205,7 +205,7 @@
         "kind": "submodule",
         "path": "upstreams/ponytail",
         "repo": "DietrichGebert/ponytail",
-        "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710"
+        "commit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846"
       },
       "compatibility": {
         "claude-code": {
