@@ -25,6 +25,12 @@ User Input →
 │       └── No ──────────────────────────→ full mode (Phase 0 will conduct an interview)
 │
 ├── Have an existing paper to revise? ──────────────────────→ revision mode
+├── Have comments explicitly identified as coming from a real committee or institutional review office?
+│   └── Need tracking / response preparation ───────────────→ revision-coach committee-correspondence variant
+├── Have reviewer comments to handle?
+│   ├── Comments only, no response written yet ──────────→ revision-coach mode
+│   └── Comments + an existing rebuttal/response draft ──→ rebuttal-audit mode
+├── Need an AI-usage disclosure statement? ─────────────────→ disclosure mode
 ├── Just need format conversion? ────────────────────────→ format-convert mode
 └── Just need a citation check? ────────────────────────→ citation-check mode
 ```
@@ -102,9 +108,9 @@ User Input →
 - No existing paper draft (→ full mode)
 - Only need to check citation format (→ citation-check mode)
 
-**Expected Output**: Revised paper + revision notes (tracked changes)
+**Expected Output**: Patch document + deterministically applied revised draft + apply report + revision log (#390) + Citation Audit Report with proposed citation fixes (#1068)
 **Expected Duration**: Medium
-**Agents Used**: peer_reviewer → draft_writer → citation_compliance
+**Agents Used**: peer_reviewer → draft_writer → citation_compliance (proposes citation fixes; does not edit the applied draft, #1068)
 
 **Prerequisite**: User must provide existing paper content
 
@@ -120,7 +126,7 @@ User Input →
 **Not Applicable When**:
 - No paper content to summarize (→ full mode or plan mode)
 
-**Expected Output**: Bilingual abstract (zh-TW + EN) + keywords
+**Expected Output**: Bilingual abstract in the run's declared output language pair (`output_language_pair`; default zh-TW + EN) + keywords
 **Expected Duration**: Short
 **Agents Used**: intake → abstract_bilingual
 
@@ -174,6 +180,70 @@ User Input →
 **Expected Output**: Citation error report + automatic correction suggestions
 **Expected Duration**: Short
 **Agents Used**: citation_compliance used standalone
+
+---
+
+### revision-coach mode — Reviewer-Comment Triage
+
+**Applicable Scenarios**:
+- Received reviewer comments / a decision letter and need them parsed into a structured plan
+- Want a Revision Roadmap that classifies, maps, and prioritizes each comment
+- Need a Response Letter Skeleton to start drafting replies
+- Deciding whether to address or push back on a comment (disagreement posture)
+- Non-journal scopes: conference rebuttal, grant-panel response, transfer-after-review
+
+**Not Applicable When**:
+- Already have a written rebuttal/response draft you want QA'd (→ rebuttal-audit mode)
+- The paper itself needs rewriting based on the comments (→ revision mode)
+
+**Expected Output**: Revision Roadmap + optional Tracking Template + Response Letter Skeleton
+**Expected Duration**: Short-Medium
+**Agents Used**: revision_coach_agent used standalone (no prior pipeline execution required)
+
+**Committee-correspondence variant**: when the user explicitly identifies comments
+from a real committee or institutional review office, this same entrypoint loads
+`committee_correspondence_protocol.md` and emits the separate #668 byte-accounted
+concern tracker plus placeholder response skeleton. It does not emit the reviewer
+Roadmap, Schema 11, priority/severity, a determination, or a resolution claim. Formal
+tone alone never activates the variant.
+
+---
+
+### disclosure mode — AI-Usage Disclosure Outcome
+
+**Applicable Scenarios**:
+- Paper is drafted and you need venue-specific disclosure text or a policy action checklist
+- Submitting under a covered policy target (ICLR, NeurIPS, Nature, Science, ACL, EMNLP, or a covered medical-publishing target: ICMJE, NEJM, The Lancet, JAMA, BMJ, PLOS, Frontiers, publisher-wide 中华护理杂志社, journal-level 国际眼科杂志)
+- Need placement/action guidance for every required manuscript or submission channel
+
+**Not Applicable When**:
+- No paper drafted yet — disclosure is a finishing step (→ full mode first)
+- The venue is not in the policy database (confirm the venue's current policy manually)
+
+**Expected Output**: Default venue path — `REQUIRED` / `ACTION_ONLY` / `NOT_REQUIRED` / `UNKNOWN` applicability plus typed halt status; policy-anchor path — anchor-specific render
+**Expected Duration**: Short
+**Agents Used**: formatter agent's standalone disclosure branch, which loads the disclosure protocol before the venue policy database or policy-anchor lookup; it does not run normal Phase 7 formatting
+
+---
+
+### rebuttal-audit mode — Rebuttal-Draft QA
+
+**Applicable Scenarios**:
+- You already wrote a rebuttal/response-to-reviewers draft and want it checked before sending
+- Need a per-comment coverage table (which reviewer concerns the draft addresses, partially addresses, or misses)
+- Want risk flags for tone (too combative), unsupported claims, or a response that misreads the reviewer's point
+
+**Not Applicable When**:
+- You have reviewer comments but have **not** written a response yet (→ revision-coach mode, which *generates* a skeleton)
+- The manuscript itself needs revising (→ revision mode)
+
+**Input gate**: requires BOTH (a) the reviewer comments / decision letter AND (b) an existing rebuttal draft. Comments only → route to revision-coach. If intent is ambiguous, clarify rather than guess.
+
+**Expected Output**: Advisory QA report — per-comment coverage + gap list + risk flags. Generates no new response.
+**Expected Duration**: Short
+**Agents Used**: revision_coach_agent's comment-parsing capability, run standalone (advisory)
+
+**Integrity boundary**: a standalone invocation runs **outside** the pipeline, so rebuttal-audit does **not** emit a Schema 11 ledger, does **not** write the Material Passport, and does **not** mark anything `ready_to_submit` or verified. The output is advisory QA only.
 
 ---
 
@@ -247,6 +317,10 @@ academic-paper completed
 | Completed paper | Abstract | abstract-only mode |
 | Completed paper | Format conversion | format-convert mode |
 | Completed paper | Citation check | citation-check mode |
+| Reviewer comments (no response yet) | Parse + roadmap + reply skeleton | revision-coach mode |
+| Real-committee comments (explicitly identified; no response yet) | Preserve source + concern tracker + placeholder response skeleton | revision-coach committee-correspondence variant |
+| Reviewer comments + a written rebuttal draft | QA the draft before sending | rebuttal-audit mode |
+| Drafted paper + target venue | AI-usage disclosure bundle or policy action checklist | disclosure mode |
 
 ---
 
@@ -275,3 +349,30 @@ Before conversion, ALL of the following must be true:
 - Conversational filler from Socratic dialogue (greetings, confirmations, repetitions)
 - Tentative ideas explicitly marked as "maybe" or "not sure" by the user
 - Plan mode's iterative drafts (only the final version of each chapter plan carries over)
+
+---
+
+## Trigger-to-Mode Mapping Examples
+
+```
+"Write a paper on SDGs in HEI"           -> full
+"Give me a paper outline for..."         -> outline-only
+"Revise this paper based on feedback"    -> revision
+"Write an abstract for this paper"       -> abstract-only
+"Do a literature review on..."           -> lit-review
+"Convert this paper to LaTeX"            -> format-convert
+"Convert citations to IEEE"              -> format-convert
+"Check the citations in this paper"      -> citation-check
+"guide my paper"                         -> plan
+"help me plan my paper"                  -> plan
+"I got reviewer comments"               -> revision-coach
+"parse these reviews"                    -> revision-coach
+"help me with my revision"              -> revision-coach
+"should we push back on reviewer 2"     -> revision-coach
+"conference rebuttal" / "grant response" -> revision-coach
+"track these committee comments"          -> revision-coach committee-correspondence variant (only with explicit real-source identity)
+"audit my rebuttal draft"               -> rebuttal-audit (needs comments + an existing draft)
+"did I miss any reviewer comment"       -> rebuttal-audit
+"AI disclosure for Nature"              -> disclosure
+"generate an AI usage statement"        -> disclosure
+```
