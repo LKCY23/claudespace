@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Propose a change or addition to Superpowers
+about: Propose a change or improvement to Superpowers
 labels: enhancement
 ---
 
@@ -11,6 +11,17 @@ progress, and some were intentionally declined.
 -->
 
 - [ ] I searched existing issues and this has not been proposed before
+
+## Who's filing this request? (required)
+<!-- Who are you, and are you filing on behalf of someone else? If a
+     human partner asked you to do something that ended with you filing
+     this request, who are they and what were your instructions, as close
+     to their words as you can get? -->
+
+## Human-authored summary (required, under 200 words)
+<!-- A human writes this section, in their own words: what they were
+     trying to do and what they wished Superpowers did instead. If an
+     agent is filing, that means your human partner, not you. -->
 
 ## What problem does this solve?
 <!-- Describe the problem from your own experience. What were you doing,
@@ -30,5 +41,18 @@ progress, and some were intentionally declined.
      of project? If this is specific to your domain, workflow, or a
      third-party tool, it may belong as its own plugin instead. -->
 
+## Environment (required)
+<!-- Required. We assume an agent wrote this request — tell us which one and
+     where it ran. We weigh proposals reasoned from documentation differently
+     than ones grounded in a real session where the problem actually came up. -->
+
+| Field | Value |
+|-------|-------|
+| Superpowers version | |
+| Harness (Claude Code, Cursor, etc.) | |
+| Harness version | |
+| Your model + version | |
+| All plugins installed | |
+
 ## Context
-<!-- Optional: version info, harness, model, workflow where you hit this. -->
+<!-- Optional: the workflow where you hit this, links, transcripts. -->
