@@ -20,9 +20,9 @@ Used by `draft_writer_agent` and `peer_reviewer_agent`.
 - Acknowledge limitations and alternative interpretations
 
 ### 4. Formality
-- No contractions (don't → do not)
-- No colloquialisms or slang
-- No first person unless discipline conventions allow it
+- Use full forms ("do not" over "don't")
+- Use formal academic vocabulary; reserve colloquialisms and slang for informal writing
+- Use third person unless discipline conventions allow first person
 
 ## Register Adjustment by Discipline
 
@@ -119,7 +119,7 @@ although, despite, while, granted that, notwithstanding
 
 ## Paragraph Construction
 
-### Standard Academic Paragraph (TEEL)
+### A Common Academic Paragraph Shape (TEEL, optional)
 1. **T**opic sentence — states the paragraph's main point
 2. **E**vidence — data, citations, examples that support the point
 3. **E**xplanation — interpret the evidence, connect to argument

@@ -1,88 +1,744 @@
 {
   "repo": "Imbad0202/academic-research-skills",
-  "sha": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+  "sha": "adc3529754e0d2aa4b4d9c839092b711d7ca2bd0",
   "path": "academic-paper-reviewer",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
     "SKILL.md": {
       "upstream_path": "academic-paper-reviewer/SKILL.md",
-      "sha256": "683a92cf6d2226dc220ac61bca69557ddf7650303dac288722dded45822f965e"
+      "sha256": "f0f35b2b666ce674bf14eecff23e9183ee2df7effab79adb457112f73b23b428"
     },
     "agents/devils_advocate_reviewer_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/devils_advocate_reviewer_agent.md",
-      "sha256": "3e6f3b22cb92d6fd41a02f589e71c5a3a80ec0e184d8f8c9677e6963e3c12eed"
+      "sha256": "a3ddde4c1e26e9e8603f71e47b3afb0c83131e0428b84048c0c3e634f19e5b5c"
     },
     "agents/domain_reviewer_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/domain_reviewer_agent.md",
-      "sha256": "117b120b19212712053d976e3663ad2978c1068fd148913bb5a2a6f067f7343a"
+      "sha256": "706a70fab08a37dff52f6e097787cf8d5712fff02bcce87ac0a184109f478f55"
     },
     "agents/editorial_synthesizer_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/editorial_synthesizer_agent.md",
-      "sha256": "cb50b27afc28efe84d0f47767a9c2a8677f81a4e44f93e1f262489d1e729c42f"
+      "sha256": "75209938bfcb77ae203435580f74cc539b522168312429606137b8c3557e3b6f"
     },
     "agents/eic_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/eic_agent.md",
-      "sha256": "0b862d83ea590f47ae58f46d8a1f19ede897a9b2705efbb07e42f543f11813f9"
+      "sha256": "9690e570d081bfcdef6da23fb93064af4028c9d6b766fcbcf0cf0981463d492f"
     },
     "agents/field_analyst_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/field_analyst_agent.md",
-      "sha256": "9b7cf1ba053d29a5a938103fbbe6b708cf440d3d44a4b43a9cf40fa34f20bdcd"
+      "sha256": "095c8ed9e1588ead3857ffe4b4dd76de61f301f4e4e89f4ba68abd1cf0ed7aae"
     },
     "agents/methodology_reviewer_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/methodology_reviewer_agent.md",
-      "sha256": "4a02fde99ac65d56c791b60e5488556ad0f4f14eb60698949d3f67a1e9392827"
+      "sha256": "7369527eb99f1ca2a7351a338a4e7ef0df482d3fb516056d271a944eb7d6d8b9"
     },
     "agents/perspective_reviewer_agent.md": {
       "upstream_path": "academic-paper-reviewer/agents/perspective_reviewer_agent.md",
-      "sha256": "f3efb3ea2b3908f54c6ee25ff6e5251ee15a454214a82c182b3865a2b15ea514"
+      "sha256": "a99386515c1e9e5b73e91f3f9cd62f6ec3660f03e229371ad53531fa165cf007"
     },
     "examples/hei_paper_review_example.md": {
       "upstream_path": "academic-paper-reviewer/examples/hei_paper_review_example.md",
-      "sha256": "3b0cce9becb06617588f0729de0b8f9ddae1368a031bda8e3e366ff639f8b2b0"
+      "sha256": "54a3e8444100eee294c4755aac92ddb2fb7b6472d1d15c437aa8b9b05fd2d5a6"
     },
     "examples/interdisciplinary_review_example.md": {
       "upstream_path": "academic-paper-reviewer/examples/interdisciplinary_review_example.md",
-      "sha256": "fb8dcbf22ef6617a108eeb49e08325d53ee1c590440cec8d4ba040297443b00b"
+      "sha256": "178c4edddd012c5df471da211926cd1794011e7f8133e12cefb74fd924d52f95"
+    },
+    "examples/subclaim_decomposition_example.md": {
+      "upstream_path": "academic-paper-reviewer/examples/subclaim_decomposition_example.md",
+      "sha256": "71b6c6923a3e0cc597f87da1ae95f2e422d2617a833475ef8a1d6cb148caeff3"
+    },
+    "references/calibration_mode_protocol.md": {
+      "upstream_path": "academic-paper-reviewer/references/calibration_mode_protocol.md",
+      "sha256": "f6ebedf09fd7810372f1150227065aad03f5bf30f49be47226b1be26fc771bfd"
+    },
+    "references/changelog.md": {
+      "upstream_path": "academic-paper-reviewer/references/changelog.md",
+      "sha256": "aabe2ccbd96dc70280ea10f6eb7e5dce59cea48ee633dc736273e5dadf662d7c"
     },
     "references/editorial_decision_standards.md": {
       "upstream_path": "academic-paper-reviewer/references/editorial_decision_standards.md",
-      "sha256": "a2f6c7ad32721a813a8052c381111610e5a94c0b0e860a426297784da6f10f60"
+      "sha256": "88e186e8d743ee40a83842ab2f00f442cd23de417e7e3ba0a7b9b8b5dc91e76d"
+    },
+    "references/guided_mode_protocol.md": {
+      "upstream_path": "academic-paper-reviewer/references/guided_mode_protocol.md",
+      "sha256": "0f5ca4d432a4e10ba5c404c0e3cffc823513c3d2de2bab50996ea200579f6297"
+    },
+    "references/integration_guide.md": {
+      "upstream_path": "academic-paper-reviewer/references/integration_guide.md",
+      "sha256": "5f0f4a9a386e603d8f7ed50a8ec67073153e2391bfb4b60bf25eacd9dca3ca01"
     },
     "references/quality_rubrics.md": {
       "upstream_path": "academic-paper-reviewer/references/quality_rubrics.md",
-      "sha256": "20bece9fd9388959449363ca54021065792606e5c0eebaf6e1b45675a6dc2664"
+      "sha256": "7335aa653d3573a323d9de522b0bc98f3230b7c639b673fc812fa46d607e01e1"
+    },
+    "references/re_review_mode_protocol.md": {
+      "upstream_path": "academic-paper-reviewer/references/re_review_mode_protocol.md",
+      "sha256": "25ec67e5cd22fe449d8385f704ce8fdb9b2a2725c9776fb0d306cc3bfca270cb"
     },
     "references/review_criteria_framework.md": {
       "upstream_path": "academic-paper-reviewer/references/review_criteria_framework.md",
-      "sha256": "7daee9c06581990e19412d337b6d2c1a57064108f14a89c81abc7d5007b15030"
+      "sha256": "6af77dc4a0b86c84dd3b1b7c9849294deb869899c9d82ff100816aca7c1eead9"
+    },
+    "references/review_panel_provenance_protocol.md": {
+      "upstream_path": "academic-paper-reviewer/references/review_panel_provenance_protocol.md",
+      "sha256": "0e3e8c7e64dc4ac61a5a6a973698515a387eb71dd10e8131b9c2ea617859d439"
+    },
+    "references/review_quality_thinking.md": {
+      "upstream_path": "academic-paper-reviewer/references/review_quality_thinking.md",
+      "sha256": "ee4fa6bf144a30810ebe0bbbffa71a79c739398afeb06ca97cb7f1090d3bdb90"
+    },
+    "references/reviewer_sprint_prompt_source.md": {
+      "upstream_path": "academic-paper-reviewer/references/reviewer_sprint_prompt_source.md",
+      "sha256": "fb11e4ebb5dd72b17018486409623f0e7bae21728830adf2c7ea1093ae2b0b8b"
+    },
+    "references/sprint_contract_protocol.md": {
+      "upstream_path": "academic-paper-reviewer/references/sprint_contract_protocol.md",
+      "sha256": "a213433ff4a05f2673094219fb2c52f116ad06129b2a9e20a735d67dafa1f014"
     },
     "references/statistical_reporting_standards.md": {
       "upstream_path": "academic-paper-reviewer/references/statistical_reporting_standards.md",
-      "sha256": "9890ad1febc6440889079ce52ee941f52ee164126d263d0aa9510738dd116ebb"
+      "sha256": "cfab6520a3d758a94dd165e74cdfee5dbe4e66fdb8f9590462ce94bd77eb93f0"
     },
     "references/top_journals_by_field.md": {
       "upstream_path": "academic-paper-reviewer/references/top_journals_by_field.md",
-      "sha256": "55079baa30c40d18244f8e539e70eca8678b309526c7e3264172f68cd128dd52"
+      "sha256": "9a163c97714ddcd4f3d7bcb2beb72ca454c880fe08c255afb43177f3db17ed57"
+    },
+    "templates/author_letter_template.md": {
+      "upstream_path": "academic-paper-reviewer/templates/author_letter_template.md",
+      "sha256": "77fba648037cd5073cccb060caee59e062f62b86686bb3bcfded5c162c312670"
     },
     "templates/editorial_decision_template.md": {
       "upstream_path": "academic-paper-reviewer/templates/editorial_decision_template.md",
-      "sha256": "ad17ea481aba3df1879ae5b95114e0cd2959d3429ccfda0327cdfc88675f3383"
+      "sha256": "32c5921c74943c92651967379c550d007c66076bf50607abbb719eaa2b7c1341"
     },
     "templates/peer_review_report_template.md": {
       "upstream_path": "academic-paper-reviewer/templates/peer_review_report_template.md",
-      "sha256": "37884a3188ba94a4e485f1ce29f6fd68458113d83bf915fea7bd71a501e70852"
+      "sha256": "5da1f9d24d6e321cec5f38c13fa03fe23b9363b1842cb0d8111c5e39a810c7d1"
     },
     "templates/revision_response_template.md": {
       "upstream_path": "academic-paper-reviewer/templates/revision_response_template.md",
-      "sha256": "eb2bd9a09f2fa3d1e743c5611a09c39f06cee38545b95fe73ad35f1f23ed49f9"
+      "sha256": "ccac360301149a0805f24b23340193ca39b62907ce9d8279c07de5eae55885a4"
+    },
+    "shared/agents/compliance_agent.md": {
+      "upstream_path": "shared/agents/compliance_agent.md",
+      "sha256": "cf51ff7a3bf3fb40fa072e465974fdd934c4922392f57cb6609f24bd4cbef0b9"
+    },
+    "shared/artifact_reproducibility_pattern.md": {
+      "upstream_path": "shared/artifact_reproducibility_pattern.md",
+      "sha256": "47272a2f2a606c0cab11efee53ac0c7515f1977869c887db01d41818fcffc45f"
+    },
+    "shared/benchmark_report.schema.json": {
+      "upstream_path": "shared/benchmark_report.schema.json",
+      "sha256": "e25dd92459d4062356d5bd0af3faed87bcaf25a6ac0c7def86f8eb2707440698"
+    },
+    "shared/benchmark_report_pattern.md": {
+      "upstream_path": "shared/benchmark_report_pattern.md",
+      "sha256": "832e26b360985e6749ee40462a72d7e9a3e1006691623ea5a0bcebe2b8c27ef1"
+    },
+    "shared/bibliographic_integrity_signals.md": {
+      "upstream_path": "shared/bibliographic_integrity_signals.md",
+      "sha256": "45cdc072028ddfede707600cd1a89a07f8e80d6238207d7a575a3f1b32bb8c13"
+    },
+    "shared/collaboration_depth_rubric.md": {
+      "upstream_path": "shared/collaboration_depth_rubric.md",
+      "sha256": "4b61265ef96c5fe455f5c71a6bd99f620f8f2a44d1a2dbee8045c0136d0b58cf"
+    },
+    "shared/compliance_checkpoint_protocol.md": {
+      "upstream_path": "shared/compliance_checkpoint_protocol.md",
+      "sha256": "3ce124b711747e2921ee5ee04fb18fced3d2ebea1c9b3df9fc1953f0da36e6ef"
+    },
+    "shared/compliance_report.schema.json": {
+      "upstream_path": "shared/compliance_report.schema.json",
+      "sha256": "4e5d162f5ee64e52393720f0d47d204ea389d7d871649f234164329d4931caf2"
+    },
+    "shared/contracts/README.md": {
+      "upstream_path": "shared/contracts/README.md",
+      "sha256": "c9a56e09d247c18a9ddf5a8058605de7afdfc18bb0a3a3c125b06332799023fc"
+    },
+    "shared/contracts/activity/adjudication_activity_input.schema.json": {
+      "upstream_path": "shared/contracts/activity/adjudication_activity_input.schema.json",
+      "sha256": "631c3cdb06d7dfc757199af72925a2d508bec2d189cc7d9c5461a82d2cfda977"
+    },
+    "shared/contracts/activity/adjudication_activity_store.schema.json": {
+      "upstream_path": "shared/contracts/activity/adjudication_activity_store.schema.json",
+      "sha256": "836e87a28737544b4736d85da04feb33439ff85e0d2db036067f38df4f9255e8"
+    },
+    "shared/contracts/audit/audit_jsonl.schema.json": {
+      "upstream_path": "shared/contracts/audit/audit_jsonl.schema.json",
+      "sha256": "a458b35baca949592a5224963cd37a1be3ed9e5b08d391e766a9e0f6a65b6338"
+    },
+    "shared/contracts/audit/audit_sidecar.schema.json": {
+      "upstream_path": "shared/contracts/audit/audit_sidecar.schema.json",
+      "sha256": "debb33ad2491e8c193f506375fccb3e555cf57f1b0dbeddcf8c4dcb08740ef71"
+    },
+    "shared/contracts/audit/audit_verdict.schema.json": {
+      "upstream_path": "shared/contracts/audit/audit_verdict.schema.json",
+      "sha256": "913a4205ad7af079d7663be2df593b8705a6026a7284b382d4972722e8f300da"
+    },
+    "shared/contracts/audit/cross_document_consistency_advisory.schema.json": {
+      "upstream_path": "shared/contracts/audit/cross_document_consistency_advisory.schema.json",
+      "sha256": "2bc6229ad77a5e86bd96021b3ac1d1fc8afc6834c4158280ca01091629652418"
+    },
+    "shared/contracts/audit/cross_document_consistency_advisory_draft.schema.json": {
+      "upstream_path": "shared/contracts/audit/cross_document_consistency_advisory_draft.schema.json",
+      "sha256": "fa061192e0d97f3913b9af83228f4355f1879a56955d2609cc1279b7f206f3e0"
+    },
+    "shared/contracts/audit/cross_document_source_manifest.schema.json": {
+      "upstream_path": "shared/contracts/audit/cross_document_source_manifest.schema.json",
+      "sha256": "875285713a881d6228d7d1a4af882d66d881628549b6917b96c350e0b4fd3d4a"
+    },
+    "shared/contracts/audit/tortured_phrase_advisory.schema.json": {
+      "upstream_path": "shared/contracts/audit/tortured_phrase_advisory.schema.json",
+      "sha256": "3984f297e2cdbbaaceae24f3b383c3ed4a7c10d4c660527aa0e8577b2142b4dc"
+    },
+    "shared/contracts/audit/tortured_phrase_snapshot.schema.json": {
+      "upstream_path": "shared/contracts/audit/tortured_phrase_snapshot.schema.json",
+      "sha256": "ba73cf8ae06cc06bc87106b4b47c25b29f318203852af13c5072272b7094a860"
+    },
+    "shared/contracts/audit/tortured_phrase_snapshot_manifest.schema.json": {
+      "upstream_path": "shared/contracts/audit/tortured_phrase_snapshot_manifest.schema.json",
+      "sha256": "4dd507fc466811c04b00e8aad1abec53295ecf90cb58fb2610f12a5143fb907d"
+    },
+    "shared/contracts/capability/stage_capability_matrix.json": {
+      "upstream_path": "shared/contracts/capability/stage_capability_matrix.json",
+      "sha256": "1a79420dcda21303aced0b2069e86c96583ef15aa556b40a1cb137c788ebce4b"
+    },
+    "shared/contracts/claim_standing/candidate_ledger.schema.json": {
+      "upstream_path": "shared/contracts/claim_standing/candidate_ledger.schema.json",
+      "sha256": "22a440d9b9b93d036a49d649fa95431723fe79cad2ea32fab814b7752f01ead6"
+    },
+    "shared/contracts/claim_standing/query_plan.schema.json": {
+      "upstream_path": "shared/contracts/claim_standing/query_plan.schema.json",
+      "sha256": "a729eeabdfb2c0a19ad178f4086021cf56b403a760a25db0367c75b7b6b453db"
+    },
+    "shared/contracts/claim_standing/query_plan_v1_1.schema.json": {
+      "upstream_path": "shared/contracts/claim_standing/query_plan_v1_1.schema.json",
+      "sha256": "ceddb35deff3e786cc2361235071b31d4bf53f79f8190a3400fe0f3373ad9dbd"
+    },
+    "shared/contracts/claim_standing/retrieval_input.schema.json": {
+      "upstream_path": "shared/contracts/claim_standing/retrieval_input.schema.json",
+      "sha256": "d0b4c88ae25ff2e51541eec5ed985ded4cd37d478ef7af88ac5556fbb7b5ec25"
+    },
+    "shared/contracts/claim_standing/stance_record.schema.json": {
+      "upstream_path": "shared/contracts/claim_standing/stance_record.schema.json",
+      "sha256": "86415b1899de50879371dbd7c0bfd1e509320eda0906edd1f438da52a4fcee2c"
+    },
+    "shared/contracts/claim_standing/transmission_ledger.schema.json": {
+      "upstream_path": "shared/contracts/claim_standing/transmission_ledger.schema.json",
+      "sha256": "74c525235f1ecba2794fdcb3adbc66309084a0fc5ce80832b800f60fe859737d"
+    },
+    "shared/contracts/cross_model/codex_citation_receipt.schema.json": {
+      "upstream_path": "shared/contracts/cross_model/codex_citation_receipt.schema.json",
+      "sha256": "5d56a9e3df9342231f463f45dbcf07abb27d93fe617b25d8237fd11090e26617"
+    },
+    "shared/contracts/cross_model/codex_citation_request.schema.json": {
+      "upstream_path": "shared/contracts/cross_model/codex_citation_request.schema.json",
+      "sha256": "53f8d1b8f1be27742f1f24bfdf476654b67d37902319d60e09c13f2be7e6b3f1"
+    },
+    "shared/contracts/cross_model/promotion_bakeoff_sealed_commitment.schema.json": {
+      "upstream_path": "shared/contracts/cross_model/promotion_bakeoff_sealed_commitment.schema.json",
+      "sha256": "b3adc85df5dc743a0281911db358032cac42806db5cf388fed4a53ac5e5f795d"
+    },
+    "shared/contracts/cross_model/promotion_bakeoff_sealed_reveal.schema.json": {
+      "upstream_path": "shared/contracts/cross_model/promotion_bakeoff_sealed_reveal.schema.json",
+      "sha256": "44c22829e041335bd69128dd8c75700b87418c42c0bb966f0ca7e40c95d63188"
+    },
+    "shared/contracts/degradation_registry.json": {
+      "upstream_path": "shared/contracts/degradation_registry.json",
+      "sha256": "708bd8e6cbae45200781c36382b14f923e26a886d951af1fd039e1e0419a2065"
+    },
+    "shared/contracts/evaluator/full.json": {
+      "upstream_path": "shared/contracts/evaluator/full.json",
+      "sha256": "ce3b3e19f1da68985ebeb2dd2d7904d7343724d0847fff4e08704d79f083158a"
+    },
+    "shared/contracts/evidence/claim_registry.schema.json": {
+      "upstream_path": "shared/contracts/evidence/claim_registry.schema.json",
+      "sha256": "4fac94d323855eff445e16528f7e1602e0bebd8d0d90805c224f710172c579bb"
+    },
+    "shared/contracts/evidence/claim_registry_coverage_report.schema.json": {
+      "upstream_path": "shared/contracts/evidence/claim_registry_coverage_report.schema.json",
+      "sha256": "69ffb0c8536a9a0864ed33b3735d41aed226b29d50077b8ef2641b732d69f142"
+    },
+    "shared/contracts/evidence/evidence_row.schema.json": {
+      "upstream_path": "shared/contracts/evidence/evidence_row.schema.json",
+      "sha256": "02f4fc4e32658249e7065724f1cb5c2f9dcec3f599f86a1a7ffee726ae422f5a"
+    },
+    "shared/contracts/evidence/evidence_row_v1_1.schema.json": {
+      "upstream_path": "shared/contracts/evidence/evidence_row_v1_1.schema.json",
+      "sha256": "ab7fdb15b8845bcf898fef5177c636b8ca43f2785c3b79bf284fa04a4ede14b9"
+    },
+    "shared/contracts/evidence/evidence_row_v1_2.schema.json": {
+      "upstream_path": "shared/contracts/evidence/evidence_row_v1_2.schema.json",
+      "sha256": "277e7b7b437a523286e06d2f55d058989f88865f4a364045405c5bcb33d94c51"
+    },
+    "shared/contracts/evidence/evidence_row_v1_3.schema.json": {
+      "upstream_path": "shared/contracts/evidence/evidence_row_v1_3.schema.json",
+      "sha256": "030fb019cc1924a926cde93c826310dbd76d48f5a7342bf2dcfef07b9397b1c0"
+    },
+    "shared/contracts/human_subjects/authority_profile_registry.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/authority_profile_registry.schema.json",
+      "sha256": "6274e962f537cc5a4951d027f30f13350b02e51e93c2ee2fd7026c294c2beea6"
+    },
+    "shared/contracts/human_subjects/committee_correspondence.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/committee_correspondence.schema.json",
+      "sha256": "302ffff93ca62445afa5f2979540aa24cea7875dc81f2ba2b770208e174b2931"
+    },
+    "shared/contracts/human_subjects/content_coverage_advisory.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/content_coverage_advisory.schema.json",
+      "sha256": "5477a6dcd0904fe2e0ccec0a7ce5ee5b7220e6ef0cc104e3834decb2721eda6c"
+    },
+    "shared/contracts/human_subjects/irb_context_record.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/irb_context_record.schema.json",
+      "sha256": "df5aabc4d5fce0d11d258369ae2caee8ca9c3f7783fa01de9d902e22e64aa847"
+    },
+    "shared/contracts/human_subjects/resolved_authority_context.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/resolved_authority_context.schema.json",
+      "sha256": "61dd4119a88f83bcd496497a42052a769501e0935cc347315c3bc4aaa9f23936"
+    },
+    "shared/contracts/human_subjects/review_pathway_rule_trace.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/review_pathway_rule_trace.schema.json",
+      "sha256": "e04509d90bd5dc2262344d4196db7296841a05d768cda0ba8b5ce783eb1d5eda"
+    },
+    "shared/contracts/human_subjects/review_pathway_trace_request.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/review_pathway_trace_request.schema.json",
+      "sha256": "a38ebc0f0d20037802be47de939a1916ca1d560b91916d56e9dc35b0456f057e"
+    },
+    "shared/contracts/human_subjects/submission_packet_inventory.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/submission_packet_inventory.schema.json",
+      "sha256": "29a7496aaf9c79819b110d23750739794033ceffff4eefca5f923fa29a593138"
+    },
+    "shared/contracts/human_subjects/submission_packet_manifest.schema.json": {
+      "upstream_path": "shared/contracts/human_subjects/submission_packet_manifest.schema.json",
+      "sha256": "430fdfb7c2a485f7c9b8414bac165b2e01f777cc3a8e63c1afc7f67e7ec72848"
+    },
+    "shared/contracts/passport/audit_artifact_entry.schema.json": {
+      "upstream_path": "shared/contracts/passport/audit_artifact_entry.schema.json",
+      "sha256": "a22b8a6ffb23615d403cf6d53b3986da2f7515f8667aac841039be5e13d526d7"
+    },
+    "shared/contracts/passport/bibliographic_integrity_signal.schema.json": {
+      "upstream_path": "shared/contracts/passport/bibliographic_integrity_signal.schema.json",
+      "sha256": "dfb1dbb12942cb67cbf306d7421e208546d933846c683d6e0356e91adfe89d36"
+    },
+    "shared/contracts/passport/citation_provenance.schema.json": {
+      "upstream_path": "shared/contracts/passport/citation_provenance.schema.json",
+      "sha256": "80e6ce1030184d9d49480e1a15c4a928e83d2d5ee6d81f261134d4408d3c465e"
+    },
+    "shared/contracts/passport/citation_verification_summary.schema.json": {
+      "upstream_path": "shared/contracts/passport/citation_verification_summary.schema.json",
+      "sha256": "5e7b83d4309ff4baff6148318d431296065e0ac3cc1357e8b8c260362a644503"
+    },
+    "shared/contracts/passport/claim_audit_result.schema.json": {
+      "upstream_path": "shared/contracts/passport/claim_audit_result.schema.json",
+      "sha256": "25a933802a9be2d07c5ead39d5d46a4f826bbc3610e3de9240f67916660bcfc2"
+    },
+    "shared/contracts/passport/claim_drift.schema.json": {
+      "upstream_path": "shared/contracts/passport/claim_drift.schema.json",
+      "sha256": "e90637531e53664dbc7651ffd2da6b82ea35a20a1166c1dd2d910aa1d5609fc3"
+    },
+    "shared/contracts/passport/claim_intent_manifest.schema.json": {
+      "upstream_path": "shared/contracts/passport/claim_intent_manifest.schema.json",
+      "sha256": "d6c4fd060812dc2a2b2dd73b6d9e77e366fcc0803486d5f38b4def6893d70cec"
+    },
+    "shared/contracts/passport/constraint_violation.schema.json": {
+      "upstream_path": "shared/contracts/passport/constraint_violation.schema.json",
+      "sha256": "41ac107f31d967ec8b578ba304629421880551ce846b726b14ee83ad2c00f4e2"
+    },
+    "shared/contracts/passport/excluded_source_entry.schema.json": {
+      "upstream_path": "shared/contracts/passport/excluded_source_entry.schema.json",
+      "sha256": "4273b0f86b15074c736f8cfce0d82525e11b52782f5215a0ab48965ab4e09ea3"
+    },
+    "shared/contracts/passport/experiment_alignment_result.schema.json": {
+      "upstream_path": "shared/contracts/passport/experiment_alignment_result.schema.json",
+      "sha256": "4ad04cb8d57b55fcc9ac28e0133c1dbd69122fd6ae3005c442d2990437a174bb"
+    },
+    "shared/contracts/passport/experiment_provenance_entry.schema.json": {
+      "upstream_path": "shared/contracts/passport/experiment_provenance_entry.schema.json",
+      "sha256": "77e7ee139c37229a5c0e878a53c3f9014557c7d37cbe34dd330d4e8e76498493"
+    },
+    "shared/contracts/passport/human_read_log.schema.json": {
+      "upstream_path": "shared/contracts/passport/human_read_log.schema.json",
+      "sha256": "0ce1a4691e218edbbc59a8f32b390b26dc76e59451c10514904052d6d04371ba"
+    },
+    "shared/contracts/passport/inquiry_ledger_ref.schema.json": {
+      "upstream_path": "shared/contracts/passport/inquiry_ledger_ref.schema.json",
+      "sha256": "6fdddcdf643b6f97c530359003c2df022ce5096042314805ad6992bee4d8b40c"
+    },
+    "shared/contracts/passport/literature_corpus_entry.schema.json": {
+      "upstream_path": "shared/contracts/passport/literature_corpus_entry.schema.json",
+      "sha256": "53507ada94248af31c25a93552a1e32ac05862671316821d2264ece7dbbfff70"
+    },
+    "shared/contracts/passport/preregistration_artifact.schema.json": {
+      "upstream_path": "shared/contracts/passport/preregistration_artifact.schema.json",
+      "sha256": "998c8a1df9149a591fc722fabc2b2afce4bc27ea23212c2b7a8e0c4f1bcea05b"
+    },
+    "shared/contracts/passport/rejection_log.schema.json": {
+      "upstream_path": "shared/contracts/passport/rejection_log.schema.json",
+      "sha256": "1cbd678c4785df08039800ffacf9db2ca94f98be9f0009a54fcfaa9f79a852e8"
+    },
+    "shared/contracts/passport/reset_ledger_entry.schema.json": {
+      "upstream_path": "shared/contracts/passport/reset_ledger_entry.schema.json",
+      "sha256": "6942f7c4dbd7e99568bfefb9183d90e50a3993e40e747a5cdc5474bc23a275d3"
+    },
+    "shared/contracts/passport/run_ledger.schema.json": {
+      "upstream_path": "shared/contracts/passport/run_ledger.schema.json",
+      "sha256": "a7b6d852cc30c22eb7644e8bcf49a7009ca105addad149d856ac53d03337ceb3"
+    },
+    "shared/contracts/passport/standing_constraint_entry.schema.json": {
+      "upstream_path": "shared/contracts/passport/standing_constraint_entry.schema.json",
+      "sha256": "daf39e2398f9e438f8223416b6d9e4f6db09e13da3d1fec24aa2ed4419ae4ba2"
+    },
+    "shared/contracts/passport/temporal_audit_results.schema.json": {
+      "upstream_path": "shared/contracts/passport/temporal_audit_results.schema.json",
+      "sha256": "4813874d42ec2e3f80bfc9d0ab6056fdcb6c6384f41eb22895178df99c4258f9"
+    },
+    "shared/contracts/passport/terminal_policies.schema.json": {
+      "upstream_path": "shared/contracts/passport/terminal_policies.schema.json",
+      "sha256": "f13616d2992cc5edb2b5dc3a1eda7a98df4ca9b71d3409fd175d2b94aeee44da"
+    },
+    "shared/contracts/passport/timeline.schema.json": {
+      "upstream_path": "shared/contracts/passport/timeline.schema.json",
+      "sha256": "d263355d95c9338cce3a1658591d186994b37e39e8a5e5be6581340f58494317"
+    },
+    "shared/contracts/passport/uncited_assertion.schema.json": {
+      "upstream_path": "shared/contracts/passport/uncited_assertion.schema.json",
+      "sha256": "4a03a638b235d7c84e937dfa3ebdbd6e2e6ae4a53034d79d7f8d3e9281e34ecd"
+    },
+    "shared/contracts/passport/uncited_audit_failure.schema.json": {
+      "upstream_path": "shared/contracts/passport/uncited_audit_failure.schema.json",
+      "sha256": "1f6b49a054b96377a26e222ba09b9e4fb1cf2fd4452ab79d08099be9013636f2"
+    },
+    "shared/contracts/passport/user_attested_read_resolution.schema.json": {
+      "upstream_path": "shared/contracts/passport/user_attested_read_resolution.schema.json",
+      "sha256": "6bb1cd7376a184c1c95108a4a610c75a4b7e00531aed8476ffd355237569c14f"
+    },
+    "shared/contracts/passport/version_records.schema.json": {
+      "upstream_path": "shared/contracts/passport/version_records.schema.json",
+      "sha256": "746b1e387070504765b0f63a4d09f17209b08977580bf502fe23a1173339e3e7"
+    },
+    "shared/contracts/patch/block_manifest.schema.json": {
+      "upstream_path": "shared/contracts/patch/block_manifest.schema.json",
+      "sha256": "d29dcd6d1d87a320bf1e682e25cb9059369dfbec348f5f94c6a32f8af229db7a"
+    },
+    "shared/contracts/patch/legacy/v1_0/revision_patch.schema.json": {
+      "upstream_path": "shared/contracts/patch/legacy/v1_0/revision_patch.schema.json",
+      "sha256": "bd5d010292fa7d363b52cf51ebb969b76fccaca7699291b8989a9b6f44fc0fe9"
+    },
+    "shared/contracts/patch/revision_patch.schema.json": {
+      "upstream_path": "shared/contracts/patch/revision_patch.schema.json",
+      "sha256": "2b29bc9ecac29665e29ad8a0dc4061cf0eaeb745b5d99bfb5a0038caa4060f85"
+    },
+    "shared/contracts/pdf/pdf_content_classifier_diagnostic.schema.json": {
+      "upstream_path": "shared/contracts/pdf/pdf_content_classifier_diagnostic.schema.json",
+      "sha256": "562f9598a7a075c9be15fef3657887ca14efc980528f2903d104f6871222b078"
+    },
+    "shared/contracts/pdf/pdf_content_classifier_worker.schema.json": {
+      "upstream_path": "shared/contracts/pdf/pdf_content_classifier_worker.schema.json",
+      "sha256": "86e86cd3d98225e876d890fd03844e359c4978eea82ec6f10c74cb7aac597bd2"
+    },
+    "shared/contracts/pdf/pdf_read_preflight.schema.json": {
+      "upstream_path": "shared/contracts/pdf/pdf_read_preflight.schema.json",
+      "sha256": "79d355ef1a8b20974f24676bacffb410715cabe677e4854271bd5f7559f0970e"
+    },
+    "shared/contracts/re_review/input_manifest.schema.json": {
+      "upstream_path": "shared/contracts/re_review/input_manifest.schema.json",
+      "sha256": "7c78a112b7373e930602cd7e9ca795eb33b89a46cac71bde8920d5f99133d263"
+    },
+    "shared/contracts/re_review/legacy/v1_0/input_manifest.schema.json": {
+      "upstream_path": "shared/contracts/re_review/legacy/v1_0/input_manifest.schema.json",
+      "sha256": "82f05f190711f37a0c72a679411bfbc1bb2c8bd63f70aa9c4fec9b66f9e1433f"
+    },
+    "shared/contracts/re_review/legacy/v1_0/precommitment.schema.json": {
+      "upstream_path": "shared/contracts/re_review/legacy/v1_0/precommitment.schema.json",
+      "sha256": "e42d84c29228e69a24236ac7ffe846181903a9a7c37b44ad6aa0f1fd8c08ec2f"
+    },
+    "shared/contracts/re_review/legacy/v1_0/traceability.schema.json": {
+      "upstream_path": "shared/contracts/re_review/legacy/v1_0/traceability.schema.json",
+      "sha256": "1f3596288d2c2f0dc03c069c2a36b385ef7836921f256a529660f8ca49b783c9"
+    },
+    "shared/contracts/re_review/legacy/v1_0/verdict_record.schema.json": {
+      "upstream_path": "shared/contracts/re_review/legacy/v1_0/verdict_record.schema.json",
+      "sha256": "6a1746566356d94d8ca0a2fdafb741412b961785e7960cc0a84d8aba3bbefb4f"
+    },
+    "shared/contracts/re_review/precommitment.schema.json": {
+      "upstream_path": "shared/contracts/re_review/precommitment.schema.json",
+      "sha256": "57e0918b7fd1453cf05784c0794dd88cb16845942a7fc2ec2a00406c6cc4cfce"
+    },
+    "shared/contracts/re_review/traceability.schema.json": {
+      "upstream_path": "shared/contracts/re_review/traceability.schema.json",
+      "sha256": "35f34c881fcb2b0707991ddcb6d82191035a5afc112bcbb95a47a55261f2686a"
+    },
+    "shared/contracts/re_review/verdict_record.schema.json": {
+      "upstream_path": "shared/contracts/re_review/verdict_record.schema.json",
+      "sha256": "b23d1dae82ef383fae9ccbc269d2aa68ed73dd61a47c2a544c1d12e59c39c3f5"
+    },
+    "shared/contracts/research_workflow/inquiry_branch_ledger.schema.json": {
+      "upstream_path": "shared/contracts/research_workflow/inquiry_branch_ledger.schema.json",
+      "sha256": "6b88b75fb8f6350b7926738653006a32e7501fdae4d8b7eea63f3aaa26afed2d"
+    },
+    "shared/contracts/research_workflow/research_workflow_profile.schema.json": {
+      "upstream_path": "shared/contracts/research_workflow/research_workflow_profile.schema.json",
+      "sha256": "c7a2e5486b4cc22b3fe894c378a73869e0ac97d1f47cc9f283a9a3fd8862695a"
+    },
+    "shared/contracts/research_workflow/research_workflow_profile_selection_receipt.schema.json": {
+      "upstream_path": "shared/contracts/research_workflow/research_workflow_profile_selection_receipt.schema.json",
+      "sha256": "4183ea039756d39267f33defecd75cdf6c10bb235f211094b7da9346e1885e02"
+    },
+    "shared/contracts/review_target/constructive_review_findings.schema.json": {
+      "upstream_path": "shared/contracts/review_target/constructive_review_findings.schema.json",
+      "sha256": "b03f2adae5cd7a0c07ef0021e14285f98b7d2e23f57fc0267dae9910ff7f8844"
+    },
+    "shared/contracts/review_target/criteria_registry.schema.json": {
+      "upstream_path": "shared/contracts/review_target/criteria_registry.schema.json",
+      "sha256": "595e75fbd35747a48420ef3e702f0547f1ae3e4badffe575e17e997a6246fc1b"
+    },
+    "shared/contracts/review_target/review_criteria_binding_manifest.schema.json": {
+      "upstream_path": "shared/contracts/review_target/review_criteria_binding_manifest.schema.json",
+      "sha256": "d8a8e0561dc3d9931b67f6c4cc875a57984b7a5cd47f44324706a3be28bdd298"
+    },
+    "shared/contracts/review_target/review_criteria_source_receipt.schema.json": {
+      "upstream_path": "shared/contracts/review_target/review_criteria_source_receipt.schema.json",
+      "sha256": "17a5509e35ee8b3304e8b252099d0c9f14f1c462cdf50419718c415dda3d6ed9"
+    },
+    "shared/contracts/review_target/review_target_context.schema.json": {
+      "upstream_path": "shared/contracts/review_target/review_target_context.schema.json",
+      "sha256": "44a4f3857686580741504dbf37d88eb60972b0135a5b012e37a74d30f85778f1"
+    },
+    "shared/contracts/review_target/review_target_declaration.schema.json": {
+      "upstream_path": "shared/contracts/review_target/review_target_declaration.schema.json",
+      "sha256": "6aa06b21d46c218ebf3eb296d0e265e16ddefa52979f3d59b4772c16e234901d"
+    },
+    "shared/contracts/reviewer/full.json": {
+      "upstream_path": "shared/contracts/reviewer/full.json",
+      "sha256": "e9712090d2469fea15a37b8e22d4e137afbcb2bf38d5789939c5df56738ef7af"
+    },
+    "shared/contracts/reviewer/methodology_focus.json": {
+      "upstream_path": "shared/contracts/reviewer/methodology_focus.json",
+      "sha256": "38d4380b8280b9af537d56ea21386d2368e6de4c11757e4a827cc7c1320f1c43"
+    },
+    "shared/contracts/reviewer/review_panel_provenance.schema.json": {
+      "upstream_path": "shared/contracts/reviewer/review_panel_provenance.schema.json",
+      "sha256": "5ffd1746485fa96619a079f2e5b81f78ee74bfcf6b3014914b7accae554e9307"
+    },
+    "shared/contracts/reviewer/review_panel_provenance_carrier.schema.json": {
+      "upstream_path": "shared/contracts/reviewer/review_panel_provenance_carrier.schema.json",
+      "sha256": "5b42c81d1498ae869a585728c46fa60ab0c5cb7d8cee099463b66a43de11c4a6"
+    },
+    "shared/contracts/reviewer/review_panel_provenance_input.schema.json": {
+      "upstream_path": "shared/contracts/reviewer/review_panel_provenance_input.schema.json",
+      "sha256": "6b3b0efc727186d2e25fdbb2d2655023935807eb3ef9bda08ea7d6acd0bc38b3"
+    },
+    "shared/contracts/revision/author_adjudication.schema.json": {
+      "upstream_path": "shared/contracts/revision/author_adjudication.schema.json",
+      "sha256": "b3d1b31ef631a11d4a09dbcee466030097ac800e74bdf760ca943d7d8a26d2dc"
+    },
+    "shared/contracts/revision/author_adjudication_input.schema.json": {
+      "upstream_path": "shared/contracts/revision/author_adjudication_input.schema.json",
+      "sha256": "bc15b7ef9a7a790d00d33786d3026a1de94f0fe73fd9b7e24452afc7c8f318d3"
+    },
+    "shared/contracts/revision/claim_strength_drift_disposition.schema.json": {
+      "upstream_path": "shared/contracts/revision/claim_strength_drift_disposition.schema.json",
+      "sha256": "389e33ee310613acedf4f464b3ec5966bb31079d227b097e56f82085667f6233"
+    },
+    "shared/contracts/revision/claim_strength_drift_disposition_input.schema.json": {
+      "upstream_path": "shared/contracts/revision/claim_strength_drift_disposition_input.schema.json",
+      "sha256": "2640c07a2de36efa349832e4ddd1f21c816d02998d109e9fd81eb878926aacae"
+    },
+    "shared/contracts/revision/claim_strength_drift_findings.schema.json": {
+      "upstream_path": "shared/contracts/revision/claim_strength_drift_findings.schema.json",
+      "sha256": "c0c58f2c39544929ef52c3c2d3046b50c92c290896ac26e1c891ddea08fdaf98"
+    },
+    "shared/contracts/revision/claim_surface_manifest.schema.json": {
+      "upstream_path": "shared/contracts/revision/claim_surface_manifest.schema.json",
+      "sha256": "85460c1c195c890eb505c95e2767f72461c4a1f631203b7b26decb7a841afb1d"
+    },
+    "shared/contracts/revision/integrity_correction_authorization.schema.json": {
+      "upstream_path": "shared/contracts/revision/integrity_correction_authorization.schema.json",
+      "sha256": "dfc3ef4d00e1171437022bd5153a323547e59795ff405177aef9207562ddb7c5"
+    },
+    "shared/contracts/revision/integrity_correction_authorization_input.schema.json": {
+      "upstream_path": "shared/contracts/revision/integrity_correction_authorization_input.schema.json",
+      "sha256": "5f3aeae21a480621dfb379464b076a8f1d5ca6b0a2317d1a14d60caf665cc6e6"
+    },
+    "shared/contracts/revision/integrity_correction_list.schema.json": {
+      "upstream_path": "shared/contracts/revision/integrity_correction_list.schema.json",
+      "sha256": "2661f1877cb5c2998d3fca9093732d20930470a8466cd2ddb85ce4d2eb8da5a7"
+    },
+    "shared/contracts/revision/integrity_pass_receipt.schema.json": {
+      "upstream_path": "shared/contracts/revision/integrity_pass_receipt.schema.json",
+      "sha256": "72b41b5710d90d31f863bf567aa1a5a57e340593b50e8fa17db16d49aa7da68f"
+    },
+    "shared/contracts/revision/revision_evidence_bundle.schema.json": {
+      "upstream_path": "shared/contracts/revision/revision_evidence_bundle.schema.json",
+      "sha256": "f5be3dc34a8571e429719997ca66d667d7d533834d00fb3341eee653f781344e"
+    },
+    "shared/contracts/revision/revision_roadmap.schema.json": {
+      "upstream_path": "shared/contracts/revision/revision_roadmap.schema.json",
+      "sha256": "8d578a7eab4de4c4c2d2274292b8d351da552429c595edf2a0f0d1405287e081"
+    },
+    "shared/contracts/submission/format_profile.example.yaml": {
+      "upstream_path": "shared/contracts/submission/format_profile.example.yaml",
+      "sha256": "f9bddef1efe0c666c71ace85ef4b4f3594b53cb5d2c77635ad040ecf77670e19"
+    },
+    "shared/contracts/submission/format_profile.schema.json": {
+      "upstream_path": "shared/contracts/submission/format_profile.schema.json",
+      "sha256": "775cb9db932e781ddb1c038d2f21e6f2e64a1d649a7d9e9b70a1b90f8b00eb78"
+    },
+    "shared/contracts/submission/submission_verification_report.schema.json": {
+      "upstream_path": "shared/contracts/submission/submission_verification_report.schema.json",
+      "sha256": "7d42fd1e90eb76511f3f2120b4f3369c530b984b6172e257b954dd13557cbc16"
+    },
+    "shared/contracts/submission/venue_profile.schema.json": {
+      "upstream_path": "shared/contracts/submission/venue_profile.schema.json",
+      "sha256": "53177ccd10da336aba2d5abd8347713569da7fd1f4f6d1cc28917b56176b1927"
+    },
+    "shared/contracts/writer/full.json": {
+      "upstream_path": "shared/contracts/writer/full.json",
+      "sha256": "ee29da7a0efaf17b7f90059e5a158ba55f4dd3d210062e4d3855da6d03f3f4a3"
+    },
+    "shared/cross_model_verification.md": {
+      "upstream_path": "shared/cross_model_verification.md",
+      "sha256": "498b4f2b5c24681741ae4a25dad43354d71f6719be9c07a6820cdb94309e028a"
+    },
+    "shared/evals_lift_report.schema.json": {
+      "upstream_path": "shared/evals_lift_report.schema.json",
+      "sha256": "14fd1e39d1d0d2fff9e7403e31c93fd6f4e204929f34e5a6258e2414d3112bc9"
+    },
+    "shared/ground_truth_isolation_pattern.md": {
+      "upstream_path": "shared/ground_truth_isolation_pattern.md",
+      "sha256": "737b1da4769e65a9a691f951c5b12dfabf1c3e5cdfb4073b6f29bf46e428cd88"
     },
     "shared/handoff_schemas.md": {
       "upstream_path": "shared/handoff_schemas.md",
-      "sha256": "c6bc2d1c20912b887b82e1dcebb62e4c9b7600300687ea30a9de3062f91db967"
+      "sha256": "adfd21750e321484350e6780257e2c8b8db6f565bf4a82d2c68b0b5540b80f16"
+    },
+    "shared/human_subjects_authority_registry.json": {
+      "upstream_path": "shared/human_subjects_authority_registry.json",
+      "sha256": "263ffbb82f31f0f0dcbfb41955a5025cb3e0449c7d21c606eabeb16b79fe0f11"
+    },
+    "shared/mode_spectrum.md": {
+      "upstream_path": "shared/mode_spectrum.md",
+      "sha256": "a4b040d33f2e3afc182fcde8db059a534811f6ce4b16a2e67001e49845f21da3"
+    },
+    "shared/model_tiering.md": {
+      "upstream_path": "shared/model_tiering.md",
+      "sha256": "f15e6597ff36651507fbd8ee96a3e51f3b41738a15a519b0a00548d0f642a89f"
+    },
+    "shared/output_language_pair.md": {
+      "upstream_path": "shared/output_language_pair.md",
+      "sha256": "d0fd4a76c56609c9c03ae51e5a55cd932dc29fc2ff5dc957eb211da47cd2e705"
+    },
+    "shared/policy_data/nature_policy.md": {
+      "upstream_path": "shared/policy_data/nature_policy.md",
+      "sha256": "eb0a33dbf6b7dc8b9e7f788aa45e1e888b127d0b520aac0f3e694d00fdbd5685"
+    },
+    "shared/prisma_trAIce_protocol.md": {
+      "upstream_path": "shared/prisma_trAIce_protocol.md",
+      "sha256": "d329da7f36c8079aff170ef21c5876dcf6c7db935f4c825a414dd8bacffeb7b8"
+    },
+    "shared/raise_framework.md": {
+      "upstream_path": "shared/raise_framework.md",
+      "sha256": "27ad56ef31ddf932f02881f725fec56fed91590752517552c57dd2b4b71318a4"
+    },
+    "shared/references/authority_content_coverage_advisory_protocol.md": {
+      "upstream_path": "shared/references/authority_content_coverage_advisory_protocol.md",
+      "sha256": "d644b929eb173adfa7748a0341467080ac1c6a6ee595dc3e5fadfe7928a3569f"
+    },
+    "shared/references/claim_standing_candidate_ledger_protocol.md": {
+      "upstream_path": "shared/references/claim_standing_candidate_ledger_protocol.md",
+      "sha256": "afe85e8cb8986f125b7807f5f2f8a4839e636750a417fa231a6f1b779167b276"
+    },
+    "shared/references/claim_strength_ladder.md": {
+      "upstream_path": "shared/references/claim_strength_ladder.md",
+      "sha256": "22f51a6fefb2525e685b6938cc446fa658bdfb6e43157b5d2e6d5051f2212dfe"
+    },
+    "shared/references/cross_document_consistency_advisory_protocol.md": {
+      "upstream_path": "shared/references/cross_document_consistency_advisory_protocol.md",
+      "sha256": "dae21751708126647394ffa39f1294b48094e2f3678f4549014d4e7395306894"
+    },
+    "shared/references/evidence_row_protocol.md": {
+      "upstream_path": "shared/references/evidence_row_protocol.md",
+      "sha256": "ea343e10550f7fe8fa93aa9a7a101cdafe3a60e4842eba12c92d6c8f04b77d24"
+    },
+    "shared/references/firm_rules.md": {
+      "upstream_path": "shared/references/firm_rules.md",
+      "sha256": "b2da465f5098101ae866074cf6fed5902611263cc69ba3f007ff447cafda7411"
+    },
+    "shared/references/human_subjects_authority_protocol.md": {
+      "upstream_path": "shared/references/human_subjects_authority_protocol.md",
+      "sha256": "5f6e6929d30a0ae757b7468b74a2c82ff1d7997f5c0b706136b9015d03ebb3a1"
+    },
+    "shared/references/intent_clarification_protocol.md": {
+      "upstream_path": "shared/references/intent_clarification_protocol.md",
+      "sha256": "d3d8fe83f944d1e1886d0ccceaffe695f6e6748be9cdfe0a76fb538e52270d3f"
+    },
+    "shared/references/irb_terminology_glossary.md": {
+      "upstream_path": "shared/references/irb_terminology_glossary.md",
+      "sha256": "9ce43e279dbccf38776f9fa875377bde5d406dcc937368a5b7bc09a256ce3b40"
+    },
+    "shared/references/per_source_method_weaknesses.md": {
+      "upstream_path": "shared/references/per_source_method_weaknesses.md",
+      "sha256": "048eb312fdffb218b22fd7bd667e7169d6237a27ea9fe1e6b94fdf4e58efaef7"
+    },
+    "shared/references/protected_hedging_phrases.md": {
+      "upstream_path": "shared/references/protected_hedging_phrases.md",
+      "sha256": "39e483f2d90ab56559ee0c0c55bf7f083a9dd65008af0c4ddf20712734b0986e"
+    },
+    "shared/references/psychometric_terminology_glossary.md": {
+      "upstream_path": "shared/references/psychometric_terminology_glossary.md",
+      "sha256": "da5f152a4c351f73f97a8389d76bcd5a1296a49394141b9af4fa3821662a5fc3"
+    },
+    "shared/references/review_criteria_consumer_protocol.md": {
+      "upstream_path": "shared/references/review_criteria_consumer_protocol.md",
+      "sha256": "575cc8c4d286c07fbd56f035c1dad3a65ff34a5b581bedca602dd286df54e1c7"
+    },
+    "shared/references/review_form_note.md": {
+      "upstream_path": "shared/references/review_form_note.md",
+      "sha256": "03ee2893d18f3d6826a8be93302643e4e8501bef73cc00b47590c752b7115a86"
+    },
+    "shared/references/review_pathway_rule_trace_protocol.md": {
+      "upstream_path": "shared/references/review_pathway_rule_trace_protocol.md",
+      "sha256": "7ca31c60cfb0b858727eb7b6e0cd7730ded4faa142cc9ad30434470066972058"
+    },
+    "shared/references/routing_core.md": {
+      "upstream_path": "shared/references/routing_core.md",
+      "sha256": "3e35ed66a9c65c5f50543905bbab86928b923d5a991b2f6324c3080617988d8f"
+    },
+    "shared/references/submission_packet_manifest_protocol.md": {
+      "upstream_path": "shared/references/submission_packet_manifest_protocol.md",
+      "sha256": "18192c0350c711c16442252a9996d68a1750ba341824a2fe65f464f15fb0b6dc"
+    },
+    "shared/references/word_count_conventions.md": {
+      "upstream_path": "shared/references/word_count_conventions.md",
+      "sha256": "c226c7961febf5e2179d0885d2c6f32a67a661efe288d602d8debd083a3cc8c8"
+    },
+    "shared/research_workflow_profiles/field_general.json": {
+      "upstream_path": "shared/research_workflow_profiles/field_general.json",
+      "sha256": "dd19699e1bcf512e520e70a90f6223f39d1c0ef8f6c09e9366278bff650d72a9"
+    },
+    "shared/review_criteria_registry.json": {
+      "upstream_path": "shared/review_criteria_registry.json",
+      "sha256": "e94db85cfb7017ed5d0311a6316ca4b3fc5d8fa77e0233a9260eb293217ed83e"
+    },
+    "shared/review_criteria_sources/msr-2027-technical-papers.2026-08-24.json": {
+      "upstream_path": "shared/review_criteria_sources/msr-2027-technical-papers.2026-08-24.json",
+      "sha256": "3dbc6caa2fae7a61d797c7c50047d9e0d573bdbcadceccdbfbdefb9c493cd7cd"
+    },
+    "shared/review_criteria_sources/sigsoft-empirical-standards.2026-08-24.json": {
+      "upstream_path": "shared/review_criteria_sources/sigsoft-empirical-standards.2026-08-24.json",
+      "sha256": "39fc4b2476c1ee5a28b27647f8eeca7010030fc1f7c8648d168b1d34c28c525e"
+    },
+    "shared/sprint_contract.schema.json": {
+      "upstream_path": "shared/sprint_contract.schema.json",
+      "sha256": "e9f544926f543ccf8fd351a2db85e2e25f67e8913ae20a400a223c5f44db0f64"
     },
     "shared/style_calibration_protocol.md": {
       "upstream_path": "shared/style_calibration_protocol.md",
       "sha256": "4adc5eaa10b9776f4343767b7db4ebe23e4fa3a5c00a7547ab507bccc2129301"
+    },
+    "shared/templates/codex_audit_multifile_template.md": {
+      "upstream_path": "shared/templates/codex_audit_multifile_template.md",
+      "sha256": "f3b2ad57d8c22c10582d76210877b50504c2d4a96a71986197b702e258ffae5c"
     }
   }
 }

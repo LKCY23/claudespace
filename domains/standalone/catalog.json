@@ -10,7 +10,7 @@
         "author": "Imbad0202",
         "upstream": {
           "repo": "Imbad0202/academic-research-skills",
-          "commit": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+          "commit": "adc3529754e0d2aa4b4d9c839092b711d7ca2bd0",
           "path": "academic-paper"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -67,7 +67,7 @@
         "author": "Imbad0202",
         "upstream": {
           "repo": "Imbad0202/academic-research-skills",
-          "commit": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+          "commit": "adc3529754e0d2aa4b4d9c839092b711d7ca2bd0",
           "path": "academic-paper-reviewer"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
