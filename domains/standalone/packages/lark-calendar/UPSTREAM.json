@@ -1,24 +1,36 @@
 {
   "repo": "larksuite/cli",
-  "sha": "b75632e78a78e0b32b762bba659efaf72c797d4e",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-calendar",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-calendar/SKILL.md",
-      "sha256": "79f1f78686d9b9d32fef0f0e9588f09c6ba3552751b953a97e6b7d449e015fcc"
+      "sha256": "d5d0ebd02b68d90e3bd8c1992a05696c3ad9900f4dcb2c86ff95edeac840355f"
     },
     "references/lark-calendar-create.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-create.md",
       "sha256": "86e1cf5166f762fda597dabdfe3d6f65935bf16bb68bb8e2cbb3e780f9f1b2a7"
     },
+    "references/lark-calendar-join-event.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-join-event.md",
+      "sha256": "229a2a5e7087636e5a06b0bcd58bf7b67f8bbf0f394262c42cb2cd152f7e0d05"
+    },
+    "references/lark-calendar-list-attendees.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-list-attendees.md",
+      "sha256": "f2c6ba350e789f52339f496ce971e871fe2b868bf9e27f4e48989d12d3b6c94b"
+    },
+    "references/lark-calendar-meeting-relation.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-meeting-relation.md",
+      "sha256": "5cd73e12cacae08a36ea5006e03fb3c180900409461fdb1a7e29fa412f23b653"
+    },
     "references/lark-calendar-meeting.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-meeting.md",
-      "sha256": "b3f85f24dbc4a92a040311bc2602342c33b7e4abe771938f748627eb712b8fb2"
+      "sha256": "9165c5f921be313f15cfca640752544ff1980433d985d9a2b710cd6a1a587b77"
     },
     "references/lark-calendar-recurring.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-recurring.md",
-      "sha256": "4bb5f47cec5b44b7eddaea7bc13c66f89f8cd25b8aea91ea3f366cf807494a41"
+      "sha256": "ac9de57e36a4ce057facb62204e538201fbdcfacb6b49b24cb960a86953f3d5b"
     },
     "references/lark-calendar-room-find.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-room-find.md",
@@ -30,7 +42,7 @@
     },
     "references/lark-calendar-schedule-clear-time.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-schedule-clear-time.md",
-      "sha256": "cebc411c62c2b8d5413e5332edf770de13d77c03de724bbcde5b043c34b47f11"
+      "sha256": "3cb98752aea1970886347da95b0cae47fb41588ec8499b8d2f024bda0f4de81d"
     },
     "references/lark-calendar-schedule-fuzzy-time.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-schedule-fuzzy-time.md",
@@ -43,6 +55,10 @@
     "references/lark-calendar-suggestion.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-suggestion.md",
       "sha256": "5861ab08517f110accca8a6473bb019bd4fca05bd883f25ffc17e8d45289a577"
+    },
+    "references/lark-calendar-transfer.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-transfer.md",
+      "sha256": "d84c4c7d1007a7a9708fc4ead84dee4f404f63cd0dd6f19e7d413fb8e111cc70"
     },
     "references/lark-calendar-update.md": {
       "upstream_path": "skills/lark-calendar/references/lark-calendar-update.md",
