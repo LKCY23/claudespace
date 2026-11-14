@@ -1237,7 +1237,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-shared"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
