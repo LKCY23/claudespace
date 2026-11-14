@@ -1,0 +1,24 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "017b19a793ad71794a02887ede04757f3d82e10d",
+  "path": "skills/lark-contact",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-contact/SKILL.md",
+      "sha256": "79041173aad9df428f51adc0435a9bdec2b45366b2003447c18af1ea1f55e7b6"
+    },
+    "references/lark-contact-get-user.md": {
+      "upstream_path": "skills/lark-contact/references/lark-contact-get-user.md",
+      "sha256": "24ba2fbd92ec33ebf04de44a6bb10ee9af91e5808aa8d1898486d332da2c5b6e"
+    },
+    "references/lark-contact-search-bot.md": {
+      "upstream_path": "skills/lark-contact/references/lark-contact-search-bot.md",
+      "sha256": "215f79202c6532631a398f87e278146ff768d1b7bc00484741a26c1c201ed2a3"
+    },
+    "references/lark-contact-search-user.md": {
+      "upstream_path": "skills/lark-contact/references/lark-contact-search-user.md",
+      "sha256": "afd023c446b4cc3837ceb9cafcf45bc7d9fef66df6f8a1c0daba66add9603671"
+    }
+  }
+}

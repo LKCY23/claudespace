@@ -1,0 +1,252 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "5028c2e6ffb9e2ed8e56fed688f1a1dd74e6b11a",
+  "path": "skills/lark-drive",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-drive/SKILL.md",
+      "sha256": "b140cd55b62be7f001384fb47627dc269ef08db3b943d0eb8c6aa4ef1bc9b685"
+    },
+    "references/lark-drive-add-comment.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-add-comment.md",
+      "sha256": "57d64f6ebc8eec7066619205b373dabd7bb383020f0a3b03550ac08170c71853"
+    },
+    "references/lark-drive-add-reply.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-add-reply.md",
+      "sha256": "51ab4b710b2c7ab0d1aeb018e112892c0067f8563eaba69946309eb34941fffa"
+    },
+    "references/lark-drive-apply-permission.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-apply-permission.md",
+      "sha256": "fcb2d45e75151fb43d8c5eccc77e060c4e909f096eb8ca71626b9b9863926751"
+    },
+    "references/lark-drive-batch-query-comments.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-batch-query-comments.md",
+      "sha256": "cf925c31d729025483b36caf7478edba0545bc00456e9dd3555aa6abcd9f6bc4"
+    },
+    "references/lark-drive-comment-content.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-comment-content.md",
+      "sha256": "7abde1590bc6c66e4a81a8303b5d21a081f3b432546a7095621dbb58884a19ce"
+    },
+    "references/lark-drive-comment-location.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-comment-location.md",
+      "sha256": "d6fb5bec768b880c44dc47ee3a6abd8bdd5df985c1db1b1c97a0f973b6403d73"
+    },
+    "references/lark-drive-copy.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-copy.md",
+      "sha256": "7a610b58a8d3a366c18805f0c70a47a67353b6594b455f450a83b06c31427e0b"
+    },
+    "references/lark-drive-cover.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-cover.md",
+      "sha256": "88c532215e7b5fdb0d342ca5a41ed94de98eed650c2b2ef3913c031e5035d95c"
+    },
+    "references/lark-drive-create-folder.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-create-folder.md",
+      "sha256": "7267d0b1ae7ec6712e165f4d6100072b9ed6e6772f29edf14b42100cbb063284"
+    },
+    "references/lark-drive-create-shortcut.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-create-shortcut.md",
+      "sha256": "f4f81ff5c1b8c22f49e1304ed07e17b811fce03c721811efa1bd64f189d29759"
+    },
+    "references/lark-drive-delete-reply.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-delete-reply.md",
+      "sha256": "97e385497ab3deb3dc3e6556d8810f73201acd77fb06e1ede0ed1224e6c855db"
+    },
+    "references/lark-drive-delete.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-delete.md",
+      "sha256": "d7f95c9b3e6866f46a8ce8c836a94af403a51aeedb4ac5b5e37798b1f5933d75"
+    },
+    "references/lark-drive-download.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-download.md",
+      "sha256": "650078e46ac8e24f1a757aa389d6fc9d3ba39e726dc9f43d55d01b94bfef7116"
+    },
+    "references/lark-drive-export-download.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-export-download.md",
+      "sha256": "414da95c78ce92ad6e0e5896cfccd905da3bf9c52f91b8d1e156466b95434314"
+    },
+    "references/lark-drive-export.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-export.md",
+      "sha256": "1a7d780ffb524f8f87d011198450736d8b4b8ce5b42ef3fad5c1204ef2983435"
+    },
+    "references/lark-drive-files-list.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-files-list.md",
+      "sha256": "f19683396d75b1f245b7332010edaaa19b98d90eb143563980abeef125bb441d"
+    },
+    "references/lark-drive-import.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-import.md",
+      "sha256": "a6bf5f7b05f49e39ffb39330e08892b900b2a515462f6757fe3dfd5667d08b2b"
+    },
+    "references/lark-drive-inspect.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-inspect.md",
+      "sha256": "550313b8cf4e65d930f4b482416e943aa9c7c5418696b7f5895f479b5869e423"
+    },
+    "references/lark-drive-list-comments.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-list-comments.md",
+      "sha256": "8e25281b31ec6814a1dc6cc3b94b07f78a30b84c9115aa92f6e2060e5f23b7f6"
+    },
+    "references/lark-drive-list-replies.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-list-replies.md",
+      "sha256": "fa83e4a782de5a6da3aaecf6ac1fff639e6ef8bb8ca5ccef2c537f1d75bfcb57"
+    },
+    "references/lark-drive-member-add.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-member-add.md",
+      "sha256": "179b021058cb23a7188264417564eecf89ecf9b092dc2a8769d8d48f8e5fa78b"
+    },
+    "references/lark-drive-member-list.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-member-list.md",
+      "sha256": "bed81dedf8af61a976db095642b823eafcb00fe3b5a679893708277b0cf39b29"
+    },
+    "references/lark-drive-member-remove.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-member-remove.md",
+      "sha256": "7c169f65b8c14ff13143968dad4e230caf9a8ebd3a1299a9e88ff393619a1a95"
+    },
+    "references/lark-drive-move.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-move.md",
+      "sha256": "cc03d0d60e0c6c1757b7ac41f445ca7b1ceebdf57f0916d05ae53bc9d4ef688c"
+    },
+    "references/lark-drive-permission-get-setting.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-permission-get-setting.md",
+      "sha256": "2ef00117158fdaafbf7830fbd705077daee48ebba5c958d3159e373ffce090d9"
+    },
+    "references/lark-drive-permission-guide.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-permission-guide.md",
+      "sha256": "4dc481b5568122b36a4c54dec2b37375be4824ac59a1a555ce5621a2db675cda"
+    },
+    "references/lark-drive-preview.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-preview.md",
+      "sha256": "e9c4971b43746d67e63a67f74ebf5323c224a0a38fab6e9d768605324bd64bb5"
+    },
+    "references/lark-drive-pull.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-pull.md",
+      "sha256": "fe9aa5027cfa2cbbc78199b3b73e407a99d187a42ef88a635008333f9ab32d5c"
+    },
+    "references/lark-drive-push.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-push.md",
+      "sha256": "79351557e246303eaa1e278576e07550571370d3db5df71f79fd1f0c7b1f0a10"
+    },
+    "references/lark-drive-react-reply.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-react-reply.md",
+      "sha256": "a2dec640a85958e666d557c273afef497ec9c6028e4c759ccd44423e0b61a3ff"
+    },
+    "references/lark-drive-reactions.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-reactions.md",
+      "sha256": "a4b0213b77f504584d9ea00d4732eb51231c38be312d0ac1c4b6a0f7e84b6a9c"
+    },
+    "references/lark-drive-resolve-comment.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-resolve-comment.md",
+      "sha256": "a48148ddb6d720ec60be59dee67968b263f80af878186a1e07c187c7c89fdd82"
+    },
+    "references/lark-drive-restore-comment.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-restore-comment.md",
+      "sha256": "ebabc65787adb79df5843a93cf5105191574d246b6356a66915c2f33aea3db22"
+    },
+    "references/lark-drive-search.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-search.md",
+      "sha256": "48c8a56709539a83cd966f46e1330a0cb9b4e9648fe44b1a5c65ac28b56a253a"
+    },
+    "references/lark-drive-secure-label.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-secure-label.md",
+      "sha256": "08569ed5612347a0cfae4ae423b28e94fc090cf0d4a5881b577cc05720cb3619"
+    },
+    "references/lark-drive-status.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-status.md",
+      "sha256": "5023fb603d2b8950b4014523a69b9c00999969a77dc80a230d20e21fb438e014"
+    },
+    "references/lark-drive-task-result.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-task-result.md",
+      "sha256": "a5f988bdeaa8da962eff2b274d573b8e9958127366c6179029f9587b4d4a7e59"
+    },
+    "references/lark-drive-update-reply.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-update-reply.md",
+      "sha256": "095e7e6a3c9299eb96ab43344bfcefe3f86c8bacb995e3264d354f486e29d217"
+    },
+    "references/lark-drive-update-title.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-update-title.md",
+      "sha256": "bd5eb6cf49affafa3c6ba2d79b4c3e9a11878f67c73149de3c26d60e06510ca4"
+    },
+    "references/lark-drive-upload.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-upload.md",
+      "sha256": "08ffb82153f92bafd5e0f9cc0246e50b6b3e45c6efa2c2db2cf622fce5624e56"
+    },
+    "references/lark-drive-version-delete.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-version-delete.md",
+      "sha256": "8e131111ba1dde1d711cbd025015f38147ba14dfeb48f2117246d0ad8975f5d0"
+    },
+    "references/lark-drive-version-get.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-version-get.md",
+      "sha256": "bba7924a4981aa263bb90ffcc140b0685b7a2d07cc04eb08411b0c796f125a15"
+    },
+    "references/lark-drive-version-history.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-version-history.md",
+      "sha256": "da9a16413942835a70c15db36ec112b11634d6d91ac7272296a1c88d6275fe7b"
+    },
+    "references/lark-drive-version-revert.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-version-revert.md",
+      "sha256": "f1e083299e0c7f452f000b83833b15e212f71a1aefb66d95fe3282f786b1875a"
+    },
+    "references/lark-drive-workflow-knowledge-organize-analysis.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-knowledge-organize-analysis.md",
+      "sha256": "b193be51d0a7656ef910ba14311acbf62ef0788e7751c26679e97583b1bedfd5"
+    },
+    "references/lark-drive-workflow-knowledge-organize-discovery.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-knowledge-organize-discovery.md",
+      "sha256": "9630d49fe29be3a0a94bb91f5f4ce6997473e3398893cee65b996c6a430dcdb0"
+    },
+    "references/lark-drive-workflow-knowledge-organize-execution.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-knowledge-organize-execution.md",
+      "sha256": "dcc6ba654ea1962728dcbba38be2aaa3e88727c77299bdb34e73cc5cc0877f4d"
+    },
+    "references/lark-drive-workflow-knowledge-organize-planning.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-knowledge-organize-planning.md",
+      "sha256": "8d4e41a33087cc0330a0535877a5e5910c2ca4b2ed7d3e6243ffa78614c1320f"
+    },
+    "references/lark-drive-workflow-knowledge-organize-rollback.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-knowledge-organize-rollback.md",
+      "sha256": "6c413f2dd193e626f1c5e02dbb52bc90500af931ee8b598aa4d10636c9c6180f"
+    },
+    "references/lark-drive-workflow-knowledge-organize.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-knowledge-organize.md",
+      "sha256": "e91f2130225d631f82658cf3474aae51ad0e43e46f2a9de5e2bf187478e8123b"
+    },
+    "references/lark-drive-workflow-permission-governance-commands.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-permission-governance-commands.md",
+      "sha256": "06885f0fce3d8e9f674cb2115ba97161cb67064705dbaec988c6dc2e5b8c7202"
+    },
+    "references/lark-drive-workflow-permission-governance-outputs.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-permission-governance-outputs.md",
+      "sha256": "84fd75ff213c56639199f3bf20abb346852f90c7dd9437d48089dbcc5bc1a549"
+    },
+    "references/lark-drive-workflow-permission-governance.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-permission-governance.md",
+      "sha256": "c81802223811416676441204e309f6fc1ae2afd20431a5fc6ca8d730d5665f4f"
+    },
+    "references/lark-drive-workflow-topic-move-collector-execute.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-topic-move-collector-execute.md",
+      "sha256": "5234b3c628ea44dc30cc78c315195999fded79d0d0ec67d5832c47ce74ca7440"
+    },
+    "references/lark-drive-workflow-topic-move-collector-recall.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-topic-move-collector-recall.md",
+      "sha256": "2b2e36ca2f516f5e440c7c6f90c52ab29efe237e085240d1b27f56fe4ad96f05"
+    },
+    "references/lark-drive-workflow-topic-move-collector-resolve-verify.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-topic-move-collector-resolve-verify.md",
+      "sha256": "d9c2f039f5d91bb22b85e09dc6c7dd9b66a11391895b41f8afc4ec33fea3b3e0"
+    },
+    "references/lark-drive-workflow-topic-move-collector-review-plan.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-topic-move-collector-review-plan.md",
+      "sha256": "61772e75afaafa0d2dedfccde5199ae0c6581a564796f25984682a870f96715d"
+    },
+    "references/lark-drive-workflow-topic-move-collector-setup.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-topic-move-collector-setup.md",
+      "sha256": "846856cc0e2eb2caa75551a6cfd0c0ad7282096cd4840f824e914c8ebf71e20b"
+    },
+    "references/lark-drive-workflow-topic-move-collector.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow-topic-move-collector.md",
+      "sha256": "3e55eca38e69f23cd3548c95a08c916a56e4927e5e2c82d4e9cb0d7e0242be2d"
+    },
+    "references/lark-drive-workflow.md": {
+      "upstream_path": "skills/lark-drive/references/lark-drive-workflow.md",
+      "sha256": "43e2e855f0e4f5713eefc6edca607777a8da82cc05eb09ba655977befb77f0e9"
+    }
+  }
+}

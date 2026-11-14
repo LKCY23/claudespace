@@ -120,9 +120,13 @@ def main() -> None:
                 print(name)
                 workspace = out / "runs" / case_id / variant / f"r{rep}" / case["fixture"]
                 episode = out / "episodes" / name
+                if not (episode / "metrics.json").exists():
+                    # A half-finished episode is rerun from scratch: its evidence and its workspace both go,
+                    # so the new session starts from the fixture rather than the previous attempt's edits.
+                    shutil.rmtree(episode, ignore_errors=True)
+                    shutil.rmtree(workspace, ignore_errors=True)
                 prepare_workspace(case["fixture"], workspace)
                 if not (episode / "metrics.json").exists():
-                    shutil.rmtree(episode, ignore_errors=True)  # a half-finished episode is rerun from scratch
                     command = [*UV, "--with", "claude-agent-sdk", "python", "-B", str(HERE / "run_interactive.py"),
                                "--case", case_id, "--variant", variant, "--workspace", str(workspace), "--out", str(episode),
                                "--model", args.model, "--simulator-model", args.simulator_model, "--budget", str(args.budget)]

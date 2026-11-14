@@ -1,0 +1,64 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "6e2cad7221755d3668b350f186b862d64e0cba97",
+  "path": "skills/lark-wiki",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-wiki/SKILL.md",
+      "sha256": "d77b966ab246078b7ef050e4fbdf3f8dfa74ed76e03dab1e4f793c1a0a7bf2c2"
+    },
+    "references/lark-wiki-delete-space.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-delete-space.md",
+      "sha256": "db47b8179e13fa4399b803012d1d642dba014bf78771e7fa6aba4acd00548c69"
+    },
+    "references/lark-wiki-member-add.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-member-add.md",
+      "sha256": "8bd78edd8099a33337b2d18745ec9d37f0fb793f6fe3e58ff99751951cb254c6"
+    },
+    "references/lark-wiki-member-list.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-member-list.md",
+      "sha256": "3846bd529361983f167e14ba993de89a716263500703db7812624fdd99ecca14"
+    },
+    "references/lark-wiki-member-remove.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-member-remove.md",
+      "sha256": "03249541afa9eab994f9775e7cccbdfb012643bc1e5b467aabd7395aa1012fc7"
+    },
+    "references/lark-wiki-move-to-drive.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-move-to-drive.md",
+      "sha256": "bc6923a5456da4d79e88c14611c2a0481c60cb83948b8ac31daefc4b9aaf27c1"
+    },
+    "references/lark-wiki-move.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-move.md",
+      "sha256": "02fb790307a9801d93de0175194ea4dcc8bba5194dc67969c7c97c4aa19e6d04"
+    },
+    "references/lark-wiki-node-copy.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-node-copy.md",
+      "sha256": "d6c5de760b0f400e3ae04dff5b3cc11e2d40b7a5cac769695ee2cacb40f1771f"
+    },
+    "references/lark-wiki-node-create.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-node-create.md",
+      "sha256": "9824c68faa0e92a57b342264ce79f3e40ca33fc9baed85c33248eb606318b7e5"
+    },
+    "references/lark-wiki-node-delete.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-node-delete.md",
+      "sha256": "2c48931d16fc2cd6f45c78ae596644652a71f61bd1d022031a18409f45773090"
+    },
+    "references/lark-wiki-node-get.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-node-get.md",
+      "sha256": "3299b7ce40192b865ec33bc42803371d62f70b344e8757d926f8d8c511e1ebd1"
+    },
+    "references/lark-wiki-node-list.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-node-list.md",
+      "sha256": "771cce93c4755916f92136e283d2b85d0e901a505e852c5e8c9d6f70787082d6"
+    },
+    "references/lark-wiki-space-create.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-space-create.md",
+      "sha256": "b936ab670f525e6e9433ee6b145ed2eafee296df2c3062abdc651000a88c86ad"
+    },
+    "references/lark-wiki-space-list.md": {
+      "upstream_path": "skills/lark-wiki/references/lark-wiki-space-list.md",
+      "sha256": "d4921cfbfaba564217f214b6f87daf7e3ccbfda5b9759f73ab6a999c682913ae"
+    }
+  }
+}

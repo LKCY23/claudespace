@@ -1,0 +1,76 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "1efe2dfb3304a7cac2a70e4adecfb1dc888ebe06",
+  "path": "skills/lark-approval",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-approval/SKILL.md",
+      "sha256": "fee377eca410dcda36b0bbbd632aab085b2e26e8232bb2ff88d394a1571d5ae2"
+    },
+    "references/lark-approval-approvals-get.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-approvals-get.md",
+      "sha256": "c53ad1afc07adf43cac455dd43e431e523203af5fc6396e596f46f7faa98e1ec"
+    },
+    "references/lark-approval-approvals-search.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-approvals-search.md",
+      "sha256": "9bdd13c466a294049d87afa4f385a7aeda31ac4a968be36bc66d6bcf04004f92"
+    },
+    "references/lark-approval-initiate.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-initiate.md",
+      "sha256": "aaa1e15dc06dbc55010540318d1f004f0c3a965bab8dacca64394ef44ed735af"
+    },
+    "references/lark-approval-instance-form-control-parameters.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-instance-form-control-parameters.md",
+      "sha256": "8367dcd3328f3a1acaaead392caf72b390cdd6c603f4840a2c6c15c25c23dbf6"
+    },
+    "references/lark-approval-instance-value-sourcing.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-instance-value-sourcing.md",
+      "sha256": "91c55c1fff12e33b02275549c9d6ab0e040e388782bd38a882cb0a901b699b10"
+    },
+    "references/lark-approval-instances-cancel.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-instances-cancel.md",
+      "sha256": "0d14981f7dd09adbdd6de20a49159c1d81605fbd1ee0baced2745aa3f3d6ed6f"
+    },
+    "references/lark-approval-instances-cc.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-instances-cc.md",
+      "sha256": "39dffced4a0a474ac17a94de85d83ff02c316ecde7610d73edc0c07c45fe2f10"
+    },
+    "references/lark-approval-instances-get.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-instances-get.md",
+      "sha256": "9a7f0a7a31c1212c23e82bfa2eb24a63e4956e7d04f7dcc1afc14c086bfe2221"
+    },
+    "references/lark-approval-instances-initiated.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-instances-initiated.md",
+      "sha256": "583ccb8ed26bd028df7fc1dc6521c7da60c866c88e60214872a773aab6e88018"
+    },
+    "references/lark-approval-tasks-add-sign.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-add-sign.md",
+      "sha256": "423b191bbe40f98ef89191a9860878b94e1f2e5722a992ee78b0b8812f5d2ac2"
+    },
+    "references/lark-approval-tasks-approve.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-approve.md",
+      "sha256": "47c94f80c365d263d832c03e621e8bce8aa6f41811ae6daf3ec200e6e4d5ad18"
+    },
+    "references/lark-approval-tasks-query.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-query.md",
+      "sha256": "1879c0017bfedb71b0bda4f1d29958cd9133123fae1237f197f863020e2803e9"
+    },
+    "references/lark-approval-tasks-reject.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-reject.md",
+      "sha256": "6735b308e38f6183e6c21a731104fbddcf7ad48f7c546d3a3ff135ea27029ea7"
+    },
+    "references/lark-approval-tasks-remind.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-remind.md",
+      "sha256": "a9df62baf89ad56e97198b7f7afa610c5e68c9219eb33a84c93d7c9319fc7229"
+    },
+    "references/lark-approval-tasks-rollback.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-rollback.md",
+      "sha256": "28d02aac5d4ad641624703ba42571892d4ea93d6d6d8f700fc30a24d166d6c34"
+    },
+    "references/lark-approval-tasks-transfer.md": {
+      "upstream_path": "skills/lark-approval/references/lark-approval-tasks-transfer.md",
+      "sha256": "4c761de1edb1c1ff1ee15b2ed4ef1f708255bcaa84b02ccf4800e92ed9d566cb"
+    }
+  }
+}

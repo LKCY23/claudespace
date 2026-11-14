@@ -1,0 +1,49 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
+  "path": "skills/lark-minutes",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-minutes/SKILL.md",
+      "sha256": "22e7bd2deec91869169a6f544ec9060cba4589f69a04c65afe39772b56278008"
+    },
+    "references/lark-minutes-apply-permission.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-apply-permission.md",
+      "sha256": "51f4afa85a117a9d9686ddc8a778c0dadd4704f70281237eb88dc48c410d392d"
+    },
+    "references/lark-minutes-detail.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-detail.md",
+      "sha256": "90500254e5d81ca5e3ea57710d991d2d85d56ba3cfdf14d092853b557933e35d"
+    },
+    "references/lark-minutes-download.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-download.md",
+      "sha256": "a27bbd2c2da85e4db8082ce1587da10f343f4cbe29441f2c5bab3438dc85c7c1"
+    },
+    "references/lark-minutes-search.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-search.md",
+      "sha256": "9235121ae418bdadccf2930428b2288f0c96f9d3d98f8066302591c76d35b2f1"
+    },
+    "references/lark-minutes-speaker-replace.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-speaker-replace.md",
+      "sha256": "e3a12073519fabc6c13e80bceae966ca57cb2eff905004a3185b043df4ea563e",
+      "upstream_sha256": "1162fd40d4b72a0f51d34ff09930a1efa243a0287fdb3e4263c6f997d02d358a",
+      "upstream_executable": false
+    },
+    "references/lark-minutes-summary.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-summary.md",
+      "sha256": "f85aeaef1861c4542e0221f1c052b93c3fbf859c30afe376bdb5e5b517cfa0e1"
+    },
+    "references/lark-minutes-todo.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-todo.md",
+      "sha256": "3e8601158b05fb1509053154638b871d7ddcb80dff59c9961c884c009c573e34"
+    },
+    "references/lark-minutes-update.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-update.md",
+      "sha256": "97704545e779ef738aaaffa6801894ade1b19d9409976cd652226950099c6e2c"
+    },
+    "references/lark-minutes-upload.md": {
+      "upstream_path": "skills/lark-minutes/references/lark-minutes-upload.md",
+      "sha256": "9e784566d6bd00a64669c69eba4218795cc72cd6cd1bcd4e835cc141f326beb9"
+    }
+  }
+}

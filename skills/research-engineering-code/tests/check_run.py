@@ -418,7 +418,10 @@ def mutation(workspace: Path, before: dict, after: dict, fixture: dict, acceptan
     A mutant counts only if the hidden acceptance tests notice it, which drops
     equivalent mutants and code the request does not care about. Of those, the
     score is the share the run's own suite also catches. Crashes, timeouts and
-    collection errors are counted apart, never as catches.
+    collection errors are counted apart, never as catches. When the hidden tests
+    cannot filter (no acceptance tests, a collection error, or none passing), the
+    score is None and only the unfiltered kill rate is reported, so the two are
+    never averaged together.
     """
     patterns = fixture["files"]
     changed = [r for r in after if category(r, patterns) == "source" and before.get(r) != after[r]]
@@ -473,12 +476,14 @@ def mutation(workspace: Path, before: dict, after: dict, fixture: dict, acceptan
                     tally["suite_error"] += 1
             (copy / relative).write_text(original)
     relevant = tally["killed"] + tally["survived"]
+    rate = round(tally["killed"] / relevant, 3) if relevant else None
     return {
         **record,
         "filtered_by_acceptance": filtered,
         "mutants": len(chosen),
         **tally,
-        "score": round(tally["killed"] / relevant, 3) if relevant else None,
+        "score": rate if filtered else None,
+        "unfiltered_kill_rate": None if filtered else rate,
         "survivors": survivors,
     }
 

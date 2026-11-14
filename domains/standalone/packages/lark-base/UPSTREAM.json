@@ -1,0 +1,128 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "9b231d98253710219e26b902f5683d3e7f32bc92",
+  "path": "skills/lark-base",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-base/SKILL.md",
+      "sha256": "252dc87222a1f6442ccd76eb68c89d122d4c3b25d750fc14037f4f9bb5bf8cfa"
+    },
+    "references/lark-base-advanced-permission-and-role.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-advanced-permission-and-role.md",
+      "sha256": "76b4ff473cbbb5c5ae286bd178cae51bf58f273a9e059781dfe9117139d1ded7"
+    },
+    "references/lark-base-app-block-data-config.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-app-block-data-config.md",
+      "sha256": "13b65987b18bea1c83fe5a93fa8c67ea1e28ccee2f6ea878d471c7214a9e24ac"
+    },
+    "references/lark-base-app.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-app.md",
+      "sha256": "729e09da45b0ab1d7b28ed0e254c9877b471763e134fe0f55310b7b2083f0943"
+    },
+    "references/lark-base-cell-value.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-cell-value.md",
+      "sha256": "d92597d2c4322447e48b7d4b056fe5f2961a4eb6488b4c75986a1863efa5f739"
+    },
+    "references/lark-base-dashboard-block-config.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-dashboard-block-config.md",
+      "sha256": "ea971c601ac3f5a999947c244aadb1ebbe6a7a62a4ba60468a34d2f7c5f4b69c"
+    },
+    "references/lark-base-dashboard-block-get-data.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-dashboard-block-get-data.md",
+      "sha256": "8282c118e542a1b84624b630801bfc200a42355d028c679bfddcb57a253f21a1"
+    },
+    "references/lark-base-dashboard.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-dashboard.md",
+      "sha256": "d57ba917f88b2a98c8c1e046d90082a2128dab0004ff222fdb77e4579822c7f1"
+    },
+    "references/lark-base-data-analysis-pandas.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-data-analysis-pandas.md",
+      "sha256": "43822fed29f61cae48fe8d56159c71c3401b795ed064a49d8bc31c39d4fe8417"
+    },
+    "references/lark-base-data-analysis-python-stdlib.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-data-analysis-python-stdlib.md",
+      "sha256": "3f0c9d8cd58b22b7a3d67d850e15e19c5f1b27c5201fd0954e1b9e761e2476e7"
+    },
+    "references/lark-base-data-query.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-data-query.md",
+      "sha256": "a5bcb1b9e8a51867b9c75f7e97366770cd9abed49cbfdaa5dc956854bffd8dc7"
+    },
+    "references/lark-base-field-create.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-field-create.md",
+      "sha256": "02c73b38d96674d363883994c680e39ce89d711f989e36f87cbcf3aac0694696"
+    },
+    "references/lark-base-field-formula.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-field-formula.md",
+      "sha256": "81e362ad160d7105a2ac5bb3a02a10af7d97e8fc1ec5c8942b4ceedb56b010f8"
+    },
+    "references/lark-base-field-lookup.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-field-lookup.md",
+      "sha256": "93677a96c03a9e4085e289ed8cc350a5c567465d2be471edca154cee20044c20"
+    },
+    "references/lark-base-field-schema.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-field-schema.md",
+      "sha256": "5bb1b6fb1580b917df608ec2853fc1dafca7bafc1ff376b5c93c29db5305e770"
+    },
+    "references/lark-base-field-update.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-field-update.md",
+      "sha256": "77b301c6365b27f7bc17d0c6534cc2ed64accb3d2e6210ade77c73a45cd9388c"
+    },
+    "references/lark-base-filter-condition.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-filter-condition.md",
+      "sha256": "be3bfe28934cc35f8749644c23f6acabb7891bfe1a651ea4fabd422c73b8555e"
+    },
+    "references/lark-base-form-detail.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-form-detail.md",
+      "sha256": "f53bae4b8d265d6af3eb38ef62e75c2cf98ce7fe2d36402059798537dc6cfdbe"
+    },
+    "references/lark-base-form-questions-create.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-form-questions-create.md",
+      "sha256": "cb1b616d49d24860beac5751375f6ece11ddb66d67595a4319e7c40377ec54c6"
+    },
+    "references/lark-base-form-questions-update.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-form-questions-update.md",
+      "sha256": "49685fbbba0c47d3012df767032654da091cff11a7907e6a8ceb28c951992924"
+    },
+    "references/lark-base-form-submit.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-form-submit.md",
+      "sha256": "2c55f09a3ecca8a74953e356fa482ee8ffc72b902626c9546910b6ac89e13bd4"
+    },
+    "references/lark-base-record-batch-create.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-record-batch-create.md",
+      "sha256": "38c9041f916881b34b712882f9bbc50b8f4e9a08cd57769f01b3206456887065"
+    },
+    "references/lark-base-record-batch-update.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-record-batch-update.md",
+      "sha256": "cbdb77234d9142259095be534144e408a1f0d14a8cafd488a73fd29f8c42917e"
+    },
+    "references/lark-base-record-history-list.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-record-history-list.md",
+      "sha256": "83039564e63370fd60b852a943e7f7c921d652d2dd8261734d109a42dde92651"
+    },
+    "references/lark-base-record-query-and-analysis-cloud-sop.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-record-query-and-analysis-cloud-sop.md",
+      "sha256": "ab1bfdb23a6299c716f676e4ac620c1dfc4ac9c69eeb7d6deea110bf6c88150d"
+    },
+    "references/lark-base-record-query-and-analysis-sop.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-record-query-and-analysis-sop.md",
+      "sha256": "c91be3ef86da865c62968306d4e69a24ad935ce628a4c2fa779d76c684ed0ed1"
+    },
+    "references/lark-base-role-config.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-role-config.md",
+      "sha256": "817d377e7e76cad31527797fa3b4d8adcb5ebbb8509353a3eeda0d99f4240619"
+    },
+    "references/lark-base-view-set-filter.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-view-set-filter.md",
+      "sha256": "7e4345f22265d081cdfa45fa516f733d053e1e727c15c6092d07bbd2c3e8e28f"
+    },
+    "references/lark-base-workflow-schema.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-workflow-schema.md",
+      "sha256": "66ab46245ed6a901e0222703f2fde8114426db7f362523357bd3537a6cef248f"
+    },
+    "references/lark-base-workflow.md": {
+      "upstream_path": "skills/lark-base/references/lark-base-workflow.md",
+      "sha256": "0bcf7c3f31f75744539b245f41570c292e33e916c74881fb016bf7d40c24ab46"
+    }
+  }
+}

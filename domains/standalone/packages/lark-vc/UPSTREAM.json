@@ -1,0 +1,40 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
+  "path": "skills/lark-vc",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-vc/SKILL.md",
+      "sha256": "a025be7065ff56e8abc6930240d05159a9698a98ac79d76eed0d70f8b1c6995d"
+    },
+    "references/lark-vc-detail.md": {
+      "upstream_path": "skills/lark-vc/references/lark-vc-detail.md",
+      "sha256": "4fbf34f57b727bedd85e911d4034509e5431a386699d9d99bde545d4cc8eaee2"
+    },
+    "references/lark-vc-meeting-events.md": {
+      "upstream_path": "skills/lark-vc/references/lark-vc-meeting-events.md",
+      "sha256": "b7eb98c4d8b9a6b9189bf75bc29cea7bf5fc9a8239080b55d9580bfd5b21a1fa"
+    },
+    "references/lark-vc-meeting-list-active.md": {
+      "upstream_path": "skills/lark-vc/references/lark-vc-meeting-list-active.md",
+      "sha256": "e21a1254802658ac9d47013c841d42f404e82aa64f2b8e507dfbe5d5372f5c6a"
+    },
+    "references/lark-vc-meeting-message-send.md": {
+      "upstream_path": "skills/lark-vc/references/lark-vc-meeting-message-send.md",
+      "sha256": "779703d7d15e747a41162ba3e56fb8fdc80b21eda7e335a281bf42d4c4523437"
+    },
+    "references/lark-vc-recording.md": {
+      "upstream_path": "skills/lark-vc/references/lark-vc-recording.md",
+      "sha256": "ce7480ff7c4bbaf8a8e85255eb422d5e9c377179c9a33d084039bdc0cda6ae32"
+    },
+    "references/lark-vc-search.md": {
+      "upstream_path": "skills/lark-vc/references/lark-vc-search.md",
+      "sha256": "8dc308892a51457a7e4fa2e1f1d2a22653beaa54de46d6d3a6da41f132fe517c"
+    },
+    "references/vc-domain-boundaries.md": {
+      "upstream_path": "skills/lark-vc/references/vc-domain-boundaries.md",
+      "sha256": "fe58582f235d6f8738d95f8e907ba07429c57fd7aa9af679780f87d6ed633162"
+    }
+  }
+}

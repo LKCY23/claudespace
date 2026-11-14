@@ -15,15 +15,17 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 资源登记不会选择安装，发布新版本也不会自动改变 Profile 或本机安装。子代理的提示词、工具清单和权限定义跟随资源正文维护。
 
+同一固定来源按客户端分别部署：Claude 使用绑定的 `config_root/skills`，Codex 使用 Machine 明确绑定的 `.agents/skills`。受管技能由 claude-config 部署，其他工具须按客户端交接重叠安装声明。目录存在、已启用、原生发现和当前会话实际使用分别验收；详见[部署边界与交接](docs/deployment-ownership.md)。
+
 ## 资源目录
 
-当前 [catalogs.json](catalogs.json) 显式登记七份 `schema_version: 1/resources` catalog，共 65 项：
+当前 [catalogs.json](catalogs.json) 显式登记七份 `schema_version: 1/resources` catalog，共 68 项：
 
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
-| [catalog.json](catalog.json) | `claudespace-personal` | 12 项原创或按需资源 |
+| [catalog.json](catalog.json) | `claudespace-personal` | 14 项原创或按需资源 |
 | [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
-| [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
+| [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 34 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
 | [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
 | [domains/claude-hud/catalog.json](domains/claude-hud/catalog.json) | `claude-hud` | 官方固定 HUD 来源；跟踪正式 Release，保留本机显示配置 |
@@ -48,6 +50,8 @@ python3 -B scripts/sync_marketplaces.py --check
 
 翻译插件入口为 `sanctuary-translate@claudespace`，引用私有仓库 `LKCY23/claude-sanctuary` 的固定 `release/plugin` 包；安装需要该仓库的读取权限及 macOS arm64 / Node 22 运行环境。
 
+`agent-led-swe` 以独立 skill 登记在 `claudespace-personal`，固定采用已接受的 v0.2.0，更新检查跟踪 `master`。Codex 与 Claude Code 共用 `SKILL.md`；Claude 市场入口沿用原生插件包装，来源及提交由 catalog 自动生成。登记与构建不代表行为效果验收，也不会自动选择或安装。
+
 ## 构建候选
 
 从仓库根目录运行，要求 Python 3.11+ 和 Git：
@@ -70,6 +74,7 @@ python3 scripts/build_candidates.py   --catalog domains/candidates/catalog.json 
 
 - [源码候选](docs/source-update-candidates.md)：匹配检查报告和旧 pin，准备独立提交，保护本地修改。
 - [GitHub 更新自动化](docs/github-update-automation.md)：调度、PR 复用、人工修改保护、权限边界及基线附件。
+- [更新 PR 流程](docs/update-pr-lifecycle.md)：自动触发两项必需检查、main 合并证明、失败提示和重试边界。
 - [更新与发布操作](docs/operations.md)：预览、批准检查、审查合并和核对基线附件。
 - [实现进度](docs/update-implementation.md)：已验证内容和剩余接入工作。
 

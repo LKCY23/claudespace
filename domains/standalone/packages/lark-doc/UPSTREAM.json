@@ -1,0 +1,184 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "525a98270f80693bdaf3c0a6006e9f3f94820851",
+  "path": "skills/lark-doc",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-doc/SKILL.md",
+      "sha256": "1c2aa910831a117b6ef4484469a3456775cef26a00beb8b38f470ee74654fb96"
+    },
+    "references/genres/business-analysis.md": {
+      "upstream_path": "skills/lark-doc/references/genres/business-analysis.md",
+      "sha256": "8aaab9e07737ea36dca4427778cc28af0087abb90710c1f2806bb1a51962ef78"
+    },
+    "references/genres/data-report.md": {
+      "upstream_path": "skills/lark-doc/references/genres/data-report.md",
+      "sha256": "ea0cb3df6c9b466bfa16eb0090a0a91965ecd242dacdd903d0cffb20f9061cbe"
+    },
+    "references/genres/email.md": {
+      "upstream_path": "skills/lark-doc/references/genres/email.md",
+      "sha256": "8a83a390d1736991f69f66e7dda5a748da1bda925be300c01e240e0bcf47a82c"
+    },
+    "references/genres/execution-plan.md": {
+      "upstream_path": "skills/lark-doc/references/genres/execution-plan.md",
+      "sha256": "e00d7da0b44bb375880e9fd3bfc9a5e684321aa9e19c3adca407669c4bae84e6"
+    },
+    "references/genres/formal-doc.md": {
+      "upstream_path": "skills/lark-doc/references/genres/formal-doc.md",
+      "sha256": "15812640cd1de50cef24be6d36658ddaaaa623ea214eb2df820d92eccc0efaa6"
+    },
+    "references/genres/meeting-minutes.md": {
+      "upstream_path": "skills/lark-doc/references/genres/meeting-minutes.md",
+      "sha256": "fb46dc9e97b7b5c8e3261c280bab6ff5366b9ac72fa64d50416365dbde4b868c"
+    },
+    "references/genres/memo-brief.md": {
+      "upstream_path": "skills/lark-doc/references/genres/memo-brief.md",
+      "sha256": "e4958eff02c053002a2664da460cb465d78db097cfe2a1add3969b885d3e57f7"
+    },
+    "references/genres/official-redhead.md": {
+      "upstream_path": "skills/lark-doc/references/genres/official-redhead.md",
+      "sha256": "97dac887c22f55f46b825f25053938d74bc8a1abcfed3b08ec4d3ca04105941c"
+    },
+    "references/genres/prd.md": {
+      "upstream_path": "skills/lark-doc/references/genres/prd.md",
+      "sha256": "0347957894ac879e8a4463d296b0d1f9386bb7274a6600506ca44b86e518aca3"
+    },
+    "references/genres/proposal.md": {
+      "upstream_path": "skills/lark-doc/references/genres/proposal.md",
+      "sha256": "ba2e2249a6f56d6e9518253c20654dad1e300d5d009a07da5ec6122db57d4eb8"
+    },
+    "references/genres/research-report.md": {
+      "upstream_path": "skills/lark-doc/references/genres/research-report.md",
+      "sha256": "93d14d00076783a140b21424e91272cb8f0cca9dd17526be0bd4477431f7efbe"
+    },
+    "references/genres/retrospective.md": {
+      "upstream_path": "skills/lark-doc/references/genres/retrospective.md",
+      "sha256": "86bad301a6c207f7243e3690fd0f6794463c9a9d2fd41a3e287fa733cfc0ae8e"
+    },
+    "references/genres/route-consumer.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-consumer.md",
+      "sha256": "ea4291f7378204a09ebc89b5a480dca3d3389e06ec0bb6e0607ad9614ac0e7af"
+    },
+    "references/genres/route-creative.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-creative.md",
+      "sha256": "40dbd02cca3ba40d48de68414a8d450e46d233c98cf0dde1dc9b389ffd45e3ff"
+    },
+    "references/genres/route-knowledge.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-knowledge.md",
+      "sha256": "b052d66f3a3a3cba4900f921cc9eb2346dbbe624b62898e185788cf38b8608d8"
+    },
+    "references/genres/route-marketing.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-marketing.md",
+      "sha256": "6ea22d7a5eaadde21ea11e484aba71492dca66428824639a20dad20d9243a787"
+    },
+    "references/genres/route-media.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-media.md",
+      "sha256": "82bef9147b59e0a6cfd1321718085210cccc484c07885630ee2ac788eb2ce8e9"
+    },
+    "references/genres/route-opinion.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-opinion.md",
+      "sha256": "87ff6fedcbd8584cef24407f434935c0fd481f58217d7e5ab8330be86d6c2dad"
+    },
+    "references/genres/route-personal-brand.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-personal-brand.md",
+      "sha256": "ba942789e91fe3239cec092a6556b2bb8a1452bb0ca29bf93dc139c2700b71cf"
+    },
+    "references/genres/route-platform.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-platform.md",
+      "sha256": "5065bea6370a87183ca7d612f232da61be458b7d35e6c4ce0b08d0a82498a2c7"
+    },
+    "references/genres/route-report.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-report.md",
+      "sha256": "441ac715a3038031962405c581741c1ff3aaa96fd057d3bd8bb7bd09cd1e3b0b"
+    },
+    "references/genres/route-workplace.md": {
+      "upstream_path": "skills/lark-doc/references/genres/route-workplace.md",
+      "sha256": "af06e57228e2a620d8be29b8208b1bb603101468c45d1ca5ee7a3d02491c5bd9"
+    },
+    "references/genres/sop-tutorial.md": {
+      "upstream_path": "skills/lark-doc/references/genres/sop-tutorial.md",
+      "sha256": "a7f79a8283725d0531675151025960c8cf76930adc3113f388847bc04c94fbe6"
+    },
+    "references/genres/technical-doc.md": {
+      "upstream_path": "skills/lark-doc/references/genres/technical-doc.md",
+      "sha256": "8af772cdc88a2dbaccd7af709de3fa25a4dff3055e6154af480d5c3e44aba67a"
+    },
+    "references/genres/wechat.md": {
+      "upstream_path": "skills/lark-doc/references/genres/wechat.md",
+      "sha256": "9ab22f27d0c6207724b8b309f2ed114a93c9a756c8e16da84a78f68c10018efc"
+    },
+    "references/genres/weekly-report.md": {
+      "upstream_path": "skills/lark-doc/references/genres/weekly-report.md",
+      "sha256": "862b8f5eb08fc41d2994e4e1158bba0042d9fbe2274c574ebde892ee5dc74d1b"
+    },
+    "references/genres/white-paper.md": {
+      "upstream_path": "skills/lark-doc/references/genres/white-paper.md",
+      "sha256": "cda3797a71149cc1f2f4fe7e6c471ce8be6adb05cbb180ba4a6af70392e5c11c"
+    },
+    "references/genres/xiaohongshu.md": {
+      "upstream_path": "skills/lark-doc/references/genres/xiaohongshu.md",
+      "sha256": "d9121277c04df2196d4c6f2c0e1c4ad3f6fc15af4f09b8a83e689d9144542e92"
+    },
+    "references/lark-doc-create-workflow.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-create-workflow.md",
+      "sha256": "913a42d0b565e00dd46460d282569dcbaf09840a2b55d486b6ef4466e1e6050d"
+    },
+    "references/lark-doc-create.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-create.md",
+      "sha256": "4add00b26e81207515ba4e3319e690a6143f604dea72444d97d49931191107bb"
+    },
+    "references/lark-doc-fetch.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-fetch.md",
+      "sha256": "a8500afd274dafa91d7ab279a0fa18194e1dce2ce159d000f06f6fb09f74e00a"
+    },
+    "references/lark-doc-history.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-history.md",
+      "sha256": "a67b4beaacef43626088f92de297fb37021cd1daf829763bbbcb419714854850"
+    },
+    "references/lark-doc-md.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-md.md",
+      "sha256": "74d062a4ac6d436141f4a90f87cbecd45d9f6d8b0d34f3e04077653175dc2e36"
+    },
+    "references/lark-doc-media-download.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-media-download.md",
+      "sha256": "d81bd5fe0144c5884df4edfa21c78284fae6d73bb0f0dcaa403eaf723f5b81de"
+    },
+    "references/lark-doc-media-insert.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-media-insert.md",
+      "sha256": "62b82cabfc2b122b0ed8430de44c14c6e1c4e9016f4607826932e883aca122f7"
+    },
+    "references/lark-doc-media-preview.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-media-preview.md",
+      "sha256": "cf88a6ce613a0d90c6d4b01e16d1db337c639d246f71ffb0686005270ab145f3"
+    },
+    "references/lark-doc-mindnote.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-mindnote.md",
+      "sha256": "a239f58aa9d832623d79943a8f8268783da3c07bce1816060e2f01b0d1278e92"
+    },
+    "references/lark-doc-resource-cover.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-resource-cover.md",
+      "sha256": "646ee64a0fbb23e7dfba1b094427b5bdf1e8a087fc8d577b407a41f9b5dfde49"
+    },
+    "references/lark-doc-script.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-script.md",
+      "sha256": "2da5fa6feb09e5820c5e380111d6a6c734dbaf149e549ef996581787594aa4e9"
+    },
+    "references/lark-doc-update.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-update.md",
+      "sha256": "1325ceac3355401486cf46a7462cf083b4dada00e7c07e03c1084cea2c7f7c6d"
+    },
+    "references/lark-doc-whiteboard.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-whiteboard.md",
+      "sha256": "86dd68d27a50914c10af97abc040934ddee38521fb555a1d019ad9b4bb0286ff"
+    },
+    "references/lark-doc-xml-extended-blocks.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-xml-extended-blocks.md",
+      "sha256": "893faaf0a757cd43b9b2031b695982191e56c6469af1a47e1e90b5c1fd342110"
+    },
+    "references/lark-doc-xml.md": {
+      "upstream_path": "skills/lark-doc/references/lark-doc-xml.md",
+      "sha256": "111e58ffcd10f0d333bb02c2c9b97c8c3cec4f20b5fbd0cf5c30132880ced4a5"
+    }
+  }
+}

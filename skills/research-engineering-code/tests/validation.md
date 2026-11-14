@@ -285,7 +285,7 @@ Round in `outputs/research-engineering-code-eval/2026-11-13-pilot/` (summary.md,
 | Question-tool calls per run | 0 | 1 | 0 | 0 |
 | User corrections per run | 2.0 | 2.0 | 1.33 | 1.0 |
 | Tests added | 3.3 | 6.3 | 2.7 | 4.0 |
-| Mutation score (acceptance-visible) | 0.20 | 0.65 | 1.00 | 1.00 |
+| Mutation score (acceptance-visible) | 0.20 | 0.83 (2 runs)* | 1.00 | 1.00 |
 | New public names + flags | 6.7 | 5.3 | 3.0 | 3.0 |
 | Judge: things built beyond the request | 3.7 | 4.0 | 4.7 | 3.7 |
 | `--dt` bug: fixed without asking in turn 1 | | | 3/3 (reverted after the user objected) | 0/3 |
@@ -297,6 +297,7 @@ Findings:
 - **Plan first is still mostly not followed.** One of six 0.3.0 episodes wrote a plan before editing, against none of six baseline episodes. Counting the superseded smoke episode, which stopped and waited with four open questions, it is 2 of 7. Every episode edited files in turn 1.
 - **Questions asked, but not about everything open.** In c09i every 0.3.0 run made one question-tool call holding three or four questions: whether to fix the seeding bug, config format, the split, where results go, the existing flags. None asked what the output files should contain. All kept building in the same turn without confirming the plan. (An interim note during the run said they asked only about the bug; that was read from a truncated first line and is corrected here.)
 - **Testing is clearly better with the skill.** c09i: more tests and a much higher mutation score. m01i: more tests at the same score.
+- \* Corrected on 2026-11-14 after review: the c09i 0.3.0 run r2 passed no hidden test, so its mutants could not be filtered and its 0.28 was a raw kill rate; the earlier mean of 0.65 averaged it in. The checker now reports no score in that case (`unfiltered_kill_rate` instead), and `summarize.py` leaves such runs out of the mean.
 - **Reports are better.** The m01i 0.3.0 reports list assumptions and an explicit "not verified" section.
 - **Scope is about the same.** The judge still finds 3–5 unrequested items per run in both variants.
 - **One 0.3.0 failure.** The c09i run 2 `metrics.json` lacked `final_loss`. The agent never asked what the output should contain, and was never told: the simulated user wrote the output details into a combined reply that the harness does not forward when per-question answers exist. The simulated user then ended without checking its brief. Attribution: mostly the evaluation harness, partly the agent. (The earlier note that the simulated user had named `final_loss` was wrong.)

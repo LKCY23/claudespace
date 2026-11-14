@@ -1,0 +1,88 @@
+{
+  "repo": "Imbad0202/academic-research-skills",
+  "sha": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+  "path": "academic-paper-reviewer",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "academic-paper-reviewer/SKILL.md",
+      "sha256": "683a92cf6d2226dc220ac61bca69557ddf7650303dac288722dded45822f965e"
+    },
+    "agents/devils_advocate_reviewer_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/devils_advocate_reviewer_agent.md",
+      "sha256": "3e6f3b22cb92d6fd41a02f589e71c5a3a80ec0e184d8f8c9677e6963e3c12eed"
+    },
+    "agents/domain_reviewer_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/domain_reviewer_agent.md",
+      "sha256": "117b120b19212712053d976e3663ad2978c1068fd148913bb5a2a6f067f7343a"
+    },
+    "agents/editorial_synthesizer_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/editorial_synthesizer_agent.md",
+      "sha256": "cb50b27afc28efe84d0f47767a9c2a8677f81a4e44f93e1f262489d1e729c42f"
+    },
+    "agents/eic_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/eic_agent.md",
+      "sha256": "0b862d83ea590f47ae58f46d8a1f19ede897a9b2705efbb07e42f543f11813f9"
+    },
+    "agents/field_analyst_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/field_analyst_agent.md",
+      "sha256": "9b7cf1ba053d29a5a938103fbbe6b708cf440d3d44a4b43a9cf40fa34f20bdcd"
+    },
+    "agents/methodology_reviewer_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/methodology_reviewer_agent.md",
+      "sha256": "4a02fde99ac65d56c791b60e5488556ad0f4f14eb60698949d3f67a1e9392827"
+    },
+    "agents/perspective_reviewer_agent.md": {
+      "upstream_path": "academic-paper-reviewer/agents/perspective_reviewer_agent.md",
+      "sha256": "f3efb3ea2b3908f54c6ee25ff6e5251ee15a454214a82c182b3865a2b15ea514"
+    },
+    "examples/hei_paper_review_example.md": {
+      "upstream_path": "academic-paper-reviewer/examples/hei_paper_review_example.md",
+      "sha256": "3b0cce9becb06617588f0729de0b8f9ddae1368a031bda8e3e366ff639f8b2b0"
+    },
+    "examples/interdisciplinary_review_example.md": {
+      "upstream_path": "academic-paper-reviewer/examples/interdisciplinary_review_example.md",
+      "sha256": "fb8dcbf22ef6617a108eeb49e08325d53ee1c590440cec8d4ba040297443b00b"
+    },
+    "references/editorial_decision_standards.md": {
+      "upstream_path": "academic-paper-reviewer/references/editorial_decision_standards.md",
+      "sha256": "a2f6c7ad32721a813a8052c381111610e5a94c0b0e860a426297784da6f10f60"
+    },
+    "references/quality_rubrics.md": {
+      "upstream_path": "academic-paper-reviewer/references/quality_rubrics.md",
+      "sha256": "20bece9fd9388959449363ca54021065792606e5c0eebaf6e1b45675a6dc2664"
+    },
+    "references/review_criteria_framework.md": {
+      "upstream_path": "academic-paper-reviewer/references/review_criteria_framework.md",
+      "sha256": "7daee9c06581990e19412d337b6d2c1a57064108f14a89c81abc7d5007b15030"
+    },
+    "references/statistical_reporting_standards.md": {
+      "upstream_path": "academic-paper-reviewer/references/statistical_reporting_standards.md",
+      "sha256": "9890ad1febc6440889079ce52ee941f52ee164126d263d0aa9510738dd116ebb"
+    },
+    "references/top_journals_by_field.md": {
+      "upstream_path": "academic-paper-reviewer/references/top_journals_by_field.md",
+      "sha256": "55079baa30c40d18244f8e539e70eca8678b309526c7e3264172f68cd128dd52"
+    },
+    "templates/editorial_decision_template.md": {
+      "upstream_path": "academic-paper-reviewer/templates/editorial_decision_template.md",
+      "sha256": "ad17ea481aba3df1879ae5b95114e0cd2959d3429ccfda0327cdfc88675f3383"
+    },
+    "templates/peer_review_report_template.md": {
+      "upstream_path": "academic-paper-reviewer/templates/peer_review_report_template.md",
+      "sha256": "37884a3188ba94a4e485f1ce29f6fd68458113d83bf915fea7bd71a501e70852"
+    },
+    "templates/revision_response_template.md": {
+      "upstream_path": "academic-paper-reviewer/templates/revision_response_template.md",
+      "sha256": "eb2bd9a09f2fa3d1e743c5611a09c39f06cee38545b95fe73ad35f1f23ed49f9"
+    },
+    "shared/handoff_schemas.md": {
+      "upstream_path": "shared/handoff_schemas.md",
+      "sha256": "c6bc2d1c20912b887b82e1dcebb62e4c9b7600300687ea30a9de3062f91db967"
+    },
+    "shared/style_calibration_protocol.md": {
+      "upstream_path": "shared/style_calibration_protocol.md",
+      "sha256": "4adc5eaa10b9776f4343767b7db4ebe23e4fa3a5c00a7547ab507bccc2129301"
+    }
+  }
+}

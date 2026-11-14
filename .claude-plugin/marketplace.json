@@ -42,7 +42,7 @@
         "source": "git-subdir",
         "url": "https://github.com/vercel-labs/agent-browser",
         "path": "skills/agent-browser",
-        "sha": "f7c8b071343dda29477a56cb336ea76144c05496"
+        "sha": "5868f7c05020e047c00e68e4abf9253cce864f41"
       },
       "category": "devtools",
       "defaultEnabled": false,
@@ -50,6 +50,17 @@
       "skills": [
         "./"
       ]
+    },
+    {
+      "name": "agent-led-swe",
+      "description": "围绕用户需求和变更目标，指导 Agent 主导的软件开发，从澄清需求、设计到经过验证的交付。结合人类决策、项目工程约定和可追溯记录，协调相关工作。适用于需要这类协调的软件开发或变更任务，也可显式调用；根据任务规模裁剪。",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/agent-led-swe",
+        "path": ".",
+        "sha": "23d8b921618bc19ab9421572ae4166e3456681e9"
+      },
+      "category": "devtools"
     },
     {
       "name": "analyze-peer-work",
@@ -189,12 +200,12 @@
     },
     {
       "name": "sanctuary-translate",
-      "description": "Claude Code 与 Desktop Code 双向翻译插件：输入侧写审查、原生译文输出块、修复与重试控制，以及本地 SQLite 持久版本。MCP 后端经插件内 launch-translator.sh 定位本机 Node 22，不依赖桌面应用 PATH。",
+      "description": "Claude Code 与 Desktop Code 双向翻译插件：输入侧写审查、中文／对照阅读偏好、自动保存与重试控制，以及本地 SQLite 持久版本。私有 Unix socket 后端经插件内 start-worker.sh 启动 Node 22，不注册模型工具。",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/LKCY23/claude-sanctuary",
         "path": "release/plugin",
-        "sha": "de04efbbf3df3f86d5762654613c305984072358"
+        "sha": "c9cc8ce9cd870a1ff9764a071c7e8fbe7ff788a1"
       }
     },
     {

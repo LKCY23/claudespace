@@ -161,6 +161,18 @@ class UpdateTests(unittest.TestCase):
         self.assertEqual(report['counts']['check_failed'], 1)
         self.assertNotIn('private-token', json.dumps(report))
 
+    def test_retired_manual_resource_explains_successor_without_querying_remote(self):
+        item = resource(update={'strategy': 'manual'})
+        item['origin']['baseline'] = 'Upstream retired; successor: lark-meeting'
+        api = FakeAPI()
+        row = self.row(catalog(one=item), api)
+        self.assertEqual(row['reason'], item['origin']['baseline'])
+        self.assertEqual(api.calls, [])
+        from run_updates import summary
+        report = {'candidates': [], 'checks': [], 'groups': [],
+                  'manual_sources': [{'resource': 'one@test', 'reason': row['reason']}]}
+        self.assertIn('successor: lark-meeting', summary(report))
+
     def test_manual_resource_does_not_query_remote(self):
         api = FakeAPI()
         self.assertEqual(self.row(catalog(one=resource(update={'strategy': 'manual'})), api)['status'], 'manual')

@@ -1,0 +1,20 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "a8552d7f447df0b6c901a70a4dde463aef43f521",
+  "path": "skills/lark-note",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-note/SKILL.md",
+      "sha256": "4c6084075cb6f0732ba1b8e6e65424bb53958920a3ed3d47ff7011f2299ba18e"
+    },
+    "references/lark-note-detail.md": {
+      "upstream_path": "skills/lark-note/references/lark-note-detail.md",
+      "sha256": "a80f08f091015beeeec424ea9bd841cd20ed1d8c4c1a075e53d7b08d04222024"
+    },
+    "references/lark-note-transcript.md": {
+      "upstream_path": "skills/lark-note/references/lark-note-transcript.md",
+      "sha256": "a1cd1cd862f513e4bc4c85bcfc4ec9b023a16822aff311dbfa35fad8c99be07b"
+    }
+  }
+}

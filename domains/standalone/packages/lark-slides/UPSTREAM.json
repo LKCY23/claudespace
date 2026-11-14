@@ -1,0 +1,208 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "0c5530dc63b65b3fda86f667f5725b1a08f0c4dc",
+  "path": "skills/lark-slides",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-slides/SKILL.md",
+      "sha256": "1233f7dbced5190fd71be87985c80258da4561c335aaa0be0c993fdf69a5c7bc"
+    },
+    "references/asset-planning.md": {
+      "upstream_path": "skills/lark-slides/references/asset-planning.md",
+      "sha256": "6e3a008c1f6270e60ecca2977b5f6ab18d78acd18346d91ae56fafc728b78468"
+    },
+    "references/cli/lark-slides-add-slide.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-add-slide.md",
+      "sha256": "b872443a0c827b52216a66e1ba76b70ad9aa9d1ad2c5ab7c0c1e6223357dea1c"
+    },
+    "references/cli/lark-slides-create.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-create.md",
+      "sha256": "d0864e0e7a26fef1173ed5a93c88eec2784ca2a26fdb231af6595f7196ed02a7"
+    },
+    "references/cli/lark-slides-delete-slide.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-delete-slide.md",
+      "sha256": "79cd1021a8404a00cd6794cdb795845e2cab763cded02a6370fe09bd387bc5b1"
+    },
+    "references/cli/lark-slides-history.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-history.md",
+      "sha256": "1e7761470520c325ca5dccfe3728b9bdd46e35e3494ac4d5d5eec71c6c2ab1ac"
+    },
+    "references/cli/lark-slides-media-upload.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-media-upload.md",
+      "sha256": "8750e43afaae0072bd4dfcf236e841c9c1f507e5dfbf0863502cd3384e3727d2"
+    },
+    "references/cli/lark-slides-replace-slide.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-replace-slide.md",
+      "sha256": "b28b1953d54ec7b3b67357042acc256faba259ac3bc84136623d8e09c18b7fa9"
+    },
+    "references/cli/lark-slides-screenshot.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-screenshot.md",
+      "sha256": "2cb28bee5adc39c2eeeeb317f8ccff4dcfcad0da5a45de78feec0690ace3fb57"
+    },
+    "references/cli/lark-slides-update-slide.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-update-slide.md",
+      "sha256": "0d5963b6e0a15211de6e63bfa1e30936c3afdc984ce2d212e552b13db6b335e8"
+    },
+    "references/cli/lark-slides-xml-presentation-slide-get.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-xml-presentation-slide-get.md",
+      "sha256": "e8bf63e3bcf06be47ddae55f867775529354d1b5cf956e9990579d14c82a0672"
+    },
+    "references/cli/lark-slides-xml-presentation-slide-replace.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-xml-presentation-slide-replace.md",
+      "sha256": "70880dfa58315a6366264f7d3a62b91eb4b69558f80dfbbf6863473032b5a024"
+    },
+    "references/cli/lark-slides-xml-presentations-get.md": {
+      "upstream_path": "skills/lark-slides/references/cli/lark-slides-xml-presentations-get.md",
+      "sha256": "675d01d001bc4e62c4f553b1b8a08b01d3206da3746003caed00dd71aad9382c"
+    },
+    "references/iconpark-index.json": {
+      "upstream_path": "skills/lark-slides/references/iconpark-index.json",
+      "sha256": "dd0bf7068928601db6588478e1b29ad674f8260a5e0d67a827cef188cd953253"
+    },
+    "references/iconpark.md": {
+      "upstream_path": "skills/lark-slides/references/iconpark.md",
+      "sha256": "485d4b7cbfd13a661bab192174674ef2a1d96a269e2dc168318327e650bcb04e"
+    },
+    "references/lark-slides-add-slide.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-add-slide.md",
+      "sha256": "ff5e6f9e45630250f05ee577bedde366e944ab624b984712398003def2cdef2e"
+    },
+    "references/lark-slides-create.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-create.md",
+      "sha256": "0a00824c0d3c11e6cd4d59610ca9cc4f5479c75e54b7fdacb2fe6422d44ce64e"
+    },
+    "references/lark-slides-delete-slide.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-delete-slide.md",
+      "sha256": "ca8252cd16e65b4d7869f9f1aa2fb3731a84edcf86cd53409896caaffb9f03ac"
+    },
+    "references/lark-slides-edit-workflows.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-edit-workflows.md",
+      "sha256": "17ae5a12839556b55344f3198cfe5d7993b5f0e51aa640a66197d2eab2fb439e"
+    },
+    "references/lark-slides-history.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-history.md",
+      "sha256": "ebf4c8ec99cce28e7c5513c28511384a6531a3b1ef7dce2ea610446661257205"
+    },
+    "references/lark-slides-media-upload.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-media-upload.md",
+      "sha256": "3785fae53e12530de0e502cad40ebd22ecbfd6da18c7d4393cdf3566fbd7676f"
+    },
+    "references/lark-slides-pptx-template-workflows.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-pptx-template-workflows.md",
+      "sha256": "9c9a844b6d7f61022ec6aeed3d3b7fb1eaa572a2daa072d54924911ddabd4e34"
+    },
+    "references/lark-slides-replace-slide.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-replace-slide.md",
+      "sha256": "1bdbbc13d7d745cd4ca9539150ca0e063f07ed016c14417b3015249ce5e8effe"
+    },
+    "references/lark-slides-screenshot.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-screenshot.md",
+      "sha256": "c4189fc0ed816442b3e06f2c141daf5865e9265331a3bfadd6ea574fff8b2fde"
+    },
+    "references/lark-slides-xml-presentation-slide-get.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-xml-presentation-slide-get.md",
+      "sha256": "748d3e991d0c34d5ba18b11fc48f33f12a1fd6049ce8b2e38cc3865f95ceb8fc"
+    },
+    "references/lark-slides-xml-presentation-slide-replace.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-xml-presentation-slide-replace.md",
+      "sha256": "653c434587294d3b43c1c9aeb55fb563d689bfc49f66c051019919ccdaa4bfc2"
+    },
+    "references/lark-slides-xml-presentations-get.md": {
+      "upstream_path": "skills/lark-slides/references/lark-slides-xml-presentations-get.md",
+      "sha256": "7833b2fddcfb0f3b5ec4d0dd30c89f2a4e4483287890f41f1d46535b6bb317ed"
+    },
+    "references/planning-layer.md": {
+      "upstream_path": "skills/lark-slides/references/planning-layer.md",
+      "sha256": "d53301e770f92c558d20bda6c87292332de16f66f105a62620e5894f26b8c4c9"
+    },
+    "references/slides_chart_demo.xml": {
+      "upstream_path": "skills/lark-slides/references/slides_chart_demo.xml",
+      "sha256": "503594a9f8d5df9c9b59907eab12ca7d3256507c3a229521657ef588aa20b97e"
+    },
+    "references/slides_xml_schema_definition.xml": {
+      "upstream_path": "skills/lark-slides/references/slides_xml_schema_definition.xml",
+      "sha256": "ea2b7d4f338bfd4c895952a799123693968d034ceb67a1346650039131cc7ebc"
+    },
+    "references/troubleshooting.md": {
+      "upstream_path": "skills/lark-slides/references/troubleshooting.md",
+      "sha256": "014769ffe4a0cd80ecaed0c5b491bf03893d156aa1a8a60976c721146c80ff5f"
+    },
+    "references/validation-checklist.md": {
+      "upstream_path": "skills/lark-slides/references/validation-checklist.md",
+      "sha256": "fac6de17786f6e0f4b01e56103c02cb6e07b3c928958c76fc0598c7b855beb85"
+    },
+    "references/visual-planning.md": {
+      "upstream_path": "skills/lark-slides/references/visual-planning.md",
+      "sha256": "37fec44b5f9acba06073ac733076a0545bda27ce637bca590abc7ef5984d8acc"
+    },
+    "references/workflow/error-handling.md": {
+      "upstream_path": "skills/lark-slides/references/workflow/error-handling.md",
+      "sha256": "2159529cf4985108ec7f20229d17bc113a53b2ff3ba40564c0d2492df1d0777e"
+    },
+    "references/workflow/slides-editing.md": {
+      "upstream_path": "skills/lark-slides/references/workflow/slides-editing.md",
+      "sha256": "1fea28729be5261f4ec1f9e0dd045ec9d17b149703c4d73ae6661f6248735ed2"
+    },
+    "references/workflow/template-editing.md": {
+      "upstream_path": "skills/lark-slides/references/workflow/template-editing.md",
+      "sha256": "a4a23d54eb745904ba783f411e98bb6f642f092c1cc4a1ea25807b721a642f62"
+    },
+    "references/workflow/validation-xml.md": {
+      "upstream_path": "skills/lark-slides/references/workflow/validation-xml.md",
+      "sha256": "c96339a4fbbfa557feea9b80370cef9f0af37edbca8dfd2f6e44f21cf17db17d"
+    },
+    "references/xml-schema-quick-ref.md": {
+      "upstream_path": "skills/lark-slides/references/xml-schema-quick-ref.md",
+      "sha256": "90cc2c5c3150d55d2bc657da51c72fe0875f80f4812399cde93fecdc4cd71939"
+    },
+    "references/xml/iconpark-index.json": {
+      "upstream_path": "skills/lark-slides/references/xml/iconpark-index.json",
+      "sha256": "5d79500c5a227dace15b40dc6de92e18d02eab1cc9491c7eda46f28a96c033dc"
+    },
+    "references/xml/iconpark.md": {
+      "upstream_path": "skills/lark-slides/references/xml/iconpark.md",
+      "sha256": "27e0c2913d686568965214d1ad379d38b511e6dfecb8754bc2159b46681823e7"
+    },
+    "references/xml/slides_chart_demo.xml": {
+      "upstream_path": "skills/lark-slides/references/xml/slides_chart_demo.xml",
+      "sha256": "02d09c1f5fcec5a0f585a133b641cf6f8ca710f6350e36fd33af16b818a73d3f"
+    },
+    "references/xml/slides_xml_schema_definition.xml": {
+      "upstream_path": "skills/lark-slides/references/xml/slides_xml_schema_definition.xml",
+      "sha256": "7a5a80f80ed4aaa54dcb8ed46eeb1f48877a4e2d94670f06fc4d63177af4699d"
+    },
+    "references/xml/xml-schema-quick-ref.md": {
+      "upstream_path": "skills/lark-slides/references/xml/xml-schema-quick-ref.md",
+      "sha256": "127a345e4c6c65e5ce6cd2d625e8a138aaed3b8c3d06f8136dc15cee877a2409"
+    },
+    "scripts/iconpark_tool.py": {
+      "upstream_path": "skills/lark-slides/scripts/iconpark_tool.py",
+      "sha256": "39061ef88e55549762aac4fc3b337f5a60cc8114c111299c9436d88eb6184431"
+    },
+    "scripts/iconpark_tool_test.py": {
+      "upstream_path": "skills/lark-slides/scripts/iconpark_tool_test.py",
+      "sha256": "db83d31146404fe53ec2a5d6e9037c62f9d20605a326709f48345b3e54dab49e"
+    },
+    "scripts/sxsd_validator.py": {
+      "upstream_path": "skills/lark-slides/scripts/sxsd_validator.py",
+      "sha256": "cf75b86fac04700848e9556ad9cee26a51461b0eb7ef45d9e550cadc229add85"
+    },
+    "scripts/xml_lint.py": {
+      "upstream_path": "skills/lark-slides/scripts/xml_lint.py",
+      "sha256": "0c9f4ba72a9f26a343f797fdbd11d9d035f461a7cdd16864e2cc3b3ca75079e4"
+    },
+    "scripts/xml_lint_test.py": {
+      "upstream_path": "skills/lark-slides/scripts/xml_lint_test.py",
+      "sha256": "778b389fc39834d83121a2f5bd9ed6001f3af3046ce673437184d8ed826e4c91"
+    },
+    "scripts/xml_text_overlap_lint.py": {
+      "upstream_path": "skills/lark-slides/scripts/xml_text_overlap_lint.py",
+      "sha256": "5f0a1af89e4d331a4c87e69d80dcfc469145a7f392f41ca6156037c2930ccb35"
+    },
+    "scripts/xml_text_overlap_lint_test.py": {
+      "upstream_path": "skills/lark-slides/scripts/xml_text_overlap_lint_test.py",
+      "sha256": "9e6af04d8b16b09422fba80773b32e668aef50943187ecd66ccc9e232bb4d98a"
+    }
+  }
+}

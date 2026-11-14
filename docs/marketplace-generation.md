@@ -41,7 +41,7 @@ PR 和 baseline 发布工作流显式运行 `--check`。固定来源 CI 通过�
 
 ## 首次迁移
 
-- 根市场保留全部 19 个安装 ID，候选市场保留 Claude Code 的 5 个及 Codex 的 4 个插件。
+- 根市场保留 main 已有的 19 个安装 ID，并加入 sanctuary-translate（共 20 个），候选市场保留 Claude Code 的 5 个及 Codex 的 4 个插件。
 - ARIS 的市场 SHA 改为 catalog 已采用的 `08f9bc06f68907279b7ddce9e41efa0c42b357df`。
 - 学术技能、GitHub、阅读技能等旧市场来源改用 catalog 中维护的实际包，不再独立引用旧上游或旧目录。
 - 外部个人技能按 catalog SHA 获取；已有原生 manifest 的技能沿用 manifest，裸技能使用显式 inline 包装。agent-browser 直接使用登记的 `skills/agent-browser` 子目录。

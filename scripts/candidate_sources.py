@@ -115,4 +115,5 @@ class Sources:
 
     def is_file(self, repo, commit, selected):
         root = self.repository(repo, commit)
+        selected = '' if PurePosixPath(selected).as_posix() == '.' else selected
         return git(root, 'cat-file', '-t', commit + ':' + selected).strip() == b'blob'

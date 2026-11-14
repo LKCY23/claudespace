@@ -1,0 +1,52 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "b75632e78a78e0b32b762bba659efaf72c797d4e",
+  "path": "skills/lark-calendar",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-calendar/SKILL.md",
+      "sha256": "79f1f78686d9b9d32fef0f0e9588f09c6ba3552751b953a97e6b7d449e015fcc"
+    },
+    "references/lark-calendar-create.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-create.md",
+      "sha256": "86e1cf5166f762fda597dabdfe3d6f65935bf16bb68bb8e2cbb3e780f9f1b2a7"
+    },
+    "references/lark-calendar-meeting.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-meeting.md",
+      "sha256": "b3f85f24dbc4a92a040311bc2602342c33b7e4abe771938f748627eb712b8fb2"
+    },
+    "references/lark-calendar-recurring.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-recurring.md",
+      "sha256": "4bb5f47cec5b44b7eddaea7bc13c66f89f8cd25b8aea91ea3f366cf807494a41"
+    },
+    "references/lark-calendar-room-find.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-room-find.md",
+      "sha256": "c1d560b8617324065b9a49885347508033a2fd8527e16d24100feab4598634c3"
+    },
+    "references/lark-calendar-rsvp.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-rsvp.md",
+      "sha256": "2410fbd793ec0a49a88c8759c019087e551dbc3b3f525e473e988ddfec25a1d6"
+    },
+    "references/lark-calendar-schedule-clear-time.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-schedule-clear-time.md",
+      "sha256": "cebc411c62c2b8d5413e5332edf770de13d77c03de724bbcde5b043c34b47f11"
+    },
+    "references/lark-calendar-schedule-fuzzy-time.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-schedule-fuzzy-time.md",
+      "sha256": "b5643b93a5ccbb109aed10b76df9f4b615fa2170bd4a3adfa254f36657262a2b"
+    },
+    "references/lark-calendar-schedule-meeting.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-schedule-meeting.md",
+      "sha256": "693937ba8c3fd433d8a57e9ce431127a1cd93d6e59b6209655d6f049f7772c06"
+    },
+    "references/lark-calendar-suggestion.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-suggestion.md",
+      "sha256": "5861ab08517f110accca8a6473bb019bd4fca05bd883f25ffc17e8d45289a577"
+    },
+    "references/lark-calendar-update.md": {
+      "upstream_path": "skills/lark-calendar/references/lark-calendar-update.md",
+      "sha256": "2e87b4bb1758570535cefafdc4539642af818e63a246f2a2bfef1e294adbb767"
+    }
+  }
+}

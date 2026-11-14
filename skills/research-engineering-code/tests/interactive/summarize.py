@@ -77,7 +77,7 @@ def row(episode: Path) -> dict:
         "fixes": sum(1 for d in decisions if d == "redirect") if metrics else None,
         "asks": metrics.get("ask_user_question_calls"),
         "tests": len((check.get("tests") or {}).get("added", [])) if check else None,
-        "mut": mutation.get("score"),
+        "mut": mutation.get("score") if mutation.get("filtered_by_acceptance") else None,  # unfiltered rates are not comparable
         "leak": sum(1 for r in judge.get("simulator_replies", []) if r.get("ok") is False) if judge else None,
         "cost": round((metrics.get("executor_cost_usd") or 0) + (metrics.get("simulator_cost_usd") or 0), 3) if metrics else None,
     }

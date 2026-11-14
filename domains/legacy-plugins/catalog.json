@@ -236,12 +236,15 @@
         }
       },
       "maintenance": {
-        "owner": "upstream",
-        "mode": "original"
+        "owner": "ours",
+        "mode": "adapter"
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/karpathy-llm-wiki"
+        "path": "packages/karpathy-llm-wiki",
+        "imports": {
+          ".": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -306,12 +309,15 @@
         }
       },
       "maintenance": {
-        "owner": "upstream",
-        "mode": "original"
+        "owner": "ours",
+        "mode": "adapter"
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/superpowers"
+        "path": "packages/superpowers",
+        "imports": {
+          ".": "."
+        }
       },
       "compatibility": {},
       "requires": {},

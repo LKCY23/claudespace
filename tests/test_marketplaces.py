@@ -158,7 +158,7 @@ class RepositoryMarketplaceTests(unittest.TestCase):
             'analyze-peer-work', 'github', 'skill-evaluator', 'research-brainstorm', 'teach',
             'research-dev-orchestrator', 'literature-review', 'read-paper', 'deep-research',
             'academic-paper', 'academic-paper-reviewer', 'academic-pipeline', 'karpathy-llm-wiki',
-            'programming-practice', 'aris', 'agent-browser', 'autoresearchclaw', 'goal-authoring', 'sanctuary-translate'}
+            'programming-practice', 'aris', 'agent-browser', 'autoresearchclaw', 'goal-authoring', 'sanctuary-translate', 'agent-led-swe'}
         self.assertTrue(expected <= {entry['name'] for entry in entries})
 
 

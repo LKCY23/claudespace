@@ -91,13 +91,32 @@ def refresh_imports(files, item, sources):
             destination = target if single else str(Path(target) / name)
             require(destination not in imported, 'Import mappings overlap: ' + destination)
             old = record.get('files', {}).get(destination)
-            require(old is not None or destination not in files, 'Import would overwrite a local adaptation: ' + destination)
+            require(old is not None or destination not in files or files[destination] == content,
+                    'Import would overwrite a local adaptation: ' + destination)
+            provenance = {'upstream_path': source if single else str(Path(source) / name)}
+            if isinstance(old, dict) and 'upstream_sha256' in old and content != files[destination]:
+                digest = hashlib.sha256(content[0]).hexdigest()
+                accepted = old.get('reviewed_replacement', {})
+                replacement = (accepted.get('commit') == upstream['commit']
+                               and accepted.get('sha256') == digest
+                               and accepted.get('executable') == content[1])
+                unchanged = digest == old['upstream_sha256'] and content[1] == old['upstream_executable']
+                require(unchanged or replacement,
+                        'Upstream changed a locally adapted file; review the repair: ' + destination)
+                if not replacement:
+                    provenance.update(upstream_sha256=old['upstream_sha256'],
+                                      upstream_executable=old['upstream_executable'])
+                    if accepted:
+                        provenance['reviewed_replacement'] = accepted
+                    content = files[destination]
             files[destination] = content
-            imported[destination] = {'upstream_path': source if single else str(Path(source) / name),
-                                     'sha256': hashlib.sha256(content[0]).hexdigest()}
+            imported[destination] = {**provenance, 'sha256': hashlib.sha256(content[0]).hexdigest()}
     # Retire only previously recorded imported files, never local wrappers.
     for name in record.get('files', {}):
         if name not in imported:
+            info = record['files'][name]
+            require(not isinstance(info, dict) or 'upstream_sha256' not in info,
+                    'Upstream removed a locally adapted file; review the repair: ' + name)
             files.pop(name, None)
     record.update(sha=upstream['commit'], path=upstream['path'], files=imported)
     files['UPSTREAM.json'] = ((json.dumps(record, indent=2, ensure_ascii=False) + '\n').encode(), False)

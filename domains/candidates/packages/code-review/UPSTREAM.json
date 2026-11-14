@@ -1,6 +1,6 @@
 {
   "repo": "mattpocock/skills",
-  "sha": "49dd158d1076134a641b33efb035946536778336",
+  "sha": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
   "path": "skills/engineering/code-review",
   "packaging_revision": 2,
   "packaging": "Original skills and references unchanged; only plugin manifests added.",
@@ -11,7 +11,7 @@
     },
     "skills/code-review/SKILL.md": {
       "upstream_path": "skills/engineering/code-review/SKILL.md",
-      "sha256": "09eb147f793e4647949edd32dbad278f0554dfb56e0d46b699cd4c2c55bf0357"
+      "sha256": "9c921a8d88138a41401d8897ca1bb852088ab1b7b605cdd04edc13e3e8aab6dd"
     },
     "skills/code-review/agents/openai.yaml": {
       "upstream_path": "skills/engineering/code-review/agents/openai.yaml",
@@ -19,7 +19,7 @@
     },
     "skills/setup-matt-pocock-skills/SKILL.md": {
       "upstream_path": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "sha256": "f148858ffb7f63c03c06fca06e6fdb1d91a35c6b293244b8fdfacd5f4cc028c4"
+      "sha256": "b01e05bfe8c323171275c6ceec78b12f1bd4c62dfd26c2cfe8be806d3883f1ed"
     },
     "skills/setup-matt-pocock-skills/agents/openai.yaml": {
       "upstream_path": "skills/engineering/setup-matt-pocock-skills/agents/openai.yaml",
@@ -31,11 +31,11 @@
     },
     "skills/setup-matt-pocock-skills/issue-tracker-github.md": {
       "upstream_path": "skills/engineering/setup-matt-pocock-skills/issue-tracker-github.md",
-      "sha256": "f0653fe106dd8ee7b33be27bd7fe3104b40555896cb45f61997aed20467020c3"
+      "sha256": "6fdb3e9b00b7b0b115ecac3b1c00e3790f637f190abf598815368722c0a94692"
     },
     "skills/setup-matt-pocock-skills/issue-tracker-gitlab.md": {
       "upstream_path": "skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md",
-      "sha256": "591a9e7057382aaccdfbed3f7ea3f2ad07e0cd29f012d18b82ee4e485fd81e24"
+      "sha256": "947602d33a80f98f939fb990995b8f95a3459b114b919c4221d08bd75d7cffe0"
     },
     "skills/setup-matt-pocock-skills/issue-tracker-local.md": {
       "upstream_path": "skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md",
