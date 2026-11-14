@@ -304,7 +304,7 @@
         "author": "obra",
         "upstream": {
           "repo": "obra/superpowers",
-          "commit": "7e516434f2a30114300efc9247db32fb37daa5f9",
+          "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
           "path": "."
         }
       },
