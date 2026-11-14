@@ -531,14 +531,78 @@
     "tests/subagent-driven-dev/svelte-todo/scaffold.sh": {
       "upstream_path": "tests/subagent-driven-dev/svelte-todo/scaffold.sh",
       "sha256": "8049cf13cea0ca24176d6967caaaa9cd068f89ead35ebe1b862c6bc811aefb8f"
+    },
+    ".github/ISSUE_TEMPLATE/bug_report.md": {
+      "upstream_path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "sha256": "b6c877815bc407deccb09c22e6eb9fbda4e7401bdf30000f67360c018584761f",
+      "upstream_sha256": null,
+      "upstream_executable": null,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "c766d3023f9a12280019055997ad2424887778d9b701b4118ea86a7fbf1f7fdb",
+        "executable": false,
+        "reason": "Captured upstream community template was absent from the recorded baseline. Adopt the reviewed template shipped by this exact upstream release; no local issue/PR workflow is executed."
+      }
+    },
+    ".github/ISSUE_TEMPLATE/config.yml": {
+      "upstream_path": ".github/ISSUE_TEMPLATE/config.yml",
+      "sha256": "387f1f5fc7bcf80964d35a4549f202c263756cb421c3fa3a9e14d4c84b36a0ee",
+      "upstream_sha256": null,
+      "upstream_executable": null,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "e955d428a9ac46ed35f407b6532d74d1dade217d89d9a4c7f6b05b72872a004a",
+        "executable": false,
+        "reason": "Captured upstream community template was absent from the recorded baseline. Adopt the reviewed template shipped by this exact upstream release; no local issue/PR workflow is executed."
+      }
+    },
+    ".github/ISSUE_TEMPLATE/feature_request.md": {
+      "upstream_path": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "sha256": "08ea18239bf99d021a0968afa2e3990947cf51895b29f126b4549914fb96b87c",
+      "upstream_sha256": null,
+      "upstream_executable": null,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "a7aac80c9df2e46fce9a3c89a6e9e73e8d81e6de311dbd634ed9d5dfacb0bdc8",
+        "executable": false,
+        "reason": "Captured upstream community template was absent from the recorded baseline. Adopt the reviewed template shipped by this exact upstream release; no local issue/PR workflow is executed."
+      }
+    },
+    ".github/ISSUE_TEMPLATE/platform_support.md": {
+      "upstream_path": ".github/ISSUE_TEMPLATE/platform_support.md",
+      "sha256": "1b74e8a91dadb0ff2f38cef1d843e22b6765d335d855fdd8e45081bb42611449",
+      "upstream_sha256": null,
+      "upstream_executable": null,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "19f6d78322bf53b62ac8d7baf117492de3bbfae80851657c24c102980ea2aa26",
+        "executable": false,
+        "reason": "Captured upstream community template was absent from the recorded baseline. Adopt the reviewed template shipped by this exact upstream release; no local issue/PR workflow is executed."
+      }
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "upstream_path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "sha256": "b03e5b6c08f24e7b95b5b52b05048c3e51d7a901156c40349b443af85b808319",
+      "upstream_sha256": null,
+      "upstream_executable": null,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "d837f95474fafb23298bb6e295409ecc522d4c4db6a2e1eff955bbfb7a4a40d9",
+        "executable": false,
+        "reason": "Captured upstream community template was absent from the recorded baseline. Adopt the reviewed template shipped by this exact upstream release; no local issue/PR workflow is executed."
+      }
+    },
+    "CODE_OF_CONDUCT.md": {
+      "upstream_path": "CODE_OF_CONDUCT.md",
+      "sha256": "3b3c37d182a611feb4e3f1105a7d3b998775f6a3bac714b90e01d1fdfe332739",
+      "upstream_sha256": null,
+      "upstream_executable": null,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "5604db48bb38684df7b0816cc2a8b2659a9c7efcfb2fa17936e6b16b1ec79316",
+        "executable": false,
+        "reason": "Captured upstream community template was absent from the recorded baseline. Adopt the reviewed template shipped by this exact upstream release; no local issue/PR workflow is executed."
+      }
     }
-  },
-  "local_files": [
-    ".github/ISSUE_TEMPLATE/bug_report.md",
-    ".github/ISSUE_TEMPLATE/config.yml",
-    ".github/ISSUE_TEMPLATE/feature_request.md",
-    ".github/ISSUE_TEMPLATE/platform_support.md",
-    ".github/PULL_REQUEST_TEMPLATE.md",
-    "CODE_OF_CONDUCT.md"
-  ]
+  }
 }

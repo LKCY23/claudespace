@@ -252,6 +252,11 @@ class CandidateTests(unittest.TestCase):
         result = builder.refresh_imports(deepcopy(files), item, sources)
         self.assertEqual(result['SKILL.md'], (incoming, False))
         self.assertNotIn('reviewed_replacement', json.loads(result['UPSTREAM.json'][0])['files']['SKILL.md'])
+        # A captured local-only file has no upstream body at the old pin.
+        info.update(upstream_sha256=None, upstream_executable=None)
+        files['UPSTREAM.json'] = (json.dumps(record).encode(), False)
+        result = builder.refresh_imports(deepcopy(files), item, sources)
+        self.assertEqual(result['SKILL.md'], (incoming, False))
         for sha, data, mode in [('c'*40, incoming, False), ('b'*40, b'unreviewed', False), ('b'*40, incoming, True)]:
             item['origin']['upstream']['commit'] = sha
             sources.files.return_value = {'SKILL.md': (data, mode)}
