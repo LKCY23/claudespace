@@ -20,7 +20,13 @@
       "upstream_path": ".cursor-plugin/plugin.json",
       "sha256": "4e7ab713fa217b97a21810c0a1cd6a04eca2144571c7df8ddb08f5fc5e99ed4e",
       "upstream_sha256": "b7e97e5c53b9d8bebedf1d0f8fd2d28a4c6360981f80954982e9f3a77df200db",
-      "upstream_executable": false
+      "upstream_executable": false,
+      "reviewed_replacement": {
+        "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+        "sha256": "e74bbc3086286fec5595e3adc35f3c340ec255508afdf5030dd617a6a850afea",
+        "executable": false,
+        "reason": "Upstream Cursor manifest now shares the 7.0.2 release version and intentionally retires agents/commands entries. Candidate remains a major-version update requiring review."
+      }
     },
     ".gitattributes": {
       "upstream_path": ".gitattributes",

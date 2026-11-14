@@ -106,3 +106,5 @@ PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 - 本地正文偏离记录：仍停止，保留人工编辑。
 
 导入映射、来源记录修复不代表接受上游的新行为；资源更新仍生成可审阅候选。尤其 Superpowers 跨主版本更新、CLI 认证及权限说明变化、学术流程指令变化不能仅凭结构检查自动合并。
+
+若逐文件审查确认上游已替代修补，可在该文件记录 `reviewed_replacement`，必须同时限定完整 commit、sha256 和 executable；只有三者全部一致才允许采用。此记录仅用于生成该版本的候选，采用后即从候选来源记录中消耗，不授权其他提交或内容。当前三处审查是 Superpowers Cursor 版本对齐、AutoResearchClaw 的上游 YAML 头部、Lark Apps 的 creative-design 链接与相邻开发说明。候选仍需正常 PR 审查，不自动合并或安装。

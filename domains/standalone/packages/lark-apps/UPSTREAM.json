@@ -178,7 +178,13 @@
       "upstream_path": "skills/lark-apps/references/lark-apps-local-dev.md",
       "sha256": "18d0dbf22ee38651f1260685b183077c7f2e7f68dd3428cd2f7d664d2448f198",
       "upstream_sha256": "1fdafbfce30f73f0ac09987ff9c288a2ed287a1cabfe62bcd0deae629ba865c8",
-      "upstream_executable": false
+      "upstream_executable": false,
+      "reviewed_replacement": {
+        "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
+        "sha256": "38d807b8e5b08a7737d6f9b09c96ccc47241093e036c7ccb052b68a7fe88af2d",
+        "executable": false,
+        "reason": "Upstream incorporates creative-design.md link repair. Reviewed accompanying database-capability and release-approval instructions; updated references are imported with the complete skill."
+      }
     },
     "references/lark-apps-observability.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-observability.md",
