@@ -1,0 +1,12 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "017b19a793ad71794a02887ede04757f3d82e10d",
+  "path": "skills/lark-skill-maker",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-skill-maker/SKILL.md",
+      "sha256": "8591158289a3cb003c7ac18001ce6b42837c780d2567492cea87bf98982b3678"
+    }
+  }
+}

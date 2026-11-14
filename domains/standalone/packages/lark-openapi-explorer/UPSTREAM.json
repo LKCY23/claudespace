@@ -1,0 +1,12 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "017b19a793ad71794a02887ede04757f3d82e10d",
+  "path": "skills/lark-openapi-explorer",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-openapi-explorer/SKILL.md",
+      "sha256": "ae89debc3f807f9947831b4525e1c118bc14544877c14c14aaa47298b1e863b4"
+    }
+  }
+}

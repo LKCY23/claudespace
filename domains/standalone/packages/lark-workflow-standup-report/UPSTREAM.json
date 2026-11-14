@@ -1,0 +1,12 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "017b19a793ad71794a02887ede04757f3d82e10d",
+  "path": "skills/lark-workflow-standup-report",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-workflow-standup-report/SKILL.md",
+      "sha256": "a283de746e65f97d7d25c3b9e351c2e5c16702be81c0f004d5be718c50994690"
+    }
+  }
+}
