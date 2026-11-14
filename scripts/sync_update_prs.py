@@ -13,6 +13,7 @@ from candidate_sources import git
 from catalog_index import load_catalogs
 from prepare_update import advance_catalog, clean_head, protect_local_sources, selected_updates
 from resource_catalog import NAME, REPO, SHA, require, validate_catalog
+from run_updates import upstream_group
 from sync_marketplaces import render as render_marketplaces, encode
 
 PREFIX = '<!-- claudespace-update-v1\n'
@@ -46,8 +47,19 @@ def marker(pr, repo, base, branch, bot):
     return state
 
 
+def batch_repository(state):
+    repos = {row['repo'] for row in state['updates'].values()}
+    if len(repos) == 1:
+        repo = next(iter(repos))
+        if state['branch'].rsplit('/', 1)[-1] == upstream_group(repo):
+            return repo
+    return None
+
+
 def same_scope(a, b):
-    return all(a[key] == b[key] for key in ('repo', 'base', 'branch', 'catalog', 'catalog_path')) and set(a['updates']) == set(b['updates'])
+    identity = all(a[key] == b[key] for key in ('repo', 'base', 'branch', 'catalog', 'catalog_path'))
+    return identity and (set(a['updates']) == set(b['updates'])
+                         or batch_repository(a) is not None and batch_repository(a) == batch_repository(b))
 
 
 def managed_pr(pr):
@@ -65,7 +77,9 @@ def decide(state, remote, bot, *, verified_base_merges=False):
     if pr:
         old = marker(pr, state['repo'], state['base'], state['branch'], bot)
         require(same_scope(old, state), 'The update group changed; review the existing PR before reusing it')
-        if pr['state'] == 'closed' and not pr.get('merged_at') and old['updates'] == state['updates']:
+        if pr['state'] == 'closed' and not pr.get('merged_at') and (old['updates'] == state['updates']
+                or batch_repository(state) and {r['to_commit'] for r in old['updates'].values()}
+                == {r['to_commit'] for r in state['updates'].values()}):
             return {'action': 'declined', 'expected_head': head, 'pr_number': pr['number']}
         require(head in (None, old['generated_head'], state['generated_head']) or verified_base_merges,
                 'Candidate branch has manual commits; preserve them')
@@ -113,6 +127,10 @@ class GitHubPRs:
             if missing and '(HTTP 404)' in result.stderr: return None
             raise ValueError('GitHub ' + method + ' failed; check repository/token permissions and the saved operation report')
         return json.loads(result.stdout) if result.stdout.strip() else None
+
+    def command(self, *args):
+        subprocess.run(['gh', 'pr', *args, '--repo', self.repo], check=True,
+                       capture_output=True, text=True, timeout=45)
 
     def verify_base_merges(self, objects, remote, old):
         git(objects, '-c', 'credential.helper=', '-c', 'credential.helper=!gh auth git-credential',

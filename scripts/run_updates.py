@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Check registered sources and export validated candidates for a separate PR job."""
 import argparse
+import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import sys
 import subprocess
@@ -32,6 +34,39 @@ def groups(catalog):
     return result
 
 
+
+def upstream_group(repo):
+    return ('upstream-' + re.sub(r'[^a-z0-9-]+', '-', repo.lower()).strip('-')
+            + '-' + hashlib.sha256(repo.lower().encode()).hexdigest()[:8])
+
+
+def update_groups(catalog, checked):
+    """Batch independent updates only when their source repository and target agree."""
+    rows = {row['resource'].split('@')[0]: row for row in checked['results']}
+    active = [names for names in groups(catalog)
+              if any(rows[name]['status'] == 'update_available' for name in names)]
+    targets = {}
+    for names in active:
+        for name in names:
+            row = rows[name]
+            if row.get('target_commit'):
+                targets.setdefault(row.get('repo'), set()).add(row['target_commit'])
+    registered = {}
+    for item in catalog['resources'].values():
+        if item['update']['strategy'] != 'manual':
+            repo = item['origin'].get('upstream', item['source']).get('repo')
+            registered[repo] = registered.get(repo, 0) + 1
+    result = {}
+    for names in active:
+        origins = {rows[name].get('repo') for name in names}
+        repo = next(iter(origins)) if len(origins) == 1 else None
+        batchable = (repo and registered.get(repo, 0) > 1 and len(targets.get(repo, ())) == 1
+                     and all(rows[name]['status'] in ('update_available', 'no_relevant_change') for name in names))
+        group = upstream_group(repo) if batchable else names[0] if len(names) == 1 else 'shared-' + names[0]
+        result.setdefault(group, []).extend(names)
+    return [(group, sorted(names)) for group, names in sorted(result.items())]
+
+
 def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=False, private_repos=()):
     root, output = Path(root).resolve(), Path(output).resolve()
     base = clean_head(root)
@@ -57,9 +92,7 @@ def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=F
         write_json(output / check_path, checked)
         report['checks'].append({'catalog': catalog['name'], 'counts': checked['counts'], 'report': check_path})
         rows = {row['resource'].split('@')[0]: row for row in checked['results']}
-        for names in groups(catalog):
-            if not any(rows[name]['status'] == 'update_available' for name in names): continue
-            group = names[0] if len(names) == 1 else 'shared-' + names[0]
+        for group, names in update_groups(catalog, checked):
             key = catalog['name'] + '--' + group
             row = {'catalog': catalog['name'], 'resources': names, 'group': group}
             try:

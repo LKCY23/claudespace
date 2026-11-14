@@ -211,7 +211,9 @@ class BundleTests(unittest.TestCase):
         def prepare(*args, **kwargs):
             if args[4] == ['demo']: raise subprocess.TimeoutExpired('git fetch', 45)
             return original(*args, **kwargs)
-        with patch.object(run_updates, 'prepare', side_effect=prepare): output, report = self.export()
+        with patch.object(run_updates, 'prepare', side_effect=prepare), patch.object(
+                run_updates, 'update_groups', return_value=[('demo', ['demo']), ('second', ['second'])]):
+            output, report = self.export()
         self.assertEqual(report['status'], 'needs_attention')
         self.assertEqual([row['status'] for row in report['groups']], ['blocked', 'prepared'])
         self.assertEqual(len(report['candidates']), 1)

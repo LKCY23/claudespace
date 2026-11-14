@@ -8,6 +8,7 @@ from urllib.parse import quote
 
 from resource_catalog import SHA, require
 from sync_update_prs import GitHubPRs
+from auto_merge import marketplace_only, disable_owned
 
 
 def eligible(pr, repo, base, expected):
@@ -49,11 +50,18 @@ def finish(hub, number, expected, tooling, fixed, url):
     if not eligible(pr, hub.repo, base, expected):
         return 'superseded'
     passed = tooling == 'success' and fixed == 'success'
+    automatic = passed and marketplace_only(hub, pr)
+    if not automatic: disable_owned(hub, pr)
     status(hub, expected, 'Tooling tests', 'success' if tooling == 'success' else 'failure', url,
            'Exact-head tests and generated marketplace checks: ' + tooling)
     if fixed != 'success':
         status(hub, expected, 'claudespace/fixed-sources', 'failure', url,
                'Trusted fixed-source job did not succeed: ' + fixed)
+    if automatic and hub.api('GET', '').get('allow_auto_merge'):
+        fresh = hub.api('GET', 'pulls/' + str(int(number)))
+        if not eligible(fresh, hub.repo, base, expected) or not marketplace_only(hub, fresh): return 'superseded'
+        hub.command('merge', str(int(number)), '--auto', '--squash', '--match-head-commit', expected)
+        return 'auto-merge-requested: generated marketplaces only'
     return 'ready-for-review' if passed else 'needs-attention'
 
 
