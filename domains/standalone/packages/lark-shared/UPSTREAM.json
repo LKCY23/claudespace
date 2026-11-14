@@ -1,6 +1,6 @@
 {
   "repo": "larksuite/cli",
-  "sha": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-shared",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
@@ -18,7 +18,7 @@
     },
     "references/lark-shared-identity-and-permissions.md": {
       "upstream_path": "skills/lark-shared/references/lark-shared-identity-and-permissions.md",
-      "sha256": "68c8f409ceeb062b4460a63ea4a8822e4150db475b7ca2f4baaf1e67162907f1"
+      "sha256": "2fe31e2724f3858e12182cdac4600377f68db36468094c500daa59031a05a18c"
     },
     "references/lark-shared-output-contract.md": {
       "upstream_path": "skills/lark-shared/references/lark-shared-output-contract.md",
@@ -30,7 +30,7 @@
     },
     "references/lark-wiki-token-routing.md": {
       "upstream_path": "skills/lark-shared/references/lark-wiki-token-routing.md",
-      "sha256": "42ba982e9ebc85aefca3db64a434d08dadba49c5d42d617388964866543f7c79"
+      "sha256": "8109dd583c0ed2193621ff83f341a9c7b0af7cf711aff5e69f4790821b4355db"
     }
   }
 }
