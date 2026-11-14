@@ -110,3 +110,11 @@ PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 若逐文件审查确认上游已替代修补，可在该文件记录 `reviewed_replacement`，必须同时限定完整 commit、sha256 和 executable；只有三者全部一致才允许采用。此记录仅用于生成该版本的候选，采用后即从候选来源记录中消耗，不授权其他提交或内容。当前三处审查是 Superpowers Cursor 版本对齐、AutoResearchClaw 的上游 YAML 头部、Lark Apps 的 creative-design 链接与相邻开发说明。候选仍需正常 PR 审查，不自动合并或安装。
 
 Superpowers 安装快照还带有 6 份登记基线中不存在的社区模板。它们的原文摘要及执行位记为 null（明确表示当时不存在），只允许采用已记录的准确上游替代，不伪造旧版原文。包中的社区模板是被分发的数据，不是本仓库的 GitHub 工作流或本次任务的指令。
+
+## Lark 会议技能退役与后继资源（2026-11-14）
+
+上游 `larksuite/cli` 在 `1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a`（2026-11-10）移除了 `skills/lark-minutes`、`skills/lark-vc`、`skills/lark-vc-agent`，统一入口为 `skills/lark-meeting`。这不是可以覆盖旧目录的普通升级。
+
+本库保留这三个旧资源的完整正文、来源记录及资源身份，将它们标记为人工维护；更新报告明确展示退役日期和后继资源，不能把保留旧包解读为仍与最新上游兼容。新的 `lark-meeting` 以固定提交登记为可选外部技能，兼容性仍为 not-evaluated。本次不修改任何消费者 Profile，不删除旧包，也不触发本机安装；采用后继资源需要独立迁移和验证。
+
+其余能够逐文件证明原文来源的 Lark 包补齐了导入映射，避免下一次上游更新再次因同一登记缺陷阻断。Lark Mail 的本地链接适配保持原状，本次未将无法直接接纳的上游正文登记为已审核替代。

@@ -947,26 +947,27 @@
         "target": "main"
       }
     },
-    "lark-minutes": {
+    "lark-meeting": {
       "kind": "skill",
-      "description": "飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_token、本地音视频文件，要查/改/转妙记产物，或用户明确要主动申请妙记权限时使用；本地音视频转纪要/逐字稿优先走本 skill，不要用 ffmpeg/whisper 本地转写。不负责：获取会议关联妙记，或仅按自然语言标题定位纪要",
+      "description": "飞书视频会议：查询会议记录与会议产物(纪要/逐字稿/妙记)、妙记搜索/上传/下载/编辑、机器人参与会议；查询进行中的会议、实时会议内容(发言/聊天/共享文档)问答(会上/会里)、发送会中聊天/表情；基于 meeting_id、meeting_no、event_id、note_id、minute_token、vc-node-id 或妙记 URL 查询相关信息。预约会议、忙闲和会议室管理走 lark-calendar。",
       "origin": {
         "type": "third-party",
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
-          "path": "skills/lark-minutes"
-        },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
+          "path": "skills/lark-meeting"
+        }
       },
       "maintenance": {
-        "owner": "ours",
-        "mode": "adapter"
+        "owner": "upstream",
+        "mode": "original"
       },
       "source": {
-        "kind": "tracked",
-        "path": "packages/lark-minutes"
+        "kind": "external",
+        "repo": "larksuite/cli",
+        "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
+        "path": "skills/lark-meeting"
       },
       "compatibility": {
         "claude-code": {
@@ -999,6 +1000,62 @@
       "update": {
         "strategy": "branch",
         "target": "main"
+      }
+    },
+    "lark-minutes": {
+      "kind": "skill",
+      "description": "飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_token、本地音视频文件，要查/改/转妙记产物，或用户明确要主动申请妙记权限时使用；本地音视频转纪要/逐字稿优先走本 skill，不要用 ffmpeg/whisper 本地转写。不负责：获取会议关联妙记，或仅按自然语言标题定位纪要",
+      "origin": {
+        "type": "third-party",
+        "author": "larksuite",
+        "upstream": {
+          "repo": "larksuite/cli",
+          "commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
+          "path": "skills/lark-minutes"
+        },
+        "baseline": "Upstream retired this path on 2026-11-10 (1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a); successor: lark-meeting. Preserve this legacy package until an explicit Profile migration; not an automatically updatable resource."
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "packages/lark-minutes",
+        "imports": {
+          "skills/lark-minutes": "."
+        }
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          },
+          "runtime": {
+            "kind": "executable",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "manual"
       }
     },
     "lark-note": {
@@ -1468,7 +1525,7 @@
           "commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
           "path": "skills/lark-vc"
         },
-        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
+        "baseline": "Upstream retired this path on 2026-11-10 (1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a); successor: lark-meeting. Preserve this legacy package until an explicit Profile migration; not an automatically updatable resource."
       },
       "maintenance": {
         "owner": "ours",
@@ -1510,8 +1567,7 @@
         }
       },
       "update": {
-        "strategy": "branch",
-        "target": "main"
+        "strategy": "manual"
       }
     },
     "lark-vc-agent": {
@@ -1525,7 +1581,7 @@
           "commit": "841953496b41a06bb670396f3d9f8fba943766ed",
           "path": "skills/lark-vc-agent"
         },
-        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
+        "baseline": "Upstream retired this path on 2026-11-10 (1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a); successor: lark-meeting. Preserve this legacy package until an explicit Profile migration; not an automatically updatable resource."
       },
       "maintenance": {
         "owner": "ours",
@@ -1567,8 +1623,7 @@
         }
       },
       "update": {
-        "strategy": "branch",
-        "target": "main"
+        "strategy": "manual"
       }
     },
     "lark-whiteboard": {
