@@ -327,14 +327,16 @@ or override the FAIL); an entry reaches PASS WITH NOTES only when NO FAIL condit
 (D7) Declaration-anchored anti-skip — run FIRST, before any provenance read.
     Determine the legacy boundary fail-closed (default = treat-as-post-#260, NOT legacy):
     - A passport is legacy_unknown (advisory) ONLY with POSITIVE proof it predates #260:
-      repro_lock.ars_version present AND < the #260 release constant (frozen here at ship
-      time). Everything else — no repro_lock, repro_lock with no ars_version, ars_version
-      >= constant — is treated as post-#260. Version-unprovable is NOT legacy.
-    Four FAIL conditions (the first three structural/deterministic — EP-INV-4 also catches
-    #2/#3 in the lint; the fourth is the heuristic you run here):
+      passport-level repro_lock.ars_version present AND < 3.12.0, the release that shipped #260
+      (compare major, minor, and patch as numbers). Everything else — no repro_lock, repro_lock
+      with no ars_version, an ars_version that does not parse, ars_version >= 3.12.0 — is
+      treated as post-#260. Version-unprovable is NOT legacy.
+    Five FAIL conditions (#1, #2, #3, and #5 structural/deterministic — EP-INV-4 also catches
+    #2/#3 in the lint; #4 is the heuristic you run here):
       1. treated-as-post-#260 AND experiment_intake_declaration is absent → FAIL
-         (a literature-only run still needs {status: no_experiments_declared} — its absence
-         is this FAIL, so the gate cannot be dodged by omitting the declaration).
+         (a literature-only run still needs a declaration with status no_experiments_declared,
+         declared_by, and declared_at — its absence is this FAIL, so the gate cannot be dodged
+         by omitting the declaration).
       2. status == experiments_declared but experiment_provenance[] is absent/empty → FAIL.
       3. status == no_experiments_declared but experiment_provenance[] is non-empty → FAIL.
       4. status == no_experiments_declared but the manuscript/manifest shows own-experiment
@@ -343,6 +345,9 @@ or override the FAIL); an entry reaches PASS WITH NOTES only when NO FAIL condit
          planned_experiment_ids present, OR a Results-section sentence reporting a
          first-person experimental outcome (own metric/ablation/run) with no <!--ref:slug-->
          marker. Either signal against no_experiments_declared is the contradiction FAIL.
+      5. treated-as-post-#260 AND status == legacy_unknown → FAIL. Only the version proof above
+         reaches legacy_unknown, so a new run cannot choose it. EP-INV-5 accepts the status
+         value because it does not read the version; this check is the one that does.
     A legacy_unknown passport with no provenance block is PASS WITH NOTES (advisory).
 
 For each referenced experiment_provenance[] entry (those an audited claim's
@@ -356,6 +361,12 @@ planned_experiment_ids resolves to, sampled per the mode below):
       omitted key cannot silently bypass the check-4 advisory — the same skip C3 was
       hardened against). A malformed entry FAILs on malformedness alone; do not also run
       or emit a check-(4) advisory for it.
+    - A null repro_lock with its repro_lock_reason is well-formed: the scholar records that
+      some or all of the lock's fields have no honest value for this experiment, and why (#1049).
+      These are MALFORMED: a null repro_lock with a missing or blank reason; a populated
+      repro_lock with a repro_lock_reason; a populated repro_lock missing a field the entry
+      schema requires. A null lock is not by itself PROVENANCE_INSUFFICIENT; judge check (3)
+      from the results and disclosures the entry carries.
 
 (1) Completeness
     - Every referenced experiment_id resolves to exactly one experiment_provenance[] entry,
@@ -419,7 +430,8 @@ a FAIL); PASS WITH NOTES only when no FAIL condition is met.
   case — so the #260 check cannot be silently dropped by shipping a manuscript whose
   experiment claims carry no provenance block.
 
-repro_lock stays passive (un-gated) while experiment_provenance[] is gated here — not an
+The settings in repro_lock stay passive (un-gated, apart from the D7 version read and the
+check-(0) shape rule) while experiment_provenance[] is gated here — not an
 inconsistency: repro_lock documents LLM/artifact reproducibility settings; experiment_provenance[]
 is evidence backing manuscript claims. Gating the evidence-bearing one and leaving the
 settings one passive is the correct asymmetry. The FAILs here block at THIS integrity gate;
@@ -518,11 +530,16 @@ stays `not_machine_detectable`.
 #### E2. Source Tracing
 ```
 For each selected claim (Mode 1: the #549 stratified selection — HIGH-IMPACT / RANDOM / TOP-UP tiers; Mode 2: the whole registry):
-1. Locate the specific passage in the cited source that supports the claim
-2. Use WebSearch + DOI lookup to find the original source text during verification. Before building an evidence row, hold that exact source text explicitly in the current session and write it to the evidence source folder (E3.1); the builder and renderer never follow a URL, DOI, source_pointer, or path
-3. If source is behind paywall, note as UNVERIFIABLE_ACCESS
+1. Identify the cited version: the record that the manuscript's reference entry names (DOI, arXiv ID with version, or venue and year). When phase2_investigation/version_records.yaml is present and the ref_slug belongs to a version_family_id, use its known_versions[] to tell that record apart from the other versions of the same work
+2. Locate the specific passage in the cited version that supports the claim
+3. Use WebSearch + DOI lookup to find the cited version's text during verification. Before building an evidence row, hold that exact source text explicitly in the current session and write it to the evidence source folder (E3.1); the builder and renderer never follow a URL, DOI, source_pointer, or path
+4. Compare the claim only with the cited version. Never substitute another version of the work (working paper, preprint, author-accepted manuscript, conference version, other edition, or another arXiv version), because it can support a claim the cited version does not make, or lack one it does. An author-accepted manuscript is the cited version only when the reference entry itself cites the accepted manuscript
+5. If the cited version's full text cannot be read, record UNVERIFIABLE_ACCESS for that source, never a support verdict, and ask the user for the PDF of the cited version. This covers a paywall and also an open-access page that cannot be read (for example a "verify you are human" check, a page that needs JavaScript, or a refused automated request). A readable copy of another version does not change this
+6. If the reference entry does not identify exactly one version, whether or not version_records.yaml exists (for example its fields match more than one known_versions[] record, or it cites an arXiv ID without a version number for a work with several versions), do not choose one: record UNVERIFIABLE_ACCESS for that source, put VERSION_INCONSISTENT_CITATION in the row's detail, and ask the user which version the manuscript cites
+7. All rows for one claim carry one verdict. Check each source against the part of the claim it is cited for (its own anchor), not the whole sentence, then take the claim's verdict from the per-source results in this order: MAJOR_DISTORTION, UNVERIFIABLE, MINOR_DISTORTION, UNVERIFIABLE_ACCESS, VERIFIED. An access note on one source never hides a distortion found in another, and the claim is VERIFIED only when every cited source was read and supports the part it is cited for
+8. Name the version in the evidence row's source.display_label: author, year, a version label (journal article, working paper, preprint, edition, report), and the identifier that pins the version: the DOI or the arXiv ID with version when there is one, otherwise a stable record such as an SSRN or report number, or the publisher and edition of a book (for example "Smith 2020, journal article, doi:10.1234/abcd" or "Smith 2019, working paper, SSRN 1234567"). For a support verdict this is the version that was read, which is the cited version. For UNVERIFIABLE_ACCESS it is the cited version that could not be read; when no single version could be identified, keep the reference entry's own details and add "version not identified". The rendered table shows this label for every row
 
-Priority:
+Priority (every step looks for the cited version only):
 - DOI resolution / publisher official website
 - Google Scholar / ERIC / PubMed / Scopus
 - Institutional repositories
@@ -601,7 +618,7 @@ infer `human_read_log` state.
 | MINOR_DISTORTION     | MINOR    | Claim paraphrases source but meaning is preserved        |
 | MAJOR_DISTORTION     | SERIOUS  | Claim oversimplifies, exaggerates, or misrepresents      |
 | UNVERIFIABLE         | SERIOUS  | Source doesn't contain the claimed information            |
-| UNVERIFIABLE_ACCESS  | NOTE     | Source exists but full text not accessible                |
+| UNVERIFIABLE_ACCESS  | NOTE     | Cited version unreadable, or no single version identified |
 ```
 
 #### Sampling Strategy (#549 — risk-stratified)
@@ -657,7 +674,7 @@ This agent runs the 7-mode checklist at Stage 2.5 and Stage 4.5 and reports one 
 - Phase D sampling rate increased to >= 50%, and all paragraphs newly added or substantially modified during revision are checked 100%
 - Phase E verifies 100% of the E1 registered quantitative/factual claim population against cited sources; semantic extraction completeness remains unknown. Zero MAJOR_DISTORTION and zero UNVERIFIABLE are required within that registered population.
 - **Phase C3 (Figure/Table Caption Fidelity) runs on every `figure_table_trace[]` entry.** If an updated Figure Package exists but carries no `figure_table_trace[]` block (or omits an entry for a figure it contains), that is a **FAIL** ("caption fidelity not verified") — not a clean pass and not the advisory case (otherwise the #261 check is trivially skippable). A legacy figure with no Figure Package at all surfaces a trace-unavailable note (PASS WITH NOTES, advisory). The full per-condition severity map is in Phase C3 above.
-- **Phase C4 (Experiment Provenance & Claim Alignment, #260) runs the D7 declaration-anchored anti-skip on every passport and produces `experiment_alignment_results[]` for EVERY experiment-backed claim (full, not sampled, at Stage 4.5).** A treated-as-post-#260 passport with the `experiment_intake_declaration` absent is a **FAIL** (even a literature-only run needs `{status: no_experiments_declared}`); a passport referencing experiment results but omitting `experiment_provenance[]` is a **FAIL**, not the legacy advisory case. The full per-condition severity map + the four FAIL conditions are in Phase C4 above.
+- **Phase C4 (Experiment Provenance & Claim Alignment, #260) runs the D7 declaration-anchored anti-skip on every passport and produces `experiment_alignment_results[]` for EVERY experiment-backed claim (full, not sampled, at Stage 4.5).** A treated-as-post-#260 passport with the `experiment_intake_declaration` absent is a **FAIL** (even a literature-only run needs a declaration with `status: no_experiments_declared`, `declared_by`, and `declared_at`); a passport referencing experiment results but omitting `experiment_provenance[]` is a **FAIL**, not the legacy advisory case. The full per-condition severity map + the five FAIL conditions are in Phase C4 above.
 - Special focus: Citations, data, and claims added or modified during the revision process
 - ADDITIONALLY: Compare with Stage 2.5 verification results to confirm all previous issues are resolved (this is a supplementary check, not a replacement for fresh verification)
 - **Input (#576 §8): the Stage 3' traceability sidecar's frozen `previously_missed` AND `indeterminate` new-issue records** — forwarded on both routes (Stage 3' → 4.5 direct on Accept/Minor; through 4' with the roadmap on Major). Consume both attributions as integrity-check input, not just cargo. Current #576 1.1 hard-requires the original manuscript, so `indeterminate` cannot be manufactured by omitting that evidence; it remains available for comparisons that are genuinely non-resolving. Each record is assessed during the relevant phase and its disposition appears in the report. A `[LEGACY-NO-CONTRACT]` run may legitimately produce no sidecar; note that legacy boundary without treating it as current contract success.
