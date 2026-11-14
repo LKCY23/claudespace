@@ -1,12 +1,12 @@
 {
   "repo": "larksuite/cli",
-  "sha": "fcdef499bb23739b720c665d49875a9957c97d48",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-event",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-event/SKILL.md",
-      "sha256": "e82b31451938a5c6bc5e65c1bc1ea241c75d0097d7deb1406f2ca3876c9802e3"
+      "sha256": "62182eac83b9a2580fefc20588e5a24f2c167d154b6ecc26b89cbea35add8523"
     },
     "references/lark-event-application.md": {
       "upstream_path": "skills/lark-event/references/lark-event-application.md",
@@ -16,11 +16,15 @@
       "upstream_path": "skills/lark-event/references/lark-event-approval.md",
       "sha256": "871a395af18311aad9d1878f67beb98984bcfa757d856213706a32f3351b07a5"
     },
+    "references/lark-event-drive.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-drive.md",
+      "sha256": "69f06cfd19e4dcd6a666ec5bd1dd291d52687ce87a41c9e5384f4a6e23145be0"
+    },
     "references/lark-event-im.md": {
       "upstream_path": "skills/lark-event/references/lark-event-im.md",
-      "sha256": "f190b14aa3827ee6e2a6f778ed4e225e080e48342f02db4603d688281328e15b",
       "upstream_sha256": "b023f08657250ae2d1b513cbeb80d4776d786b270ffc459a1bd142eae156f3a6",
-      "upstream_executable": false
+      "upstream_executable": false,
+      "sha256": "f190b14aa3827ee6e2a6f778ed4e225e080e48342f02db4603d688281328e15b"
     },
     "references/lark-event-minutes.md": {
       "upstream_path": "skills/lark-event/references/lark-event-minutes.md",

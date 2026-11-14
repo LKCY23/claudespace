@@ -1,12 +1,12 @@
 {
   "repo": "larksuite/cli",
-  "sha": "4488da0b143131e2a5603cad4667bd85da7fcf61",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-apps",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-apps/SKILL.md",
-      "sha256": "0361e7e7a9b77bb65e7a047d412f47d387131b5ed106eb67c36bfb632256175d"
+      "sha256": "c1ae464e221d8cb0e0a02d62f9dd68a8f1dc47cedec9d40483be94d016e7c95e"
     },
     "creative-design/agents/assets/vision-probe.png": {
       "upstream_path": "skills/lark-apps/creative-design/agents/assets/vision-probe.png",
@@ -22,9 +22,9 @@
     },
     "creative-design/assets/index.html": {
       "upstream_path": "skills/lark-apps/creative-design/assets/index.html",
-      "sha256": "1ba764eaf9fa97b540b944ae023f56317a87e5324845c72a13ce39f2a3e00574",
       "upstream_sha256": "1acc38148574e3ccc720b8665284c70f100960f82887b01fddf1b5f1baf40be7",
-      "upstream_executable": false
+      "upstream_executable": false,
+      "sha256": "1ba764eaf9fa97b540b944ae023f56317a87e5324845c72a13ce39f2a3e00574"
     },
     "creative-design/creative-design.md": {
       "upstream_path": "skills/lark-apps/creative-design/creative-design.md",
@@ -112,23 +112,23 @@
     },
     "references/lark-apps-access-scope-get.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-access-scope-get.md",
-      "sha256": "40dee291c18ae45b0c5d7f4c1d4fc07dfefcdf102025402330a0603df8c335cb"
+      "sha256": "d79c3d35fa3e7e9cd2147e1ea2b302ec5570cb6cb2feec5d84008c7079cbba25"
     },
     "references/lark-apps-access-scope-set.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-access-scope-set.md",
-      "sha256": "37bd4f8e0e33a8dacd273430a0f1240e92ff4301eb3e5f7ba2ff9b0aa0d8a3df"
+      "sha256": "42488b737cbf0d83ed92d1872eae78d5c6bb6101131131c0e22b97e11b79b0de"
     },
     "references/lark-apps-automation.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-automation.md",
-      "sha256": "27345ebb94fed0c21d96c55248ddbfb183cd687acbe40c4cebb38a7d815f1ac9"
+      "sha256": "6798f1b5aff9811261d24e59650a4ac24c1c58e6c459b1eaa8ab26d4cc780251"
     },
     "references/lark-apps-cache.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-cache.md",
-      "sha256": "2318a7daa1a16c5603a256c237020d146b00dad252068859c2094d051f0fe584"
+      "sha256": "a1be94a9a477369e756169c78a11b92dc591dfdfbef5264498027cddf4a51964"
     },
     "references/lark-apps-cloud-dev.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-cloud-dev.md",
-      "sha256": "703aa4f1d4d68571c5d9d9e34fe635747619622a500e693df26e5f6d0f84b040"
+      "sha256": "79a9cb4ac1f91ffc66a14fedb42df920cb23c5fdfb3783277a3356421d5450f2"
     },
     "references/lark-apps-create.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-create.md",
@@ -136,23 +136,35 @@
     },
     "references/lark-apps-db-execute.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-db-execute.md",
-      "sha256": "6203fa3ee973c8f16ce3b03457d58e2671e7074600b7500801c9b00233323d63"
+      "sha256": "a3afb428ebaa7bd280d43363cf58e2d815090a563142a73f70a90adddc58795e"
     },
     "references/lark-apps-db.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-db.md",
-      "sha256": "953a97962c1fbbc9171faccac680dcaab166c4c283ac37793002dc7e399afed9"
+      "sha256": "a09f7e3d1d821ea052fb42d11f0178fde129c1328b738af03703205149daf535"
+    },
+    "references/lark-apps-delete.md": {
+      "upstream_path": "skills/lark-apps/references/lark-apps-delete.md",
+      "sha256": "ecc7d9c0bab22c4969132ce08b443ddf1f291ebaba44c143dfe3ddc0d5c70237"
     },
     "references/lark-apps-env-pull.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-env-pull.md",
-      "sha256": "b0dab7726d5415ba46458f83013be910f96692e094328d98ee4dce136b623950"
+      "sha256": "1a523950cc79822b5184b354ae2cb90ec658ef83a10372991386a14f3677358f"
     },
     "references/lark-apps-env.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-env.md",
-      "sha256": "a9157f71dd070042e6c8e32c8fdcc697690b4ab04c6cf5774390cd53c7371e80"
+      "sha256": "5b8eb3008395414cc1bd4e3b79ec9e33f26505ef578fce1d3a2e4082dd6c49dd"
+    },
+    "references/lark-apps-export.md": {
+      "upstream_path": "skills/lark-apps/references/lark-apps-export.md",
+      "sha256": "8febc83cb50e960deb7aa0a0345bbe6fb2423ebd8aefd899e915188067a568f0"
+    },
+    "references/lark-apps-features.md": {
+      "upstream_path": "skills/lark-apps/references/lark-apps-features.md",
+      "sha256": "28b4ffb9e53b0a69b06c804b0c90a6e82194e9fc7d9356122c663ec6be5eecda"
     },
     "references/lark-apps-file.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-file.md",
-      "sha256": "36d859bc7a5634558457d0876520fa692ca096663569c4fb8b5bc702c834a1c8"
+      "sha256": "8e34f60a5a3f6fc69c2ccc8462853226f543980f819ad67046b817af0b05e5cc"
     },
     "references/lark-apps-get.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-get.md",
@@ -172,23 +184,15 @@
     },
     "references/lark-apps-list.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-list.md",
-      "sha256": "68b272c34624a5637983380b596df34fbe75e08949c6a9a8012a04ec226d9d34"
+      "sha256": "d4c046e665b8f90218a2d2a4e3b12919665971bc941f0241dfbb29b3ee9de3a4"
     },
     "references/lark-apps-local-dev.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-local-dev.md",
-      "sha256": "18d0dbf22ee38651f1260685b183077c7f2e7f68dd3428cd2f7d664d2448f198",
-      "upstream_sha256": "1fdafbfce30f73f0ac09987ff9c288a2ed287a1cabfe62bcd0deae629ba865c8",
-      "upstream_executable": false,
-      "reviewed_replacement": {
-        "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
-        "sha256": "38d807b8e5b08a7737d6f9b09c96ccc47241093e036c7ccb052b68a7fe88af2d",
-        "executable": false,
-        "reason": "Upstream incorporates creative-design.md link repair. Reviewed accompanying database-capability and release-approval instructions; updated references are imported with the complete skill."
-      }
+      "sha256": "38d807b8e5b08a7737d6f9b09c96ccc47241093e036c7ccb052b68a7fe88af2d"
     },
     "references/lark-apps-observability.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-observability.md",
-      "sha256": "43a81f61f0c0ac6b7912adab117f229a10a8debcaa81d6fd5bc068f34aa4c441"
+      "sha256": "bfa4f03440ab1eb763e2f82e96b5bbfa04b9d02a44dc3544626b8f456c6f06dc"
     },
     "references/lark-apps-openapi-key.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-openapi-key.md",
@@ -208,11 +212,11 @@
     },
     "references/lark-apps-release-create.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-release-create.md",
-      "sha256": "3894d62d0540dba3f143e01e13d67da72d678cbec91e7825cee9c77e0dce1063"
+      "sha256": "b919642ba43f8c5fadc4de8f9587eff6f5de0b96a63fa2b99bb2b371cf7a5b9a"
     },
     "references/lark-apps-release-get.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-release-get.md",
-      "sha256": "a208c884a528f946471d36abd7d6da1191fdf6b5403bff3e3d6f5a1c0eb79f47"
+      "sha256": "ddfde2965c2c0a97abddbabcd37f61c7b491964679cbff10d62c7063e542174f"
     },
     "references/lark-apps-release-list.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-release-list.md",
@@ -228,7 +232,7 @@
     },
     "references/lark-apps-update.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-update.md",
-      "sha256": "52f43a521499b4507335eadf5ed8edeb696a2dafd6a094aa5e5d8be16b83c49c"
+      "sha256": "1fc644c5e926709c653a795b86317dd654518a30a754bddb35f5a2ae4b239684"
     },
     "references/lark-apps-user-id-convert.md": {
       "upstream_path": "skills/lark-apps/references/lark-apps-user-id-convert.md",

@@ -1,20 +1,48 @@
 {
   "repo": "larksuite/cli",
-  "sha": "409a3172da5d43c98bbb637557f3d10403febaf0",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-okr",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-okr/SKILL.md",
-      "sha256": "658ec51f59e3af529064821fb5fbee2ed3ff5cac9e22b66887541cfab4353772"
+      "sha256": "772690b94c2b30bbb729e36b63d4495f2a274fc13e48c06815cc75068606d4d3"
     },
     "references/lark-okr-alignments.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-alignments.md",
-      "sha256": "5a0701e9eb747d91a877fc6c3986366922528a87777f034f45dcebe757116753"
+      "sha256": "48564592ef6e8a82ebbcaa6f759f58b33075c5dec68bdb07014abc6c48c19289"
     },
     "references/lark-okr-batch-create.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-batch-create.md",
-      "sha256": "3c8662ab49c9af8c55ebae7e61a50074a9efeb5ba8d262057adb047ed6ac0e2e"
+      "sha256": "9600f0186c10dd41f085dc7cb4370bad476368937d448fadbd2c06ad9e078410"
+    },
+    "references/lark-okr-comment-create.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-create.md",
+      "sha256": "ece149dffdb69b69f01d2a4f8d4f9c2525a809e003b4671d681dd382c72b2ec3"
+    },
+    "references/lark-okr-comment-delete.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-delete.md",
+      "sha256": "787769af9c18c15fd57ab128ce0a6744664333054dc8c4fad075fd6395dd8557"
+    },
+    "references/lark-okr-comment-detail.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-detail.md",
+      "sha256": "ab23177e9e93bba31a9acbdbe670d8f51059b427cffb6aa72bafb8727515f8dc"
+    },
+    "references/lark-okr-comment-get.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-get.md",
+      "sha256": "d5d71d971a26c85760f47890ff3e9a9e6036fea4affbef86bfc4dd96a1f82241"
+    },
+    "references/lark-okr-comment-list.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-list.md",
+      "sha256": "a4558aba77575de193f971e3256537bef68cf3d0c1f1b06dfb3ec232bd66a3d5"
+    },
+    "references/lark-okr-comment-patch.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-patch.md",
+      "sha256": "01b3a1fa8e749b35c86ee8d73a80dcfd23f16fc9a2fc713f9663bd1c09cc2df2"
+    },
+    "references/lark-okr-comment-solve-reopen.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-comment-solve-reopen.md",
+      "sha256": "a5856e83b3e8cfe4450ffac512d6cd53612794f6bff1b2f69f69758681cb14cb"
     },
     "references/lark-okr-contentblock.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-contentblock.md",
@@ -22,19 +50,23 @@
     },
     "references/lark-okr-create.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-create.md",
-      "sha256": "edcfd20fc1a616a97b61b33adf12f4e651523930ec95870f654a1d868e2b53d5"
+      "sha256": "ece75175963a18454d5f3427dcee594d7d750fd88f2c187e7249c80db79f1dba"
     },
     "references/lark-okr-cycle-detail.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-cycle-detail.md",
-      "sha256": "69fef9becb64d635d088c734ad5957194017041fc0303d804d96d91f27e13079"
+      "sha256": "239b81cb407eb9e1f8330e09d612c47f179041f1d5cafe9ce5fd0787c89e0939"
     },
     "references/lark-okr-cycle-list.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-cycle-list.md",
       "sha256": "2d44c3f76744f0d98a9fa1c69976c930ad12e688eafdcaf6f9ad29014c091526"
     },
+    "references/lark-okr-drafts.md": {
+      "upstream_path": "skills/lark-okr/references/lark-okr-drafts.md",
+      "sha256": "868374454bb5b28244e8a9f56e9a8df9eea85950ec8ff6b80397786555dc79c3"
+    },
     "references/lark-okr-entities.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-entities.md",
-      "sha256": "127c32ef1be94f69c29b97dc6f28ee1aa64e521d7a477a503fbe38d728d76f83"
+      "sha256": "dc4f4a5c8cd970ec72ad29865da34c93845beb33a13a43117959cf2d65a7225c"
     },
     "references/lark-okr-image-upload.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-image-upload.md",
@@ -42,15 +74,15 @@
     },
     "references/lark-okr-indicator-update.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-indicator-update.md",
-      "sha256": "423d9e714b5b4dd6cba3f736f430e9a1c04b49ba13f55b56f71b1117bfef448c"
+      "sha256": "16450293870aeabdbd496b9d584f45fa7520d1cf09cfab544220f9dbebf42180"
     },
     "references/lark-okr-indicators.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-indicators.md",
-      "sha256": "a30ed4fe25d926b7df74b13500770d9f6b802d815458900cc98d65fb600d9507"
+      "sha256": "3cd44952a8736eb914deec361a24b3f07365bdda10d9a1ef26f7e913ae7538cd"
     },
     "references/lark-okr-patch.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-patch.md",
-      "sha256": "c07f0484a1325e4981856648e0ee5119cbd512140cf5457859cea9d8ad23e734"
+      "sha256": "174b023c2f73f5e7321c099de9e799c271c4c21c2889b762375496afce0b4a1c"
     },
     "references/lark-okr-progress-create.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-progress-create.md",
@@ -78,7 +110,7 @@
     },
     "references/lark-okr-weight.md": {
       "upstream_path": "skills/lark-okr/references/lark-okr-weight.md",
-      "sha256": "b71f2e7b4c3f2b0d6654933909d5e11f1d4c980793205a7c635643465a9d6637"
+      "sha256": "3cfaceeba94eb36d3f6786a499c3061c08cf9df60e70c62c0b6995264ba8b4dc"
     }
   }
 }

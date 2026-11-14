@@ -274,7 +274,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "1efe2dfb3304a7cac2a70e4adecfb1dc888ebe06",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-approval"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -331,7 +331,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "4488da0b143131e2a5603cad4667bd85da7fcf61",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-apps"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -445,7 +445,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "9b231d98253710219e26b902f5683d3e7f32bc92",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-base"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -502,7 +502,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "b75632e78a78e0b32b762bba659efaf72c797d4e",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-calendar"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -616,7 +616,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "525a98270f80693bdaf3c0a6006e9f3f94820851",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-doc"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -673,7 +673,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "5028c2e6ffb9e2ed8e56fed688f1a1dd74e6b11a",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-drive"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -730,7 +730,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "fcdef499bb23739b720c665d49875a9957c97d48",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-event"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -787,7 +787,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "f98db395d8520e4a431ed714261ab899e562aa45",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-im"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -898,7 +898,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "f98dbfe247c6ec172715ce578b67ac6fa22655db",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-markdown"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1066,7 +1066,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "a8552d7f447df0b6c901a70a4dde463aef43f521",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-note"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1123,7 +1123,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "409a3172da5d43c98bbb637557f3d10403febaf0",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-okr"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1237,7 +1237,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-shared"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1294,7 +1294,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "be2a96f490b5356a004bafffcaa39daab6179d76",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-sheets"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1408,7 +1408,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "0c5530dc63b65b3fda86f667f5725b1a08f0c4dc",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-slides"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1465,7 +1465,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "b9cced677a89fd42317b386daff41a9f62b473c3",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-task"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1691,7 +1691,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "6e2cad7221755d3668b350f186b862d64e0cba97",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-wiki"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -1748,7 +1748,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "d9330b7ab3dcd6de2fd2944517cc5758cc47f55c",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-workflow-meeting-summary"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."

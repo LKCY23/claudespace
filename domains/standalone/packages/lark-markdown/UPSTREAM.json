@@ -1,32 +1,32 @@
 {
   "repo": "larksuite/cli",
-  "sha": "f98dbfe247c6ec172715ce578b67ac6fa22655db",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-markdown",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-markdown/SKILL.md",
-      "sha256": "50024d5e506a95f122fb818011b7624c1948342ea8617089a102fcd72bab0a1b"
+      "sha256": "dd533844109c1b46e23c84171da7ea2ad2faa9f75999c27d7c7cc1fe8ec32709"
     },
     "references/lark-markdown-create.md": {
       "upstream_path": "skills/lark-markdown/references/lark-markdown-create.md",
-      "sha256": "686df9384108e71ca6d5d9964f74d5d9ae89b7f9ae7bbb7472ad511c22ec9eee"
+      "sha256": "f2a05bc05f3bf125373aed139f8a9a3fffb0ed463a9e51defc22a616f0648651"
     },
     "references/lark-markdown-diff.md": {
       "upstream_path": "skills/lark-markdown/references/lark-markdown-diff.md",
-      "sha256": "d0302666cd90a9bd1c6e211d5df0ac45d0298dbeafc09851004facce1466a321"
+      "sha256": "7507e026cc8f69a4ee1ebbc0e497d35dbe8620f526031297568e2854f359415e"
     },
     "references/lark-markdown-fetch.md": {
       "upstream_path": "skills/lark-markdown/references/lark-markdown-fetch.md",
-      "sha256": "0c68f0d56ddd7272485f32f7cf9321171dbdd1be4c4f98e0304beb78038bf2d0"
+      "sha256": "724b56afdf56597f594e6ef7fb86ee534f4d3ce6009b6888a9526102ba94d7af"
     },
     "references/lark-markdown-overwrite.md": {
       "upstream_path": "skills/lark-markdown/references/lark-markdown-overwrite.md",
-      "sha256": "67265b9bc7ca2e97ed966f7bf693e349f10795e567e5e80870ba4b39b1d81bd0"
+      "sha256": "8b0e5f17dbde5496ba9a86e7deacf989d08e1af0a83675d44c4bf9e391986f19"
     },
     "references/lark-markdown-patch.md": {
       "upstream_path": "skills/lark-markdown/references/lark-markdown-patch.md",
-      "sha256": "f4da2faccc9e6b0e91823636a9269038aca51fc16692c2f2b49c3afde18f2522"
+      "sha256": "45a09affb3f6dba9e42dfb1262ec279c9fe5702f4e767cb313be2ea01ecf9e4f"
     }
   }
 }
