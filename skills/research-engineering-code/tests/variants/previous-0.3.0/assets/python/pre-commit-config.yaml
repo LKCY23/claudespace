@@ -1,0 +1,17 @@
+# Copy to .pre-commit-config.yaml, then run: pre-commit install
+# The rev below was current when this file was written; update it with
+# pre-commit autoupdate.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.4
+    hooks:
+      - id: ruff-check
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: fast-tests
+        name: fast test suite
+        entry: python -m pytest -q
+        language: system
+        pass_filenames: false
+        types: [python]

@@ -182,6 +182,12 @@
       ]
     },
     {
+      "name": "research-engineering-code",
+      "description": "Use for any change to research or experiment code in any language: training and evaluation loops, losses, metrics, data loading and splits, simulations and solvers, experiment runners and configs, seeding and reproducibility, or tests for any of these. Covers everyday requests such as 'fix this bug in training', 'add X to the model', 'make runs reproducible', 'check why these results look wrong', 'write tests for the metrics', 'set up experiments from config files', 'refactor train.py without changing results', '给训练加早停', '修一下这个 bug', '重构一下但结果不能变'. Makes the agent work from a short design of the whole, build a thin end-to-end path and grow it, add only what the purpose needs, and verify both the numbers and the pipeline. Skip it for questions with no code change, one-off plots or scripts the user calls throwaway, and dependency or config chores.",
+      "source": "./skills/research-engineering-code",
+      "category": "research"
+    },
+    {
       "name": "sanctuary-translate",
       "description": "Claude Code 与 Desktop Code 双向翻译插件：输入侧写审查、原生译文输出块、修复与重试控制，以及本地 SQLite 持久版本。MCP 后端经插件内 launch-translator.sh 定位本机 Node 22，不依赖桌面应用 PATH。",
       "source": {

@@ -1,0 +1,14 @@
+[
+  {"id": "r01-nan-loss", "fixture": "tinylab", "expected": true, "prompt": "The loss goes NaN after a few hundred steps when I use lr 1.0. Can you fix it?"},
+  {"id": "r02-lr-schedule", "fixture": "tinylab", "expected": true, "prompt": "Add a cosine learning-rate schedule to the training loop."},
+  {"id": "r03-early-stop-zh", "fixture": "tinylab", "expected": true, "prompt": "给训练加一个早停：验证集 loss 连续 5 次没有下降就停止。"},
+  {"id": "r04-weight-decay", "fixture": "tinylab", "expected": true, "prompt": "Can you add weight decay to the logistic regression?"},
+  {"id": "r05-lr-sweep", "fixture": "tinylab", "expected": true, "prompt": "I want to sweep lr over 0.01, 0.1 and 1 with three seeds each and keep the results so I can compare them."},
+  {"id": "r06-integrator", "fixture": "decaysim", "expected": true, "prompt": "The errors from run.sh look too large for small steps. Can you check the integrator and fix whatever is wrong?"},
+  {"id": "r07-metric-tests", "fixture": "tinylab", "expected": true, "prompt": "Write proper tests for tinylab.metrics."},
+  {"id": "r08-refactor-zh", "fixture": "tinylab", "expected": true, "prompt": "帮我把 train.py 重构一下，现在没法单独测试里面的步骤，但结果不能变。"},
+  {"id": "r09-explain", "fixture": "tinylab", "expected": false, "prompt": "What does label smoothing do, and when does it hurt calibration? No code, just explain."},
+  {"id": "r10-quick-chart", "fixture": "tinylab", "expected": false, "prompt": "Throwaway: make me a bar chart of 0.81, 0.85 and 0.90 labelled A, B, C and save it as bars.png."},
+  {"id": "r11-dependency-bump", "fixture": "tinylab", "expected": false, "prompt": "Bump the minimum numpy version in pyproject.toml to 1.26."},
+  {"id": "r12-explain-script-zh", "fixture": "decaysim", "expected": false, "prompt": "解释一下 run.sh 每一步在做什么，不用改代码。"}
+]

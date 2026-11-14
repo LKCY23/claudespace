@@ -1,0 +1,38 @@
+# Merge these tables into the project's pyproject.toml. Keep any existing
+# settings; add only what is missing. Thresholds are starting points: tighten
+# or relax them per project, in this file, instead of arguing case by case.
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "I", "B", "UP",  # errors, unused names, import order, likely bugs, modern syntax
+    "C90",      # function complexity
+    "PLR0912",  # too many branches
+    "PLR0913",  # too many arguments
+    "PLR0915",  # too many statements
+    "BLE",      # blind `except`
+    "S110",     # `try`/`except`/`pass`
+    "NPY002",   # global NumPy random state instead of a passed Generator
+    "SLF001",   # access to private members of another module or object
+    "PT",       # pytest style
+    "ERA",      # commented-out code
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+max-args = 6
+max-branches = 10
+max-statements = 40
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers -m 'not slow and not gpu'"
+markers = [
+    "slow: takes more than a few seconds; run with -m slow",
+    "gpu: needs a GPU; run with -m gpu",
+]

@@ -1,0 +1,51 @@
+{
+  "c09i-config-runner": {
+    "fixture": "tinylab",
+    "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nI want to run experiments from a config file instead of flags: `python -m tinylab.run CONFIG OUTDIR`, where CONFIG is a JSON file with `seed`, `steps`, `lr`, `batch_size` and `val_fraction`. It should train on a training split, evaluate on the held-out rest, and write `OUTDIR/metrics.json` with `train_accuracy`, `val_accuracy` and `final_loss`, plus a copy of the config as `OUTDIR/config.json`. I'll be comparing runs by reading those files.",
+    "brief": "briefs/c09i-config-runner.md",
+    "acceptance": "acceptance/test_c09i_config_runner.py",
+    "max_user_turns": 4
+  },
+  "m01i-midpoint": {
+    "fixture": "decaysim",
+    "prompt": "Explicit Euler is too coarse for what I'm doing. Please add the explicit midpoint method, selected with `./run.sh OUT --method midpoint`, keep Euler as the default, and record which method ran in summary.json as `method`. I want to compare the two methods' errors.",
+    "brief": "briefs/m01i-midpoint.md",
+    "acceptance": "acceptance/test_m01i_midpoint.py",
+    "max_user_turns": 4
+  },
+  "c03i-seed-bug": {
+    "fixture": "tinylab",
+    "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nTwo runs of `python -m tinylab.train --seed 0` give me different final accuracy. Can you fix it?",
+    "brief": "briefs/c03i-seed-bug.md",
+    "acceptance": "acceptance/test_c03i_seed_bug.py",
+    "max_user_turns": 3
+  },
+  "c10i-empty-accuracy": {
+    "fixture": "tinylab",
+    "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\n`tinylab.metrics.accuracy([], [])` gives nan and a RuntimeWarning. It should fail loudly instead.",
+    "brief": "briefs/c10i-empty-accuracy.md",
+    "acceptance": "acceptance/test_c10i_empty_accuracy.py",
+    "max_user_turns": 3
+  },
+  "c11i-away": {
+    "fixture": "tinylab",
+    "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nI'm going into a two-hour meeting and won't be able to answer anything. Please add balanced accuracy to tinylab.metrics as `balanced_accuracy(preds, labels)` (the mean of per-class recall over the classes that appear in labels), and print it next to accuracy at the end of training. Leave me a note on anything you had to decide.",
+    "brief": "briefs/c11i-away.md",
+    "acceptance": "acceptance/test_c11i_balanced_accuracy.py",
+    "max_user_turns": 2
+  },
+  "c07i-throwaway-plot": {
+    "fixture": "tinylab",
+    "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nQuick one: I need a figure with the training loss curves for seeds 0 to 4, saved as curves.png in the project folder, for a slide tomorrow.",
+    "brief": "briefs/c07i-throwaway-plot.md",
+    "acceptance": "acceptance/test_c07i_throwaway_plot.py",
+    "max_user_turns": 2
+  },
+  "p01-lr-study": {
+    "fixture": "tinylab",
+    "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nI need to pick a learning rate for the paper, so I want a small learning-rate study: `python -m tinylab.study CONFIG OUTDIR`. CONFIG is a JSON file with `learning_rates` (a list), `seeds` (a list), `steps`, `batch_size`, `val_fraction` and `patience`. For every learning rate and seed it should train on a training split with early stopping on validation loss (stop after `patience` evaluations without improvement, evaluating every 10 steps), keep the best weights of each run in `OUTDIR/runs/<lr>_<seed>/best.npz` next to that run's `metrics.json`, and at the end write `OUTDIR/summary.csv` with one row per learning rate: mean and standard deviation of validation accuracy over the seeds. If I rerun the same command after an interruption, runs that already finished should be skipped.",
+    "brief": "briefs/p01-lr-study.md",
+    "acceptance": null,
+    "max_user_turns": 2
+  }
+}

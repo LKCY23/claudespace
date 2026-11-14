@@ -1,0 +1,162 @@
+{
+  "fixtures": {
+    "tinylab": {
+      "path": "fixtures/tinylab",
+      "stack": "Python with NumPy; pytest",
+      "suite": [
+        "{python}",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "env": {
+        "PYTHONPATH": "{workspace}/src"
+      },
+      "files": {
+        "test_config": [
+          "pyproject.toml",
+          "setup.cfg",
+          "pytest.ini",
+          "tox.ini",
+          "conftest.py",
+          "*/conftest.py"
+        ],
+        "test": [
+          "tests/*"
+        ],
+        "source": [
+          "src/*"
+        ]
+      },
+      "entry_point_pattern": "\\btrain\\(|tinylab\\.train|tinylab\\.run|subprocess"
+    },
+    "decaysim": {
+      "path": "fixtures/decaysim",
+      "stack": "C solver, Python analysis, Bash pipeline; make test with plain C asserts and unittest",
+      "suite": [
+        "make",
+        "-s",
+        "test"
+      ],
+      "env": {},
+      "files": {
+        "test_config": [
+          "Makefile",
+          "conftest.py",
+          "*/conftest.py"
+        ],
+        "test": [
+          "tests/*"
+        ],
+        "source": [
+          "sim/*",
+          "analysis/*",
+          "run.sh"
+        ]
+      },
+      "test_name_pattern": "^\\s*(?:static\\s+)?void\\s+(test_\\w+)\\s*\\(",
+      "entry_point_pattern": "run\\.sh",
+      "clean": [
+        "make",
+        "-s",
+        "clean"
+      ]
+    }
+  },
+  "cases": {
+    "c01-label-smoothing": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c01_label_smoothing.py"
+    },
+    "c02-running-stats": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c02_running_stats.py"
+    },
+    "c03-seed-determinism": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c03_seed_determinism.py"
+    },
+    "c04-logging": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c04_logging.py"
+    },
+    "c05-restructure": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c05_restructure.py"
+    },
+    "c06-early-stopping": {
+      "fixture": "tinylab",
+      "acceptance": null
+    },
+    "c07-throwaway-plot": {
+      "fixture": "tinylab",
+      "acceptance": null
+    },
+    "c08-explain-only": {
+      "fixture": "tinylab",
+      "acceptance": null
+    },
+    "c09-experiment-runner": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c09_experiment_runner.py"
+    },
+    "c10-empty-accuracy": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c10_empty_accuracy.py"
+    },
+    "m01-midpoint": {
+      "fixture": "decaysim",
+      "acceptance": "acceptance/test_m01_midpoint.py"
+    },
+    "h01-macro-f1": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_h01_macro_f1.py"
+    },
+    "h02-split-standardize": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_h02_split_standardize.py"
+    },
+    "h03-checkpoint": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_h03_checkpoint.py"
+    },
+    "h04-python-bump": {
+      "fixture": "tinylab",
+      "acceptance": null
+    },
+    "m02-dt-wiring": {
+      "fixture": "decaysim",
+      "acceptance": "acceptance/test_m02_dt_wiring.py"
+    },
+    "c09i-config-runner": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c09i_config_runner.py"
+    },
+    "m01i-midpoint": {
+      "fixture": "decaysim",
+      "acceptance": "acceptance/test_m01i_midpoint.py"
+    },
+    "c03i-seed-bug": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c03i_seed_bug.py"
+    },
+    "c10i-empty-accuracy": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c10i_empty_accuracy.py"
+    },
+    "c11i-away": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c11i_balanced_accuracy.py"
+    },
+    "c07i-throwaway-plot": {
+      "fixture": "tinylab",
+      "acceptance": "acceptance/test_c07i_throwaway_plot.py"
+    },
+    "p01-lr-study": {
+      "fixture": "tinylab",
+      "acceptance": null
+    }
+  }
+}

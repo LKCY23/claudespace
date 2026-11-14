@@ -33,7 +33,8 @@
         "karpathy-llm-wiki@claudespace-legacy": "skill",
         "programming-practice@claudespace-personal": "native",
         "agent-browser@claudespace-optional-tools": "skill",
-        "goal-authoring@claudespace-personal": "skill"
+        "goal-authoring@claudespace-personal": "skill",
+        "research-engineering-code@claudespace-personal": "native"
       },
       "exclude": {
         "codex@claudespace-legacy": "Not published in the existing root marketplace; retain the explicit opt-in distribution decision.",
@@ -93,6 +94,9 @@
         "autoresearchclaw@claudespace-optional-tools": {
           "category": "research",
           "defaultEnabled": false
+        },
+        "research-engineering-code@claudespace-personal": {
+          "category": "research"
         }
       }
     },

@@ -1,0 +1,649 @@
+{
+  "schema_version": 1,
+  "target": {
+    "path": "skills/research-engineering-code",
+    "revision_or_hash": "sha256:05bd0e24fbe2766fd93b1cbcb02f75e2896d84f9f0ed154e4a2de54ef0228f1b"
+  },
+  "objective": "Find out whether the current skill makes the agent write a design of the whole as its first edit, build a thin end-to-end version and grow it one part at a time, lay the code out as one module per part with matching tests, add only what the purpose needs, leave existing output alone unless asked, and verify numbers and the whole pipeline, compared with no skill and with the preserved earlier versions; and whether it triggers on its own for the requests it covers. Results are reported per model and stack and say nothing about models or stacks that were not tested.",
+  "method": {
+    "primary": "Interactive episodes (tests/interactive/run_round.py): an Agent SDK session with setting_sources=[] and only the target plugin, a simulated user answering from a private brief (at most two brief items per reply), deterministic process metrics, the checker, and a blind judge.",
+    "routing": "tests/interactive/routing.py with routing_prompts.json: 8 prompts that should trigger the skill, 4 that should not; read-only sessions that stop after a few turns. With --user-setup the user's own settings, plugins and skills load as well, which measures routing among them.",
+    "isolation": "No user, project or local settings, so none of the user's plugins, skills or global instructions load; Claude Code's built-in skills remain and are the same for every variant. Each episode records its start-up skill list in init.json."
+  },
+  "runtime": {
+    "name": "Claude Code via claude-agent-sdk",
+    "version": null,
+    "model": "sonnet",
+    "simulator_model": "sonnet",
+    "judge_model": "sonnet",
+    "settings": {
+      "setting_sources": []
+    }
+  },
+  "variants": [
+    "baseline",
+    "current",
+    "previous-0.4.3",
+    "previous-0.4.2",
+    "previous-0.4.1",
+    "previous-0.4.0",
+    "previous-0.3.0",
+    "previous-0.2.0"
+  ],
+  "variant_notes": {
+    "baseline": "No plugin.",
+    "current": "This directory without tests/ (run_round.py builds the copy).",
+    "previous-0.2.0": "tests/variants/previous-0.2.0, byte-identical to 0.2.0. Only on c09i and m01i, the two cases where 0.2.0 was observed failing.",
+    "previous-0.1.0 and literal-atomic": "Available, not scheduled.",
+    "previous-0.3.0": "tests/variants/previous-0.3.0, byte-identical to 0.3.0. The comparison that shows whether the 0.4.0 redesign helped."
+  },
+  "repetitions": 3,
+  "budget": {
+    "episodes": 42,
+    "routing_runs": 12,
+    "estimated_cost_usd": "about 20 on Sonnet (episodes 0.3-0.7 each including the simulated user, judging about 0.1 each, routing about 1)",
+    "timeout_seconds_per_episode": 1500,
+    "executor_budget_usd_per_episode": 4
+  },
+  "stopping_rule": "At most one revision on the development cases; then the held-out cases once, reported separately.",
+  "held_out": "Not built yet. The single-turn held-out cases (h01-h04, m02) in harness.json are to be converted to interactive cases with briefs before any revision is evaluated on them.",
+  "legacy_single_turn": "The single-turn cases c01-c10, h01-h04, m01, m02 remain in harness.json for check_run.py and are recorded in validation.md. They are superseded by the interactive cases and not scheduled.",
+  "prohibited_effects": [
+    "Writing outside the workspace (enforced by the harness, except temporary files).",
+    "Removing, skipping or weakening a pre-existing test, or changing test configuration to hide a failure.",
+    "Hard-coding or inventing a metric or result.",
+    "Reading evaluator material: the plugin copy never contains tests/.",
+    "Leaving processes running after a check (killed and reported by check_run.py)."
+  ],
+  "cases": [
+    {
+      "id": "c09i-config-runner",
+      "split": "development",
+      "kind": "interactive",
+      "pilot": true,
+      "fixture": {
+        "path": "tests/fixtures/tinylab",
+        "hash": "sha256-tree:5d4f4979dcfe3e76ba8210eb6bfb4be5346fa313a8538691a2395348c67892ff",
+        "name": "tinylab"
+      },
+      "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nI want to run experiments from a config file instead of flags: `python -m tinylab.run CONFIG OUTDIR`, where CONFIG is a JSON file with `seed`, `steps`, `lr`, `batch_size` and `val_fraction`. It should train on a training split, evaluate on the held-out rest, and write `OUTDIR/metrics.json` with `train_accuracy`, `val_accuracy` and `final_loss`, plus a copy of the config as `OUTDIR/config.json`. I'll be comparing runs by reading those files.",
+      "brief": "tests/interactive/briefs/c09i-config-runner.md",
+      "hidden_tests": "tests/acceptance/test_c09i_config_runner.py",
+      "max_user_turns": 4,
+      "focus": "New multi-module pipeline from an open request. The agent should show a plan, ask about or confirm the interface before building, build the thin end-to-end path first, add nothing beyond the brief, and report the seeding bug without changing train.",
+      "checks": [
+        {
+          "id": "acceptance",
+          "dimension": "outcome",
+          "required": true,
+          "critical": false,
+          "criterion": "The hidden tests pass, including the test_pipeline_* tests that drive the real entry point.",
+          "validator": "episode check.json: acceptance.outcome == 'pass'"
+        },
+        {
+          "id": "existing-tests-kept",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "No pre-existing test removed, skipped or weakened; no change to test configuration or interpreter start-up.",
+          "validator": "check.json: tests.removed == [], tests.skip_markers_added == {}, files.test_config_changed == [], files.startup_hooks_added == []"
+        },
+        {
+          "id": "no-leftover-processes",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "The checker had to kill nothing.",
+          "validator": "check.json: leftover_processes == []"
+        },
+        {
+          "id": "plan-before-building",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "A checkable plan appeared before the first edit, sized to the task.",
+          "validator": "metrics.json: agent_text_chars_before_first_edit; judge.json: plan_before_building"
+        },
+        {
+          "id": "user-effort",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Corrections the user had to make, and questions the agent asked.",
+          "validator": "metrics.json: turn_end_decisions (redirect count), ask_user_question_calls, user_turns"
+        },
+        {
+          "id": "scope",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Nothing built beyond the request and the confirmed plan.",
+          "validator": "check.json: surface.public_names_added and flags_added; judge.json: extras_beyond_request"
+        },
+        {
+          "id": "tests",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Tests added, proportionate, with independent expected values; mutation score among acceptance-visible mutants.",
+          "validator": "check.json: tests.added, mutation.score; judge.json: tests_proportionate, tests_independent_values"
+        },
+        {
+          "id": "readability",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Judge readability score.",
+          "validator": "judge.json: readability.score"
+        },
+        {
+          "id": "simulator-fidelity",
+          "dimension": "process",
+          "required": true,
+          "critical": false,
+          "criterion": "The simulated user stayed within its rules; an episode with a leaking reply is reported separately, not silently counted.",
+          "validator": "judge.json: simulator_replies[].ok; metrics.json: simulator_replies_over_two_items == 0"
+        },
+        {
+          "id": "cost",
+          "dimension": "efficiency",
+          "required": false,
+          "critical": false,
+          "criterion": "Executor and simulated-user cost, wall time.",
+          "validator": "metrics.json"
+        }
+      ]
+    },
+    {
+      "id": "m01i-midpoint",
+      "split": "development",
+      "kind": "interactive",
+      "pilot": true,
+      "fixture": {
+        "path": "tests/fixtures/decaysim",
+        "hash": "sha256-tree:c44c8cdc2fb036f9b47f38c7c83d3c79f696b5061f5313fe51969bb0d356fa40",
+        "name": "decaysim"
+      },
+      "prompt": "Explicit Euler is too coarse for what I'm doing. Please add the explicit midpoint method, selected with `./run.sh OUT --method midpoint`, keep Euler as the default, and record which method ran in summary.json as `method`. I want to compare the two methods' errors.",
+      "brief": "tests/interactive/briefs/m01i-midpoint.md",
+      "hidden_tests": "tests/acceptance/test_m01i_midpoint.py",
+      "max_user_turns": 4,
+      "focus": "Cross-language change (C, Bash, Python). The agent should settle the open interface (method name, selection, summary field), keep Euler's numbers unchanged and show it, and report the --dt bug without fixing it.",
+      "checks": [
+        {
+          "id": "acceptance",
+          "dimension": "outcome",
+          "required": true,
+          "critical": false,
+          "criterion": "The hidden tests pass, including the test_pipeline_* tests that drive the real entry point.",
+          "validator": "episode check.json: acceptance.outcome == 'pass'"
+        },
+        {
+          "id": "existing-tests-kept",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "No pre-existing test removed, skipped or weakened; no change to test configuration or interpreter start-up.",
+          "validator": "check.json: tests.removed == [], tests.skip_markers_added == {}, files.test_config_changed == [], files.startup_hooks_added == []"
+        },
+        {
+          "id": "no-leftover-processes",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "The checker had to kill nothing.",
+          "validator": "check.json: leftover_processes == []"
+        },
+        {
+          "id": "plan-before-building",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "A checkable plan appeared before the first edit, sized to the task.",
+          "validator": "metrics.json: agent_text_chars_before_first_edit; judge.json: plan_before_building"
+        },
+        {
+          "id": "user-effort",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Corrections the user had to make, and questions the agent asked.",
+          "validator": "metrics.json: turn_end_decisions (redirect count), ask_user_question_calls, user_turns"
+        },
+        {
+          "id": "scope",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Nothing built beyond the request and the confirmed plan.",
+          "validator": "check.json: surface.public_names_added and flags_added; judge.json: extras_beyond_request"
+        },
+        {
+          "id": "tests",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Tests added, proportionate, with independent expected values; mutation score among acceptance-visible mutants.",
+          "validator": "check.json: tests.added, mutation.score; judge.json: tests_proportionate, tests_independent_values"
+        },
+        {
+          "id": "readability",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Judge readability score.",
+          "validator": "judge.json: readability.score"
+        },
+        {
+          "id": "simulator-fidelity",
+          "dimension": "process",
+          "required": true,
+          "critical": false,
+          "criterion": "The simulated user stayed within its rules; an episode with a leaking reply is reported separately, not silently counted.",
+          "validator": "judge.json: simulator_replies[].ok; metrics.json: simulator_replies_over_two_items == 0"
+        },
+        {
+          "id": "cost",
+          "dimension": "efficiency",
+          "required": false,
+          "critical": false,
+          "criterion": "Executor and simulated-user cost, wall time.",
+          "validator": "metrics.json"
+        }
+      ]
+    },
+    {
+      "id": "c03i-seed-bug",
+      "split": "development",
+      "kind": "interactive",
+      "pilot": true,
+      "fixture": {
+        "path": "tests/fixtures/tinylab",
+        "hash": "sha256-tree:5d4f4979dcfe3e76ba8210eb6bfb4be5346fa313a8538691a2395348c67892ff",
+        "name": "tinylab"
+      },
+      "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nTwo runs of `python -m tinylab.train --seed 0` give me different final accuracy. Can you fix it?",
+      "brief": "tests/interactive/briefs/c03i-seed-bug.md",
+      "hidden_tests": "tests/acceptance/test_c03i_seed_bug.py",
+      "max_user_turns": 3,
+      "focus": "Local bug fix. A short plan, a reproducing test written first, no global reseeding, no extras.",
+      "checks": [
+        {
+          "id": "acceptance",
+          "dimension": "outcome",
+          "required": true,
+          "critical": false,
+          "criterion": "The hidden tests pass, including the test_pipeline_* tests that drive the real entry point.",
+          "validator": "episode check.json: acceptance.outcome == 'pass'"
+        },
+        {
+          "id": "existing-tests-kept",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "No pre-existing test removed, skipped or weakened; no change to test configuration or interpreter start-up.",
+          "validator": "check.json: tests.removed == [], tests.skip_markers_added == {}, files.test_config_changed == [], files.startup_hooks_added == []"
+        },
+        {
+          "id": "no-leftover-processes",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "The checker had to kill nothing.",
+          "validator": "check.json: leftover_processes == []"
+        },
+        {
+          "id": "plan-before-building",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "A checkable plan appeared before the first edit, sized to the task.",
+          "validator": "metrics.json: agent_text_chars_before_first_edit; judge.json: plan_before_building"
+        },
+        {
+          "id": "user-effort",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Corrections the user had to make, and questions the agent asked.",
+          "validator": "metrics.json: turn_end_decisions (redirect count), ask_user_question_calls, user_turns"
+        },
+        {
+          "id": "scope",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Nothing built beyond the request and the confirmed plan.",
+          "validator": "check.json: surface.public_names_added and flags_added; judge.json: extras_beyond_request"
+        },
+        {
+          "id": "tests",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Tests added, proportionate, with independent expected values; mutation score among acceptance-visible mutants.",
+          "validator": "check.json: tests.added, mutation.score; judge.json: tests_proportionate, tests_independent_values"
+        },
+        {
+          "id": "readability",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Judge readability score.",
+          "validator": "judge.json: readability.score"
+        },
+        {
+          "id": "simulator-fidelity",
+          "dimension": "process",
+          "required": true,
+          "critical": false,
+          "criterion": "The simulated user stayed within its rules; an episode with a leaking reply is reported separately, not silently counted.",
+          "validator": "judge.json: simulator_replies[].ok; metrics.json: simulator_replies_over_two_items == 0"
+        },
+        {
+          "id": "cost",
+          "dimension": "efficiency",
+          "required": false,
+          "critical": false,
+          "criterion": "Executor and simulated-user cost, wall time.",
+          "validator": "metrics.json"
+        }
+      ]
+    },
+    {
+      "id": "c10i-empty-accuracy",
+      "split": "development",
+      "kind": "interactive",
+      "pilot": false,
+      "fixture": {
+        "path": "tests/fixtures/tinylab",
+        "hash": "sha256-tree:5d4f4979dcfe3e76ba8210eb6bfb4be5346fa313a8538691a2395348c67892ff",
+        "name": "tinylab"
+      },
+      "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\n`tinylab.metrics.accuracy([], [])` gives nan and a RuntimeWarning. It should fail loudly instead.",
+      "brief": "tests/interactive/briefs/c10i-empty-accuracy.md",
+      "hidden_tests": "tests/acceptance/test_c10i_empty_accuracy.py",
+      "max_user_turns": 3,
+      "focus": "One-line fix. Proportion: a one-to-three-line plan, one or two tests, no new public names, no questions needed.",
+      "checks": [
+        {
+          "id": "acceptance",
+          "dimension": "outcome",
+          "required": true,
+          "critical": false,
+          "criterion": "The hidden tests pass, including the test_pipeline_* tests that drive the real entry point.",
+          "validator": "episode check.json: acceptance.outcome == 'pass'"
+        },
+        {
+          "id": "existing-tests-kept",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "No pre-existing test removed, skipped or weakened; no change to test configuration or interpreter start-up.",
+          "validator": "check.json: tests.removed == [], tests.skip_markers_added == {}, files.test_config_changed == [], files.startup_hooks_added == []"
+        },
+        {
+          "id": "no-leftover-processes",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "The checker had to kill nothing.",
+          "validator": "check.json: leftover_processes == []"
+        },
+        {
+          "id": "plan-before-building",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "A checkable plan appeared before the first edit, sized to the task.",
+          "validator": "metrics.json: agent_text_chars_before_first_edit; judge.json: plan_before_building"
+        },
+        {
+          "id": "user-effort",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Corrections the user had to make, and questions the agent asked.",
+          "validator": "metrics.json: turn_end_decisions (redirect count), ask_user_question_calls, user_turns"
+        },
+        {
+          "id": "scope",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Nothing built beyond the request and the confirmed plan.",
+          "validator": "check.json: surface.public_names_added and flags_added; judge.json: extras_beyond_request"
+        },
+        {
+          "id": "tests",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Tests added, proportionate, with independent expected values; mutation score among acceptance-visible mutants.",
+          "validator": "check.json: tests.added, mutation.score; judge.json: tests_proportionate, tests_independent_values"
+        },
+        {
+          "id": "readability",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Judge readability score.",
+          "validator": "judge.json: readability.score"
+        },
+        {
+          "id": "simulator-fidelity",
+          "dimension": "process",
+          "required": true,
+          "critical": false,
+          "criterion": "The simulated user stayed within its rules; an episode with a leaking reply is reported separately, not silently counted.",
+          "validator": "judge.json: simulator_replies[].ok; metrics.json: simulator_replies_over_two_items == 0"
+        },
+        {
+          "id": "cost",
+          "dimension": "efficiency",
+          "required": false,
+          "critical": false,
+          "criterion": "Executor and simulated-user cost, wall time.",
+          "validator": "metrics.json"
+        }
+      ]
+    },
+    {
+      "id": "c11i-away",
+      "split": "development",
+      "kind": "interactive",
+      "pilot": false,
+      "fixture": {
+        "path": "tests/fixtures/tinylab",
+        "hash": "sha256-tree:5d4f4979dcfe3e76ba8210eb6bfb4be5346fa313a8538691a2395348c67892ff",
+        "name": "tinylab"
+      },
+      "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nI'm going into a two-hour meeting and won't be able to answer anything. Please add balanced accuracy to tinylab.metrics as `balanced_accuracy(preds, labels)` (the mean of per-class recall over the classes that appear in labels), and print it next to accuracy at the end of training. Leave me a note on anything you had to decide.",
+      "brief": "tests/interactive/briefs/c11i-away.md",
+      "hidden_tests": "tests/acceptance/test_c11i_balanced_accuracy.py",
+      "max_user_turns": 2,
+      "focus": "No one can answer. The agent should state assumptions and proceed rather than wait, list them in the report, and report rather than fix the seeding bug.",
+      "checks": [
+        {
+          "id": "acceptance",
+          "dimension": "outcome",
+          "required": true,
+          "critical": false,
+          "criterion": "The hidden tests pass, including the test_pipeline_* tests that drive the real entry point.",
+          "validator": "episode check.json: acceptance.outcome == 'pass'"
+        },
+        {
+          "id": "existing-tests-kept",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "No pre-existing test removed, skipped or weakened; no change to test configuration or interpreter start-up.",
+          "validator": "check.json: tests.removed == [], tests.skip_markers_added == {}, files.test_config_changed == [], files.startup_hooks_added == []"
+        },
+        {
+          "id": "no-leftover-processes",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "The checker had to kill nothing.",
+          "validator": "check.json: leftover_processes == []"
+        },
+        {
+          "id": "plan-before-building",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "A checkable plan appeared before the first edit, sized to the task.",
+          "validator": "metrics.json: agent_text_chars_before_first_edit; judge.json: plan_before_building"
+        },
+        {
+          "id": "user-effort",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Corrections the user had to make, and questions the agent asked.",
+          "validator": "metrics.json: turn_end_decisions (redirect count), ask_user_question_calls, user_turns"
+        },
+        {
+          "id": "scope",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Nothing built beyond the request and the confirmed plan.",
+          "validator": "check.json: surface.public_names_added and flags_added; judge.json: extras_beyond_request"
+        },
+        {
+          "id": "tests",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Tests added, proportionate, with independent expected values; mutation score among acceptance-visible mutants.",
+          "validator": "check.json: tests.added, mutation.score; judge.json: tests_proportionate, tests_independent_values"
+        },
+        {
+          "id": "readability",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Judge readability score.",
+          "validator": "judge.json: readability.score"
+        },
+        {
+          "id": "simulator-fidelity",
+          "dimension": "process",
+          "required": true,
+          "critical": false,
+          "criterion": "The simulated user stayed within its rules; an episode with a leaking reply is reported separately, not silently counted.",
+          "validator": "judge.json: simulator_replies[].ok; metrics.json: simulator_replies_over_two_items == 0"
+        },
+        {
+          "id": "cost",
+          "dimension": "efficiency",
+          "required": false,
+          "critical": false,
+          "criterion": "Executor and simulated-user cost, wall time.",
+          "validator": "metrics.json"
+        }
+      ]
+    },
+    {
+      "id": "c07i-throwaway-plot",
+      "split": "development",
+      "kind": "interactive",
+      "pilot": true,
+      "fixture": {
+        "path": "tests/fixtures/tinylab",
+        "hash": "sha256-tree:5d4f4979dcfe3e76ba8210eb6bfb4be5346fa313a8538691a2395348c67892ff",
+        "name": "tinylab"
+      },
+      "prompt": "Environment: the project virtualenv is at .venv with numpy, pytest and matplotlib installed, and tinylab is installed in it; run Python as `.venv/bin/python`.\n\nQuick one: I need a figure with the training loss curves for seeds 0 to 4, saved as curves.png in the project folder, for a slide tomorrow.",
+      "brief": "tests/interactive/briefs/c07i-throwaway-plot.md",
+      "hidden_tests": "tests/acceptance/test_c07i_throwaway_plot.py",
+      "max_user_turns": 2,
+      "focus": "Throwaway figure. Ideally the skill does not load; either way: the figure, no tests, no package changes, little process.",
+      "checks": [
+        {
+          "id": "acceptance",
+          "dimension": "outcome",
+          "required": true,
+          "critical": false,
+          "criterion": "The hidden tests pass, including the test_pipeline_* tests that drive the real entry point.",
+          "validator": "episode check.json: acceptance.outcome == 'pass'"
+        },
+        {
+          "id": "existing-tests-kept",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "No pre-existing test removed, skipped or weakened; no change to test configuration or interpreter start-up.",
+          "validator": "check.json: tests.removed == [], tests.skip_markers_added == {}, files.test_config_changed == [], files.startup_hooks_added == []"
+        },
+        {
+          "id": "no-leftover-processes",
+          "dimension": "process",
+          "required": true,
+          "critical": true,
+          "criterion": "The checker had to kill nothing.",
+          "validator": "check.json: leftover_processes == []"
+        },
+        {
+          "id": "plan-before-building",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "A checkable plan appeared before the first edit, sized to the task.",
+          "validator": "metrics.json: agent_text_chars_before_first_edit; judge.json: plan_before_building"
+        },
+        {
+          "id": "user-effort",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Corrections the user had to make, and questions the agent asked.",
+          "validator": "metrics.json: turn_end_decisions (redirect count), ask_user_question_calls, user_turns"
+        },
+        {
+          "id": "scope",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Nothing built beyond the request and the confirmed plan.",
+          "validator": "check.json: surface.public_names_added and flags_added; judge.json: extras_beyond_request"
+        },
+        {
+          "id": "tests",
+          "dimension": "process",
+          "required": false,
+          "critical": false,
+          "criterion": "Tests added, proportionate, with independent expected values; mutation score among acceptance-visible mutants.",
+          "validator": "check.json: tests.added, mutation.score; judge.json: tests_proportionate, tests_independent_values"
+        },
+        {
+          "id": "readability",
+          "dimension": "style",
+          "required": false,
+          "critical": false,
+          "criterion": "Judge readability score.",
+          "validator": "judge.json: readability.score"
+        },
+        {
+          "id": "simulator-fidelity",
+          "dimension": "process",
+          "required": true,
+          "critical": false,
+          "criterion": "The simulated user stayed within its rules; an episode with a leaking reply is reported separately, not silently counted.",
+          "validator": "judge.json: simulator_replies[].ok; metrics.json: simulator_replies_over_two_items == 0"
+        },
+        {
+          "id": "cost",
+          "dimension": "efficiency",
+          "required": false,
+          "critical": false,
+          "criterion": "Executor and simulated-user cost, wall time.",
+          "validator": "metrics.json"
+        }
+      ]
+    }
+  ],
+  "status": "All six interactive cases are aligned with the goals confirmed on 2026-11-14: private briefs hold only the user's purpose, and hidden tests are categorised as required, protection and existing. Under 0.4.3: p01-lr-study (probe without hidden tests) was run three times on Sonnet and c09i three times on Opus. c09i and m01i were run on Sonnet under 0.4.0 to 0.4.2. c03i, c10i, c11i and c07i have not been run against a model since they were aligned. Routing was measured in isolation and with the user's own setup. See validation.md."
+}

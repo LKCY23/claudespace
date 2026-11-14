@@ -318,6 +318,49 @@
         "strategy": "manual"
       }
     },
+    "research-engineering-code": {
+      "kind": "skill",
+      "description": "Use for any change to research or experiment code in any language: training and evaluation loops, losses, metrics, data loading and splits, simulations and solvers, experiment runners and configs, seeding and reproducibility, or tests for any of these. Covers everyday requests such as 'fix this bug in training', 'add X to the model', 'make runs reproducible', 'check why these results look wrong', 'write tests for the metrics', 'set up experiments from config files', 'refactor train.py without changing results', '给训练加早停', '修一下这个 bug', '重构一下但结果不能变'. Makes the agent work from a short design of the whole, build a thin end-to-end path and grow it, add only what the purpose needs, and verify both the numbers and the pipeline. Skip it for questions with no code change, one-off plots or scripts the user calls throwaway, and dependency or config chores.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "skills/research-engineering-code"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "manual"
+      }
+    },
     "pdf": {
       "kind": "skill",
       "description": "Read, generate and visually inspect PDF documents with Python and Poppler.",

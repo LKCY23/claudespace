@@ -1,0 +1,11 @@
+{
+  "name": "research-engineering-code",
+  "version": "0.4.4",
+  "description": "科研实验代码的工程约束（不限语言与技术栈）：从整体设计出发，先打通最薄的端到端路径再逐步扩展，只加入目的所需的内容，让代码可读可维护、结果可信。",
+  "author": {
+    "name": "LKCY23"
+  },
+  "skills": [
+    "./"
+  ]
+}
