@@ -1,12 +1,12 @@
 {
   "repo": "larksuite/cli",
-  "sha": "0c5530dc63b65b3fda86f667f5725b1a08f0c4dc",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-slides",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-slides/SKILL.md",
-      "sha256": "1233f7dbced5190fd71be87985c80258da4561c335aaa0be0c993fdf69a5c7bc"
+      "sha256": "2b2b912438270cc52c61211c9886f9648f6b81b94a896ab68b409daabcdb9701"
     },
     "references/asset-planning.md": {
       "upstream_path": "skills/lark-slides/references/asset-planning.md",
@@ -14,27 +14,27 @@
     },
     "references/cli/lark-slides-add-slide.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-add-slide.md",
-      "sha256": "b872443a0c827b52216a66e1ba76b70ad9aa9d1ad2c5ab7c0c1e6223357dea1c"
+      "sha256": "a4d1d05fd8bb1a585a65e20759c0bdb3174b0c439ae7450da746b887898c69d2"
     },
     "references/cli/lark-slides-create.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-create.md",
-      "sha256": "d0864e0e7a26fef1173ed5a93c88eec2784ca2a26fdb231af6595f7196ed02a7"
+      "sha256": "7737d2b3e1864076142fd438d4c86998ea70d97b5bc90d847cec068ea9b05e12"
     },
     "references/cli/lark-slides-delete-slide.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-delete-slide.md",
-      "sha256": "79cd1021a8404a00cd6794cdb795845e2cab763cded02a6370fe09bd387bc5b1"
+      "sha256": "97c3e80945aebe75829bcc470663f1f32168d3ca63ce85830af5ef061183ea4e"
     },
     "references/cli/lark-slides-history.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-history.md",
-      "sha256": "1e7761470520c325ca5dccfe3728b9bdd46e35e3494ac4d5d5eec71c6c2ab1ac"
+      "sha256": "bd5ec1a8f84f48a885bbe91c16fa9da83caec10de10eb26427bd53c4d6cc60c0"
     },
     "references/cli/lark-slides-media-upload.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-media-upload.md",
-      "sha256": "8750e43afaae0072bd4dfcf236e841c9c1f507e5dfbf0863502cd3384e3727d2"
+      "sha256": "9b0c3be2fae9ad87a7d23d233e81ffe8de2114d0d0ac07d1d7a90e2081a6d95b"
     },
     "references/cli/lark-slides-replace-slide.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-replace-slide.md",
-      "sha256": "b28b1953d54ec7b3b67357042acc256faba259ac3bc84136623d8e09c18b7fa9"
+      "sha256": "b813c3463ef85545c5733f4cb7ae33ccbfff7ba45ee9eb066373ead394d98d23"
     },
     "references/cli/lark-slides-screenshot.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-screenshot.md",
@@ -42,19 +42,19 @@
     },
     "references/cli/lark-slides-update-slide.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-update-slide.md",
-      "sha256": "0d5963b6e0a15211de6e63bfa1e30936c3afdc984ce2d212e552b13db6b335e8"
+      "sha256": "c14aef5f59b3e2d9492ed19485270268aa7e46958f1edc92b3ff87b1d2db5333"
     },
     "references/cli/lark-slides-xml-presentation-slide-get.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-xml-presentation-slide-get.md",
-      "sha256": "e8bf63e3bcf06be47ddae55f867775529354d1b5cf956e9990579d14c82a0672"
+      "sha256": "21ad42224c7e9d33d6e3ebc6758679767e5179f72a6dcf8dc6d837d4df6d7f09"
     },
     "references/cli/lark-slides-xml-presentation-slide-replace.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-xml-presentation-slide-replace.md",
-      "sha256": "70880dfa58315a6366264f7d3a62b91eb4b69558f80dfbbf6863473032b5a024"
+      "sha256": "d57609a6150b065c287998f2225a16f3849980509244aba937bc22ac78e6d792"
     },
     "references/cli/lark-slides-xml-presentations-get.md": {
       "upstream_path": "skills/lark-slides/references/cli/lark-slides-xml-presentations-get.md",
-      "sha256": "675d01d001bc4e62c4f553b1b8a08b01d3206da3746003caed00dd71aad9382c"
+      "sha256": "0c6f14b3f26ad34e67ceb09cc21e091d58d0d3a40b85d33d40f11e9cb750d81e"
     },
     "references/iconpark-index.json": {
       "upstream_path": "skills/lark-slides/references/iconpark-index.json",
@@ -102,15 +102,15 @@
     },
     "references/lark-slides-xml-presentation-slide-get.md": {
       "upstream_path": "skills/lark-slides/references/lark-slides-xml-presentation-slide-get.md",
-      "sha256": "748d3e991d0c34d5ba18b11fc48f33f12a1fd6049ce8b2e38cc3865f95ceb8fc"
+      "sha256": "0ff6ac70be15f45f5e729ea1df1c1ef9a6afa193041dadfe981bf79c51e92f03"
     },
     "references/lark-slides-xml-presentation-slide-replace.md": {
       "upstream_path": "skills/lark-slides/references/lark-slides-xml-presentation-slide-replace.md",
-      "sha256": "653c434587294d3b43c1c9aeb55fb563d689bfc49f66c051019919ccdaa4bfc2"
+      "sha256": "8aec9ef6a72ba71e3276c0f616a17f1a7dbe32672c7a43ca81f3c9714bd9f7c5"
     },
     "references/lark-slides-xml-presentations-get.md": {
       "upstream_path": "skills/lark-slides/references/lark-slides-xml-presentations-get.md",
-      "sha256": "7833b2fddcfb0f3b5ec4d0dd30c89f2a4e4483287890f41f1d46535b6bb317ed"
+      "sha256": "f9230b3fbfa277ac8bdf32d4c069062f49d3f6d928f06f5e8a04459e3729ce42"
     },
     "references/planning-layer.md": {
       "upstream_path": "skills/lark-slides/references/planning-layer.md",
@@ -138,11 +138,11 @@
     },
     "references/workflow/error-handling.md": {
       "upstream_path": "skills/lark-slides/references/workflow/error-handling.md",
-      "sha256": "2159529cf4985108ec7f20229d17bc113a53b2ff3ba40564c0d2492df1d0777e"
+      "sha256": "e58a0dc0b1ee3122b25c346f48ead91c5c54cf0f4af3b620f08aebf3e154d8d0"
     },
     "references/workflow/slides-editing.md": {
       "upstream_path": "skills/lark-slides/references/workflow/slides-editing.md",
-      "sha256": "1fea28729be5261f4ec1f9e0dd045ec9d17b149703c4d73ae6661f6248735ed2"
+      "sha256": "f21d00838d811096c5517e3f4f015e5b811362ecdfb927ed0d4600108a00e8b5"
     },
     "references/workflow/template-editing.md": {
       "upstream_path": "skills/lark-slides/references/workflow/template-editing.md",
@@ -170,7 +170,7 @@
     },
     "references/xml/slides_xml_schema_definition.xml": {
       "upstream_path": "skills/lark-slides/references/xml/slides_xml_schema_definition.xml",
-      "sha256": "7a5a80f80ed4aaa54dcb8ed46eeb1f48877a4e2d94670f06fc4d63177af4699d"
+      "sha256": "a753f6a081f7cdf0ea39d7171770f04e39c8a0ddf29b6b1618418d54021e4366"
     },
     "references/xml/xml-schema-quick-ref.md": {
       "upstream_path": "skills/lark-slides/references/xml/xml-schema-quick-ref.md",
