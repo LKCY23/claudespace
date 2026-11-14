@@ -673,7 +673,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "5028c2e6ffb9e2ed8e56fed688f1a1dd74e6b11a",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-drive"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
