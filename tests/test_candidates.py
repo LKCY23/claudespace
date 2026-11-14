@@ -194,6 +194,13 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual((self.output / 'resources/demo/wrapper.md').read_text(), 'our wrapper')
         self.assertEqual((self.source / 'demo/SKILL.md').read_bytes(), before)
 
+    def test_repository_root_import_is_a_directory(self):
+        item = self.import_fixture()
+        item['source']['imports'] = {'.': '.'}
+        self.build(prepared={'owner/upstream': self.upstream}, import_upstream=True)
+        self.assertIn('new', (self.output / 'resources/demo/SKILL.md').read_text())
+        self.assertEqual((self.output / 'resources/demo/wrapper.md').read_text(), 'our wrapper')
+
     def test_import_will_not_overwrite_local_edits_or_unproven_adaptations(self):
         self.import_fixture(); (self.source / 'demo/SKILL.md').write_text('local edit')
         with self.assertRaisesRegex(ValueError, 'locally modified'): self.build(prepared={'owner/upstream': self.upstream}, import_upstream=True)
