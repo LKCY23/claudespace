@@ -1,0 +1,12 @@
+{
+  "repo": "MiniMax-AI/cli",
+  "sha": "235e8ce73655ee6f2005a6e1d4856203b1209824",
+  "path": "skill",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skill/SKILL.md",
+      "sha256": "f9abafc4616df74f7235ae49c616e6a470c41cb47c5208c0227bab9c28e26e1b"
+    }
+  }
+}

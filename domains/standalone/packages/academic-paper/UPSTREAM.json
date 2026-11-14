@@ -1,0 +1,196 @@
+{
+  "repo": "Imbad0202/academic-research-skills",
+  "sha": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+  "path": "academic-paper",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "academic-paper/SKILL.md",
+      "sha256": "92d7951dfbb1ae274bb9b2d6eeeea789a2fe45bc855663474b93b2220fc41f49"
+    },
+    "agents/abstract_bilingual_agent.md": {
+      "upstream_path": "academic-paper/agents/abstract_bilingual_agent.md",
+      "sha256": "205dfdb128414b91c6257901a6842b553c1d67712331c1324189f360acb25e37"
+    },
+    "agents/argument_builder_agent.md": {
+      "upstream_path": "academic-paper/agents/argument_builder_agent.md",
+      "sha256": "36972c13d84dd71b9173dac99f1db98443ea59195f1ed6d78123b6de826cf830"
+    },
+    "agents/citation_compliance_agent.md": {
+      "upstream_path": "academic-paper/agents/citation_compliance_agent.md",
+      "sha256": "d999b18ccb72c58ac0f79e1f591ce65fa227512b8021ed32b553c57bcb3757af"
+    },
+    "agents/draft_writer_agent.md": {
+      "upstream_path": "academic-paper/agents/draft_writer_agent.md",
+      "sha256": "3903916c19fcd26a362e5ba65a2a5bc0d995d76c899cdcc74017e490d8f510fa"
+    },
+    "agents/formatter_agent.md": {
+      "upstream_path": "academic-paper/agents/formatter_agent.md",
+      "sha256": "c2ab6287fb24a8e548d92a3fa33f9bd4c384d1d3ccf5ce506bbc22ec974f04e6"
+    },
+    "agents/intake_agent.md": {
+      "upstream_path": "academic-paper/agents/intake_agent.md",
+      "sha256": "c8bdf8a9dd1bfff6e09912ae984e412b66378d2bec707bdd58e0702e796e61be"
+    },
+    "agents/literature_strategist_agent.md": {
+      "upstream_path": "academic-paper/agents/literature_strategist_agent.md",
+      "sha256": "3546bbdf23ecde644c5bafe80a260d2e240cdb209c6f5d281f30d220701b6056"
+    },
+    "agents/peer_reviewer_agent.md": {
+      "upstream_path": "academic-paper/agents/peer_reviewer_agent.md",
+      "sha256": "88f46f86a19fe93476d872b99421d678b4345df9c687711fff59ebf214efa38d"
+    },
+    "agents/revision_coach_agent.md": {
+      "upstream_path": "academic-paper/agents/revision_coach_agent.md",
+      "sha256": "db10dbb1323e397cf194a178374d5fc85ee74d1a4c7cd7448770de9f40511507"
+    },
+    "agents/socratic_mentor_agent.md": {
+      "upstream_path": "academic-paper/agents/socratic_mentor_agent.md",
+      "sha256": "37f4c10c8431033286b1e8538bdd1297c0fb2b1a36a5e29ae726c44183186c52"
+    },
+    "agents/structure_architect_agent.md": {
+      "upstream_path": "academic-paper/agents/structure_architect_agent.md",
+      "sha256": "aac6ccba19954c71d2978a83721f2395d4c1f552ba5f9562e8019c6830313f41"
+    },
+    "agents/visualization_agent.md": {
+      "upstream_path": "academic-paper/agents/visualization_agent.md",
+      "sha256": "208f1b51e8c9f17ebbba6e20cce3f14026881f8fc3f10c49fb6d528948e8d5b3"
+    },
+    "examples/chinese_paper_example.md": {
+      "upstream_path": "academic-paper/examples/chinese_paper_example.md",
+      "sha256": "2cc5564ccdfcb16248ad1651062533ee719e7b904cb5ea5a67a2a956473f9fea"
+    },
+    "examples/imrad_hei_example.md": {
+      "upstream_path": "academic-paper/examples/imrad_hei_example.md",
+      "sha256": "4d8a05bade86281b57f3edd79c00f0eedcb71ae1b7ae05850be084bccc702b6e"
+    },
+    "examples/literature_review_example.md": {
+      "upstream_path": "academic-paper/examples/literature_review_example.md",
+      "sha256": "f71b4d552a76549c33d953a13f5925fd5f582cf222eded0d8001ecd218b3df40"
+    },
+    "examples/plan_mode_guided_writing.md": {
+      "upstream_path": "academic-paper/examples/plan_mode_guided_writing.md",
+      "sha256": "eb0155dd49fe2e88b88ca55d6759a816fd1d29e757de9a6b19c5553229ef2f39"
+    },
+    "examples/revision_mode_example.md": {
+      "upstream_path": "academic-paper/examples/revision_mode_example.md",
+      "sha256": "4e11429ec70b2b3829f5bdffa83825fe859749d041f4f09500f175d3f8735597"
+    },
+    "examples/revision_recovery_example.md": {
+      "upstream_path": "academic-paper/examples/revision_recovery_example.md",
+      "sha256": "598eddbe98e3bb8a645932529b235a96973a947c9fe2d2a47fee01db6475983c"
+    },
+    "references/abstract_writing_guide.md": {
+      "upstream_path": "academic-paper/references/abstract_writing_guide.md",
+      "sha256": "539c794257c3740f484f67a1518158904954b461a418c56d665020cc55ced85b"
+    },
+    "references/academic_writing_style.md": {
+      "upstream_path": "academic-paper/references/academic_writing_style.md",
+      "sha256": "e9696091f557c3497c13c1914c0683ada344b307152d0aa21d58a997d45daf80"
+    },
+    "references/apa7_chinese_citation_guide.md": {
+      "upstream_path": "academic-paper/references/apa7_chinese_citation_guide.md",
+      "sha256": "2350cca9408a7f0b544d11c468856260225f60ab99c67ae794eddfbfeb5da747"
+    },
+    "references/apa7_extended_guide.md": {
+      "upstream_path": "academic-paper/references/apa7_extended_guide.md",
+      "sha256": "7d4096c0559af232de1335719ec0c0729c8dfde0a735b149563242d391892900"
+    },
+    "references/citation_format_switcher.md": {
+      "upstream_path": "academic-paper/references/citation_format_switcher.md",
+      "sha256": "3c2bef0529e307588c744b13652f1f48a7cae42d8b2513470a88d591ea8e868f"
+    },
+    "references/credit_authorship_guide.md": {
+      "upstream_path": "academic-paper/references/credit_authorship_guide.md",
+      "sha256": "89517644fe4469326db5ee466d98f96e0a85965092b23c361fd457c830bf6841"
+    },
+    "references/failure_paths.md": {
+      "upstream_path": "academic-paper/references/failure_paths.md",
+      "sha256": "17fdb9355dc2db112df75d51c0a4a726e5dab1a9812e4d5125d19a25ddd1fd8d"
+    },
+    "references/funding_statement_guide.md": {
+      "upstream_path": "academic-paper/references/funding_statement_guide.md",
+      "sha256": "1826f1573813061436da6a0a639df1ce10d1e8684d36dd28f5c86a3f65c141b5"
+    },
+    "references/hei_domain_glossary.md": {
+      "upstream_path": "academic-paper/references/hei_domain_glossary.md",
+      "sha256": "4a9dcf5e0c279abc28846b87d26c32c8427502201e07f3cce7be480f708ef3f2"
+    },
+    "references/journal_submission_guide.md": {
+      "upstream_path": "academic-paper/references/journal_submission_guide.md",
+      "sha256": "60f285c823a629e005b3702b9c9a6a00191df260024c9c5174bc1eaf134d08a9"
+    },
+    "references/latex_template_reference.md": {
+      "upstream_path": "academic-paper/references/latex_template_reference.md",
+      "sha256": "859e758f58d72cf887e2f6723c2fb52b0252945e1f7e36f0887557fa06a4e784"
+    },
+    "references/mode_selection_guide.md": {
+      "upstream_path": "academic-paper/references/mode_selection_guide.md",
+      "sha256": "d5b190698d0b956e561b381f32e7efc9e825f6b95967670169d5cfffd17cf44a"
+    },
+    "references/paper_structure_patterns.md": {
+      "upstream_path": "academic-paper/references/paper_structure_patterns.md",
+      "sha256": "2defeaa4daa1e8c3c51f9114ad4c6a98c14669c5dc3f9234b6602595f93f3c5d"
+    },
+    "references/statistical_visualization_standards.md": {
+      "upstream_path": "academic-paper/references/statistical_visualization_standards.md",
+      "sha256": "8de7783763d00ceead6de3fee9b904b048fa44b785d2452fb6d99e7ade639f79"
+    },
+    "references/writing_quality_check.md": {
+      "upstream_path": "academic-paper/references/writing_quality_check.md",
+      "sha256": "9885d812654dd0c300bd36c5ff334cb5fe067abc2ef7a2bb2903e924bfbd5980"
+    },
+    "templates/bilingual_abstract_template.md": {
+      "upstream_path": "academic-paper/templates/bilingual_abstract_template.md",
+      "sha256": "1fffa6d11038ad6df2c3ec79616b88bff55a00013aaee28fde221df5d0013b0f"
+    },
+    "templates/case_study_template.md": {
+      "upstream_path": "academic-paper/templates/case_study_template.md",
+      "sha256": "36dd33266bdbc80fbeecbf526cb7160f5f5dc6efac17dffa64bc0984d9d2b716"
+    },
+    "templates/conference_paper_template.md": {
+      "upstream_path": "academic-paper/templates/conference_paper_template.md",
+      "sha256": "e96780005fa82b7894ce2200b749029156cfcd1c3a271dbde3745427c1623167"
+    },
+    "templates/credit_statement_template.md": {
+      "upstream_path": "academic-paper/templates/credit_statement_template.md",
+      "sha256": "82284069af81b78953b3653266bf21b052a37f466dd000b92e4757bb6eb03364"
+    },
+    "templates/funding_statement_template.md": {
+      "upstream_path": "academic-paper/templates/funding_statement_template.md",
+      "sha256": "f8f4a55187b43b11e575f2190779b609345ecbb1f8f67549d4d468b58efc7d58"
+    },
+    "templates/imrad_template.md": {
+      "upstream_path": "academic-paper/templates/imrad_template.md",
+      "sha256": "73b78dc2715ea0f5b04aaebbfa00729df3d09815b77107c057bbb01400dd98b2"
+    },
+    "templates/latex_article_template.tex": {
+      "upstream_path": "academic-paper/templates/latex_article_template.tex",
+      "sha256": "1f9112782a501b605d17ce644598cdd5e5ef250560198677266976038ccbc3c9"
+    },
+    "templates/literature_review_template.md": {
+      "upstream_path": "academic-paper/templates/literature_review_template.md",
+      "sha256": "7db258b9e2d43b34e0da41048830cbc778030f7f4ab6a9a0a75a1c28f300f91a"
+    },
+    "templates/policy_brief_template.md": {
+      "upstream_path": "academic-paper/templates/policy_brief_template.md",
+      "sha256": "3e7e0c2858ec8f402b32008cba7124a2312f8f8ad2929da4cd575115d18651be"
+    },
+    "templates/revision_tracking_template.md": {
+      "upstream_path": "academic-paper/templates/revision_tracking_template.md",
+      "sha256": "e8f8c930e822417e7ddd207b81fea84f89d142a3cc5ef961c5ffbb68faa93bbf"
+    },
+    "templates/theoretical_paper_template.md": {
+      "upstream_path": "academic-paper/templates/theoretical_paper_template.md",
+      "sha256": "d1389a34154452da695d5ac1f3d10b61db7a19d44a2cf5f8433b5f55c8cc1f05"
+    },
+    "shared/handoff_schemas.md": {
+      "upstream_path": "shared/handoff_schemas.md",
+      "sha256": "c6bc2d1c20912b887b82e1dcebb62e4c9b7600300687ea30a9de3062f91db967"
+    },
+    "shared/style_calibration_protocol.md": {
+      "upstream_path": "shared/style_calibration_protocol.md",
+      "sha256": "4adc5eaa10b9776f4343767b7db4ebe23e4fa3a5c00a7547ab507bccc2129301"
+    }
+  }
+}

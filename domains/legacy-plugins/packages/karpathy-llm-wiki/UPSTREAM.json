@@ -1,0 +1,24 @@
+{
+  "repo": "Astro-Han/karpathy-llm-wiki",
+  "sha": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642",
+  "path": ".",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    ".gitignore": {
+      "upstream_path": ".gitignore",
+      "sha256": "41ede42025f87af6b69d72de95d261ac7e205cfa8e96178e3d666efa7d8d22ee"
+    },
+    "LICENSE": {
+      "upstream_path": "LICENSE",
+      "sha256": "ce1702d638e34829f490a6aee7c4bdf033cecf358e971df69ba758714d9f1d56"
+    },
+    "README.md": {
+      "upstream_path": "README.md",
+      "sha256": "798ec62a8625151c4a3b3b2dd3c612b31d66798b3d651c737a13aece5b5a4cd1"
+    },
+    "SKILL.md": {
+      "upstream_path": "SKILL.md",
+      "sha256": "e8f4fb2b873c61e0e264181b903c0fbea752e2019290396c2783def7708c6882"
+    }
+  }
+}
