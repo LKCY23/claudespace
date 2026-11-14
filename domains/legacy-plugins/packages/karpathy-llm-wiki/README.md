@@ -22,7 +22,7 @@ This skill gives you three operations:
 
 | Operation | What it does | Output |
 |-----------|--------------|--------|
-| **Ingest** | Collects a source into `raw/` and compiles it into the wiki | New or updated wiki pages |
+| **Ingest** | Collects a source into `raw/`, triages it, then creates or updates wiki articles — or just logs it when nothing is new | New or updated wiki pages |
 | **Query** | Searches the wiki and answers with citations | Grounded answers linking to markdown pages |
 | **Lint** | Checks index integrity, links, and wiki health | Auto-fixes plus reported issues |
 
@@ -105,7 +105,7 @@ This skill follows the [agentskills.io](https://agentskills.io) open standard:
 | Cursor | `npx add-skill Astro-Han/karpathy-llm-wiki` |
 | Codex CLI | Copy to `.agents/skills/karpathy-llm-wiki/` |
 | OpenCode | `npx add-skill Astro-Han/karpathy-llm-wiki` |
-| Other tools | Copy `SKILL.md` and `references/` into the tool's skill directory |
+| Other tools | Copy `SKILL.md`, `references/`, and `scripts/` into the tool's skill directory |
 
 ## FAQ
 
@@ -121,11 +121,27 @@ Web pages, papers, blog posts, PDFs, markdown files, text files, and pasted text
 
 The workflow is based on a real knowledge base with 94 articles and 99 sources maintained daily since April 2026. The repo includes examples, templates, and a design spec.
 
+## Design Boundaries
+
+Deliberately not built, after three months of production logs and a survey of the ecosystem (LLM Wiki v2, llm-wiki-compiler, OKF, agent-memory literature):
+
+- **Source-hash freshness tracking** — raw/ is immutable, so hashes guard against events that cannot happen. Genuinely new information arrives as new sources through normal ingest.
+- **Persisted line-number citations** — every observed fidelity error was "value absent from the source", which a whole-file grep catches. Anchors only disambiguate a failure mode that has not occurred, and the annotation friction makes agents skip the rule.
+- **Numeric confidence or quality scores** — false precision with no calibration behind it. Evidence strength belongs in the prose.
+- **Per-article review dates** — nobody can predict at compile time how fast a domain moves. Maintenance is driven by whole-wiki lint, not per-page timers.
+- **Access-based decay** — frequently asked is not the same as true.
+- **Retract / bad-source machinery** — has not happened yet. Handle it manually until it does.
+- **Automatic hooks and scheduled runs** — those belong to the agent harness, not a tool-agnostic skill.
+- **Vector or graph search** — at 50K–100K tokens of curated wiki, grep and read are more reliable. Add search tooling only when recall measurably degrades.
+- **Typed relationship ontologies** — link semantics live in the prose around the link.
+- **OKF conformance** — the spec is a v0.1 draft with a minimal tooling ecosystem. Tracked; will be revisited.
+- **MCP servers, UIs, output subsystems** — outside the boundary of a tool-agnostic skill.
+
 ## Inspired By
 
 Unofficial community implementation of the workflow from [Karpathy's LLM Wiki idea](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). The value here is the reusable workflow, prompt structure, and battle-tested knowledge-compilation rules.
 
-See also: [lucasastorian/llmwiki](https://github.com/lucasastorian/llmwiki), [atomicmemory/llm-wiki-compiler](https://github.com/atomicmemory/llm-wiki-compiler).
+See also: [lucasastorian/llmwiki](https://github.com/lucasastorian/llmwiki), [atomicmemory/llm-wiki-compiler](https://github.com/atomicmemory/llm-wiki-compiler). We are tracking Google's [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf) draft and will evaluate compatibility once the spec and tooling mature.
 
 ## License
 
