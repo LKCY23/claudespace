@@ -12,6 +12,7 @@
       "catalogs": [
         "claudespace-personal",
         "claude-hud",
+        "claudespace-design",
         "claudespace-legacy",
         "claudespace-optional-tools",
         "claudespace-standalone"
@@ -33,6 +34,7 @@
         "programming-practice@claudespace-personal": "native",
         "agent-browser@claudespace-optional-tools": "skill",
         "goal-authoring@claudespace-personal": "skill",
+        "research-engineering-code@claudespace-personal": "native",
         "agent-led-swe@claudespace-personal": "native"
       },
       "exclude": {
@@ -93,6 +95,9 @@
         "autoresearchclaw@claudespace-optional-tools": {
           "category": "research",
           "defaultEnabled": false
+        },
+        "research-engineering-code@claudespace-personal": {
+          "category": "research"
         },
         "agent-led-swe@claudespace-personal": {
           "category": "devtools"

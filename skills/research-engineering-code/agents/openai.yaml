@@ -1,0 +1,7 @@
+interface:
+  display_name: "科研实验代码工程约束"
+  short_description: "从整体设计出发，先打通最薄的端到端路径再逐步扩展，让任意语言的实验代码可读、可维护、结果可信"
+  default_prompt: "使用 $research-engineering-code:research-engineering-code 完成这项实验代码改动：新模块或新流水线的第一次编辑只写入口文件的头部说明（目的、对外接口、内部各部分与数据流），第二次编辑写端到端测试，然后每个可单独测试的部分各占一个模块并配对应的测试文件，逐个部分实现；只加入目的所需的能力和能说出所防错误的保护，并对照设计报告结果。"
+
+policy:
+  allow_implicit_invocation: true

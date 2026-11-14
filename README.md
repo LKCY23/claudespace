@@ -19,16 +19,17 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 ## 资源目录
 
-当前 [catalogs.json](catalogs.json) 显式登记六份 `schema_version: 1/resources` catalog，共 65 项：
+当前 [catalogs.json](catalogs.json) 显式登记七份 `schema_version: 1/resources` catalog，共 68 项：
 
 | 登记 | 标识 | 内容 |
 | --- | --- | --- |
-| [catalog.json](catalog.json) | `claudespace-personal` | 13 项原创或按需资源 |
+| [catalog.json](catalog.json) | `claudespace-personal` | 14 项原创或按需资源 |
 | [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
-| [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 33 项独立技能 |
+| [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 34 项独立技能 |
 | [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
 | [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
 | [domains/claude-hud/catalog.json](domains/claude-hud/catalog.json) | `claude-hud` | 官方固定 HUD 来源；跟踪正式 Release，保留本机显示配置 |
+| [domains/design/catalog.json](domains/design/catalog.json) | `claudespace-design` | Impeccable 独立设计技能 |
 
 [HUD 正式入口](domains/claude-hud/README.md) 已接入自动更新；旧安装快照仅保留历史证据。登记、发布和更新候选均不会覆盖本机 HUD 显示配置。
 
