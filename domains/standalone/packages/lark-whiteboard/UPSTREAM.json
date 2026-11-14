@@ -1,0 +1,132 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "017b19a793ad71794a02887ede04757f3d82e10d",
+  "path": "skills/lark-whiteboard",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-whiteboard/SKILL.md",
+      "sha256": "78a3fbffa0da5c561b3e7035543fe1e80dbd7854c38d84e35e1392598b288f07"
+    },
+    "elements/connectors.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/connectors.md",
+      "sha256": "c4211b04f7decc0f63422d0f0bb6e47bdaa1fa85ce04ec508fe99d6e880b7db6"
+    },
+    "elements/content.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/content.md",
+      "sha256": "8ed9a8b5552f63f7072e14957219eea369a06b4bb7d6ebe8f401df802a0eecf2"
+    },
+    "elements/image.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/image.md",
+      "sha256": "5d5b60de1edc20781f4d731e1b523eb5637166ab25e3c4467fe97866eb59820e"
+    },
+    "elements/layout.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/layout.md",
+      "sha256": "72224bfdd1c253d6500c5a2eb73401d1f37ea3fe73fdfbce2132c49cf9c7f960"
+    },
+    "elements/schema.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/schema.md",
+      "sha256": "ab27a1bb931ce76e85441aff748ab56e15d05ad7dd89adf7b938bc3f4b7fc540"
+    },
+    "elements/style.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/style.md",
+      "sha256": "b596a86895b7d6858b14cb8d18e37a842cb0078d774654f50fcd6b37be146752"
+    },
+    "elements/typography.md": {
+      "upstream_path": "skills/lark-whiteboard/elements/typography.md",
+      "sha256": "9df28a4ec089b7bfe894e2ac798d28f992c697b1a1012ce2a4561ca35fcee761"
+    },
+    "references/lark-whiteboard-export.md": {
+      "upstream_path": "skills/lark-whiteboard/references/lark-whiteboard-export.md",
+      "sha256": "fe4142d5c8a1240a742170d5ffb4cff7f2f7b3235bd259897bbe1cb11cbeba0d"
+    },
+    "references/lark-whiteboard-update.md": {
+      "upstream_path": "skills/lark-whiteboard/references/lark-whiteboard-update.md",
+      "sha256": "b051b9bc62e5de8c0a56f6b72d6477d266c21de9045d36e1805f3b61bc2f64eb"
+    },
+    "references/lark-whiteboard-workflow.md": {
+      "upstream_path": "skills/lark-whiteboard/references/lark-whiteboard-workflow.md",
+      "sha256": "ab312295d0e4e030dc1f26756a326954ef579ef63ee11c033360d099e80d01ab"
+    },
+    "routes/dsl.md": {
+      "upstream_path": "skills/lark-whiteboard/routes/dsl.md",
+      "sha256": "1241a620f539fb2ac7562636b4f34bf66df987696f44a8ffe22adb7deaf86f94"
+    },
+    "routes/mermaid.md": {
+      "upstream_path": "skills/lark-whiteboard/routes/mermaid.md",
+      "sha256": "57d21c5aeb3651544a3c70380bd8deca88fd14e53172e9fd7bbd8b82018d25cd"
+    },
+    "routes/svg-edit.md": {
+      "upstream_path": "skills/lark-whiteboard/routes/svg-edit.md",
+      "sha256": "3e171717e2d8b1e25e3fdae5f7405d82a84e2d54a2233e7ff830696cd205e6ea"
+    },
+    "routes/svg.md": {
+      "upstream_path": "skills/lark-whiteboard/routes/svg.md",
+      "sha256": "2c806e708c09c3ca6481e13ad886e1f6e2de0239c7522326fb05fc22c2057dcc"
+    },
+    "scenes/architecture.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/architecture.md",
+      "sha256": "12eed6cca334d58eb31d45c2eba9b8f9a5204597dc56d0dc52bd384f64cf2191"
+    },
+    "scenes/bar-chart.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/bar-chart.md",
+      "sha256": "e25cd5b927e32d0252b8e4bfc8a2d5ea27d2bac4599737c26d88843d4dadcf73"
+    },
+    "scenes/comparison.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/comparison.md",
+      "sha256": "8f93eb09b817f4c13f50acacae83b44b10d01996f6e586e610a7ef80d90665ca"
+    },
+    "scenes/fishbone.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/fishbone.md",
+      "sha256": "71173f07d5ada6c296da42c1f8fa20a35fe8388af91ee49ac5c9fbc557c366ab"
+    },
+    "scenes/flowchart.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/flowchart.md",
+      "sha256": "ede7f8dbd48b1c79c6fbd739d63bc8a327b43a6e950c5165b3ef9a1f1bc3820f"
+    },
+    "scenes/flywheel.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/flywheel.md",
+      "sha256": "a4a551be042be3976b59833bcae8035f30905e31f9c5e4650d810a03866dcd3b"
+    },
+    "scenes/funnel.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/funnel.md",
+      "sha256": "5198fc1d84ea27dd4501a8e8a451f390ca3be1373c587bcaf6d2238c28eae2a3"
+    },
+    "scenes/line-chart.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/line-chart.md",
+      "sha256": "33b6ccb3e63c0170c7aabcb65f9f7ecc234578301e498a5ec9d90ee5197fde96"
+    },
+    "scenes/mention.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/mention.md",
+      "sha256": "d727617a111d2c97fc514fa10477094578d3e73428ba43f0be45a773ee4a9338"
+    },
+    "scenes/mermaid.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/mermaid.md",
+      "sha256": "87d26d7a29736623b59354a9c2d8fb094e6138cf2aa574f92404959964e3fbfc"
+    },
+    "scenes/milestone.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/milestone.md",
+      "sha256": "a047231f45e8a514a2b198606d1484fe845613d1700dafe0b8e8c02199559c43"
+    },
+    "scenes/organization.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/organization.md",
+      "sha256": "508110eb0b15a400b3d91ec744db31dce5a492c3310f1202b03d02479b1a3ca8"
+    },
+    "scenes/photo-showcase.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/photo-showcase.md",
+      "sha256": "426aa7cfb4cb3c5a30a2dfe63d3729ff5bbb151d2264fba19206125f0887c76b"
+    },
+    "scenes/pyramid.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/pyramid.md",
+      "sha256": "9cd7c1e3c509a8183919ac7b6a10a1a184a2d2e9eca88dcf6800d0b5e3d7a64b"
+    },
+    "scenes/swimlane.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/swimlane.md",
+      "sha256": "32ae9bc3ab3a870654cd66411915d27e456624acdf672da5e6ddee98b38c213b"
+    },
+    "scenes/treemap.md": {
+      "upstream_path": "skills/lark-whiteboard/scenes/treemap.md",
+      "sha256": "15f34c71addf36645a68c5fbbfb637f879d87e3cbe6ae5b1b5119722f0e3fbcc"
+    }
+  }
+}

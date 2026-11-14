@@ -48,6 +48,8 @@ def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=F
         catalog = read_catalog(file)
         checked = check_catalog(catalog, api)
         for row in checked['results']:
+            if row['status'] == 'manual':
+                report.setdefault('manual_sources', []).append({'resource': row['resource'], 'reason': row['reason']})
             if row.get('repo') in private_repos:
                 row['changed_files_count'] = len(row.pop('changed_files', []))
                 row['private_details_redacted'] = True
@@ -87,6 +89,8 @@ def summary(report):
     for row in report['checks']:
         counts = row['counts']
         lines.append('- ' + row['catalog'] + '：有更新 ' + str(counts['update_available']) + '；检查失败 ' + str(counts['check_failed']) + '；人工来源 ' + str(counts['manual']))
+    for row in report.get('manual_sources', []):
+        lines.append('- 人工维护 ' + row['resource'] + '：' + row['reason'].replace('\n', ' '))
     for row in report['groups']:
         if row['status'] == 'blocked': lines.append('- 待处理 ' + row['catalog'] + '/' + row['group'] + '：' + row['reason'].replace('\n', ' '))
     return '\n'.join(lines) + '\n'

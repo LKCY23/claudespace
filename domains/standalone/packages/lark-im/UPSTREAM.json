@@ -1,0 +1,244 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "f98db395d8520e4a431ed714261ab899e562aa45",
+  "path": "skills/lark-im",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-im/SKILL.md",
+      "sha256": "604a4ae72f7276a52eb791384497385dc0e2eac7c2c5bd2fa944ee56cf0dac92"
+    },
+    "references/card/card-2.0-schema.md": {
+      "upstream_path": "skills/lark-im/references/card/card-2.0-schema.md",
+      "sha256": "e552c0771bccbb0ab25477796b88f0fc478edbd98a151e08d9969e37f1a3aedb"
+    },
+    "references/card/components/button.md": {
+      "upstream_path": "skills/lark-im/references/card/components/button.md",
+      "sha256": "ec34429fd8d5ee8c352555448d0d6de7c0a83b690b3e7c378e87cde3141d4e63"
+    },
+    "references/card/components/chart.md": {
+      "upstream_path": "skills/lark-im/references/card/components/chart.md",
+      "sha256": "7ff81baa364b101180e0aa174c433c66634dbceefc3c053a75e320c071a69f89"
+    },
+    "references/card/components/checker.md": {
+      "upstream_path": "skills/lark-im/references/card/components/checker.md",
+      "sha256": "48ea8df7f02f185a8a5ce153f37bfa43cf9af90e2266943f1beea84ed24aa03f"
+    },
+    "references/card/components/collapsible_panel.md": {
+      "upstream_path": "skills/lark-im/references/card/components/collapsible_panel.md",
+      "sha256": "60f7b08e7886704a27798507cef25517db2abba353b244403645dec487f7987b"
+    },
+    "references/card/components/column_set.md": {
+      "upstream_path": "skills/lark-im/references/card/components/column_set.md",
+      "sha256": "41a4e2c51fcea8b9ebef1d527b151e181e4d17468a0840329024eab074d6b7a5"
+    },
+    "references/card/components/date_picker.md": {
+      "upstream_path": "skills/lark-im/references/card/components/date_picker.md",
+      "sha256": "48e7db578409b58f2d353874cbf6dcd29362c3abf8bb707e7fe3e73706a7ab25"
+    },
+    "references/card/components/div.md": {
+      "upstream_path": "skills/lark-im/references/card/components/div.md",
+      "sha256": "f5c829ca2fb2bd46b84ac1092318af0868297d288b122ef5f21f74d256c4c081"
+    },
+    "references/card/components/form.md": {
+      "upstream_path": "skills/lark-im/references/card/components/form.md",
+      "sha256": "75b0cb13c24d93e5fdcb0612e47e93f4abd055d43075bd7d5e8d93384f5453e3"
+    },
+    "references/card/components/header.md": {
+      "upstream_path": "skills/lark-im/references/card/components/header.md",
+      "sha256": "8fb324931353027ce19e113a195b8d5f15f52121ba213c4f97a263a7ccb056df"
+    },
+    "references/card/components/hr.md": {
+      "upstream_path": "skills/lark-im/references/card/components/hr.md",
+      "sha256": "533d80148ed84dcbd1dab9e34f4176e17478df1ce904049c46c9c06f8e1e0033"
+    },
+    "references/card/components/img.md": {
+      "upstream_path": "skills/lark-im/references/card/components/img.md",
+      "sha256": "d3405c0b07a91c1637c52bd3f247eabb0def4e6221acf07d6b366ee6e74d7c91"
+    },
+    "references/card/components/img_combination.md": {
+      "upstream_path": "skills/lark-im/references/card/components/img_combination.md",
+      "sha256": "66880e918808f6ae4f5a346844fd5609efe8c607698fda8fa79224c87ce8e474"
+    },
+    "references/card/components/input.md": {
+      "upstream_path": "skills/lark-im/references/card/components/input.md",
+      "sha256": "c4b65daed6b6391adf7a722868cd246ecf4a713096709f37922d0be8213f328f"
+    },
+    "references/card/components/interactive_container.md": {
+      "upstream_path": "skills/lark-im/references/card/components/interactive_container.md",
+      "sha256": "272f1fca62df25356cdcce2344ac9da826fc74ca717376f812f4d233a1de7191"
+    },
+    "references/card/components/markdown.md": {
+      "upstream_path": "skills/lark-im/references/card/components/markdown.md",
+      "sha256": "4615f5286b8a62e64db58728cd5dcb5856872ae7d0f00c36027f87c4a792a2ae"
+    },
+    "references/card/components/multi_select_person.md": {
+      "upstream_path": "skills/lark-im/references/card/components/multi_select_person.md",
+      "sha256": "d261891eb8eda155c113a83d1c33879baba49e6a442a0c97824869e09480cd36"
+    },
+    "references/card/components/multi_select_static.md": {
+      "upstream_path": "skills/lark-im/references/card/components/multi_select_static.md",
+      "sha256": "964f75e14721525c810b5508723d047de93650568abeaf4c3296f6b39c988ee0"
+    },
+    "references/card/components/overflow.md": {
+      "upstream_path": "skills/lark-im/references/card/components/overflow.md",
+      "sha256": "2ad27bb06e35c9d9a3d33fddd8a6e5560bb099b68c100dc2630af349e65e4375"
+    },
+    "references/card/components/person.md": {
+      "upstream_path": "skills/lark-im/references/card/components/person.md",
+      "sha256": "17aead4bce1b83e5e0f1ece159c2ff47ebe0fe222a87f061cedafac90d18a4af"
+    },
+    "references/card/components/person_list.md": {
+      "upstream_path": "skills/lark-im/references/card/components/person_list.md",
+      "sha256": "0528626125daed765a535e2a781f3fef60521ec702086acf048f6aad97ad52c2"
+    },
+    "references/card/components/picker_datetime.md": {
+      "upstream_path": "skills/lark-im/references/card/components/picker_datetime.md",
+      "sha256": "5d1e8bfae0d50eafd121edba767857701a3ba2afd5fbb12b7a6bcf97fd22f63b"
+    },
+    "references/card/components/picker_time.md": {
+      "upstream_path": "skills/lark-im/references/card/components/picker_time.md",
+      "sha256": "80bc6d5d3393f45bbc76c51bc01177db8149be9f53c90a5c767087403029e5cd"
+    },
+    "references/card/components/recycling_container.md": {
+      "upstream_path": "skills/lark-im/references/card/components/recycling_container.md",
+      "sha256": "db843da1ce85abc4d0522ef90378e66f009dc155ae0ba9a416b3918b5c1071f5"
+    },
+    "references/card/components/select_img.md": {
+      "upstream_path": "skills/lark-im/references/card/components/select_img.md",
+      "sha256": "282c5dc24b5e9a1d9c3c3459c874836879501c3c5ac2470d48aa2b2f273365c5"
+    },
+    "references/card/components/select_person.md": {
+      "upstream_path": "skills/lark-im/references/card/components/select_person.md",
+      "sha256": "3ab2e169f8b997f7731412cc4637a3eec6c75e4fe38da45a095155870f4d90cf"
+    },
+    "references/card/components/select_static.md": {
+      "upstream_path": "skills/lark-im/references/card/components/select_static.md",
+      "sha256": "48f62d8efaeb05906f290e03cfe415b2b5e03ac4eeeebab592edf1a587d0596c"
+    },
+    "references/card/components/table.md": {
+      "upstream_path": "skills/lark-im/references/card/components/table.md",
+      "sha256": "c778e8797704d4ba7ead75df3de65bc84b63d8fc2f95f19c5a51f3eefad2249e"
+    },
+    "references/card/lark-im-card-create.md": {
+      "upstream_path": "skills/lark-im/references/card/lark-im-card-create.md",
+      "sha256": "80685e023f57abf352a4442225de8ff7e1ff86276738b0d5ac35bc7932fbdfed"
+    },
+    "references/card/lark-im-card-style.md": {
+      "upstream_path": "skills/lark-im/references/card/lark-im-card-style.md",
+      "sha256": "b4023a8c75766864766edd030cec5d27af2a452d281e905d75218fdc1637fb34"
+    },
+    "references/card/resource/colors.md": {
+      "upstream_path": "skills/lark-im/references/card/resource/colors.md",
+      "sha256": "fb69e337cf4bb48d95bedf2bb8e64c80955f55b78ef5cd5dc7a0f0abf838f885"
+    },
+    "references/card/resource/icons.md": {
+      "upstream_path": "skills/lark-im/references/card/resource/icons.md",
+      "sha256": "4a33658c22cd57c1e621667082e91ff049456c81acb2fae78d80fd1d5172740e"
+    },
+    "references/lark-im-card-action-reply.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-card-action-reply.md",
+      "sha256": "10a924f677588658ec8ec538d3f79bf13e865693a4dec9c9afe4b0f8305d1812"
+    },
+    "references/lark-im-chat-create.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-create.md",
+      "sha256": "2757a5849b8f5426379200209c8141adedd16243ff4a0dcf84e201d6cc9f9f6b"
+    },
+    "references/lark-im-chat-identity.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-identity.md",
+      "sha256": "449708ed9be8b3b4657c685509e9b587c4f728f51b00bdeb08db20941a4135b1"
+    },
+    "references/lark-im-chat-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-list.md",
+      "sha256": "d410ee0aa39f7c292ee0a9044f5d2af922d59bc821e7e53a392be137ea0ee789"
+    },
+    "references/lark-im-chat-members-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-members-list.md",
+      "sha256": "552f9f77f6d49d21fe03e7f6e439cc5eeedfe351f7e3e0d2817c9e8c137b4e79"
+    },
+    "references/lark-im-chat-messages-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-messages-list.md",
+      "sha256": "0ffbc49ba76dfb513a465734b27d246a4f81a2e1b56b864d24a2044654e1a4ef"
+    },
+    "references/lark-im-chat-search.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-search.md",
+      "sha256": "057afb9ad4151d1b3f219d2a945f6861c1f92de52af7cc0b3d8292a284ebc7f3"
+    },
+    "references/lark-im-chat-update.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-chat-update.md",
+      "sha256": "5e27243b3e230711107f1bf05b99fe282e8b23b0aaeb411e27a7fdc66f689f4a"
+    },
+    "references/lark-im-feed-group-list-item.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-group-list-item.md",
+      "sha256": "53cd63de8deacb5ffbef26e36de218acc78c60b0ce6e15577647b1869a736e4f"
+    },
+    "references/lark-im-feed-group-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-group-list.md",
+      "sha256": "733bf414d4915d040178a5392a13ee06adb7f619b7701afe76b0da5fb3a55f46"
+    },
+    "references/lark-im-feed-group-query-item.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-group-query-item.md",
+      "sha256": "a2081a85ecfdbd39910f8fb89f57728fca78fb5d4611952baad49e7252a2bc73"
+    },
+    "references/lark-im-feed-groups.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-groups.md",
+      "sha256": "dde9a598c3e0ec6cb7a5a8fb9f052f0cdd18cf5cfd5f09bbdf693e432502feda"
+    },
+    "references/lark-im-feed-shortcut-create.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-shortcut-create.md",
+      "sha256": "e84700c52456a7cc99b879dd8fd94400c07a0573dc5ab305435cb9ebd0e1a810"
+    },
+    "references/lark-im-feed-shortcut-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-shortcut-list.md",
+      "sha256": "3b44f46921e736f3658a2d09e2ecc6bf36859d032cfedfd44fb48db3ed27d665"
+    },
+    "references/lark-im-feed-shortcut-remove.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-feed-shortcut-remove.md",
+      "sha256": "1bccde46fedf08851e96901b19e9805be27622ebe56e64d50b4dc0b5609483ae"
+    },
+    "references/lark-im-flag-cancel.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-flag-cancel.md",
+      "sha256": "36ffe9abeaf9a5c2da5dac1bd868c6f7a96e4257985eef364785a0993c1dfeb9"
+    },
+    "references/lark-im-flag-create.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-flag-create.md",
+      "sha256": "61f13376f14986f61b1e61146ee5d89fbd5c978d574cb13e78e52c71f982761a"
+    },
+    "references/lark-im-flag-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-flag-list.md",
+      "sha256": "7f7de19421c8143de12dd20dda8b47c519eebdcfe2e42fd78f02099d48e30904"
+    },
+    "references/lark-im-message-enrichment.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-message-enrichment.md",
+      "sha256": "746d2ed80e182e563535043dc64d0d6246f849be6f54173ab5d1750ba5f69f36"
+    },
+    "references/lark-im-messages-mget.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-messages-mget.md",
+      "sha256": "1f8b344fffbca43608c8962fe88ef1479c5978d91f137420cee8b8f7694a6c21"
+    },
+    "references/lark-im-messages-reply.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-messages-reply.md",
+      "sha256": "760321ac244e99d140349cedacf5158f6857b77afbcde4df4d82eb22091a2604"
+    },
+    "references/lark-im-messages-resources-download.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-messages-resources-download.md",
+      "sha256": "34561a450d315e3df99d739c6e19c1a1505d911d9782bc695ff8053536a24db9"
+    },
+    "references/lark-im-messages-search.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-messages-search.md",
+      "sha256": "cc95ffc954dbe490145b36be19ce909c731d39ecd885e3d158157fe163a5e67f"
+    },
+    "references/lark-im-messages-send.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-messages-send.md",
+      "sha256": "29de4bf9fe04eeae0815e44ee37b83a66ddf4aaba724c0213f78a18744608959"
+    },
+    "references/lark-im-reactions.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-reactions.md",
+      "sha256": "70c63d60dd5bf4049b5a31099cb88242a32357be08f0954755c7f817c6415817"
+    },
+    "references/lark-im-threads-messages-list.md": {
+      "upstream_path": "skills/lark-im/references/lark-im-threads-messages-list.md",
+      "sha256": "6cc074e167072581ee3708a643b8184994edc214b52ab345972c375418173de9"
+    }
+  }
+}

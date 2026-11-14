@@ -274,10 +274,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "1efe2dfb3304a7cac2a70e4adecfb1dc888ebe06",
           "path": "skills/lark-approval"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -285,7 +285,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-approval"
+        "path": "packages/lark-approval",
+        "imports": {
+          "skills/lark-approval": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -388,7 +391,7 @@
           "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
           "path": "skills/lark-attendance"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "upstream",
@@ -396,7 +399,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-attendance"
+        "path": "packages/lark-attendance",
+        "imports": {
+          "skills/lark-attendance": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -439,10 +445,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "9b231d98253710219e26b902f5683d3e7f32bc92",
           "path": "skills/lark-base"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -450,7 +456,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-base"
+        "path": "packages/lark-base",
+        "imports": {
+          "skills/lark-base": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -493,10 +502,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "b75632e78a78e0b32b762bba659efaf72c797d4e",
           "path": "skills/lark-calendar"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -504,7 +513,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-calendar"
+        "path": "packages/lark-calendar",
+        "imports": {
+          "skills/lark-calendar": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -550,7 +562,7 @@
           "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
           "path": "skills/lark-contact"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "upstream",
@@ -558,7 +570,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-contact"
+        "path": "packages/lark-contact",
+        "imports": {
+          "skills/lark-contact": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -658,10 +673,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "5028c2e6ffb9e2ed8e56fed688f1a1dd74e6b11a",
           "path": "skills/lark-drive"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -669,7 +684,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-drive"
+        "path": "packages/lark-drive",
+        "imports": {
+          "skills/lark-drive": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -769,10 +787,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "f98db395d8520e4a431ed714261ab899e562aa45",
           "path": "skills/lark-im"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -780,7 +798,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-im"
+        "path": "packages/lark-im",
+        "imports": {
+          "skills/lark-im": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -877,10 +898,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "f98dbfe247c6ec172715ce578b67ac6fa22655db",
           "path": "skills/lark-markdown"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -888,7 +909,65 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-markdown"
+        "path": "packages/lark-markdown",
+        "imports": {
+          "skills/lark-markdown": "."
+        }
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          },
+          "runtime": {
+            "kind": "executable",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "lark-meeting": {
+      "kind": "skill",
+      "description": "飞书视频会议：查询会议记录与会议产物(纪要/逐字稿/妙记)、妙记搜索/上传/下载/编辑、机器人参与会议；查询进行中的会议、实时会议内容(发言/聊天/共享文档)问答(会上/会里)、发送会中聊天/表情；基于 meeting_id、meeting_no、event_id、note_id、minute_token、vc-node-id 或妙记 URL 查询相关信息。预约会议、忙闲和会议室管理走 lark-calendar。",
+      "origin": {
+        "type": "third-party",
+        "author": "larksuite",
+        "upstream": {
+          "repo": "larksuite/cli",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
+          "path": "skills/lark-meeting"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "larksuite/cli",
+        "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
+        "path": "skills/lark-meeting"
       },
       "compatibility": {
         "claude-code": {
@@ -931,10 +1010,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
           "path": "skills/lark-minutes"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Upstream retired this path on 2026-11-10 (1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a); successor: lark-meeting. Preserve this legacy package until an explicit Profile migration; not an automatically updatable resource."
       },
       "maintenance": {
         "owner": "ours",
@@ -942,7 +1021,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-minutes"
+        "path": "packages/lark-minutes",
+        "imports": {
+          "skills/lark-minutes": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -973,8 +1055,7 @@
         }
       },
       "update": {
-        "strategy": "branch",
-        "target": "main"
+        "strategy": "manual"
       }
     },
     "lark-note": {
@@ -985,10 +1066,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "a8552d7f447df0b6c901a70a4dde463aef43f521",
           "path": "skills/lark-note"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -996,7 +1077,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-note"
+        "path": "packages/lark-note",
+        "imports": {
+          "skills/lark-note": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1039,10 +1123,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "409a3172da5d43c98bbb637557f3d10403febaf0",
           "path": "skills/lark-okr"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -1050,7 +1134,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-okr"
+        "path": "packages/lark-okr",
+        "imports": {
+          "skills/lark-okr": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1096,7 +1183,7 @@
           "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
           "path": "skills/lark-openapi-explorer"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "upstream",
@@ -1104,7 +1191,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-openapi-explorer"
+        "path": "packages/lark-openapi-explorer",
+        "imports": {
+          "skills/lark-openapi-explorer": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1204,10 +1294,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "be2a96f490b5356a004bafffcaa39daab6179d76",
           "path": "skills/lark-sheets"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -1215,7 +1305,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-sheets"
+        "path": "packages/lark-sheets",
+        "imports": {
+          "skills/lark-sheets": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1261,7 +1354,7 @@
           "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
           "path": "skills/lark-skill-maker"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "upstream",
@@ -1269,7 +1362,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-skill-maker"
+        "path": "packages/lark-skill-maker",
+        "imports": {
+          "skills/lark-skill-maker": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1312,10 +1408,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "0c5530dc63b65b3fda86f667f5725b1a08f0c4dc",
           "path": "skills/lark-slides"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -1323,7 +1419,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-slides"
+        "path": "packages/lark-slides",
+        "imports": {
+          "skills/lark-slides": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1423,10 +1522,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "327874c8f4af85586af97ddda6f1ac4bd168e79a",
           "path": "skills/lark-vc"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Upstream retired this path on 2026-11-10 (1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a); successor: lark-meeting. Preserve this legacy package until an explicit Profile migration; not an automatically updatable resource."
       },
       "maintenance": {
         "owner": "ours",
@@ -1434,7 +1533,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-vc"
+        "path": "packages/lark-vc",
+        "imports": {
+          "skills/lark-vc": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1465,8 +1567,7 @@
         }
       },
       "update": {
-        "strategy": "branch",
-        "target": "main"
+        "strategy": "manual"
       }
     },
     "lark-vc-agent": {
@@ -1477,10 +1578,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "841953496b41a06bb670396f3d9f8fba943766ed",
           "path": "skills/lark-vc-agent"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Upstream retired this path on 2026-11-10 (1bfdcc2c1a0ed0296ddb6349d251bdd75145bc5a); successor: lark-meeting. Preserve this legacy package until an explicit Profile migration; not an automatically updatable resource."
       },
       "maintenance": {
         "owner": "ours",
@@ -1488,7 +1589,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-vc-agent"
+        "path": "packages/lark-vc-agent",
+        "imports": {
+          "skills/lark-vc-agent": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1519,8 +1623,7 @@
         }
       },
       "update": {
-        "strategy": "branch",
-        "target": "main"
+        "strategy": "manual"
       }
     },
     "lark-whiteboard": {
@@ -1534,7 +1637,7 @@
           "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
           "path": "skills/lark-whiteboard"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "upstream",
@@ -1542,7 +1645,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-whiteboard"
+        "path": "packages/lark-whiteboard",
+        "imports": {
+          "skills/lark-whiteboard": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1585,10 +1691,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "6e2cad7221755d3668b350f186b862d64e0cba97",
           "path": "skills/lark-wiki"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -1596,7 +1702,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-wiki"
+        "path": "packages/lark-wiki",
+        "imports": {
+          "skills/lark-wiki": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1639,10 +1748,10 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
+          "commit": "d9330b7ab3dcd6de2fd2944517cc5758cc47f55c",
           "path": "skills/lark-workflow-meeting-summary"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "ours",
@@ -1650,7 +1759,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-workflow-meeting-summary"
+        "path": "packages/lark-workflow-meeting-summary",
+        "imports": {
+          "skills/lark-workflow-meeting-summary": "."
+        }
       },
       "compatibility": {
         "claude-code": {
@@ -1696,7 +1808,7 @@
           "commit": "017b19a793ad71794a02887ede04757f3d82e10d",
           "path": "skills/lark-workflow-standup-report"
         },
-        "baseline": "Installed local content captured 2026-10-17; upstream pin is a comparison baseline, not an assertion of identical source."
+        "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
       },
       "maintenance": {
         "owner": "upstream",
@@ -1704,7 +1816,10 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-workflow-standup-report"
+        "path": "packages/lark-workflow-standup-report",
+        "imports": {
+          "skills/lark-workflow-standup-report": "."
+        }
       },
       "compatibility": {
         "claude-code": {

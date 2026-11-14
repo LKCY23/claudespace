@@ -1,0 +1,20 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "841953496b41a06bb670396f3d9f8fba943766ed",
+  "path": "skills/lark-vc-agent",
+  "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-vc-agent/SKILL.md",
+      "sha256": "7f2df2bc5472b162044dac8132a1a48a1008bb6aa264189443f01dc83af1d2f8"
+    },
+    "references/lark-vc-agent-meeting-join.md": {
+      "upstream_path": "skills/lark-vc-agent/references/lark-vc-agent-meeting-join.md",
+      "sha256": "9ff1021b5548195d701be1a1aa9a4df5d79025c4d77c94edf8b33f6eacca995a"
+    },
+    "references/lark-vc-agent-meeting-leave.md": {
+      "upstream_path": "skills/lark-vc-agent/references/lark-vc-agent-meeting-leave.md",
+      "sha256": "c79f19580ee4cefd07a519975f940e901ce1461a504ac259997ee28e3c3e05c1"
+    }
+  }
+}

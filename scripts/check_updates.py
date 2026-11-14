@@ -74,7 +74,7 @@ def check_catalog(catalog, api):
                'maintenance': item['maintenance'], 'strategy': item['update']['strategy']}
         results.append(row)
         if item['update']['strategy'] == 'manual':
-            row.update(status='manual', reason='No automatic tracking target')
+            row.update(status='manual', reason=item['origin'].get('baseline', 'No automatic tracking target'))
             continue
         origin = item['origin'].get('upstream', item['source'])
         repo, current = origin['repo'], origin['commit']
