@@ -1,0 +1,42 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "fcdef499bb23739b720c665d49875a9957c97d48",
+  "path": "skills/lark-event",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-event/SKILL.md",
+      "sha256": "e82b31451938a5c6bc5e65c1bc1ea241c75d0097d7deb1406f2ca3876c9802e3"
+    },
+    "references/lark-event-application.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-application.md",
+      "sha256": "77edb90951293b3c1c31ed7e54c2fd04a2b2d4db3aff4b7090ae7f10fe37e0cd"
+    },
+    "references/lark-event-approval.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-approval.md",
+      "sha256": "871a395af18311aad9d1878f67beb98984bcfa757d856213706a32f3351b07a5"
+    },
+    "references/lark-event-im.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-im.md",
+      "sha256": "f190b14aa3827ee6e2a6f778ed4e225e080e48342f02db4603d688281328e15b",
+      "upstream_sha256": "b023f08657250ae2d1b513cbeb80d4776d786b270ffc459a1bd142eae156f3a6",
+      "upstream_executable": false
+    },
+    "references/lark-event-minutes.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-minutes.md",
+      "sha256": "b5e92ad64edda99b848da6201985b9b9120c79df84c73a56f445ac3775d2cdd2"
+    },
+    "references/lark-event-task.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-task.md",
+      "sha256": "5d191dd4694a7431969c994408779cd777d9d6a8ea163c91a455ef6dd76bdd47"
+    },
+    "references/lark-event-vc.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-vc.md",
+      "sha256": "3a71bc13648983c75644cddc341e64ff91b3306246ffdce30e38fe4455ab04d0"
+    },
+    "references/lark-event-whiteboard.md": {
+      "upstream_path": "skills/lark-event/references/lark-event-whiteboard.md",
+      "sha256": "24f29bc6b7aac10cfcbb5250f8fb27e239bfb4c36d3e58cd5e1e51b156aa717b"
+    }
+  }
+}

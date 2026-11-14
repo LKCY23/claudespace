@@ -1,0 +1,80 @@
+{
+  "repo": "larksuite/cli",
+  "sha": "b9cced677a89fd42317b386daff41a9f62b473c3",
+  "path": "skills/lark-task",
+  "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
+  "files": {
+    "SKILL.md": {
+      "upstream_path": "skills/lark-task/SKILL.md",
+      "sha256": "20fb2149de457adbae78d16b3beca0235dd19cc5740e284bdada6db381784bee"
+    },
+    "references/lark-task-assign.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-assign.md",
+      "sha256": "21e7f23794a9b6250e936d747d6e48cfeda1ecd576496a0ccc80b272270719a6"
+    },
+    "references/lark-task-comment.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-comment.md",
+      "sha256": "a214797e0cda20b84e1c7b4fb74e16f09435372a0839a8e0fd4030951c6d975c"
+    },
+    "references/lark-task-complete.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-complete.md",
+      "sha256": "2720818c86ebe3bbb83704798bd17d9f63877f56c120cd896b972b259a4f283f"
+    },
+    "references/lark-task-create.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-create.md",
+      "sha256": "d63b0327c6dd3d994ad527c0603288249d3554290076f325ffa6071a494c5772"
+    },
+    "references/lark-task-followers.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-followers.md",
+      "sha256": "3c68ce7dcd2402bd534222bfff79e4de8be5bb1496292c0d7f546cc46b6c8648"
+    },
+    "references/lark-task-get-my-tasks.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-get-my-tasks.md",
+      "sha256": "c27aca17d0a8b83a22be5e2d0d993e6b300580880bfd1372e8bad5156ea9bd53"
+    },
+    "references/lark-task-get-related-tasks.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-get-related-tasks.md",
+      "sha256": "f5e8ba3221d29d452c017b38086cb68e52340b281e973077b95ac8a40c6f2d62"
+    },
+    "references/lark-task-reminder.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-reminder.md",
+      "sha256": "299565d936ffccec2ef3e34dee1fae424d9ea469799d7fc8232a6290a5c1b7bd"
+    },
+    "references/lark-task-reopen.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-reopen.md",
+      "sha256": "393c52d0f801a992a59748baf28d8671f8ae63a2a674dbe8e55f99b603b038ac"
+    },
+    "references/lark-task-search.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-search.md",
+      "sha256": "a666ba6a9c70dee6a06290ed74054a3d751dc0ae098d9d898b74e42e0467b0b6"
+    },
+    "references/lark-task-set-ancestor.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-set-ancestor.md",
+      "sha256": "f07dd5a0706f6a95dd83417a4a215903f9dbad3f16c3a2a915d3bd0b850d4fcd"
+    },
+    "references/lark-task-tasklist-create.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-tasklist-create.md",
+      "sha256": "011f4bf1902063f39ebbe18c94790e77dc621dd5d8a0a0318f361a2411d5c9ab"
+    },
+    "references/lark-task-tasklist-members.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-tasklist-members.md",
+      "sha256": "68c21892a5f4fb104fa0f455f4781f427b6766c999e7a8c242b642f1553d2e96"
+    },
+    "references/lark-task-tasklist-search.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-tasklist-search.md",
+      "sha256": "c9a70b4d017bef95f8f779343e3f01e49d2ec01e1af2263f13476d3b918124af"
+    },
+    "references/lark-task-tasklist-task-add.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-tasklist-task-add.md",
+      "sha256": "11dfb8d31bb7c5946e9cd7b881f593b82fc9592c319c0f3139b7b13433edb51b"
+    },
+    "references/lark-task-update.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-update.md",
+      "sha256": "821f7985e7c0101159e361a1329cbcff5b8c44367c4351d4dde132457cb2748e"
+    },
+    "references/lark-task-upload-attachment.md": {
+      "upstream_path": "skills/lark-task/references/lark-task-upload-attachment.md",
+      "sha256": "6275490511a6e7cd13c617f3a9332011d309b63d4130342e66ca92ab8a826871"
+    }
+  }
+}

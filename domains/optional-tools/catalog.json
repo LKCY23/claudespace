@@ -101,7 +101,16 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/autoresearchclaw"
+        "path": "packages/autoresearchclaw",
+        "imports": {
+          ".claude/skills/a-evolve": "skills/a-evolve",
+          ".claude/skills/hypothesis-formulation": "skills/hypothesis-formulation",
+          ".claude/skills/literature-search": "skills/literature-search",
+          ".claude/skills/researchclaw": "skills/researchclaw",
+          ".claude/skills/scientific-visualization": "skills/scientific-visualization",
+          ".claude/skills/scientific-writing": "skills/scientific-writing",
+          ".claude/skills/statistical-reporting": "skills/statistical-reporting"
+        }
       },
       "compatibility": {
         "claude-code": {

@@ -200,6 +200,36 @@ class CandidateTests(unittest.TestCase):
         (self.source / 'demo/UPSTREAM.json').unlink()
         with self.assertRaisesRegex(ValueError, 'recorded original'): self.build(prepared={'owner/upstream': self.upstream}, import_upstream=True)
 
+    def test_recorded_repair_survives_only_unchanged_upstream(self):
+        from unittest.mock import Mock
+        original, repaired = b"original\n", b"original\nlocal repair\n"
+        info = {'upstream_path': 'SKILL.md', 'sha256': hashlib.sha256(repaired).hexdigest(),
+                'upstream_sha256': hashlib.sha256(original).hexdigest(), 'upstream_executable': False}
+        record = {'repo': 'owner/upstream', 'sha': 'a'*40, 'files': {'SKILL.md': info}}
+        files = {'SKILL.md': (repaired, False), 'UPSTREAM.json': (json.dumps(record).encode(), False)}
+        item = {'source': {'imports': {'.': '.'}},
+                'origin': {'upstream': {'repo': 'owner/upstream', 'commit': 'b'*40, 'path': '.'}}}
+        sources = Mock(); sources.is_file.return_value = False
+        sources.files.return_value = {'SKILL.md': (original, False), 'extra.md': (b'new', False)}
+        result = builder.refresh_imports(deepcopy(files), item, sources)
+        self.assertEqual(result['SKILL.md'], (repaired, False))
+        self.assertEqual(result['extra.md'], (b'new', False))
+        self.assertIn('upstream_sha256', json.loads(result['UPSTREAM.json'][0])['files']['SKILL.md'])
+        for incoming in [(b'upstream changed', False), (original, True)]:
+            sources.files.return_value = {'SKILL.md': incoming}
+            with self.assertRaisesRegex(ValueError, 'changed a locally adapted'):
+                builder.refresh_imports(deepcopy(files), item, sources)
+        sources.files.return_value = {'extra.md': (b'new', False)}
+        with self.assertRaisesRegex(ValueError, 'removed a locally adapted'):
+            builder.refresh_imports(deepcopy(files), item, sources)
+        # When upstream incorporates the repair, it becomes an ordinary imported file.
+        sources.files.return_value = {'SKILL.md': (repaired, False)}
+        result = builder.refresh_imports(deepcopy(files), item, sources)
+        self.assertNotIn('upstream_sha256', json.loads(result['UPSTREAM.json'][0])['files']['SKILL.md'])
+        files['SKILL.md'] = (b'unreviewed edit', False)
+        with self.assertRaisesRegex(ValueError, 'locally modified'):
+            builder.refresh_imports(files, item, sources)
+
     def test_simplifier_manifest_updates_upstream_fields_and_protects_local_changes(self):
         original = json.dumps({'name': 'code-simplifier', 'version': '1', 'description': 'old'}).encode()
         published = json.dumps({'name': 'code-simplifier', 'version': 'wrapper', 'description': 'old'}).encode()

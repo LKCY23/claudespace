@@ -93,3 +93,16 @@ PYTHONPATH=scripts python3 -B -m unittest discover -s tests -v
 实际上游检查发现 Code Review、Matt 全集合、Ponytail 有相关变化，Karpathy 无变化，Code Simplifier 仅有无关上游变化。使用临时、已提交的真实内容基线，Code Review 和 Ponytail 都成功生成源码候选，耗时约 2.64／2.92 秒。这些候选没有推送或安装，也不是对真实客户端新版本的验收。
 
 后续 PR 层和 GitHub Actions 源码现已实现，尚未在线启用；原准备器仍保持本地边界。详见 [GitHub 自动化操作与接入现状](github-update-automation.md)。
+
+## 安装快照的来源修复（2026-11-14）
+
+旧 standalone 登记曾把“登记当天的上游提交”当作比较基线，而本地正文来自更早安装。学术写作／审稿的共同原文基线为 `9c1c5dd10d159de5ff407b75a70efac00a8f7411`，含完整正文和共享依赖；Lark 与 MiniMax 的实际历史基线分别记录在 catalog 与包内 `UPSTREAM.json`。这些基线通过 Git blob 与执行位逐文件核对，不把快照与较新上游之间的差异误标为个人定制。academic 的映射同时覆盖正文和 shared，避免仅更新 shared 却前移整个资源 pin。
+
+每个包的 `UPSTREAM.json.files` 记录导入目标、上游路径及本地内容摘要。少数已审核修补额外记录 `upstream_sha256` 和 `upstream_executable`（如链接修复、YAML 头部、Cursor manifest 版本）。更新时：
+
+- 上游对应文件未变：保留本地修补，正常更新其余文件。
+- 上游文件与修补后的本地文件完全一致：视为上游已吸收修补，恢复普通原文记录。
+- 上游修改或删除修补文件：停止候选并指出准确文件，要求重新审查；不能用覆盖正文或伪造原文摘要解除阻塞。
+- 本地正文偏离记录：仍停止，保留人工编辑。
+
+导入映射、来源记录修复不代表接受上游的新行为；资源更新仍生成可审阅候选。尤其 Superpowers 跨主版本更新、CLI 认证及权限说明变化、学术流程指令变化不能仅凭结构检查自动合并。
