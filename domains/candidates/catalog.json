@@ -156,7 +156,7 @@
         "author": "Matt Pocock",
         "upstream": {
           "repo": "mattpocock/skills",
-          "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+          "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
           "path": "."
         }
       },
@@ -168,7 +168,7 @@
         "kind": "submodule",
         "path": "upstreams/matt",
         "repo": "mattpocock/skills",
-        "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"
+        "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa"
       },
       "compatibility": {
         "claude-code": {
