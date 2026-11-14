@@ -502,7 +502,7 @@
         "author": "larksuite",
         "upstream": {
           "repo": "larksuite/cli",
-          "commit": "b75632e78a78e0b32b762bba659efaf72c797d4e",
+          "commit": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
           "path": "skills/lark-calendar"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
