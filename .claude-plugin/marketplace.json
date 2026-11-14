@@ -224,6 +224,16 @@
         "sha": "35be21e816e9956ed2673a24b2d37e7837487221"
       },
       "description": "Author and review durable Codex goal contracts."
+    },
+    {
+      "name": "sanctuary-input",
+      "description": "Local input editing and review with persistent drafts and reading preferences.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/claude-sanctuary",
+        "path": "release/plugin",
+        "sha": "77a82446035bfb6d3e54ccf011c20d7e30e844b8"
+      }
     }
   ]
 }
