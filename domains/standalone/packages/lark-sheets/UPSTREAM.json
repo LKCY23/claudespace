@@ -1,16 +1,16 @@
 {
   "repo": "larksuite/cli",
-  "sha": "be2a96f490b5356a004bafffcaa39daab6179d76",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-sheets",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-sheets/SKILL.md",
-      "sha256": "bc2889caded8d8da32fc8a33682c1e24e457d86990da6bfbf8a232571e308ccd"
+      "sha256": "dfbf915c719cf45bc599a38986e856cb07199c7b1a35c6d9cf26ee55aa3cf843"
     },
     "references/lark-sheets-batch-update.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-batch-update.md",
-      "sha256": "4931c23bcf44ebaf40f05ea9fc7bc1a65e0015c3c3d242da97956f2f86b751fc"
+      "sha256": "57357a79dad6941eb987da06e1b010607e51e1f57fbef58d408c8a79cbf7ef8f"
     },
     "references/lark-sheets-changeset.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-changeset.md",
@@ -18,31 +18,31 @@
     },
     "references/lark-sheets-chart.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-chart.md",
-      "sha256": "0b7c8203f5192803d95497abc2be3c518ec8b2ec90dbeb0224b2ac11fd88b3e0"
+      "sha256": "884d6a18ec8362eae8b4466813a4c797a8b50d694e2decc67ed904f141f1d36e"
     },
     "references/lark-sheets-conditional-format.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-conditional-format.md",
-      "sha256": "e8c4a7587c2d0f42d217b69dac3fab3924505a6484c18a869a30468698ff8e04"
+      "sha256": "164bf51e70867a5cfb32ee29bf581fda656cd893c76421d5faa45a3edbf35aa7"
     },
     "references/lark-sheets-filter-view.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-filter-view.md",
-      "sha256": "6ce71d8569b662701e489a48606cefad06e5347f952915ae4528a54648b81dfe"
+      "sha256": "1cc006bdb6043bb359a6d053b6573e298a8e7364c1c44bff9f42b4f43b4db765"
     },
     "references/lark-sheets-filter.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-filter.md",
-      "sha256": "4b16d1070389ca2084c949c8ceeb20f3867b91f72c61db8ea4ef0c02752dcc58"
+      "sha256": "9694ffb63d48664b53aa79a9e76463801ac30286c7658baf68f7ecf8a16cfdcf"
     },
     "references/lark-sheets-float-image.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-float-image.md",
-      "sha256": "b124c8f352078822fbe90535d397366297e74250f44effab1fd25f69ece55d6a"
+      "sha256": "ede2dd57b020aa68ff10d821cf6e60daceb9ee00d5bd126fae9d6e3a7e6237b8"
     },
     "references/lark-sheets-formula-translation.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-formula-translation.md",
-      "sha256": "890e9bc98fced20976fc0c68fa0817c906edba596d3a56b922c214fbd410de6b"
+      "sha256": "27b97badfc47f57129f0a076b24708f0ed9886d139ea7c98f577afc8658515ba"
     },
     "references/lark-sheets-formula-verify.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-formula-verify.md",
-      "sha256": "2c878b392c36aba0954bf0c758b4b64bf295e761e99c5af4cf1d9c5030339abb"
+      "sha256": "b374fdfb335f4f18c249e2af5fe83f2bffa80f54f3d1efa99ceb4d4f8483f33c"
     },
     "references/lark-sheets-history.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-history.md",
@@ -50,43 +50,55 @@
     },
     "references/lark-sheets-pivot-table.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-pivot-table.md",
-      "sha256": "bf6fb7ddf4b23f8cd6b505d60cc3e4629b2be75b0d3d76599fab42782d6c94cd"
+      "sha256": "e34dbdecd11683ff09097ef501fb82c6157d373b8a08948a6d9eacdce84ecbca"
     },
     "references/lark-sheets-range-operations.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-range-operations.md",
-      "sha256": "8bb62dd948dee82cdb40044bc48f325374ee746c68a869cd1167a4210deb8529"
+      "sha256": "d9bfb32793ceb64845325da144139cd045df9750b7a66ec56e3a7c6416d642d1"
     },
     "references/lark-sheets-read-data.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-read-data.md",
-      "sha256": "3c65d5d693a0f5c8f4db1ef0909a6ef643488f24e8f156c43e85bffaa1974f05"
+      "sha256": "f7cfc0bd5cde703287e7ad41567473e41e49a915a98f115a8a5cb18999ee6139"
     },
     "references/lark-sheets-search-replace.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-search-replace.md",
-      "sha256": "3536dbef48ec5568322ac1fa6c51c65f0ffbd8721c21a0e391d22c8990fb1e52"
+      "sha256": "e68718fefe77a72da6c66112b3aba9ac002154ee8761ddda6762beeabbf75979"
     },
     "references/lark-sheets-sheet-structure.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-sheet-structure.md",
-      "sha256": "0bc920f4762c3c002944e1771a6def0257dae61db1af9c7dba9ad94919f5398b"
+      "sha256": "60f97a61d555df87f91eaecab074d5a481f97a0ccdcc577fa7a8cf0a18f1ec06"
     },
     "references/lark-sheets-sparkline.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-sparkline.md",
-      "sha256": "8064fcac14f4b1854f33ebd0bcf0446513fd26d10acb2fe3d37bd2030130f328"
+      "sha256": "256394db083b743218e662cdc2b7b3e4b1a5e3b6d29c4a89503c199f161ef215"
     },
     "references/lark-sheets-styles-put.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-styles-put.md",
-      "sha256": "d60d0242a63b790049d95373e7b0fd8b2c5d8b9aed3f17900d265c08cc2583a7"
+      "sha256": "9d544dd02c42699e0200430f0dba5edd33d7c813235e4940d514224446efa0c0"
     },
     "references/lark-sheets-visual-standards.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-visual-standards.md",
-      "sha256": "6e64663f157caf70b1795029d1faa71d8a067f4b811e1208a2558c5ad7b2f549"
+      "sha256": "ad7638c5d425adc83cb65253aff7e6aeb739b6de376dbbdbb61af9d3812a384e"
     },
     "references/lark-sheets-workbook.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-workbook.md",
-      "sha256": "cab43a97ee8ff9a071f400c3e01dabbae127637a9469cf20536eb1faf0bc8a6b"
+      "sha256": "f55f08ca40d9c030a0c6172690ffb94e6d5843e9ce66d598ef5374a67492e69b"
     },
     "references/lark-sheets-write-cells.md": {
       "upstream_path": "skills/lark-sheets/references/lark-sheets-write-cells.md",
-      "sha256": "fa4b37ec28835a3146e0ef1d4e1e5c9e7510c1a06cce27b79b0c10fd66374747"
+      "sha256": "6576619938339f3c30860e65428b0e99d178630f55f6191e641ccfa0c9d51fe1"
+    },
+    "scripts/lark_chart_quality_check.py": {
+      "upstream_path": "skills/lark-sheets/scripts/lark_chart_quality_check.py",
+      "sha256": "4b9f4f3783dd20fcdc3f4ac88410dc8913f9e4a0bc10f0597179db1c9e241af0"
+    },
+    "scripts/lark_chart_size_advisor.py": {
+      "upstream_path": "skills/lark-sheets/scripts/lark_chart_size_advisor.py",
+      "sha256": "66009455fa0b7de80ecf3551b7b885ccca14ff28fe634cc318830f145a00a82c"
+    },
+    "scripts/lark_chart_size_rules.py": {
+      "upstream_path": "skills/lark-sheets/scripts/lark_chart_size_rules.py",
+      "sha256": "96ac04ce5ae918103f3ebecd5edd57690bd5c9257e6c823f1e2322135460d0c8"
     },
     "scripts/lark_detect_subtables.py": {
       "upstream_path": "skills/lark-sheets/scripts/lark_detect_subtables.py",
@@ -94,7 +106,7 @@
     },
     "scripts/lark_inspect_workbook.py": {
       "upstream_path": "skills/lark-sheets/scripts/lark_inspect_workbook.py",
-      "sha256": "e45d12779cbcc178a1d0ab6a57807e94b07aef0f014e0b010a755e6f4a0672a3"
+      "sha256": "dd8ee6f9c0284a7f7f54ff96f11cc044f5e319e16c7e2b6466e78d9f372fbeee"
     },
     "scripts/lark_profile_table.py": {
       "upstream_path": "skills/lark-sheets/scripts/lark_profile_table.py",
@@ -106,11 +118,11 @@
     },
     "scripts/lark_sheet_read_cli.py": {
       "upstream_path": "skills/lark-sheets/scripts/lark_sheet_read_cli.py",
-      "sha256": "37a5f4caf4215d21f35387103dff0abfadac80b8d110cf6aae5a0b75e10ed01e"
+      "sha256": "35e81c2978273e6163b4e6b3cedd27c78694fed05ee21ec5adb65d91357481dd"
     },
-    "scripts/sheets_df.py": {
-      "upstream_path": "skills/lark-sheets/scripts/sheets_df.py",
-      "sha256": "8166b9a624e362c7408418b7fecf14421f4465fe3056f6793cfb2f840dd6371b"
+    "scripts/lark_sheets_df.py": {
+      "upstream_path": "skills/lark-sheets/scripts/lark_sheets_df.py",
+      "sha256": "b53fcf772b702a896d3969ddd35c25c50f299dfb210a9dd058122afe7f605373"
     }
   }
 }

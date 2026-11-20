@@ -1,12 +1,12 @@
 {
   "repo": "larksuite/cli",
-  "sha": "1efe2dfb3304a7cac2a70e4adecfb1dc888ebe06",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-approval",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-approval/SKILL.md",
-      "sha256": "fee377eca410dcda36b0bbbd632aab085b2e26e8232bb2ff88d394a1571d5ae2"
+      "sha256": "2ac464c970291bf38e9a5ce7e2fb013c13abaf03d736ad75f64dd93a635aa5f7"
     },
     "references/lark-approval-approvals-get.md": {
       "upstream_path": "skills/lark-approval/references/lark-approval-approvals-get.md",
@@ -42,11 +42,11 @@
     },
     "references/lark-approval-instances-initiated.md": {
       "upstream_path": "skills/lark-approval/references/lark-approval-instances-initiated.md",
-      "sha256": "583ccb8ed26bd028df7fc1dc6521c7da60c866c88e60214872a773aab6e88018"
+      "sha256": "71dee82fe85dfcf42fae77711336a7f0b6c0cc7587a43b49d514b5749b2efd1a"
     },
     "references/lark-approval-tasks-add-sign.md": {
       "upstream_path": "skills/lark-approval/references/lark-approval-tasks-add-sign.md",
-      "sha256": "423b191bbe40f98ef89191a9860878b94e1f2e5722a992ee78b0b8812f5d2ac2"
+      "sha256": "d08ad4c059c3e0074186992384ca6bdc500744063b875994f2788fe877d3daf2"
     },
     "references/lark-approval-tasks-approve.md": {
       "upstream_path": "skills/lark-approval/references/lark-approval-tasks-approve.md",
@@ -54,7 +54,7 @@
     },
     "references/lark-approval-tasks-query.md": {
       "upstream_path": "skills/lark-approval/references/lark-approval-tasks-query.md",
-      "sha256": "1879c0017bfedb71b0bda4f1d29958cd9133123fae1237f197f863020e2803e9"
+      "sha256": "105d6f98f21999d91870dca1adf570a607cd67706473bcba3766129185119d5f"
     },
     "references/lark-approval-tasks-reject.md": {
       "upstream_path": "skills/lark-approval/references/lark-approval-tasks-reject.md",

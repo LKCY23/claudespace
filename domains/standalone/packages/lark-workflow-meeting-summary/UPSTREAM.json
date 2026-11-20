@@ -1,12 +1,12 @@
 {
   "repo": "larksuite/cli",
-  "sha": "d9330b7ab3dcd6de2fd2944517cc5758cc47f55c",
+  "sha": "3d82c85419ad7560ad017db7a3972a596b5fbeb1",
   "path": "skills/lark-workflow-meeting-summary",
   "packaging": "Complete historical subtree verified byte-for-byte and by executable mode.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skills/lark-workflow-meeting-summary/SKILL.md",
-      "sha256": "ad3db979a2e6d8932ab33058967e1dab82090f8d8d82b16c59ee2955eb967d61"
+      "sha256": "2cc95a5db67b9cb73bc4d3f3d38f49b348e56f99cadca5cd998ed8c443f6e166"
     }
   }
 }
