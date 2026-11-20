@@ -1862,7 +1862,7 @@
         "author": "MiniMax-AI",
         "upstream": {
           "repo": "MiniMax-AI/cli",
-          "commit": "235e8ce73655ee6f2005a6e1d4856203b1209824",
+          "commit": "ae29aae57b05c2140c7ea6aba0a852763ffe7859",
           "path": "skill"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."

@@ -1,12 +1,20 @@
 {
   "repo": "MiniMax-AI/cli",
-  "sha": "235e8ce73655ee6f2005a6e1d4856203b1209824",
+  "sha": "ae29aae57b05c2140c7ea6aba0a852763ffe7859",
   "path": "skill",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
     "SKILL.md": {
       "upstream_path": "skill/SKILL.md",
-      "sha256": "f9abafc4616df74f7235ae49c616e6a470c41cb47c5208c0227bab9c28e26e1b"
+      "sha256": "d933667601a2196aae91f6f2de1422504827186d1cb585cb1f5c33bc6cf17265"
+    },
+    "h3-video/SKILL.md": {
+      "upstream_path": "skill/h3-video/SKILL.md",
+      "sha256": "b2f17ff95f14cd7b2790f185a7882f9acd36ac6664b5aecdf231461c61257cb6"
+    },
+    "h3-video/references/h3-video.md": {
+      "upstream_path": "skill/h3-video/references/h3-video.md",
+      "sha256": "7c2c79e335cdcc2007dc6d4926a20ce29cb8f11f95d3956525650fa766a01c12"
     }
   }
 }
