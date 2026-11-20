@@ -47,7 +47,7 @@
         "author": "vercel-labs",
         "upstream": {
           "repo": "vercel-labs/agent-browser",
-          "commit": "5868f7c05020e047c00e68e4abf9253cce864f41",
+          "commit": "4605d82cfc20dbd051f57a631b5b7130e32141a5",
           "path": "skills/agent-browser"
         }
       },
@@ -58,7 +58,7 @@
       "source": {
         "kind": "external",
         "repo": "vercel-labs/agent-browser",
-        "commit": "5868f7c05020e047c00e68e4abf9253cce864f41",
+        "commit": "4605d82cfc20dbd051f57a631b5b7130e32141a5",
         "path": "skills/agent-browser"
       },
       "compatibility": {
