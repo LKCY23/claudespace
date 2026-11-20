@@ -1,12 +1,12 @@
 {
   "repo": "Astro-Han/karpathy-llm-wiki",
-  "sha": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642",
+  "sha": "eafcc77001e496cc43499e4923b663aec722c813",
   "path": ".",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
     ".gitignore": {
       "upstream_path": ".gitignore",
-      "sha256": "41ede42025f87af6b69d72de95d261ac7e205cfa8e96178e3d666efa7d8d22ee"
+      "sha256": "80e9c5e5c0ff28f25337c9af460ebd083f2849fef300bfa2aa2e35375e429be7"
     },
     "LICENSE": {
       "upstream_path": "LICENSE",
@@ -14,11 +14,59 @@
     },
     "README.md": {
       "upstream_path": "README.md",
-      "sha256": "798ec62a8625151c4a3b3b2dd3c612b31d66798b3d651c737a13aece5b5a4cd1"
+      "sha256": "67dc43c26a747ece5ed56323a7e0a16dc66b50f85e47ef55f7c35309f67de847"
     },
     "SKILL.md": {
       "upstream_path": "SKILL.md",
-      "sha256": "e8f4fb2b873c61e0e264181b903c0fbea752e2019290396c2783def7708c6882"
+      "sha256": "c154f62094738b65e91dbb1c706758137290c622e386b3204e87c60a78f75748"
+    },
+    "assets/karpathy-tweet.png": {
+      "upstream_path": "assets/karpathy-tweet.png",
+      "sha256": "31cc7410b26bc4da9ebc7e5931835f1697aff74a83bb743d41a86802e2419f5c"
+    },
+    "examples/2026-03-19-claude-code-statusline-landscape.md": {
+      "upstream_path": "examples/2026-03-19-claude-code-statusline-landscape.md",
+      "sha256": "d987beeeba5247b15f2e3b62bbd926b3f0f6c7e7e5ffb55751630fcb27574fe4"
+    },
+    "examples/README.md": {
+      "upstream_path": "examples/README.md",
+      "sha256": "38f85ff392f07e239714f01b3de7cc3353214aff463c1b88d596ba81c9413cb0"
+    },
+    "examples/ai-coding-tools-index.md": {
+      "upstream_path": "examples/ai-coding-tools-index.md",
+      "sha256": "be94e3d687bb15823606156b7124f08fd8eddaf74d3b7cc63872e3c5deb2181d"
+    },
+    "examples/claude-code-statusline-landscape.md": {
+      "upstream_path": "examples/claude-code-statusline-landscape.md",
+      "sha256": "32e03020113a9c172f8b80947f720c0d65c669d0f1086eaaabe397a970ed4d56"
+    },
+    "examples/log-sample.md": {
+      "upstream_path": "examples/log-sample.md",
+      "sha256": "8f666d6351819e8900446829d5d55ff83157e7e4105da6302838e5a8246bd4bb"
+    },
+    "references/archive-template.md": {
+      "upstream_path": "references/archive-template.md",
+      "sha256": "53d9493d45dde7bcac4373a92dccad6d80e2b06150f0d12fb535c0dcab898338"
+    },
+    "references/article-template.md": {
+      "upstream_path": "references/article-template.md",
+      "sha256": "2acd247441d4899d0752f90e7e1319217bbd6791cebbdb2906d0a92c362a0490"
+    },
+    "references/index-template.md": {
+      "upstream_path": "references/index-template.md",
+      "sha256": "122303cba8a4f5a278e4cc39153f89a5971fd42fd47dd820f9e4ae6796617e8a"
+    },
+    "references/raw-template.md": {
+      "upstream_path": "references/raw-template.md",
+      "sha256": "e5410f65d2017c2f9f8959fdc11f13cdbc99cf746ab8af34926bc6b8b4ff66bd"
+    },
+    "scripts/check_evidence.py": {
+      "upstream_path": "scripts/check_evidence.py",
+      "sha256": "967298608a30f83f62616a40c0f68a64e300abd4a3299e24548ccee7722ee40e"
+    },
+    "tests/test_check_evidence.py": {
+      "upstream_path": "tests/test_check_evidence.py",
+      "sha256": "baae13bc4a617e286a937d347b81cad630366fbf50891ee055e00bb63ffb27c4"
     }
   }
 }
