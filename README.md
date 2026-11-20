@@ -48,7 +48,7 @@ python3 -B scripts/sync_marketplaces.py --check
 
 生成不联网、不安装。原生插件按宿主兼容性自动收录；独立技能须显式选择包装方式。新增 catalog 先登记索引并配置市场路由。更新候选自动重生成所有受影响的市场，PR、固定来源验证及发布流程检查结果是否一致。文件职责、迁移及验证边界见 [市场生成](docs/marketplace-generation.md)。
 
-翻译插件入口为 `sanctuary-translate@claudespace`，引用私有仓库 `LKCY23/claude-sanctuary` 的固定 `release/plugin` 包；安装需要该仓库的读取权限及 macOS arm64 / Node 22 运行环境。
+Install `clarity@claudespace` for draft review and translated replies. The catalog pins `release/plugin` from the private `LKCY23/clarity` repository. Installation requires read access, macOS arm64 and Node.js 22.
 
 `agent-led-swe` 以独立 skill 登记在 `claudespace-personal`，固定采用已接受的 v0.2.0，更新检查跟踪 `master`。Codex 与 Claude Code 共用 `SKILL.md`；Claude 市场入口沿用原生插件包装，来源及提交由 catalog 自动生成。登记与构建不代表行为效果验收，也不会自动选择或安装。
 

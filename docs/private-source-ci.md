@@ -1,6 +1,6 @@
 # 私有来源的 CI 访问与验证
 
-当前私有来源为 `LKCY23/goal-authoring` 与 `LKCY23/claude-sanctuary`。每个仓库使用专属的只读 deploy key，不复制维护者的个人 GitHub Token，也不改变来源仓库可见性。公开来源仍使用原有 GitHub API 和固定提交下载。
+当前私有来源为 `LKCY23/goal-authoring` 与 `LKCY23/clarity`。每个仓库使用专属的只读 deploy key，不复制维护者的个人 GitHub Token，也不改变来源仓库可见性。公开来源仍使用原有 GitHub API 和固定提交下载。
 
 ## 授权位置
 
