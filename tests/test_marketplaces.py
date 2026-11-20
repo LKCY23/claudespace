@@ -99,6 +99,17 @@ class MarketplaceTests(unittest.TestCase):
         self.assertEqual(entry['skills'], ['./']); self.assertFalse(entry['strict'])
         self.assertEqual(self.catalog['resources']['demo']['kind'], 'skill')
 
+    def test_explicit_plugin_list_ignores_new_catalog_members(self):
+        self.catalog['resources']['second'] = deepcopy(self.item)
+        self.market['plugins'] = ['demo@optional']
+        self.save()
+        self.assertEqual([e['name'] for e in self.entries()], ['demo'])
+        for invalid in (['missing@optional'], ['demo@optional', 'demo@optional']):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                self.market['plugins'] = invalid
+                self.save()
+                self.entries()
+
     def test_exclusions_are_explicit_and_stale_exclusions_fail(self):
         self.market['exclude'] = {'demo@optional': 'Not distributed in this market'}; self.save()
         self.assertEqual(self.entries(), [])

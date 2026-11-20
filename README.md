@@ -19,17 +19,7 @@ Claudespace 保存 Claude Code 和 Codex 使用的资源定义、固定来源及
 
 ## 资源目录
 
-当前 [catalogs.json](catalogs.json) 显式登记七份 `schema_version: 1/resources` catalog，共 68 项：
-
-| 登记 | 标识 | 内容 |
-| --- | --- | --- |
-| [catalog.json](catalog.json) | `claudespace-personal` | 14 项原创或按需资源 |
-| [domains/candidates/catalog.json](domains/candidates/catalog.json) | `claudespace-candidates` | 5 项第三方插件及宿主包装 |
-| [domains/standalone/catalog.json](domains/standalone/catalog.json) | `claudespace-standalone` | 34 项独立技能 |
-| [domains/legacy-plugins/catalog.json](domains/legacy-plugins/catalog.json) | `claudespace-legacy` | 10 项已整理的历史插件来源 |
-| [domains/optional-tools/catalog.json](domains/optional-tools/catalog.json) | `claudespace-optional-tools` | ARIS、agent-browser、AutoResearchClaw 按需来源 |
-| [domains/claude-hud/catalog.json](domains/claude-hud/catalog.json) | `claude-hud` | 官方固定 HUD 来源；跟踪正式 Release，保留本机显示配置 |
-| [domains/design/catalog.json](domains/design/catalog.json) | `claudespace-design` | Impeccable 独立设计技能 |
+[catalogs.json](catalogs.json) 登记同一发布提交的两份清单。自研与主体维护的资源见 [claudespace-personal](catalog.json)，第三方上游资源见 [claudespace-external](domains/catalog.json)。资源的目录和维护者信息随条目保存。`claudespace-candidates` 是两个宿主上的市场名称，分别发布 5 个 Claude Code 插件和 4 个 Codex 插件。
 
 [HUD 正式入口](domains/claude-hud/README.md) 已接入自动更新；旧安装快照仅保留历史证据。登记、发布和更新候选均不会覆盖本机 HUD 显示配置。
 
@@ -46,7 +36,7 @@ python3 -B scripts/sync_marketplaces.py --write
 python3 -B scripts/sync_marketplaces.py --check
 ```
 
-生成不联网、不安装。原生插件按宿主兼容性自动收录；独立技能须显式选择包装方式。新增 catalog 先登记索引并配置市场路由。更新候选自动重生成所有受影响的市场，PR、固定来源验证及发布流程检查结果是否一致。文件职责、迁移及验证边界见 [市场生成](docs/marketplace-generation.md)。
+生成不联网、不安装。原生插件按市场显式名单和宿主兼容性收录；独立技能须显式选择包装方式。新增 catalog 先登记索引并配置市场路由。更新候选自动重生成所有受影响的市场，PR、固定来源验证及发布流程检查结果是否一致。文件职责、迁移及验证边界见 [市场生成](docs/marketplace-generation.md)。
 
 Install `clarity@claudespace` for draft review and translated replies. The catalog pins `release/plugin` from the private `LKCY23/clarity` repository. Installation requires read access, macOS arm64 and Node.js 22.
 
@@ -57,7 +47,7 @@ Install `clarity@claudespace` for draft review and translated replies. The catal
 从仓库根目录运行，要求 Python 3.11+ 和 Git：
 
 ```sh
-python3 scripts/build_candidates.py   --catalog domains/candidates/catalog.json   --output /tmp/claudespace-candidates-review   --fetch
+python3 scripts/build_candidates.py   --catalog domains/catalog.json   --output /tmp/claudespace-candidates-review   --fetch
 ```
 
 输出目录须不存在，且位于输入 catalog 目录之外。`--fetch` 允许临时下载固定来源；已有源码可用 `--source OWNER/REPO=DIR` 提供。工具读取固定 Git 对象，不把源码工作区的未提交修改当作固定版本。

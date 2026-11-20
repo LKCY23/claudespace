@@ -26,7 +26,7 @@
 先运行检查器，将 JSON 保存到仓库外：
 
 ```sh
-python3 scripts/check_updates.py --catalog /absolute/clean-source/domains/candidates/catalog.json > /tmp/candidates-check.json
+python3 scripts/check_updates.py --catalog /absolute/clean-source/domains/catalog.json > /tmp/candidates-check.json
 ```
 
 再准备指定资源：
@@ -34,7 +34,7 @@ python3 scripts/check_updates.py --catalog /absolute/clean-source/domains/candid
 ```sh
 python3 scripts/prepare_update.py \
   --root /absolute/clean-source \
-  --catalog domains/candidates/catalog.json \
+  --catalog domains/catalog.json \
   --check-report /tmp/candidates-check.json \
   --resource code-review \
   --output /tmp/claudespace-code-review-update \
