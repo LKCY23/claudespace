@@ -4,6 +4,9 @@
     "LKCY23/goal-authoring": {
       "key_env": "CLAUDESPACE_GOAL_AUTHORING_KEY"
     },
+    "LKCY23/clarity": {
+      "key_env": "CLAUDESPACE_CLAUDE_SANCTUARY_KEY"
+    },
     "LKCY23/claude-sanctuary": {
       "key_env": "CLAUDESPACE_CLAUDE_SANCTUARY_KEY"
     }
