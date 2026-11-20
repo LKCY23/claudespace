@@ -25,7 +25,7 @@ def publication_plan(read):
                  for catalog_name, (path, catalog) in catalogs.items() for name, item in catalog['resources'].items()}
     outputs, identities, covered, result = set(), set(), set(), []
     for market in config['marketplaces']:
-        fields = ('host', 'output', 'name', 'catalogs', 'skills', 'exclude', 'display', 'owner', 'interface', 'description')
+        fields = ('host', 'output', 'name', 'catalogs', 'plugins', 'skills', 'exclude', 'display', 'owner', 'interface', 'description')
         obj(market, fields, ('host', 'output', 'name', 'catalogs'), 'marketplace')
         host, output, name = market['host'], market['output'], market['name']
         require(host in HOST_PATHS, 'Unknown marketplace host')
@@ -49,6 +49,12 @@ def publication_plan(read):
             require('owner' not in market, 'Claude owner on Codex marketplace')
         selected = {ref: 'native' for ref, (_, item) in resources.items()
                     if ref.split('@')[1] in declared and item['kind'] == 'plugin' and host in item['compatibility']}
+        if 'plugins' in market:
+            plugins = market['plugins']
+            require(isinstance(plugins, list) and all(isinstance(ref, str) and ref in selected for ref in plugins),
+                    'Plugin publications must name compatible plugins from the declared catalogs')
+            require(len(set(plugins)) == len(plugins), 'Duplicate plugin publication')
+            selected = {ref: 'native' for ref in plugins}
         exclusions = market.get('exclude', {})
         require(isinstance(exclusions, dict), 'Exclusions must map resources to reasons')
         for ref, reason in exclusions.items():
