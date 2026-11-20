@@ -572,9 +572,9 @@
         "target": "main"
       }
     },
-    "sanctuary-translate": {
+    "clarity": {
       "kind": "plugin",
-      "description": "Claude Code 与 Desktop Code 双向翻译插件：输入侧写审查、中文／对照阅读偏好、自动保存与重试控制，以及本地 SQLite 持久版本。私有 Unix socket 后端经插件内 start-worker.sh 启动 Node 22，不注册模型工具。",
+      "description": "Draft, review and read with clarity. Persistent versions and personal reading views.",
       "origin": {
         "type": "self",
         "author": "LKCY23"
@@ -585,8 +585,8 @@
       },
       "source": {
         "kind": "external",
-        "repo": "LKCY23/claude-sanctuary",
-        "commit": "c9cc8ce9cd870a1ff9764a071c7e8fbe7ff788a1",
+        "repo": "LKCY23/clarity",
+        "commit": "40c88557362ce537e987c69ee307695c058aadda",
         "path": "release/plugin"
       },
       "compatibility": {
@@ -620,7 +620,7 @@
       },
       "update": {
         "strategy": "branch",
-        "target": "feat/translation-schema-toolbar"
+        "target": "main"
       }
     },
     "agent-led-swe": {
