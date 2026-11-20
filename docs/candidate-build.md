@@ -4,16 +4,7 @@
 
 ## 登记入口
 
-仓库维护 6 份 `schema_version: 1` catalog，共 63 项资源：
-
-| 文件 | 标识 | 数量 |
-| --- | --- | --- |
-| `catalog.json` | claudespace-personal | 11 |
-| `domains/candidates/catalog.json` | claudespace-candidates | 5 |
-| `domains/standalone/catalog.json` | claudespace-standalone | 33 |
-| `domains/legacy-plugins/catalog.json` | claudespace-legacy | 10 |
-| `domains/optional-tools/catalog.json` | claudespace-optional-tools | 3 |
-| `domains/claude-hud/catalog.json` | claude-hud | 1 |
+自研资源由 `catalog.json` 登记，第三方资源由 `domains/catalog.json` 登记。两份清单共享同一仓库版本。
 
 每份登记均使用按资源标识组织的 `resources`，包含 `kind`、`origin`、`maintenance`、`source`、`compatibility`、`requires`、`update`。类型与字段由 `scripts/resource_catalog.py` 校验，并与 claude-config 的协议副本一致。
 `domains/claude-hud` 使用经过逐文件核对的官方固定来源并跟踪正式 Release。`domains/infrastructure/claude-hud` 仅保留历史安装快照，不作为运行输入。
@@ -37,7 +28,7 @@
 
 ```sh
 python3 scripts/build_candidates.py \
-  --catalog domains/candidates/catalog.json \
+  --catalog domains/catalog.json \
   --output /tmp/claudespace-candidates-review \
   --fetch
 ```
@@ -47,7 +38,7 @@ python3 scripts/build_candidates.py \
 
 ```sh
 python3 scripts/build_candidates.py \
-  --catalog domains/candidates/catalog.json \
+  --catalog domains/catalog.json \
   --resource code-review --resource code-simplifier \
   --output /tmp/claudespace-review-tools
 ```

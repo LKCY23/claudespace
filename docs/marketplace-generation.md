@@ -8,7 +8,7 @@
 
 每个市场声明 `host`、`output`、`name`、`catalogs`，以及 Claude Code 的 `owner` 或 Codex 的 `interface`。所有正式 catalog 必须有市场路由规则；路由本身不意味着其中所有资源都会被发布。
 
-- 自动收录所列 catalog 中声明该宿主兼容性的 `plugin`；`failed` 的兼容性声明阻断生成。
+- `plugins` 显式列出该市场发布的兼容插件；省略时收录所列 catalog 的全部兼容插件；`failed` 的兼容性声明阻断生成。
 - `exclude` 为不发布的插件记录原因；失效的排除项报错，避免无声积累旧配置。
 - `skills` 显式选择独立技能，资源类型仍然是 `skill`。`native` 使用包内的 `.claude-plugin/plugin.json`；`skill` 根据 catalog 的 `SKILL.md` 入口生成 `strict: false` 和 `skills` 路径。
 - `display` 只允许分类及 Claude Code 的 `defaultEnabled`。描述来自 catalog；版本由实际包管理，市场不保存另一份手填版本。

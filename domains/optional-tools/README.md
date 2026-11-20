@@ -14,7 +14,7 @@
 
 ```sh
 python3 scripts/build_candidates.py \
-  --catalog domains/optional-tools/catalog.json \
+  --catalog domains/catalog.json \
   --output /tmp/claudespace-optional-review \
   --fetch
 ```

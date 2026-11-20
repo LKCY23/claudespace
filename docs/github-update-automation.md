@@ -31,7 +31,7 @@
 python3 scripts/private_ci.py prepare \
   --root /absolute/claudespace \
   --output /tmp/claudespace-update-review \
-  --catalog domains/candidates/catalog.json
+  --catalog domains/catalog.json
 
 python3 scripts/sync_update_prs.py \
   --root /absolute/claudespace \
@@ -40,7 +40,7 @@ python3 scripts/sync_update_prs.py \
   --report /tmp/claudespace-pr-preview.json
 ```
 
-省略 `--catalog` 检查根目录及 `domains/*/catalog.json` 的六份新版登记，包括 `domains/claude-hud/catalog.json`；旧 `domains/infrastructure/claude-hud` 不参与发现。第二条默认只读，只有显式 `--write` 才推送分支和创建／刷新 PR；GitHub 工作流通过独立写入作业调用它。`--format json` 可取得原始同步报告，默认输出可读摘要与完整 JSON 路径。直接使用个人令牌时，应通过 `--bot-login` 明确实际发布账号；这不会接管其他账号创建的 PR。
+省略 `--catalog` 检查根目录及 `domains/*/catalog.json` 的六份新版登记，包括 `domains/catalog.json`；旧 `domains/infrastructure/claude-hud` 不参与发现。第二条默认只读，只有显式 `--write` 才推送分支和创建／刷新 PR；GitHub 工作流通过独立写入作业调用它。`--format json` 可取得原始同步报告，默认输出可读摘要与完整 JSON 路径。直接使用个人令牌时，应通过 `--bot-login` 明确实际发布账号；这不会接管其他账号创建的 PR。
 
 `private_ci.py prepare` 先准备允许的私有来源，再调用原更新器。私有分支通过 Git 查询；公共来源继续使用 GitHub API。私有密钥／读取失败只影响对应来源；更新器在一个组失败后继续其他组，结果仍列出失败原因，返回非零退出码；可用候选照常保存。工作流保留失败状态，同时允许独立 PR 作业处理已通过的组。检查失败、无法自动适配和下载超时不会被解释为“已经最新”。
 

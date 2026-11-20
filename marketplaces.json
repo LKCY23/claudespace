@@ -10,42 +10,34 @@
       },
       "description": "Claude Code plugins generated from the indexed Claudespace resource catalogs.",
       "catalogs": [
-        "claudespace-personal",
-        "claude-hud",
-        "claudespace-design",
-        "claudespace-legacy",
-        "claudespace-optional-tools",
-        "claudespace-standalone"
+        "claudespace-external",
+        "claudespace-personal"
       ],
       "skills": {
         "analyze-peer-work@claudespace-personal": "native",
-        "github@claudespace-legacy": "skill",
+        "github@claudespace-personal": "skill",
         "skill-evaluator@claudespace-personal": "native",
         "research-brainstorm@claudespace-personal": "skill",
-        "teach@claudespace-legacy": "skill",
+        "teach@claudespace-external": "skill",
         "research-dev-orchestrator@claudespace-personal": "skill",
-        "literature-review@claudespace-legacy": "skill",
-        "read-paper@claudespace-legacy": "skill",
-        "deep-research@claudespace-legacy": "skill",
-        "academic-paper@claudespace-standalone": "skill",
-        "academic-paper-reviewer@claudespace-standalone": "skill",
-        "academic-pipeline@claudespace-legacy": "skill",
-        "karpathy-llm-wiki@claudespace-legacy": "skill",
+        "literature-review@claudespace-personal": "skill",
+        "read-paper@claudespace-personal": "skill",
+        "deep-research@claudespace-external": "skill",
+        "academic-paper@claudespace-external": "skill",
+        "academic-paper-reviewer@claudespace-external": "skill",
+        "academic-pipeline@claudespace-external": "skill",
+        "karpathy-llm-wiki@claudespace-external": "skill",
         "programming-practice@claudespace-personal": "native",
-        "agent-browser@claudespace-optional-tools": "skill",
+        "agent-browser@claudespace-external": "skill",
         "goal-authoring@claudespace-personal": "skill",
         "research-engineering-code@claudespace-personal": "native",
         "agent-led-swe@claudespace-personal": "native"
-      },
-      "exclude": {
-        "codex@claudespace-legacy": "Not published in the existing root marketplace; retain the explicit opt-in distribution decision.",
-        "claude-hud@claude-hud": "Distributed through its official marketplace or claude-config; retain the existing installation identity."
       },
       "display": {
         "analyze-peer-work@claudespace-personal": {
           "category": "research"
         },
-        "github@claudespace-legacy": {
+        "github@claudespace-personal": {
           "category": "devtools"
         },
         "skill-evaluator@claudespace-personal": {
@@ -54,45 +46,45 @@
         "research-brainstorm@claudespace-personal": {
           "category": "research"
         },
-        "teach@claudespace-legacy": {
+        "teach@claudespace-external": {
           "category": "productivity"
         },
         "research-dev-orchestrator@claudespace-personal": {
           "category": "research"
         },
-        "literature-review@claudespace-legacy": {
+        "literature-review@claudespace-personal": {
           "category": "research"
         },
-        "read-paper@claudespace-legacy": {
+        "read-paper@claudespace-personal": {
           "category": "research"
         },
-        "deep-research@claudespace-legacy": {
+        "deep-research@claudespace-external": {
           "category": "research"
         },
-        "academic-paper@claudespace-standalone": {
+        "academic-paper@claudespace-external": {
           "category": "research"
         },
-        "academic-paper-reviewer@claudespace-standalone": {
+        "academic-paper-reviewer@claudespace-external": {
           "category": "research"
         },
-        "academic-pipeline@claudespace-legacy": {
+        "academic-pipeline@claudespace-external": {
           "category": "research"
         },
-        "karpathy-llm-wiki@claudespace-legacy": {
+        "karpathy-llm-wiki@claudespace-external": {
           "category": "knowledge"
         },
         "programming-practice@claudespace-personal": {
           "category": "productivity"
         },
-        "aris@claudespace-optional-tools": {
+        "aris@claudespace-external": {
           "category": "research",
           "defaultEnabled": false
         },
-        "agent-browser@claudespace-optional-tools": {
+        "agent-browser@claudespace-external": {
           "category": "devtools",
           "defaultEnabled": false
         },
-        "autoresearchclaw@claudespace-optional-tools": {
+        "autoresearchclaw@claudespace-external": {
           "category": "research",
           "defaultEnabled": false
         },
@@ -102,29 +94,47 @@
         "agent-led-swe@claudespace-personal": {
           "category": "devtools"
         }
-      }
+      },
+      "plugins": [
+        "aris@claudespace-external",
+        "autoresearchclaw@claudespace-external",
+        "clarity@claudespace-personal"
+      ]
     },
     {
       "host": "claude-code",
       "output": "domains/candidates/.claude-plugin/marketplace.json",
       "name": "claudespace-candidates",
       "catalogs": [
-        "claudespace-candidates"
+        "claudespace-external"
       ],
       "owner": {
         "name": "LKCY23"
-      }
+      },
+      "plugins": [
+        "andrej-karpathy-skills@claudespace-external",
+        "code-review@claudespace-external",
+        "code-simplifier@claudespace-external",
+        "mattpocock-skills@claudespace-external",
+        "ponytail@claudespace-external"
+      ]
     },
     {
       "host": "codex",
       "output": "domains/candidates/.agents/plugins/marketplace.json",
       "name": "claudespace-candidates",
       "catalogs": [
-        "claudespace-candidates"
+        "claudespace-external"
       ],
       "interface": {
         "displayName": "claudespace-candidates · candidates"
-      }
+      },
+      "plugins": [
+        "andrej-karpathy-skills@claudespace-external",
+        "code-review@claudespace-external",
+        "code-simplifier@claudespace-external",
+        "ponytail@claudespace-external"
+      ]
     }
   ]
 }

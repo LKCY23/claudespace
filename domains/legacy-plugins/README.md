@@ -1,6 +1,6 @@
 # 已整理的历史来源（claudespace-legacy）
 
-本目录通过新版 `catalog.json` 登记 10 项资源。`legacy-plugins` 是来源分组名称，不是旧 schema 兼容入口；其中也有作为独立 Skill 管理的资源。
+本目录保存原有的资源包。原创工具登记在[个人清单](../../catalog.json)，第三方工具登记在[外部清单](../catalog.json)。`legacy-plugins` 是来源分组名称，不是旧 schema 兼容入口；其中也有作为独立 Skill 管理的资源。
 
 ## 登记与兼容入口
 
@@ -14,7 +14,7 @@
 
 ```sh
 python3 scripts/build_candidates.py \
-  --catalog domains/legacy-plugins/catalog.json \
+  --catalog domains/catalog.json \
   --output /tmp/claudespace-legacy-review \
   --fetch
 ```

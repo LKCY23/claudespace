@@ -18,7 +18,7 @@ GitHub 的 Actions PR 设置同时控制“创建和批准 PR”。这里启用�
 
 ```sh
 gh workflow run resource-updates.yml --repo LKCY23/claudespace --ref main \
-  -f catalog=domains/candidates/catalog.json -f publish=false
+  -f catalog=domains/catalog.json -f publish=false
 ```
 
 审阅 Actions summary 和 `claudespace-update-candidates` artifact。检查失败与待人工适配的资源单独列出；它们不会被解释为已最新，也不会生成伪装成功的候选。

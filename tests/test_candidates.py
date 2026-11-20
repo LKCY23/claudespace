@@ -358,32 +358,35 @@ class RepositoryCatalogTests(unittest.TestCase):
 
     def test_candidate_discovery_manifests_match_new_registry(self):
         root = ROOT / 'domains/candidates'
-        catalog = read_catalog(root / 'catalog.json')
+        catalog = read_catalog(ROOT / 'domains/catalog.json')
         for host, file in [('claude-code', '.claude-plugin/marketplace.json'), ('codex', '.agents/plugins/marketplace.json')]:
             manifest = json.loads((root / file).read_text())
-            expected = {name: item for name, item in catalog['resources'].items() if item['kind'] == 'plugin' and host in item['compatibility']}
-            self.assertEqual(manifest['name'], catalog['name'])
+            names = {'andrej-karpathy-skills', 'code-review', 'code-simplifier', 'ponytail'}
+            if host == 'claude-code': names.add('mattpocock-skills')
+            expected = {name: catalog['resources'][name] for name in names}
+            self.assertEqual(manifest['name'], 'claudespace-candidates')
             self.assertEqual({row['name'] for row in manifest['plugins']}, set(expected))
             for row in manifest['plugins']:
-                self.assertEqual(row['source'], './' + expected[row['name']]['source']['path'])
+                self.assertEqual(row['source'], './' + Path(expected[row['name']]['source']['path']).relative_to('candidates').as_posix())
                 if host == 'codex': self.assertEqual(row['policy']['installation'], 'AVAILABLE')
 
     def test_candidate_wrappers_rebuild_without_upstream_or_native_changes(self):
         with tempfile.TemporaryDirectory() as directory:
-            report = builder.build(ROOT / 'domains/candidates/catalog.json', Path(directory) / 'result',
+            report = builder.build(ROOT / 'domains/catalog.json', Path(directory) / 'result',
                                    selected=['code-review', 'code-simplifier', 'andrej-karpathy-skills'])
             self.assertEqual(len(report['resources']), 3)
 
     def test_patched_upstream_and_packaging_revision_drift_still_block(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            shutil.copytree(ROOT / 'domains/candidates', root / 'source')
+            shutil.copytree(ROOT / 'domains/candidates/packages', root / 'source/candidates/packages')
+            shutil.copyfile(ROOT / 'domains/catalog.json', root / 'source/catalog.json')
             catalog = root / 'source/catalog.json'
             data = json.loads(catalog.read_text()); data['resources']['code-review']['packaging_revision'] += 1
             catalog.write_text(json.dumps(data))
             with self.assertRaisesRegex(ValueError, 'version mismatch'):
                 builder.build(catalog, root / 'result', selected=['code-review'])
-            entry = root / 'source/packages/code-simplifier/agents/code-simplifier.md'
+            entry = root / 'source/candidates/packages/code-simplifier/agents/code-simplifier.md'
             entry.write_text(entry.read_text() + '\nlocal change')
             with self.assertRaisesRegex(ValueError, 'locally modified'):
                 builder.build(catalog, root / 'result', selected=['code-simplifier'])

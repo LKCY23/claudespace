@@ -361,159 +361,6 @@
         "strategy": "manual"
       }
     },
-    "pdf": {
-      "kind": "skill",
-      "description": "Read, generate and visually inspect PDF documents with Python and Poppler.",
-      "origin": {
-        "type": "third-party",
-        "author": "OpenAI",
-        "upstream": {
-          "repo": "openai/skills",
-          "commit": "49f948faa9258a0c61caceaf225e179651397431",
-          "path": "skills/.curated/pdf"
-        }
-      },
-      "maintenance": {
-        "owner": "upstream",
-        "mode": "original"
-      },
-      "source": {
-        "kind": "external",
-        "repo": "openai/skills",
-        "commit": "49f948faa9258a0c61caceaf225e179651397431",
-        "path": "skills/.curated/pdf"
-      },
-      "compatibility": {
-        "claude-code": {
-          "mode": "native",
-          "entry": "SKILL.md",
-          "validation": {
-            "status": "not-evaluated"
-          }
-        },
-        "codex": {
-          "mode": "native",
-          "entry": "SKILL.md",
-          "validation": {
-            "status": "not-evaluated"
-          }
-        }
-      },
-      "requires": {
-        "bindings": {
-          "install_root": {
-            "kind": "path",
-            "required": false
-          }
-        }
-      },
-      "update": {
-        "strategy": "branch",
-        "target": "main"
-      }
-    },
-    "playwright": {
-      "kind": "skill",
-      "description": "Automate browser interactions through the Playwright CLI; verify host-specific paths before use.",
-      "origin": {
-        "type": "third-party",
-        "author": "OpenAI",
-        "upstream": {
-          "repo": "openai/skills",
-          "commit": "49f948faa9258a0c61caceaf225e179651397431",
-          "path": "skills/.curated/playwright"
-        }
-      },
-      "maintenance": {
-        "owner": "upstream",
-        "mode": "original"
-      },
-      "source": {
-        "kind": "external",
-        "repo": "openai/skills",
-        "commit": "49f948faa9258a0c61caceaf225e179651397431",
-        "path": "skills/.curated/playwright"
-      },
-      "compatibility": {
-        "claude-code": {
-          "mode": "native",
-          "entry": "SKILL.md",
-          "validation": {
-            "status": "not-evaluated"
-          }
-        },
-        "codex": {
-          "mode": "native",
-          "entry": "SKILL.md",
-          "validation": {
-            "status": "not-evaluated"
-          }
-        }
-      },
-      "requires": {
-        "bindings": {
-          "install_root": {
-            "kind": "path",
-            "required": false
-          }
-        }
-      },
-      "update": {
-        "strategy": "branch",
-        "target": "main"
-      }
-    },
-    "screenshot": {
-      "kind": "skill",
-      "description": "Capture desktop, application windows or screen regions using OS screenshot helpers.",
-      "origin": {
-        "type": "third-party",
-        "author": "OpenAI",
-        "upstream": {
-          "repo": "openai/skills",
-          "commit": "49f948faa9258a0c61caceaf225e179651397431",
-          "path": "skills/.curated/screenshot"
-        }
-      },
-      "maintenance": {
-        "owner": "upstream",
-        "mode": "original"
-      },
-      "source": {
-        "kind": "external",
-        "repo": "openai/skills",
-        "commit": "49f948faa9258a0c61caceaf225e179651397431",
-        "path": "skills/.curated/screenshot"
-      },
-      "compatibility": {
-        "claude-code": {
-          "mode": "native",
-          "entry": "SKILL.md",
-          "validation": {
-            "status": "not-evaluated"
-          }
-        },
-        "codex": {
-          "mode": "native",
-          "entry": "SKILL.md",
-          "validation": {
-            "status": "not-evaluated"
-          }
-        }
-      },
-      "requires": {
-        "bindings": {
-          "install_root": {
-            "kind": "path",
-            "required": false
-          }
-        }
-      },
-      "update": {
-        "strategy": "branch",
-        "target": "main"
-      }
-    },
     "agent-session-migration": {
       "kind": "skill",
       "description": "在 Codex、Claude Code、Pi 和 DeepSeek Harness（DSH）之间迁移可续聊的原生会话。用于跨 agent 搬移聊天记录、接续已有任务，以及检查或排查会话迁移结果。",
@@ -664,6 +511,122 @@
           }
         }
       },
+      "update": {
+        "strategy": "branch",
+        "target": "master"
+      }
+    },
+    "github": {
+      "kind": "skill",
+      "description": "Use when the user wants to manage a GitHub repository workflow through git and gh, including local branch and sync operations, pull requests, issues, and CI runs.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23",
+        "upstream": {
+          "repo": "LKCY23/claude-github-skill",
+          "commit": "8ba6659ae35d73a0a9fe09ffcc07464e5169668e",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "domains/legacy-plugins/packages/github"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "git": {
+            "kind": "executable",
+            "required": true
+          },
+          "gh": {
+            "kind": "executable",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "read-paper": {
+      "kind": "skill",
+      "description": "Use when reading a single research paper in a structured way to extract claims, evidence, methods, limitations, and critique.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23",
+        "upstream": {
+          "repo": "LKCY23/research-reading-skills",
+          "commit": "0631f430e5e9b3bf80772e7ca057caa054d6be2d",
+          "path": "skills/read-paper"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "domains/legacy-plugins/packages/read-paper"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "master"
+      }
+    },
+    "literature-review": {
+      "kind": "skill",
+      "description": "Use when conducting a topic-first literature review across multiple papers, comparing methods, evidence, and coverage for a research question.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23",
+        "upstream": {
+          "repo": "LKCY23/research-reading-skills",
+          "commit": "0631f430e5e9b3bf80772e7ca057caa054d6be2d",
+          "path": "skills/literature-review"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "domains/legacy-plugins/packages/literature-review"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
       "update": {
         "strategy": "branch",
         "target": "master"

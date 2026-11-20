@@ -1,7 +1,831 @@
 {
   "schema_version": 1,
-  "name": "claudespace-standalone",
+  "name": "claudespace-external",
   "resources": {
+    "pdf": {
+      "kind": "skill",
+      "description": "Read, generate and visually inspect PDF documents with Python and Poppler.",
+      "origin": {
+        "type": "third-party",
+        "author": "OpenAI",
+        "upstream": {
+          "repo": "openai/skills",
+          "commit": "49f948faa9258a0c61caceaf225e179651397431",
+          "path": "skills/.curated/pdf"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "openai/skills",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431",
+        "path": "skills/.curated/pdf"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "playwright": {
+      "kind": "skill",
+      "description": "Automate browser interactions through the Playwright CLI; verify host-specific paths before use.",
+      "origin": {
+        "type": "third-party",
+        "author": "OpenAI",
+        "upstream": {
+          "repo": "openai/skills",
+          "commit": "49f948faa9258a0c61caceaf225e179651397431",
+          "path": "skills/.curated/playwright"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "openai/skills",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431",
+        "path": "skills/.curated/playwright"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "screenshot": {
+      "kind": "skill",
+      "description": "Capture desktop, application windows or screen regions using OS screenshot helpers.",
+      "origin": {
+        "type": "third-party",
+        "author": "OpenAI",
+        "upstream": {
+          "repo": "openai/skills",
+          "commit": "49f948faa9258a0c61caceaf225e179651397431",
+          "path": "skills/.curated/screenshot"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "openai/skills",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431",
+        "path": "skills/.curated/screenshot"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": false
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "andrej-karpathy-skills": {
+      "kind": "plugin",
+      "description": "Karpathy Guidelines — coding scope, assumptions, simplicity and verification",
+      "origin": {
+        "type": "third-party",
+        "author": "forrestchang",
+        "upstream": {
+          "repo": "multica-ai/andrej-karpathy-skills",
+          "commit": "2c606141936f1eeef17fa3043a72095b4765b9c2",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "candidates/packages/andrej-karpathy-skills"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      },
+      "packaging_revision": 1
+    },
+    "code-simplifier": {
+      "kind": "plugin",
+      "description": "Code Simplifier — improve readability while preserving behavior",
+      "origin": {
+        "type": "third-party",
+        "author": "Anthropic",
+        "upstream": {
+          "repo": "anthropics/claude-plugins-official",
+          "commit": "ab024cdcfa7ca80be204acd4907656ba5a968589",
+          "path": "plugins/code-simplifier"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "candidates/packages/code-simplifier",
+        "imports": {
+          "plugins/code-simplifier/.claude-plugin/plugin.json": "upstream/claude-plugin.json",
+          "plugins/code-simplifier/agents/code-simplifier.md": "agents/code-simplifier.md",
+          "LICENSE": "LICENSE"
+        }
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      },
+      "packaging_revision": 2
+    },
+    "code-review": {
+      "kind": "plugin",
+      "description": "Matt Pocock code review — Standards and Spec, with original setup helper",
+      "origin": {
+        "type": "third-party",
+        "author": "Matt Pocock",
+        "upstream": {
+          "repo": "mattpocock/skills",
+          "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+          "path": "skills/engineering/code-review"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "candidates/packages/code-review",
+        "imports": {
+          "LICENSE": "LICENSE",
+          "skills/engineering/code-review/SKILL.md": "skills/code-review/SKILL.md",
+          "skills/engineering/code-review/agents/openai.yaml": "skills/code-review/agents/openai.yaml",
+          "skills/engineering/setup-matt-pocock-skills/SKILL.md": "skills/setup-matt-pocock-skills/SKILL.md",
+          "skills/engineering/setup-matt-pocock-skills/agents/openai.yaml": "skills/setup-matt-pocock-skills/agents/openai.yaml",
+          "skills/engineering/setup-matt-pocock-skills/domain.md": "skills/setup-matt-pocock-skills/domain.md",
+          "skills/engineering/setup-matt-pocock-skills/issue-tracker-github.md": "skills/setup-matt-pocock-skills/issue-tracker-github.md",
+          "skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md": "skills/setup-matt-pocock-skills/issue-tracker-gitlab.md",
+          "skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md": "skills/setup-matt-pocock-skills/issue-tracker-local.md",
+          "skills/engineering/setup-matt-pocock-skills/triage-labels.md": "skills/setup-matt-pocock-skills/triage-labels.md"
+        }
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      },
+      "packaging_revision": 2
+    },
+    "mattpocock-skills": {
+      "kind": "plugin",
+      "description": "Complete original Matt Pocock skill collection, available for later trial",
+      "origin": {
+        "type": "third-party",
+        "author": "Matt Pocock",
+        "upstream": {
+          "repo": "mattpocock/skills",
+          "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "submodule",
+        "path": "candidates/upstreams/matt",
+        "repo": "mattpocock/skills",
+        "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "ponytail": {
+      "kind": "plugin",
+      "description": "Ponytail — reuse-first simplification, review, audit and debt tracking",
+      "origin": {
+        "type": "third-party",
+        "author": "Dietrich Gebert",
+        "upstream": {
+          "repo": "DietrichGebert/ponytail",
+          "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "submodule",
+        "path": "candidates/upstreams/ponytail",
+        "repo": "DietrichGebert/ponytail",
+        "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "claude-hud": {
+      "kind": "plugin",
+      "description": "Claude Code statusline HUD; official pinned source with tracked runtime",
+      "origin": {
+        "type": "third-party",
+        "author": "Jarrod Watts",
+        "upstream": {
+          "repo": "jarrodwatts/claude-hud",
+          "commit": "5621429b84ea2503185221244c43a06797bfd05e",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "jarrodwatts/claude-hud",
+        "commit": "5621429b84ea2503185221244c43a06797bfd05e",
+        "path": "."
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "release",
+        "target": "latest"
+      }
+    },
+    "impeccable": {
+      "kind": "skill",
+      "description": "Impeccable UI design, redesign, critique, layout, typography, color and polish; official Codex skill distribution.",
+      "origin": {
+        "type": "third-party",
+        "author": "pbakaus",
+        "upstream": {
+          "repo": "pbakaus/impeccable",
+          "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+          "path": ".agents/skills/impeccable"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "pbakaus/impeccable",
+        "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+        "path": ".agents/skills/impeccable"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "install_root": {
+            "kind": "path",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "codex": {
+      "kind": "plugin",
+      "description": "Codex delegation and code review from Claude Code.",
+      "origin": {
+        "type": "third-party",
+        "author": "openai",
+        "upstream": {
+          "repo": "openai/codex-plugin-cc",
+          "commit": "db52e28f4d9ded852ab3942cea316258ae4ef346",
+          "path": "plugins/codex"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "legacy-plugins/packages/codex"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "deep-research": {
+      "kind": "skill",
+      "description": "Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic. 7 modes: full research, quick brief, paper review, lit-review, fact-check, Socratic guided research dialogue, and systematic review with optional meta-analysis. Covers research question formulation, Socratic mentoring, methodology design, systematic literature search, source verification, cross-source synthesis, risk of bias assessment, meta-analysis, APA 7.0 report compilation, editorial review, devil's advocate challenges, ethics review, and post-research literature monitoring. Triggers on: research, deep research, literature review, systematic review, meta-analysis, PRISMA, evidence synthesis, fact-check, guide my research, help me think through, 研究, 深度研究, 文獻回顧, 文獻探討, 系統性回顧, 後設分析, 事實查核, 引導我的研究, 幫我釐清, 幫我想想, 我不確定要研究什麼, 研究方向, 研究主題.",
+      "origin": {
+        "type": "third-party",
+        "author": "Imbad0202",
+        "upstream": {
+          "repo": "Imbad0202/academic-research-skills",
+          "commit": "cfd081d8f309ec65254d9f9f04c845ee78b1ec1d",
+          "path": "deep-research"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "legacy-plugins/packages/deep-research"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "academic-pipeline": {
+      "kind": "skill",
+      "description": "Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize. Coordinates deep-research, academic-paper, and academic-paper-reviewer into a seamless 10-stage workflow with mandatory integrity verification, two-stage peer review, and reproducible quality gates. Triggers on: academic pipeline, research to paper, full paper workflow, paper pipeline, end-to-end paper, research-to-publication, complete paper workflow.",
+      "origin": {
+        "type": "third-party",
+        "author": "Imbad0202",
+        "upstream": {
+          "repo": "Imbad0202/academic-research-skills",
+          "commit": "cfd081d8f309ec65254d9f9f04c845ee78b1ec1d",
+          "path": "academic-pipeline"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "legacy-plugins/packages/academic-pipeline"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "karpathy-llm-wiki": {
+      "kind": "skill",
+      "description": "Use when building or maintaining a personal LLM-powered knowledge base. Triggers: ingesting sources into a wiki, querying wiki knowledge, linting wiki quality, 'add to wiki', 'what do I know about', or any mention of 'LLM wiki' or 'Karpathy wiki'.",
+      "origin": {
+        "type": "third-party",
+        "author": "Astro-Han",
+        "upstream": {
+          "repo": "Astro-Han/karpathy-llm-wiki",
+          "commit": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "legacy-plugins/packages/karpathy-llm-wiki",
+        "imports": {
+          ".": "."
+        }
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "teach": {
+      "kind": "skill",
+      "description": "Teach the user a new skill or concept, within this workspace.",
+      "origin": {
+        "type": "third-party",
+        "author": "Matt Pocock; maintained wrapper LKCY23",
+        "upstream": {
+          "repo": "LKCY23/teach-skill",
+          "commit": "c15b216daf1397addb7b4ef40c8accb504f606d9",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "legacy-plugins/packages/teach"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "superpowers": {
+      "kind": "plugin",
+      "description": "Optional development workflow collection; not selected.",
+      "origin": {
+        "type": "third-party",
+        "author": "obra",
+        "upstream": {
+          "repo": "obra/superpowers",
+          "commit": "7e516434f2a30114300efc9247db32fb37daa5f9",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "legacy-plugins/packages/superpowers",
+        "imports": {
+          ".": "."
+        }
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "claude-scientific-writer": {
+      "kind": "plugin",
+      "description": "Scientific writing collection; keep source only and evaluate components separately.",
+      "origin": {
+        "type": "third-party",
+        "author": "K-Dense-AI",
+        "upstream": {
+          "repo": "K-Dense-AI/claude-scientific-writer",
+          "commit": "529b9f73ab4b48925027145800d7b49e96ccfd3c",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "K-Dense-AI/claude-scientific-writer",
+        "commit": "529b9f73ab4b48925027145800d7b49e96ccfd3c",
+        "path": "."
+      },
+      "compatibility": {},
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "aris": {
+      "kind": "plugin",
+      "description": "ARIS research skills, pinned upstream plugin; optional, not installed by catalog registration.",
+      "origin": {
+        "type": "third-party",
+        "author": "wanshuiyin",
+        "upstream": {
+          "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+          "commit": "08f9bc06f68907279b7ddce9e41efa0c42b357df",
+          "path": "."
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+        "commit": "08f9bc06f68907279b7ddce9e41efa0c42b357df",
+        "path": "."
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "agent-browser": {
+      "kind": "skill",
+      "description": "Browser automation skill bundle with fixed upstream source; requires a compatible CLI.",
+      "origin": {
+        "type": "third-party",
+        "author": "vercel-labs",
+        "upstream": {
+          "repo": "vercel-labs/agent-browser",
+          "commit": "5868f7c05020e047c00e68e4abf9253cce864f41",
+          "path": "skills/agent-browser"
+        }
+      },
+      "maintenance": {
+        "owner": "upstream",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "vercel-labs/agent-browser",
+        "commit": "5868f7c05020e047c00e68e4abf9253cce864f41",
+        "path": "skills/agent-browser"
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {
+        "bindings": {
+          "agent_browser": {
+            "kind": "executable",
+            "required": true
+          }
+        }
+      },
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "autoresearchclaw": {
+      "kind": "plugin",
+      "description": "Seven AutoResearchClaw research skills; Python runtime and provider credentials are separate.",
+      "origin": {
+        "type": "third-party",
+        "author": "aiming-lab",
+        "upstream": {
+          "repo": "aiming-lab/AutoResearchClaw",
+          "commit": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
+          "path": ".claude/skills"
+        }
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "adapter"
+      },
+      "source": {
+        "kind": "tracked",
+        "path": "optional-tools/packages/autoresearchclaw",
+        "imports": {
+          ".claude/skills/a-evolve": "skills/a-evolve",
+          ".claude/skills/hypothesis-formulation": "skills/hypothesis-formulation",
+          ".claude/skills/literature-search": "skills/literature-search",
+          ".claude/skills/researchclaw": "skills/researchclaw",
+          ".claude/skills/scientific-visualization": "skills/scientific-visualization",
+          ".claude/skills/scientific-writing": "skills/scientific-writing",
+          ".claude/skills/statistical-reporting": "skills/statistical-reporting"
+        }
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      },
+      "packaging_revision": 1
+    },
     "academic-paper": {
       "kind": "skill",
       "description": "Academic paper writing skill with 12-agent pipeline. v2.5: Style Calibration (learn author's writing voice from past papers) + Writing Quality Check (writing quality checklist for natural prose). Supports IMRaD, literature review, theoretical, case study, policy brief, and conference paper structures. APA 7.0 (default), Chicago, MLA, IEEE, Vancouver citation formats. Bilingual abstracts (zh-TW + EN). Multi-format output (LaTeX, DOCX, PDF, Markdown). Triggers on: write paper, academic paper, paper outline, write abstract, revise paper, check citations, convert to LaTeX, guide my paper, parse reviews, revision roadmap, 寫論文, 學術論文, 論文大綱, 寫摘要, 修改論文, 檢查引用, 引導我寫論文, 帶我規劃論文, 逐章規劃, 論文架構, 審查意見, 修訂路線圖.",
@@ -21,7 +845,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/academic-paper",
+        "path": "standalone/packages/academic-paper",
         "imports": {
           "academic-paper": ".",
           "shared": "shared"
@@ -78,7 +902,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/academic-paper-reviewer",
+        "path": "standalone/packages/academic-paper-reviewer",
         "imports": {
           "academic-paper-reviewer": ".",
           "shared": "shared"
@@ -135,7 +959,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/brainstorming-research-ideas"
+        "path": "standalone/packages/brainstorming-research-ideas"
       },
       "compatibility": {
         "claude-code": {
@@ -185,7 +1009,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/creative-thinking-for-research"
+        "path": "standalone/packages/creative-thinking-for-research"
       },
       "compatibility": {
         "claude-code": {
@@ -235,7 +1059,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/humanizer"
+        "path": "standalone/packages/humanizer"
       },
       "compatibility": {
         "claude-code": {
@@ -285,7 +1109,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-approval",
+        "path": "standalone/packages/lark-approval",
         "imports": {
           "skills/lark-approval": "."
         }
@@ -342,7 +1166,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-apps",
+        "path": "standalone/packages/lark-apps",
         "imports": {
           "skills/lark-apps": "."
         }
@@ -399,7 +1223,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-attendance",
+        "path": "standalone/packages/lark-attendance",
         "imports": {
           "skills/lark-attendance": "."
         }
@@ -456,7 +1280,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-base",
+        "path": "standalone/packages/lark-base",
         "imports": {
           "skills/lark-base": "."
         }
@@ -513,7 +1337,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-calendar",
+        "path": "standalone/packages/lark-calendar",
         "imports": {
           "skills/lark-calendar": "."
         }
@@ -570,7 +1394,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-contact",
+        "path": "standalone/packages/lark-contact",
         "imports": {
           "skills/lark-contact": "."
         }
@@ -627,7 +1451,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-doc",
+        "path": "standalone/packages/lark-doc",
         "imports": {
           "skills/lark-doc": "."
         }
@@ -684,7 +1508,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-drive",
+        "path": "standalone/packages/lark-drive",
         "imports": {
           "skills/lark-drive": "."
         }
@@ -741,7 +1565,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-event",
+        "path": "standalone/packages/lark-event",
         "imports": {
           "skills/lark-event": "."
         }
@@ -798,7 +1622,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-im",
+        "path": "standalone/packages/lark-im",
         "imports": {
           "skills/lark-im": "."
         }
@@ -855,7 +1679,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-mail"
+        "path": "standalone/packages/lark-mail"
       },
       "compatibility": {
         "claude-code": {
@@ -909,7 +1733,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-markdown",
+        "path": "standalone/packages/lark-markdown",
         "imports": {
           "skills/lark-markdown": "."
         }
@@ -1021,7 +1845,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-minutes",
+        "path": "standalone/packages/lark-minutes",
         "imports": {
           "skills/lark-minutes": "."
         }
@@ -1077,7 +1901,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-note",
+        "path": "standalone/packages/lark-note",
         "imports": {
           "skills/lark-note": "."
         }
@@ -1134,7 +1958,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-okr",
+        "path": "standalone/packages/lark-okr",
         "imports": {
           "skills/lark-okr": "."
         }
@@ -1191,7 +2015,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-openapi-explorer",
+        "path": "standalone/packages/lark-openapi-explorer",
         "imports": {
           "skills/lark-openapi-explorer": "."
         }
@@ -1248,7 +2072,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-shared",
+        "path": "standalone/packages/lark-shared",
         "imports": {
           "skills/lark-shared": "."
         }
@@ -1305,7 +2129,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-sheets",
+        "path": "standalone/packages/lark-sheets",
         "imports": {
           "skills/lark-sheets": "."
         }
@@ -1362,7 +2186,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-skill-maker",
+        "path": "standalone/packages/lark-skill-maker",
         "imports": {
           "skills/lark-skill-maker": "."
         }
@@ -1419,7 +2243,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-slides",
+        "path": "standalone/packages/lark-slides",
         "imports": {
           "skills/lark-slides": "."
         }
@@ -1476,7 +2300,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-task",
+        "path": "standalone/packages/lark-task",
         "imports": {
           "skills/lark-task": "."
         }
@@ -1533,7 +2357,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-vc",
+        "path": "standalone/packages/lark-vc",
         "imports": {
           "skills/lark-vc": "."
         }
@@ -1589,7 +2413,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-vc-agent",
+        "path": "standalone/packages/lark-vc-agent",
         "imports": {
           "skills/lark-vc-agent": "."
         }
@@ -1645,7 +2469,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-whiteboard",
+        "path": "standalone/packages/lark-whiteboard",
         "imports": {
           "skills/lark-whiteboard": "."
         }
@@ -1702,7 +2526,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-wiki",
+        "path": "standalone/packages/lark-wiki",
         "imports": {
           "skills/lark-wiki": "."
         }
@@ -1759,7 +2583,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-workflow-meeting-summary",
+        "path": "standalone/packages/lark-workflow-meeting-summary",
         "imports": {
           "skills/lark-workflow-meeting-summary": "."
         }
@@ -1816,7 +2640,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/lark-workflow-standup-report",
+        "path": "standalone/packages/lark-workflow-standup-report",
         "imports": {
           "skills/lark-workflow-standup-report": "."
         }
@@ -1873,7 +2697,7 @@
       },
       "source": {
         "kind": "tracked",
-        "path": "packages/mmx-cli",
+        "path": "standalone/packages/mmx-cli",
         "imports": {
           "skill": "."
         }
