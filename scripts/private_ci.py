@@ -54,7 +54,9 @@ def private_items(root, rules, selected_catalog=None):
 
 def take_keys(rules):
     """Remove all allowlisted secrets before any child process, even for public-only work."""
-    return {repo: os.environ.pop(entry['key_env'], '') for repo, entry in rules.items()}
+    names = {entry['key_env'] for entry in rules.values()}
+    values = {name: os.environ.pop(name, '') for name in names}
+    return {repo: values[entry['key_env']] for repo, entry in rules.items()}
 
 
 @contextmanager

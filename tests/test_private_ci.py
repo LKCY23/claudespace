@@ -145,6 +145,12 @@ class PrivateSourceTests(unittest.TestCase):
         candidate_policy.write_text('{"schema_version":1,"repositories":{}}')
         self.assertIn('LKCY23/goal-authoring',module.policy())
 
+    def test_renamed_repository_uses_the_same_key_and_clears_the_environment(self):
+        aliases = {name: {'key_env': 'CLAUDESPACE_TEST_KEY'} for name in ('owner/prior', 'owner/current')}
+        with patch.dict(os.environ, {'CLAUDESPACE_TEST_KEY': 'fixture'}):
+            self.assertEqual(module.take_keys(aliases), dict.fromkeys(aliases, 'fixture'))
+            self.assertNotIn('CLAUDESPACE_TEST_KEY', os.environ)
+
     def test_public_only_selection_also_removes_unused_keys_from_environment(self):
         with patch.object(module,'private_items',return_value=[]):
             with module.private_sources(self.f.source,RULES) as (prepared,targets):
