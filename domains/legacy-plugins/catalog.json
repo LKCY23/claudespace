@@ -231,7 +231,7 @@
         "author": "Astro-Han",
         "upstream": {
           "repo": "Astro-Han/karpathy-llm-wiki",
-          "commit": "9e8c4f44ce8d8f154494844a860cc6e9e49c8642",
+          "commit": "eafcc77001e496cc43499e4923b663aec722c813",
           "path": "."
         }
       },
