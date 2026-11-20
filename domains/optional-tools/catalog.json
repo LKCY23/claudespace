@@ -91,7 +91,7 @@
         "author": "aiming-lab",
         "upstream": {
           "repo": "aiming-lab/AutoResearchClaw",
-          "commit": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
+          "commit": "be4ba4755bf1b52220f25e13b2293b5956590070",
           "path": ".claude/skills"
         }
       },
