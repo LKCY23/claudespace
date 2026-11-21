@@ -44,6 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
           CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
+          CLAUDESPACE_CODEX_GUIDANCE_KEY: ${{ secrets.CLAUDESPACE_CODEX_GUIDANCE_KEY }}
           CATALOG: ${{ inputs.catalog }}
         run: |
           args=(prepare --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/claudespace-updates")

@@ -9,6 +9,9 @@
     },
     "LKCY23/claude-sanctuary": {
       "key_env": "CLAUDESPACE_CLAUDE_SANCTUARY_KEY"
+    },
+    "LKCY23/codex-guidance": {
+      "key_env": "CLAUDESPACE_CODEX_GUIDANCE_KEY"
     }
   }
 }
