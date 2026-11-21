@@ -77,6 +77,7 @@ jobs:
     secrets:
       CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
       CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
+      CLAUDESPACE_CODEX_GUIDANCE_KEY: ${{ secrets.CLAUDESPACE_CODEX_GUIDANCE_KEY }}
   report:
     needs: [select, tooling, fixed_sources]
     if: ${{ always() && needs.select.outputs.eligible == 'true' }}
