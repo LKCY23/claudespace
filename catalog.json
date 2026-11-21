@@ -631,6 +631,70 @@
         "strategy": "branch",
         "target": "master"
       }
+    },
+    "codex-guidance": {
+      "kind": "plugin",
+      "description": "Personal Codex guidance: install the global AGENTS.md, write lean project AGENTS.md files, and turn rough asks into task briefs.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/codex-guidance",
+        "commit": "0689690885f93b7d1dc31d515f2cda643a85de34",
+        "path": "."
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
+    },
+    "codex-global-instructions": {
+      "kind": "instruction",
+      "description": "Global Codex instructions from codex-guidance, deployed as one managed block in ~/.codex/AGENTS.md.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/codex-guidance",
+        "commit": "0689690885f93b7d1dc31d515f2cda643a85de34",
+        "path": "instructions"
+      },
+      "compatibility": {
+        "codex": {
+          "mode": "native",
+          "entry": "AGENTS.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
     }
   }
 }
