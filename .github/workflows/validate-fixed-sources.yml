@@ -10,6 +10,8 @@ on:
         required: true
       CLAUDESPACE_CLAUDE_SANCTUARY_KEY:
         required: true
+      CLAUDESPACE_CODEX_GUIDANCE_KEY:
+        required: true
   push:
     branches: [main, codex/claude-codex-adaptation]
   workflow_dispatch:
@@ -71,6 +73,7 @@ jobs:
         env:
           CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
           CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
+          CLAUDESPACE_CODEX_GUIDANCE_KEY: ${{ secrets.CLAUDESPACE_CODEX_GUIDANCE_KEY }}
         working-directory: ${{ runner.temp }}
         run: python "$GITHUB_WORKSPACE/validator/scripts/private_ci.py" validate --root "$GITHUB_WORKSPACE/candidate" --report "$RUNNER_TEMP/fixed-source-validation.json"
       - name: Record status on the inspected commit
