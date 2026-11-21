@@ -1,6 +1,6 @@
 {
   "repo": "aiming-lab/AutoResearchClaw",
-  "sha": "2984bb62323eb1abfe481e4b950e3a4c4cdbefa6",
+  "sha": "be4ba4755bf1b52220f25e13b2293b5956590070",
   "path": ".claude/skills",
   "packaging": "Historical source verified by Git blob and executable mode; local repairs retain upstream fingerprints.",
   "files": {
@@ -18,15 +18,7 @@
     },
     "skills/researchclaw/SKILL.md": {
       "upstream_path": ".claude/skills/researchclaw/SKILL.md",
-      "sha256": "9506288dfe06ebf65d6364e3624c0c37b2b1cf06a2f50fd47af50489d7985943",
-      "upstream_sha256": "ec454f8b3d67c71298d1f4769b4c2ab2f6055899ea6b59c97af74119f1a16976",
-      "upstream_executable": false,
-      "reviewed_replacement": {
-        "commit": "be4ba4755bf1b52220f25e13b2293b5956590070",
-        "sha256": "9fd3bf5b8be7acb7ffec23c86535e2cfce1f33732d819eba6dad0c5fe8c55836",
-        "executable": false,
-        "reason": "Upstream now provides valid researchclaw YAML frontmatter; only the description differs from the local repair, and the pipeline body is unchanged."
-      }
+      "sha256": "9fd3bf5b8be7acb7ffec23c86535e2cfce1f33732d819eba6dad0c5fe8c55836"
     },
     "skills/scientific-visualization/SKILL.md": {
       "upstream_path": ".claude/skills/scientific-visualization/SKILL.md",
