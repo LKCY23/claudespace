@@ -506,7 +506,7 @@
         "author": "Imbad0202",
         "upstream": {
           "repo": "Imbad0202/academic-research-skills",
-          "commit": "cfd081d8f309ec65254d9f9f04c845ee78b1ec1d",
+          "commit": "00315dfea67cba974583debae32b77bdce659301",
           "path": "deep-research"
         }
       },
@@ -541,7 +541,7 @@
         "author": "Imbad0202",
         "upstream": {
           "repo": "Imbad0202/academic-research-skills",
-          "commit": "cfd081d8f309ec65254d9f9f04c845ee78b1ec1d",
+          "commit": "00315dfea67cba974583debae32b77bdce659301",
           "path": "academic-pipeline"
         }
       },
@@ -834,7 +834,7 @@
         "author": "Imbad0202",
         "upstream": {
           "repo": "Imbad0202/academic-research-skills",
-          "commit": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+          "commit": "00315dfea67cba974583debae32b77bdce659301",
           "path": "academic-paper"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
@@ -891,7 +891,7 @@
         "author": "Imbad0202",
         "upstream": {
           "repo": "Imbad0202/academic-research-skills",
-          "commit": "9c1c5dd10d159de5ff407b75a70efac00a8f7411",
+          "commit": "00315dfea67cba974583debae32b77bdce659301",
           "path": "academic-paper-reviewer"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
