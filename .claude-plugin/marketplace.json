@@ -42,7 +42,7 @@
         "source": "git-subdir",
         "url": "https://github.com/vercel-labs/agent-browser",
         "path": "skills/agent-browser",
-        "sha": "5868f7c05020e047c00e68e4abf9253cce864f41"
+        "sha": "d2dfc782ccdd79d25a9b4f0acced9321789cecb8"
       },
       "category": "devtools",
       "defaultEnabled": false,
