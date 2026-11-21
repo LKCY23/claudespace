@@ -433,7 +433,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/clarity",
-        "commit": "9e5bd6c52eed918b99af8ffa40991b4999df04dd",
+        "commit": "066f121cc5b5d3d9e033924a5f74eac7508ee792",
         "path": "release/plugin"
       },
       "compatibility": {
