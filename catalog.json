@@ -375,7 +375,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/agent-session-migration",
-        "commit": "3af8bdcf9f5f1483a57cf68d3cfc9d732b031d1c",
+        "commit": "5d2c56b1662a4c5da1c95949ad17643a7d304b19",
         "path": "."
       },
       "compatibility": {
