@@ -646,8 +646,8 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/codex-guidance",
-        "commit": "0689690885f93b7d1dc31d515f2cda643a85de34",
-        "path": "."
+        "commit": "dc926823217adb798af6c6e7aea7d02dc6748f96",
+        "path": "plugin"
       },
       "compatibility": {
         "codex": {
@@ -678,7 +678,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/codex-guidance",
-        "commit": "0689690885f93b7d1dc31d515f2cda643a85de34",
+        "commit": "dc926823217adb798af6c6e7aea7d02dc6748f96",
         "path": "instructions"
       },
       "compatibility": {
