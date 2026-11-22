@@ -1,13 +1,13 @@
 # 私有来源的 CI 访问与验证
 
-当前私有来源为 `LKCY23/goal-authoring` 与 `LKCY23/clarity`。每个仓库使用专属的只读 deploy key，不复制维护者的个人 GitHub Token，也不改变来源仓库可见性。公开来源仍使用原有 GitHub API 和固定提交下载。
+当前私有来源为 `LKCY23/goal-authoring`、`LKCY23/clarity` 与 `LKCY23/codex-guidance`。每个仓库使用专属的只读 deploy key，不复制维护者的个人 GitHub Token，也不改变来源仓库可见性。公开来源仍使用原有 GitHub API 和固定提交下载。
 
 ## 授权位置
 
 | 项目 | 位置与用途 |
 | --- | --- |
 | 来源公钥 | 各来源仓库的只读 Deploy Key |
-| 私钥 | Claudespace repository secrets（私有来源作业受 `claudespace-private-sources` Environment 分支规则约束）：`CLAUDESPACE_GOAL_AUTHORING_KEY`、`CLAUDESPACE_CLAUDE_SANCTUARY_KEY` |
+| 私钥 | Claudespace repository secrets（私有来源作业受 `claudespace-private-sources` Environment 分支规则约束）：`CLAUDESPACE_GOAL_AUTHORING_KEY`、`CLAUDESPACE_CLAUDE_SANCTUARY_KEY`、`CLAUDESPACE_CODEX_GUIDANCE_KEY` |
 | 来源与密钥变量映射 | `ci/private-sources.json`，只保存变量名 |
 | GitHub 主机身份 | `ci/github-known-hosts`，固定 GitHub 官方公布的 Ed25519 公钥 |
 | 长期允许分支 | `main`；不允许 PR merge refs、通配分支或 tags |
@@ -45,7 +45,7 @@ gh workflow run validate-fixed-sources.yml \
 
 输入为空则检查可信工作流当前提交。手动工作流需先存在于默认分支；初次接入的开发分支验证由受限 `push` 入口触发。[GitHub 手动运行规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。
 
-复用工作流不会自动接收调用方的 repository secrets。`pr-validation.yml` 只向固定来源 job 显式传递上述两个只读密钥，callee 在 `workflow_call.secrets` 中声明必需项；不使用全量 `secrets: inherit`，普通测试、选择及报告 job 不接收它们。
+复用工作流不会自动接收调用方的 repository secrets。`pr-validation.yml` 只向固定来源 job 显式传递上述只读密钥，callee 在 `workflow_call.secrets` 中声明必需项；不使用全量 `secrets: inherit`，普通测试、选择及报告 job 不接收它们。
 
 ## 读取与输出
 
