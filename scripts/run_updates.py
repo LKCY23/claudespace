@@ -10,6 +10,7 @@ import sys
 import subprocess
 import tempfile
 
+from active_resources import expand_active_dependencies
 from build_candidates import write_json
 from catalog_index import catalog_paths
 from candidate_sources import git
@@ -67,21 +68,28 @@ def update_groups(catalog, checked):
     return [(group, sorted(names)) for group, names in sorted(result.items())]
 
 
-def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=False, private_repos=()):
+def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=False, private_repos=(), active_refs=None):
     root, output = Path(root).resolve(), Path(output).resolve()
     base = clean_head(root)
     require(not output.exists() and not output.is_relative_to(root), 'Use a new output directory outside the repository')
-    available = catalogs(root)
+    all_available = catalogs(root)
+    available = all_available
     if selected_catalog:
         require(selected_catalog in [str(path.relative_to(root)) for path in available], 'Unknown catalog path')
         available = [root / selected_catalog]
+    effective_active = None
+    if active_refs is not None:
+        catalogs_by_name = {parsed['name']: parsed for parsed in (read_catalog(path) for path in all_available)}
+        effective_active = expand_active_dependencies(catalogs_by_name, active_refs)
     output.mkdir(parents=True)
     report = {'schema_version': 1, 'kind': 'claudespace-update-batch', 'base_commit': base,
               'checks': [], 'groups': [], 'candidates': [], 'published': False, 'installed': False}
+    if effective_active is not None:
+        report['active_filter'] = {'enabled': True, 'active_resource_count': len(effective_active)}
     api = api or GitHub(os.environ.get('GITHUB_TOKEN'))
     for file in available:
         catalog = read_catalog(file)
-        checked = check_catalog(catalog, api)
+        checked = check_catalog(catalog, api, active_refs=effective_active)
         for row in checked['results']:
             if row['status'] == 'manual':
                 report.setdefault('manual_sources', []).append({'resource': row['resource'], 'reason': row['reason']})
@@ -119,9 +127,16 @@ def run(root, output, *, selected_catalog=None, api=None, prepared=None, fetch=F
 
 def summary(report):
     lines = ['## Claudespace 更新检查', '', '已准备 ' + str(len(report['candidates'])) + ' 个候选；未推送或安装。', '']
+    if report.get('active_filter', {}).get('enabled'):
+        lines.extend(['已启用活动资源过滤：共 ' + str(report['active_filter']['active_resource_count']) + ' 项启用资源。', ''])
     for row in report['checks']:
         counts = row['counts']
-        lines.append('- ' + row['catalog'] + '：有更新 ' + str(counts['update_available']) + '；检查失败 ' + str(counts['check_failed']) + '；人工来源 ' + str(counts['manual']))
+        line = ('- ' + row['catalog'] + '：有更新 ' + str(counts['update_available'])
+                + '；检查失败 ' + str(counts['check_failed'])
+                + '；人工来源 ' + str(counts['manual']))
+        if 'inactive' in counts:
+            line += '；未启用跳过 ' + str(counts['inactive'])
+        lines.append(line)
     for row in report.get('manual_sources', []):
         lines.append('- 人工维护 ' + row['resource'] + '：' + row['reason'].replace('\n', ' '))
     for row in report['groups']:

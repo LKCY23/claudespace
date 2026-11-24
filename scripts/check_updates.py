@@ -10,6 +10,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
+from active_resources import active_catalog_names
 from resource_catalog import SHA, read_catalog, validate_catalog
 
 
@@ -54,8 +55,9 @@ class GitHub:
             raise CheckError('GitHub transport failed') from None
 
 
-def check_catalog(catalog, api):
+def check_catalog(catalog, api, active_refs=None):
     validate_catalog(catalog)  # Validate all resources before querying anything.
+    active_names = active_catalog_names(catalog, active_refs) if active_refs is not None else None
     cache = {}
     def query(repo, route):
         key = repo, route
@@ -75,6 +77,9 @@ def check_catalog(catalog, api):
         results.append(row)
         if item['update']['strategy'] == 'manual':
             row.update(status='manual', reason=item['origin'].get('baseline', 'No automatic tracking target'))
+            continue
+        if active_names is not None and identifier not in active_names:
+            row.update(status='inactive', reason='Not enabled in any configured machine profile')
             continue
         origin = item['origin'].get('upstream', item['source'])
         repo, current = origin['repo'], origin['commit']
@@ -132,8 +137,10 @@ def check_catalog(catalog, api):
         except Exception as exc:
             row.update(status='check_failed', error_type=type(exc).__name__,
                        reason=str(exc) if isinstance(exc, CheckError) else 'Upstream response/query failed')
-    counts = {status: sum(row['status'] == status for row in results)
-              for status in ('update_available', 'no_change', 'no_relevant_change', 'manual', 'check_failed')}
+    statuses = ['update_available', 'no_change', 'no_relevant_change', 'manual', 'check_failed']
+    if active_refs is not None:
+        statuses.append('inactive')
+    counts = {status: sum(row['status'] == status for row in results) for status in statuses}
     digest = hashlib.sha256(json.dumps(catalog, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     return {'schema_version': 1, 'kind': 'claudespace-update-check', 'catalog': catalog['name'],
             'catalog_fingerprint': digest, 'checked_at': datetime.now(timezone.utc).isoformat(),

@@ -11,6 +11,7 @@ import subprocess
 import tempfile
 from urllib.parse import unquote
 
+from active_resources import collect_active_resources
 from build_candidates import write_json
 from candidate_sources import git
 from check_updates import CheckError, GitHub
@@ -52,6 +53,53 @@ def private_items(root, rules, selected_catalog=None):
     return result
 
 
+def active_profile_policy():
+    value = json.loads((TRUSTED_ROOT / 'ci/active-profile-source.json').read_text())
+    require(value.get('schema_version') == 1
+            and set(value) == {'schema_version', 'repository', 'ref', 'key_env'}
+            and isinstance(value.get('repository'), str) and REPO.fullmatch(value['repository'])
+            and isinstance(value.get('ref'), str) and bool(value['ref'])
+            and '/' not in value['ref'] and not value['ref'].startswith('-')
+            and isinstance(value.get('key_env'), str) and re.fullmatch(r'CLAUDESPACE_[A-Z0-9_]+', value['key_env']),
+            'Invalid active profile source policy')
+    return value
+
+
+def _write_ssh_key(workspace, name, key_value):
+    key_file = workspace / (name + '.key')
+    with os.fdopen(os.open(key_file, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), 'w') as stream:
+        stream.write(key_value.rstrip() + '\n')
+    return key_file
+
+
+def _ssh_command(key_file):
+    return shlex.join(['ssh', '-F', '/dev/null', '-p', '443', '-o', 'Hostname=ssh.github.com',
+                       '-o', 'HostKeyAlias=github.com', '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes',
+                       '-o', 'IdentityAgent=none', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=20',
+                       '-o', 'GlobalKnownHostsFile=/dev/null', '-o', 'UserKnownHostsFile=' + str(TRUSTED_ROOT / 'ci/github-known-hosts'),
+                       '-i', str(key_file)])
+
+
+def load_active_resources(profile_policy, key_value):
+    """Read active machine profiles over hardened SSH inside a temporary directory."""
+    require(isinstance(key_value, str) and key_value.startswith('-----BEGIN OPENSSH PRIVATE KEY-----'),
+            'Configured active profile key is missing or invalid')
+    repo = profile_policy['repository']
+    ref = 'refs/heads/' + profile_policy['ref']
+    with tempfile.TemporaryDirectory(prefix='claudespace-active-profile-') as directory:
+        workspace = Path(directory)
+        key_file = _write_ssh_key(workspace, 'active-profile', key_value)
+        key_value = None
+        checkout = workspace / 'checkout'
+        checkout.mkdir()
+        git(checkout, 'init', '--quiet')
+        git(checkout, 'check-ref-format', ref)
+        ssh = _ssh_command(key_file)
+        git(checkout, '-c', 'core.sshCommand=' + ssh, 'fetch', '--quiet', '--no-tags', 'git@github.com:' + repo + '.git', ref)
+        git(checkout, 'checkout', '--quiet', 'FETCH_HEAD')
+        return collect_active_resources(checkout)
+
+
 def take_keys(rules):
     """Remove all allowlisted secrets before any child process, even for public-only work."""
     names = {entry['key_env'] for entry in rules.values()}
@@ -70,18 +118,12 @@ def private_sources(root, rules, *, tracking=False, selected_catalog=None, toler
             try:
                 key_value = keys.pop(repo, '')
                 require(key_value.startswith('-----BEGIN OPENSSH PRIVATE KEY-----'), 'Configured private source key is missing or invalid')
-                key_file = workspace / (repo.replace('/', '--') + '.key')
-                with os.fdopen(os.open(key_file, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), 'w') as stream:
-                    stream.write(key_value.rstrip() + '\n')
+                key_file = _write_ssh_key(workspace, repo.replace('/', '--'), key_value)
                 key_value = None
                 checkout = workspace / repo.replace('/', '--'); checkout.mkdir()
                 git(checkout, 'init', '--quiet')
                 git(checkout, 'remote', 'add', 'origin', 'https://github.com/' + repo + '.git')
-                ssh = shlex.join(['ssh', '-F', '/dev/null', '-p', '443', '-o', 'Hostname=ssh.github.com',
-                                 '-o', 'HostKeyAlias=github.com', '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes',
-                                 '-o', 'IdentityAgent=none', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=20',
-                                 '-o', 'GlobalKnownHostsFile=/dev/null', '-o', 'UserKnownHostsFile=' + str(TRUSTED_ROOT / 'ci/github-known-hosts'),
-                                 '-i', str(key_file)])
+                ssh = _ssh_command(key_file)
                 def fetch(ref):
                     git(checkout, '-c', 'core.sshCommand=' + ssh, 'fetch', '--quiet', '--no-tags', 'git@github.com:' + repo + '.git', ref)
                     return git(checkout, 'rev-parse', 'FETCH_HEAD').decode().strip()
@@ -165,10 +207,14 @@ def main(argv=None):
     parser.add_argument('--report', type=Path)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--catalog')
+    parser.add_argument('--active-filter', action='store_true')
     args = parser.parse_args(argv)
     rules = policy()
     keys = take_keys(rules)
+    profile_policy = active_profile_policy()
+    profile_key = os.environ.pop(profile_policy['key_env'], '')
     if args.operation == 'validate':
+        profile_key = ''
         if not args.report:
             parser.error('--report is required')
         result = validate_sources(args.root, args.report, rules, keys=keys)
@@ -185,9 +231,12 @@ def main(argv=None):
                 and not args.output.resolve().is_relative_to(args.root.resolve()), 'Use a new output outside the checkout')
         base = clean_head(args.root.resolve())
         output_allowed = True
+        active_refs = load_active_resources(profile_policy, profile_key) if args.active_filter else None
+        profile_key = ''
         with private_sources(args.root.resolve(), rules, tracking=True, selected_catalog=args.catalog, tolerate_errors=True, keys=keys) as (prepared, targets):
             report = run_updates.run(args.root, args.output, selected_catalog=args.catalog, prepared=prepared, fetch=True,
-                                     private_repos=rules, api=SourceAPI(prepared, targets, GitHub(os.environ.get('GITHUB_TOKEN')), rules))
+                                     private_repos=rules, api=SourceAPI(prepared, targets, GitHub(os.environ.get('GITHUB_TOKEN')), rules),
+                                     active_refs=active_refs)
         return run_updates.emit(report, args.output)
     except (ValueError, OSError, RuntimeError, KeyError, TypeError, subprocess.SubprocessError):
         print('更新候选未准备完成：请检查私有来源密钥、固定提交和分支配置。')
