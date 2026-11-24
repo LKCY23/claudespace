@@ -695,6 +695,45 @@
         "strategy": "branch",
         "target": "main"
       }
+    },
+    "folio": {
+      "kind": "plugin",
+      "description": "Frontend development, UI design, and ECharts data visualization workflow plugin with 5-scenario routing, DESIGN.md tokens, static UI checks, and adaptive visual verification.",
+      "origin": {
+        "type": "self",
+        "author": "LKCY23"
+      },
+      "maintenance": {
+        "owner": "ours",
+        "mode": "original"
+      },
+      "source": {
+        "kind": "external",
+        "repo": "LKCY23/folio",
+        "commit": "55999ff0e9c72e6a1d457ef75792250adcd52675",
+        "path": "."
+      },
+      "compatibility": {
+        "claude-code": {
+          "mode": "native",
+          "entry": ".claude-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "codex": {
+          "mode": "native",
+          "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        }
+      },
+      "requires": {},
+      "update": {
+        "strategy": "branch",
+        "target": "main"
+      }
     }
   }
 }
