@@ -710,7 +710,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/folio",
-        "commit": "55999ff0e9c72e6a1d457ef75792250adcd52675",
+        "commit": "9860f84e5fb72da941ac14e41384520d6d69314a",
         "path": "."
       },
       "compatibility": {
@@ -724,6 +724,13 @@
         "codex": {
           "mode": "native",
           "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "plugin.json",
           "validation": {
             "status": "not-evaluated"
           }
