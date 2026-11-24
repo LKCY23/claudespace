@@ -427,7 +427,7 @@
         "author": "pbakaus",
         "upstream": {
           "repo": "pbakaus/impeccable",
-          "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+          "commit": "b49177d32788f2dc585c42831d845dacf1ebed2c",
           "path": ".agents/skills/impeccable"
         }
       },
@@ -438,7 +438,7 @@
       "source": {
         "kind": "external",
         "repo": "pbakaus/impeccable",
-        "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+        "commit": "b49177d32788f2dc585c42831d845dacf1ebed2c",
         "path": ".agents/skills/impeccable"
       },
       "compatibility": {
