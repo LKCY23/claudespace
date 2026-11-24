@@ -375,7 +375,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/agent-session-migration",
-        "commit": "3af8bdcf9f5f1483a57cf68d3cfc9d732b031d1c",
+        "commit": "5d2c56b1662a4c5da1c95949ad17643a7d304b19",
         "path": "."
       },
       "compatibility": {
@@ -433,7 +433,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/clarity",
-        "commit": "9e5bd6c52eed918b99af8ffa40991b4999df04dd",
+        "commit": "df180b7a8767d7aafec95b25511e39f087d04df7",
         "path": "release/plugin"
       },
       "compatibility": {
@@ -710,7 +710,7 @@
       "source": {
         "kind": "external",
         "repo": "LKCY23/folio",
-        "commit": "55999ff0e9c72e6a1d457ef75792250adcd52675",
+        "commit": "9860f84e5fb72da941ac14e41384520d6d69314a",
         "path": "."
       },
       "compatibility": {
@@ -724,6 +724,13 @@
         "codex": {
           "mode": "native",
           "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "plugin.json",
           "validation": {
             "status": "not-evaluated"
           }

@@ -1,7 +1,5 @@
 name: Resource updates
 on:
-  push:
-    branches: [main]
   schedule:
     - cron: '17 1 * * 1'
   workflow_dispatch:
@@ -12,6 +10,10 @@ on:
         default: ''
       publish:
         description: 'Create or refresh draft PRs after candidate validation'
+        type: boolean
+        default: false
+      all_resources:
+        description: 'Check all non-manual resources instead of only machine-enabled ones'
         type: boolean
         default: false
 permissions:
@@ -45,10 +47,13 @@ jobs:
           CLAUDESPACE_GOAL_AUTHORING_KEY: ${{ secrets.CLAUDESPACE_GOAL_AUTHORING_KEY }}
           CLAUDESPACE_CLAUDE_SANCTUARY_KEY: ${{ secrets.CLAUDESPACE_CLAUDE_SANCTUARY_KEY }}
           CLAUDESPACE_CODEX_GUIDANCE_KEY: ${{ secrets.CLAUDESPACE_CODEX_GUIDANCE_KEY }}
+          CLAUDESPACE_CONFIG_DATA_KEY: ${{ secrets.CLAUDESPACE_CONFIG_DATA_KEY }}
           CATALOG: ${{ inputs.catalog }}
+          ALL_RESOURCES: ${{ inputs.all_resources }}
         run: |
           args=(prepare --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/claudespace-updates")
           if [[ -n "$CATALOG" ]]; then args+=(--catalog "$CATALOG"); fi
+          if [[ "$ALL_RESOURCES" != "true" ]]; then args+=(--active-filter); fi
           python scripts/private_ci.py "${args[@]}"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
@@ -62,7 +67,7 @@ jobs:
         run: exit 1
   pull_requests:
     needs: prepare
-    if: ${{ always() && needs.prepare.outputs.ready == 'true' && (github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish == true) && github.ref_name == github.event.repository.default_branch }}
+    if: ${{ always() && needs.prepare.outputs.ready == 'true' && (github.event_name == 'schedule' || inputs.publish == true) && github.ref_name == github.event.repository.default_branch }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
