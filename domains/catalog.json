@@ -390,7 +390,7 @@
         "author": "Jarrod Watts",
         "upstream": {
           "repo": "jarrodwatts/claude-hud",
-          "commit": "5621429b84ea2503185221244c43a06797bfd05e",
+          "commit": "b86e1c3e5255880578de4b7cc87dc383228c2a18",
           "path": "."
         }
       },
@@ -401,7 +401,7 @@
       "source": {
         "kind": "external",
         "repo": "jarrodwatts/claude-hud",
-        "commit": "5621429b84ea2503185221244c43a06797bfd05e",
+        "commit": "b86e1c3e5255880578de4b7cc87dc383228c2a18",
         "path": "."
       },
       "compatibility": {
@@ -427,7 +427,7 @@
         "author": "pbakaus",
         "upstream": {
           "repo": "pbakaus/impeccable",
-          "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+          "commit": "b49177d32788f2dc585c42831d845dacf1ebed2c",
           "path": ".agents/skills/impeccable"
         }
       },
@@ -438,7 +438,7 @@
       "source": {
         "kind": "external",
         "repo": "pbakaus/impeccable",
-        "commit": "f75ee2a201cefd39c3bd54cf0ac1f141d82119e2",
+        "commit": "b49177d32788f2dc585c42831d845dacf1ebed2c",
         "path": ".agents/skills/impeccable"
       },
       "compatibility": {
@@ -2686,7 +2686,7 @@
         "author": "MiniMax-AI",
         "upstream": {
           "repo": "MiniMax-AI/cli",
-          "commit": "235e8ce73655ee6f2005a6e1d4856203b1209824",
+          "commit": "ae29aae57b05c2140c7ea6aba0a852763ffe7859",
           "path": "skill"
         },
         "baseline": "Historical source matched to installed content; package UPSTREAM.json records originals and reviewed local repairs."
