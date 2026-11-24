@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "repository": "LKCY23/claude-config-data",
+  "ref": "master",
+  "key_env": "CLAUDESPACE_CONFIG_DATA_KEY"
+}
