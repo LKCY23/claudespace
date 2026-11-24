@@ -93,12 +93,16 @@
         },
         "agent-led-swe@claudespace-personal": {
           "category": "devtools"
+        },
+        "folio@claudespace-personal": {
+          "category": "devtools"
         }
       },
       "plugins": [
         "aris@claudespace-external",
         "autoresearchclaw@claudespace-external",
-        "clarity@claudespace-personal"
+        "clarity@claudespace-personal",
+        "folio@claudespace-personal"
       ]
     },
     {

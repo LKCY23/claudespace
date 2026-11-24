@@ -108,6 +108,17 @@
       ]
     },
     {
+      "name": "folio",
+      "description": "Frontend development, UI design, and ECharts data visualization workflow plugin with 5-scenario routing, DESIGN.md tokens, static UI checks, and adaptive visual verification.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/LKCY23/folio",
+        "path": ".",
+        "sha": "55999ff0e9c72e6a1d457ef75792250adcd52675"
+      },
+      "category": "devtools"
+    },
+    {
       "name": "github",
       "description": "Use when the user wants to manage a GitHub repository workflow through git and gh, including local branch and sync operations, pull requests, issues, and CI runs.",
       "source": "./domains/legacy-plugins/packages/github",
