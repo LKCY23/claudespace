@@ -94,7 +94,7 @@
         "source": "git-subdir",
         "url": "https://github.com/LKCY23/clarity",
         "path": "release/plugin",
-        "sha": "9e5bd6c52eed918b99af8ffa40991b4999df04dd"
+        "sha": "df180b7a8767d7aafec95b25511e39f087d04df7"
       }
     },
     {
@@ -114,7 +114,7 @@
         "source": "git-subdir",
         "url": "https://github.com/LKCY23/folio",
         "path": ".",
-        "sha": "55999ff0e9c72e6a1d457ef75792250adcd52675"
+        "sha": "9860f84e5fb72da941ac14e41384520d6d69314a"
       },
       "category": "devtools"
     },

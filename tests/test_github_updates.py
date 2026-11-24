@@ -325,6 +325,7 @@ class WorkflowTests(unittest.TestCase):
                 for step in job.get('steps', []):
                     if 'uses' in step:self.assertRegex(step['uses'],r'^actions/[\w-]+@[0-9a-f]{40}$')
         value=self.read('resource-updates.yml')
+        self.assertNotIn('push',value['on'])
         self.assertEqual(value['on']['workflow_dispatch']['inputs']['publish']['default'],'false')
         self.assertEqual(value['on']['schedule'][0]['cron'],'17 1 * * 1')
     def test_baseline_only_follows_final_validation_and_has_no_write_token(self):
