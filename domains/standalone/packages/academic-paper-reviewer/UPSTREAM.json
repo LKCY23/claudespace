@@ -122,7 +122,9 @@
     },
     "shared/agents/compliance_agent.md": {
       "upstream_path": "shared/agents/compliance_agent.md",
-      "sha256": "cf51ff7a3bf3fb40fa072e465974fdd934c4922392f57cb6609f24bd4cbef0b9"
+      "sha256": "901677ebb59de09fd6912eca539956c6d97bdcfef68447538b473c4af4a068e8",
+      "upstream_sha256": "cf51ff7a3bf3fb40fa072e465974fdd934c4922392f57cb6609f24bd4cbef0b9",
+      "upstream_executable": false
     },
     "shared/artifact_reproducibility_pattern.md": {
       "upstream_path": "shared/artifact_reproducibility_pattern.md",
@@ -146,7 +148,9 @@
     },
     "shared/compliance_checkpoint_protocol.md": {
       "upstream_path": "shared/compliance_checkpoint_protocol.md",
-      "sha256": "3ce124b711747e2921ee5ee04fb18fced3d2ebea1c9b3df9fc1953f0da36e6ef"
+      "sha256": "153008fd5b042d7383e9c16ed77902653690197bb3907b9eb45e5e7e2a566ad9",
+      "upstream_sha256": "3ce124b711747e2921ee5ee04fb18fced3d2ebea1c9b3df9fc1953f0da36e6ef",
+      "upstream_executable": false
     },
     "shared/compliance_report.schema.json": {
       "upstream_path": "shared/compliance_report.schema.json",
@@ -610,7 +614,9 @@
     },
     "shared/handoff_schemas.md": {
       "upstream_path": "shared/handoff_schemas.md",
-      "sha256": "a75f2c0c83d68b475ba0332d8fb7f655375d56d04c3f6a6d8ec5bf28e1f68a32"
+      "sha256": "949f757448525ef0775f3dda272172241607aba42cac2c5a804be744a72741ac",
+      "upstream_sha256": "a75f2c0c83d68b475ba0332d8fb7f655375d56d04c3f6a6d8ec5bf28e1f68a32",
+      "upstream_executable": false
     },
     "shared/human_subjects_authority_registry.json": {
       "upstream_path": "shared/human_subjects_authority_registry.json",
@@ -626,7 +632,9 @@
     },
     "shared/output_language_pair.md": {
       "upstream_path": "shared/output_language_pair.md",
-      "sha256": "d0fd4a76c56609c9c03ae51e5a55cd932dc29fc2ff5dc957eb211da47cd2e705"
+      "sha256": "3bd4fd09aace7450842e9cf4ec5d9f648a8e53b781ed6af35a2ac6e98ec0f97a",
+      "upstream_sha256": "d0fd4a76c56609c9c03ae51e5a55cd932dc29fc2ff5dc957eb211da47cd2e705",
+      "upstream_executable": false
     },
     "shared/policy_data/nature_policy.md": {
       "upstream_path": "shared/policy_data/nature_policy.md",

@@ -223,7 +223,7 @@ AI-assisted assessment's primary advantage lies in the immediacy of feedback, re
 | `title` | string | Paper title |
 | `abstract` | object | `{english: string, chinese: string}` (chinese is required only if bilingual) |
 | `authors` | list[Author] | Author information with CRediT roles |
-| `keywords` | object | `{en: list[string], zh_tw: list[string]}` bilingual keywords; per-language counts follow the regime table in [`academic-paper/references/abstract_writing_guide.md`](../academic-paper/references/abstract_writing_guide.md) (#862 Phase 1 — this row references the guide's regime table instead of restating a count) |
+| `keywords` | object | `{en: list[string], zh_tw: list[string]}` bilingual keywords; per-language counts follow the regime table in `academic-paper/references/abstract_writing_guide.md` (#862 Phase 1 — this row references the guide's regime table instead of restating a count) |
 | `sections` | list[Section] | Ordered paper sections |
 | `references` | list[Reference] | Full reference list with cross-referencing |
 | `total_word_count` | integer | Total word count (excluding references) |
@@ -234,7 +234,7 @@ AI-assisted assessment's primary advantage lies in the immediacy of feedback, re
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_language_pair` | string | *(optional, #862 Phase 1)* Opaque registry token declaring the run's two abstract languages. Initially only `zh-tw-en` — L1 Traditional Chinese, L2 English. Registry and language roles: [`shared/output_language_pair.md`](output_language_pair.md). Abstract length and keyword counts: the regime table in [`academic-paper/references/abstract_writing_guide.md`](../academic-paper/references/abstract_writing_guide.md). **Omission = the legacy state** = the legacy object keys and the heading literals reproduce exactly and the serialized key is omitted, so a pre-#862 handoff keeps the same keys, headings, and serialized shape. A present value outside the registry, or a non-string / `null` value, fails visibly naming that registry — never a silent fallback to the default. The legacy Schema-4 object keys are untouched: `abstract: {english, chinese}`, `keywords: {en, zh_tw}`. |
+| `output_language_pair` | string | *(optional, #862 Phase 1)* Opaque registry token declaring the run's two abstract languages. Initially only `zh-tw-en` — L1 Traditional Chinese, L2 English. Registry and language roles: [`shared/output_language_pair.md`](output_language_pair.md). Abstract length and keyword counts: the regime table in `academic-paper/references/abstract_writing_guide.md`. **Omission = the legacy state** = the legacy object keys and the heading literals reproduce exactly and the serialized key is omitted, so a pre-#862 handoff keeps the same keys, headings, and serialized shape. A present value outside the registry, or a non-string / `null` value, fails visibly naming that registry — never a silent fallback to the default. The legacy Schema-4 object keys are untouched: `abstract: {english, chinese}`, `keywords: {en, zh_tw}`. |
 
 ### Section Object
 
@@ -731,9 +731,9 @@ conformance, not a manuscript verdict or integrity/checkpoint input. See
 | `upstream_dependencies` | list[string] | Version labels of artifacts this one depends on |
 | `repro_lock` | object \| null | configuration lockfile for artifact reproducibility. See [`artifact_reproducibility_pattern.md`](artifact_reproducibility_pattern.md). `null` = honest opt-out. Required from v3.3.5+ — omitted key fails lint. |
 | `compliance_history` | list[object] | Append-only audit trail of `compliance_report` entries (Schema 12). Added v3.4.0+. See [Schema 12](#schema-12--compliance-report-v340) and [`shared/compliance_report.schema.json`](compliance_report.schema.json). |
-| `reset_boundary` | list[object] | Append-only ledger. Two entry kinds: `boundary` (recorded at FULL checkpoints when `ARS_PASSPORT_RESET=1`) and `resume` (recorded when `resume_from_passport` consumes a boundary). Added v3.6.3+. Entry shape: [`shared/contracts/passport/reset_ledger_entry.schema.json`](contracts/passport/reset_ledger_entry.schema.json). See [`academic-pipeline/references/passport_as_reset_boundary.md`](../academic-pipeline/references/passport_as_reset_boundary.md). |
+| `reset_boundary` | list[object] | Append-only ledger. Two entry kinds: `boundary` (recorded at FULL checkpoints when `ARS_PASSPORT_RESET=1`) and `resume` (recorded when `resume_from_passport` consumes a boundary). Added v3.6.3+. Entry shape: [`shared/contracts/passport/reset_ledger_entry.schema.json`](contracts/passport/reset_ledger_entry.schema.json). See `academic-pipeline/references/passport_as_reset_boundary.md`. |
 | `inquiry_ledger_ref` | object | Optional pointer to the separate opt-in `inquiry-branch-ledger/1.0` user-project artifact. Closed shape: `{ledger_path, ledger_version, content_sha256}` per [`shared/contracts/passport/inquiry_ledger_ref.schema.json`](contracts/passport/inquiry_ledger_ref.schema.json). It carries no branch copy. A missing or digest-mismatched target is `LEDGER-BINDING-BROKEN`; a file without this pointer is ignored with a visible notice. Added #743. |
-| `literature_corpus` | list[object] | Optional append-friendly literature corpus. Each entry conforms to [`shared/contracts/passport/literature_corpus_entry.schema.json`](contracts/passport/literature_corpus_entry.schema.json). Produced by user-written adapters (see [`academic-pipeline/references/adapters/overview.md`](../academic-pipeline/references/adapters/overview.md)); ARS does not produce these entries itself. Added v3.6.4+. |
+| `literature_corpus` | list[object] | Optional append-friendly literature corpus. Each entry conforms to [`shared/contracts/passport/literature_corpus_entry.schema.json`](contracts/passport/literature_corpus_entry.schema.json). Produced by user-written adapters (see `academic-pipeline/references/adapters/overview.md`); ARS does not produce these entries itself. Added v3.6.4+. |
 | `audit_artifact` | list[object] | Optional append-only ledger of cross-model audit runs for v3.6.7 downstream-agent deliverables. Each entry conforms to [`shared/contracts/passport/audit_artifact_entry.schema.json`](contracts/passport/audit_artifact_entry.schema.json). Produced by the pipeline orchestrator after Layer 2 + Layer 3 verification of wrapper-emitted proposal entries; only `persisted` entries are stored here. Added v3.6.7+. |
 | `slr_lineage` | boolean | Run-level provenance flag set by `pipeline_orchestrator_agent` at the Stage 1 → Stage 2 handoff. `true` iff any stage in this run history was produced by `deep-research` in systematic-review mode. Consumed by `disclosure` mode renderer (`--policy-anchor=prisma-trAIce` track gate per `policy_anchor_disclosure_protocol.md` §3.1). Absence = `false` = cold-start path (renderer requires explicit `mode=` per §4.3 G2 invariant fallback rule). Added v3.7.4+. See [Run-level lineage signal (v3.7.4)](#run-level-lineage-signal-v374) below. |
 | `experiment_intake_declaration` | object | Passport-level intake decision (#260, D7). `status` ∈ `{experiments_declared, no_experiments_declared, legacy_unknown}` + `declared_at` + `declared_by: scholar` + optional `scholar_answer` (the scholar's words, unchanged; a non-empty string when present, #925). Set at intake by the intake/orchestrator layer for that entry path, NOT by the three manifest writers; in pipeline runs the orchestrator asks the scholar after Stage 1 or at a later entry point (`academic-pipeline/agents/pipeline_orchestrator_agent.md` § Experiment Intake Question (#925)). **Fail-closed**: a passport treated-as-post-#260 (the default — only a passport-level `repro_lock.ars_version` proven `< 3.12.0`, the release that shipped #260, is `legacy_unknown`) with this field ABSENT, or with `status: legacy_unknown`, is a gate FAIL. Even a literature-only run must carry a declaration with `status: no_experiments_declared`, `declared_by: scholar`, and `declared_at`. EP-INV-4 enforces declaration↔provenance symmetry. See [Experiment Provenance Intake (#260)](#experiment-provenance-intake-260) below. |
@@ -822,17 +822,17 @@ reset_boundary:
 
 Consumers match `resume_from_passport=<hash>` against `boundary` entries. A `boundary` is **awaiting resume** iff no later `resume` entry carries `consumes_hash == <boundary hash>`. Hash mismatch on resume is a hard error.
 
-See [`academic-pipeline/references/passport_as_reset_boundary.md`](../academic-pipeline/references/passport_as_reset_boundary.md) for the full protocol.
+See `academic-pipeline/references/passport_as_reset_boundary.md` for the full protocol.
 
 ### Literature Corpus Input Port (v3.6.4)
 
 The optional `literature_corpus[]` field is Schema 9's input port for user-owned literature. Each entry is a bibliographic record conforming to `literature_corpus_entry.schema.json` (CSL-JSON author format, β required set).
 
-ARS does not produce these entries. User-written adapters read their own corpus source (Zotero, Obsidian, folder, Notion, etc.) and emit a passport with `literature_corpus[]` populated. Three reference adapters ship with v3.6.4 under [`scripts/adapters/`](../scripts/adapters/).
+ARS does not produce these entries. User-written adapters read their own corpus source (Zotero, Obsidian, folder, Notion, etc.) and emit a passport with `literature_corpus[]` populated. Three reference adapters ship with v3.6.4 under `scripts/adapters/`.
 
-Consumer integration ships in v3.6.5: `bibliography_agent` (deep-research, Phase 1) and `literature_strategist_agent` (academic-paper, Phase 1) read `literature_corpus[]` via the corpus-first, search-fills-gap flow. See [`academic-pipeline/references/literature_corpus_consumers.md`](../academic-pipeline/references/literature_corpus_consumers.md) for the full consumer protocol, the four Iron Rules, and per-consumer reading instructions.
+Consumer integration ships in v3.6.5: `bibliography_agent` (deep-research, Phase 1) and `literature_strategist_agent` (academic-paper, Phase 1) read `literature_corpus[]` via the corpus-first, search-fills-gap flow. See `academic-pipeline/references/literature_corpus_consumers.md` for the full consumer protocol, the four Iron Rules, and per-consumer reading instructions.
 
-See [`academic-pipeline/references/adapters/overview.md`](../academic-pipeline/references/adapters/overview.md) for the adapter contract.
+See `academic-pipeline/references/adapters/overview.md` for the adapter contract.
 
 ### Tortured-Phrase Advisory Extension (#660)
 
@@ -904,7 +904,7 @@ revision stales both. See
 
 Schema 9 gains an optional append-only `audit_artifact[]` ledger recording cross-model audit runs that gate the three v3.6.7 downstream agents (`synthesis_agent`, `research_architect_agent` survey-designer mode, `report_compiler_agent` abstract-only mode). Each entry conforms to [`shared/contracts/passport/audit_artifact_entry.schema.json`](contracts/passport/audit_artifact_entry.schema.json).
 
-The ledger stores only `persisted` entries — those merged by `pipeline_orchestrator_agent` after Layer 2 (JSONL schema) + Layer 3 (sidecar metadata) anti-fake-audit checks pass per the eleven gating checks at [`docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md`](../docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md) §5.2. Wrapper-emitted `proposal` entries live under `audit_artifacts/<run_id>.audit_artifact_entry.json` until orchestrator consumes them; they never reach the passport.
+The ledger stores only `persisted` entries — those merged by `pipeline_orchestrator_agent` after Layer 2 (JSONL schema) + Layer 3 (sidecar metadata) anti-fake-audit checks pass per the eleven gating checks at `docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md` §5.2. Wrapper-emitted `proposal` entries live under `audit_artifacts/<run_id>.audit_artifact_entry.json` until orchestrator consumes them; they never reach the passport.
 
 ```yaml
 audit_artifact:
@@ -940,9 +940,9 @@ audit_artifact:
 - Multiple entries for the same `(stage, agent, deliverable_sha)` represent multiple audit rounds; orchestrator selects the latest by `verified_at` for verdict reads.
 - If `deliverable_sha` changes (deliverable mutated), prior entries become stale but remain as audit history; orchestrator only honors entries whose `deliverable_sha` matches the current deliverable.
 
-**This mirrors the v3.6.3 `reset_boundary[]` append-only pattern**: history preserved, freshness computed by ledger scan. Deletion or reordering is forbidden; lint at `scripts/check_audit_artifact_consistency.py` enforces the invariant family at [`docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md`](../docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md) §3.7.
+**This mirrors the v3.6.3 `reset_boundary[]` append-only pattern**: history preserved, freshness computed by ledger scan. Deletion or reordering is forbidden; lint at `scripts/check_audit_artifact_consistency.py` enforces the invariant family at `docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md` §3.7.
 
-For the orchestrator-side gate procedure (Path A latest-by-`verified_at` selection, Path B proposal merge after Layer 2 + Layer 3 verification), the canonical contract is [`docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md`](../docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md) §5.6 (Path A/B fall-through with the §5.6 A1.5 superseding-proposal preflight) plus §5.2 (eleven Layer 2 + Layer 3 gating checks). Implementation lands as a subsection of `academic-pipeline/agents/pipeline_orchestrator_agent.md` (Phase 6.6 deliverable). For the resume-time re-verification semantics, see [`academic-pipeline/references/passport_as_reset_boundary.md`](../academic-pipeline/references/passport_as_reset_boundary.md).
+For the orchestrator-side gate procedure (Path A latest-by-`verified_at` selection, Path B proposal merge after Layer 2 + Layer 3 verification), the canonical contract is `docs/design/2026-04-30-ars-v3.6.7-step-6-orchestrator-hooks-spec.md` §5.6 (Path A/B fall-through with the §5.6 A1.5 superseding-proposal preflight) plus §5.2 (eleven Layer 2 + Layer 3 gating checks). Implementation lands as a subsection of `academic-pipeline/agents/pipeline_orchestrator_agent.md` (Phase 6.6 deliverable). For the resume-time re-verification semantics, see `academic-pipeline/references/passport_as_reset_boundary.md`.
 
 ### Experiment Provenance Intake (#260)
 
@@ -989,7 +989,7 @@ Schema 9 gains the **intake + alignment** layer for experiments — NOT an execu
 
 **Invariants** (lint-enforced in `scripts/check_claim_audit_consistency.py`): EP-INV-1 (experiment_id unique/passport) · EP-INV-2 (planned_experiment_ids resolve; rename + forward-reference guard) · EP-INV-3 (experiment ids ⟹ empirical; mixed literature+experiment allowed) · EP-INV-4 (declaration↔provenance symmetry) · EP-INV-5 (declaration well-formedness when present) · EA-INV-1 (finding_id unique) · EA-INV-2 (alignment row references resolve; dangling id = structural FAIL, never a verdict). Shape-only validation of a single entry is also available via `scripts/check_experiment_provenance.py`.
 
-See [`docs/design/2026-06-08-260-experiment-provenance-intake-spec.md`](../docs/design/2026-06-08-260-experiment-provenance-intake-spec.md) for the full design (7 decisions D1–D7) and [`examples/passport_with_experiment_provenance.yaml`](../examples/passport_with_experiment_provenance.yaml) for a worked passport.
+See `docs/design/2026-06-08-260-experiment-provenance-intake-spec.md` for the full design (7 decisions D1–D7) and `examples/passport_with_experiment_provenance.yaml` for a worked passport.
 
 ### Run-level lineage signal (v3.7.4)
 
@@ -1003,11 +1003,11 @@ slr_lineage: true   # any pipeline stage was deep-research in systematic-review 
 
 - `true` iff `bool(incoming_passport.slr_lineage) or any(stage.skill == "deep-research" and stage.mode in {"systematic-review", "slr"} for stage in state_tracker.stages.values())` at the time the passport is written. The OR is monotonic — a true value persists across resume / mid-entry passports whose `state_tracker.stages` was reconstructed from the ledger and may be empty. Run-level, not artifact-level — distinct from `origin_mode` which records the directly-producing skill's mode.
 - Producer: `pipeline_orchestrator_agent` writes the field at every handoff transition; in practice only the Stage 1 → Stage 2 transition can flip `false` → `true`, and the OR keeps the value monotonic thereafter. Reference helper: `scripts/slr_lineage.py` `emit(stages, incoming_slr_lineage)` (or the underlying `resolve_from_stages(stages)` when callers need the pre-OR fragment alone).
-- Consumer: `disclosure` mode renderer reads it as `RendererInput.slr_lineage` to dispatch `--policy-anchor=prisma-trAIce` per the §4.3 G2 invariant track gate documented in [`academic-paper/references/policy_anchor_disclosure_protocol.md`](../academic-paper/references/policy_anchor_disclosure_protocol.md) §3.1.
+- Consumer: `disclosure` mode renderer reads it as `RendererInput.slr_lineage` to dispatch `--policy-anchor=prisma-trAIce` per the §4.3 G2 invariant track gate documented in `academic-paper/references/policy_anchor_disclosure_protocol.md` §3.1.
 - Backward compat: passports written before v3.7.4 lack the field; renderer treats absence as `false` (cold-start path requiring explicit `mode_param='systematic-review'`). Identical to pre-v3.7.4 behavior.
 - G1 boundary: this is a passport-level (run-level provenance) field, distinct from corpus-entry-level fields. The §4.4 #11 G1 invariant scope is `literature_corpus_entry.schema.json` (corpus entry data schema, frozen by Decision Doc §2.1); passport-schema extensions follow the v3.6.3 / v3.6.4 / v3.6.7 precedent and are permitted per Decision Doc §4.4 #11.
 
-Spec: [`docs/design/2026-05-15-issue-111-slr-lineage-emission-design.md`](../docs/design/2026-05-15-issue-111-slr-lineage-emission-design.md). Conformance test: `scripts/test_slr_lineage_emission.py`.
+Spec: `docs/design/2026-05-15-issue-111-slr-lineage-emission-design.md`. Conformance test: `scripts/test_slr_lineage_emission.py`.
 
 ### Claim-Faithfulness Audit Aggregates (v3.8)
 
@@ -1030,7 +1030,7 @@ v3.8 introduces six passport aggregates around the L3 (claim-faithfulness) audit
 
 Cross-field invariants (INV-1..INV-18 / M-INV-1..M-INV-4 / U-INV-1..U-INV-4 / D-INV-1..D-INV-4 / CV-INV-1..CV-INV-4 / S-INV-1..S-INV-4) are lint-enforced by `scripts/check_claim_audit_consistency.py` because the conditional matrix relating judgment / audit_status / defect_stage / ref_retrieval_method exceeds what JSON Schema can express. Audit-side producer: `claim_ref_alignment_audit_agent` (`academic-pipeline/agents/`). Consumer: `formatter_agent` REFUSE rules 6-10 (see v3.8 spec §5 mode flag rationale). Default OFF for v3.8.0 — ramp-on plan deferred to post-calibration evidence.
 
-Spec: [`docs/design/2026-05-15-issue-103-claim-alignment-audit-spec.md`](../docs/design/2026-05-15-issue-103-claim-alignment-audit-spec.md) + decision doc [`2026-05-15-issue-103-claim-alignment-audit-decision.md`](../docs/design/2026-05-15-issue-103-claim-alignment-audit-decision.md) (D1-D6 settled).
+Spec: `docs/design/2026-05-15-issue-103-claim-alignment-audit-spec.md` + decision doc `2026-05-15-issue-103-claim-alignment-audit-decision.md` (D1-D6 settled).
 
 ---
 

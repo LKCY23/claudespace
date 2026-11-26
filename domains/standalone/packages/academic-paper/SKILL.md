@@ -647,7 +647,7 @@ On a `full`-mode re-check, verify the sources as usual and record conflicts in I
 
 ## Output Language
 
-Follows the user's language. Academic terminology is kept in English. The bilingual abstract follows the declared output language pair (`output_language_pair`) — nothing more. The pair selects the two abstract languages; it is not a body-language setting and not an abstract-cardinality setting (Bilingual / EN-only / zh-TW-only is a separate intake answer). The default entry `zh-tw-en` is Traditional Chinese (L1) + English (L2) — the pre-#862 pair, so a run that omits the field reproduces the legacy object keys and the legacy heading literals and omits the serialized key. Registry and language roles: [`shared/output_language_pair.md`](../shared/output_language_pair.md). Abstract length and keyword counts: the regime table in [`references/abstract_writing_guide.md`](references/abstract_writing_guide.md).
+Follows the user's language. Academic terminology is kept in English. The bilingual abstract follows the declared output language pair (`output_language_pair`) — nothing more. The pair selects the two abstract languages; it is not a body-language setting and not an abstract-cardinality setting (Bilingual / EN-only / zh-TW-only is a separate intake answer). The default entry `zh-tw-en` is Traditional Chinese (L1) + English (L2) — the pre-#862 pair, so a run that omits the field reproduces the legacy object keys and the legacy heading literals and omits the serialized key. Registry and language roles: [`shared/output_language_pair.md`](shared/output_language_pair.md). Abstract length and keyword counts: the regime table in [`references/abstract_writing_guide.md`](references/abstract_writing_guide.md).
 
 ---
 

@@ -12,7 +12,7 @@ surfaces outside that set still carry a copy of the figures — `apa7_extended_g
 `latex_template_reference.md`, and `journal_submission_guide.md` — and
 `academic-paper/agents/formatter_agent.md:790` carries a generic limit of its own; all four are
 recorded exceptions, reconciled with this table when each is next revised (the formatter entry is
-recorded in [`shared/output_language_pair.md`](../../shared/output_language_pair.md)). The figures
+recorded in [`shared/output_language_pair.md`](../shared/output_language_pair.md)). The figures
 apply whether or not the run declares `output_language_pair`: that field selects which two languages
 the abstract surfaces use, not which figures apply.
 
@@ -27,7 +27,7 @@ the abstract surfaces use, not which figures apply.
 
 Read the row for the run's paper type and the run's declared output language pair (default
 `zh-tw-en`): both the L1 and L2 columns apply, and the keyword count applies per language.
-Lengths are measured per [`shared/references/word_count_conventions.md`](../../shared/references/word_count_conventions.md)
+Lengths are measured per [`shared/references/word_count_conventions.md`](../shared/references/word_count_conventions.md)
 — whitespace splitting, ARS-marker removal, and the 3–5% buffer rule. That reference is
 pointed at, never replaced. A venue-declared limit (#394 venue profile) takes precedence over
 the table.
@@ -56,7 +56,7 @@ resolves to this one table, not a vote among copies.
 
 The rows cover the default entry `zh-tw-en`. Phase 1 carries the regime rows for the default entry
 only; a pack-supplied entry ships its own regime rows with the Phase-2 registry loader of
-[`shared/output_language_pair.md`](../../shared/output_language_pair.md), which carries the
+[`shared/output_language_pair.md`](../shared/output_language_pair.md), which carries the
 registry, the language roles, and the field semantics — not these figures. The writing-pattern
 examples further down are English- and Traditional-Chinese-language guidance and therefore apply
 to the default pair.
