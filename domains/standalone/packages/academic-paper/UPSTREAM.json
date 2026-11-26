@@ -6,11 +6,15 @@
   "files": {
     "SKILL.md": {
       "upstream_path": "academic-paper/SKILL.md",
-      "sha256": "7cae675b3f7bc6bcc2207aad29bc5cb2c59f962e96026db956fd4f032d542192"
+      "sha256": "3131f28c60c2b9eb4119f5006feeda15a97f423118299cd596ef5b307f3d19cc",
+      "upstream_sha256": "7cae675b3f7bc6bcc2207aad29bc5cb2c59f962e96026db956fd4f032d542192",
+      "upstream_executable": false
     },
     "agents/abstract_bilingual_agent.md": {
       "upstream_path": "academic-paper/agents/abstract_bilingual_agent.md",
-      "sha256": "ac22eb3c47e5251d2052ec13489798c166b0c318c24ba851a62493a299598384"
+      "sha256": "f9054a7457cab723b89475fe3e2cab496ef5bc0ba985be980bc300da3a5a38d2",
+      "upstream_sha256": "ac22eb3c47e5251d2052ec13489798c166b0c318c24ba851a62493a299598384",
+      "upstream_executable": false
     },
     "agents/argument_builder_agent.md": {
       "upstream_path": "academic-paper/agents/argument_builder_agent.md",
@@ -34,7 +38,9 @@
     },
     "agents/literature_strategist_agent.md": {
       "upstream_path": "academic-paper/agents/literature_strategist_agent.md",
-      "sha256": "ce051707df4261209ed39cbbb82f40aee4ec72c20f5612aec1e5711b7bd12bbb"
+      "sha256": "de870b0f223d1f9cc2742d932a5f57a29f2c3bca81ea2255bb1bf59f5e3d734e",
+      "upstream_sha256": "ce051707df4261209ed39cbbb82f40aee4ec72c20f5612aec1e5711b7bd12bbb",
+      "upstream_executable": false
     },
     "agents/peer_reviewer_agent.md": {
       "upstream_path": "academic-paper/agents/peer_reviewer_agent.md",
@@ -98,7 +104,9 @@
     },
     "references/abstract_writing_guide.md": {
       "upstream_path": "academic-paper/references/abstract_writing_guide.md",
-      "sha256": "e9f72480d357274e5510e498d1dbec2af734f8ff2d6f9afbebecd7a63ba247fb"
+      "sha256": "e5014c0592308f1c312dd33dd6ed117c7c538790d43b5f9b5acbd354871147aa",
+      "upstream_sha256": "e9f72480d357274e5510e498d1dbec2af734f8ff2d6f9afbebecd7a63ba247fb",
+      "upstream_executable": false
     },
     "references/academic_writing_style.md": {
       "upstream_path": "academic-paper/references/academic_writing_style.md",
@@ -106,7 +114,9 @@
     },
     "references/anti_leakage_protocol.md": {
       "upstream_path": "academic-paper/references/anti_leakage_protocol.md",
-      "sha256": "e8672e1c69c511dda11ab90e5805a9c8b528298a59ce46b94fbf1b460784d53d"
+      "sha256": "aa7e267084fcedf3c5afc7a5b9c07b372c12a94ca105d92d49504f34cc9850aa",
+      "upstream_sha256": "e8672e1c69c511dda11ab90e5805a9c8b528298a59ce46b94fbf1b460784d53d",
+      "upstream_executable": false
     },
     "references/apa7_chinese_citation_guide.md": {
       "upstream_path": "academic-paper/references/apa7_chinese_citation_guide.md",
@@ -214,7 +224,9 @@
     },
     "templates/bilingual_abstract_template.md": {
       "upstream_path": "academic-paper/templates/bilingual_abstract_template.md",
-      "sha256": "d050039e79f72057dd87a6163d046fb8d8ce65bd8d170ee9db04eb50dc17a03e"
+      "sha256": "46671759dafd29ddda328cf56a106970730d9abccbf710a880307fe01b36600f",
+      "upstream_sha256": "d050039e79f72057dd87a6163d046fb8d8ce65bd8d170ee9db04eb50dc17a03e",
+      "upstream_executable": false
     },
     "templates/case_study_template.md": {
       "upstream_path": "academic-paper/templates/case_study_template.md",
@@ -258,7 +270,9 @@
     },
     "shared/agents/compliance_agent.md": {
       "upstream_path": "shared/agents/compliance_agent.md",
-      "sha256": "cf51ff7a3bf3fb40fa072e465974fdd934c4922392f57cb6609f24bd4cbef0b9"
+      "sha256": "901677ebb59de09fd6912eca539956c6d97bdcfef68447538b473c4af4a068e8",
+      "upstream_sha256": "cf51ff7a3bf3fb40fa072e465974fdd934c4922392f57cb6609f24bd4cbef0b9",
+      "upstream_executable": false
     },
     "shared/artifact_reproducibility_pattern.md": {
       "upstream_path": "shared/artifact_reproducibility_pattern.md",
@@ -282,7 +296,9 @@
     },
     "shared/compliance_checkpoint_protocol.md": {
       "upstream_path": "shared/compliance_checkpoint_protocol.md",
-      "sha256": "3ce124b711747e2921ee5ee04fb18fced3d2ebea1c9b3df9fc1953f0da36e6ef"
+      "sha256": "153008fd5b042d7383e9c16ed77902653690197bb3907b9eb45e5e7e2a566ad9",
+      "upstream_sha256": "3ce124b711747e2921ee5ee04fb18fced3d2ebea1c9b3df9fc1953f0da36e6ef",
+      "upstream_executable": false
     },
     "shared/compliance_report.schema.json": {
       "upstream_path": "shared/compliance_report.schema.json",
@@ -746,7 +762,9 @@
     },
     "shared/handoff_schemas.md": {
       "upstream_path": "shared/handoff_schemas.md",
-      "sha256": "a75f2c0c83d68b475ba0332d8fb7f655375d56d04c3f6a6d8ec5bf28e1f68a32"
+      "sha256": "949f757448525ef0775f3dda272172241607aba42cac2c5a804be744a72741ac",
+      "upstream_sha256": "a75f2c0c83d68b475ba0332d8fb7f655375d56d04c3f6a6d8ec5bf28e1f68a32",
+      "upstream_executable": false
     },
     "shared/human_subjects_authority_registry.json": {
       "upstream_path": "shared/human_subjects_authority_registry.json",
@@ -762,7 +780,9 @@
     },
     "shared/output_language_pair.md": {
       "upstream_path": "shared/output_language_pair.md",
-      "sha256": "d0fd4a76c56609c9c03ae51e5a55cd932dc29fc2ff5dc957eb211da47cd2e705"
+      "sha256": "3bd4fd09aace7450842e9cf4ec5d9f648a8e53b781ed6af35a2ac6e98ec0f97a",
+      "upstream_sha256": "d0fd4a76c56609c9c03ae51e5a55cd932dc29fc2ff5dc957eb211da47cd2e705",
+      "upstream_executable": false
     },
     "shared/policy_data/nature_policy.md": {
       "upstream_path": "shared/policy_data/nature_policy.md",

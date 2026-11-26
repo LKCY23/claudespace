@@ -11,7 +11,7 @@ The headings and column labels below are **pair-derived**: the L2 heading is the
 
 For any other registry entry, substitute that entry's declared L2 and L1 language names in the headings and in the checklist column labels. The structure, the five components, and the keyword line do not change. When the field is absent the default entry applies and this template is used unchanged.
 
-Registry and language roles: [`shared/output_language_pair.md`](../../shared/output_language_pair.md). Abstract length and keyword counts: the regime table in [`references/abstract_writing_guide.md`](../references/abstract_writing_guide.md). Enter a token only from that registry; an unsupported value fails visibly and names the registry rather than falling back to the default.
+Registry and language roles: [`shared/output_language_pair.md`](../shared/output_language_pair.md). Abstract length and keyword counts: the regime table in [`references/abstract_writing_guide.md`](../references/abstract_writing_guide.md). Enter a token only from that registry; an unsupported value fails visibly and names the registry rather than falling back to the default.
 
 ---
 

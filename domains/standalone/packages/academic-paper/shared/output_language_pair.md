@@ -46,7 +46,7 @@ does not redefine the core contract.
 ## Regime table
 
 The abstract length and keyword regime table is **not** carried here: its single source is
-[`academic-paper/references/abstract_writing_guide.md`](../academic-paper/references/abstract_writing_guide.md),
+`academic-paper/references/abstract_writing_guide.md`,
 whose marked regime block every other surface references. This contract carries the registry,
 the language roles, and the field semantics — not the figures.
 
