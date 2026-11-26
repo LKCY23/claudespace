@@ -203,7 +203,7 @@
         "strategy": "branch",
         "target": "main"
       },
-      "packaging_revision": 1
+      "packaging_revision": 2
     },
     "code-simplifier": {
       "kind": "plugin",
@@ -313,7 +313,7 @@
         "strategy": "branch",
         "target": "main"
       },
-      "packaging_revision": 2
+      "packaging_revision": 3
     },
     "mattpocock-skills": {
       "kind": "plugin",

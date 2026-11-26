@@ -2,7 +2,7 @@
   "repo": "mattpocock/skills",
   "sha": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
   "path": "skills/engineering/code-review",
-  "packaging_revision": 2,
+  "packaging_revision": 3,
   "packaging": "Original skills and references unchanged; only plugin manifests added.",
   "files": {
     "LICENSE": {
