@@ -189,6 +189,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {},
@@ -289,6 +296,13 @@
         "codex": {
           "mode": "native",
           "entry": ".codex-plugin/plugin.json",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "plugin.json",
           "validation": {
             "status": "not-evaluated"
           }
@@ -448,13 +462,20 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
         "bindings": {
           "install_root": {
             "kind": "path",
-            "required": true
+            "required": false
           }
         }
       },
@@ -628,6 +649,13 @@
       },
       "compatibility": {
         "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -868,6 +896,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -925,6 +960,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -970,6 +1012,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1025,6 +1074,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1070,6 +1126,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1123,6 +1186,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1185,6 +1255,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1237,6 +1314,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1299,6 +1383,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1351,6 +1442,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1413,6 +1511,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1465,6 +1570,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1527,6 +1639,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1579,6 +1698,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1641,6 +1767,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1690,6 +1823,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1747,6 +1887,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1864,6 +2011,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -1915,6 +2069,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -1977,6 +2138,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2029,6 +2197,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -2091,6 +2266,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2143,6 +2325,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -2205,6 +2394,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2257,6 +2453,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -2319,6 +2522,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2371,6 +2581,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -2432,6 +2649,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2483,6 +2707,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -2545,6 +2776,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2597,6 +2835,13 @@
           }
         },
         "codex": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
@@ -2659,6 +2904,13 @@
           "validation": {
             "status": "not-evaluated"
           }
+        },
+        "antigravity": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
         }
       },
       "requires": {
@@ -2704,6 +2956,13 @@
       },
       "compatibility": {
         "claude-code": {
+          "mode": "native",
+          "entry": "SKILL.md",
+          "validation": {
+            "status": "not-evaluated"
+          }
+        },
+        "antigravity": {
           "mode": "native",
           "entry": "SKILL.md",
           "validation": {
